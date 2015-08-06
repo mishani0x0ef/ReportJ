@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+
+  "name": "JIRA Report Helper",
+  "description": "This extension help reporting in JIRA system. It's adding issue summary to report.",
+  "version": "1.0.0",
+  "permissions": ["activeTab", "contextMenus"],
+  "background": {
+    "scripts": ["lib/jquery.min.js", "popup.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "name": "JIRA Repor Helper",
+    "default_icon": "img/jira.png",
+    "default_title": "JIRA Repor Helper"
+    // Uncomment to activate popup view. MR
+    //,"default_popup": "popup.html"
+  },
+  "icons":{
+    "16":"img/jira.png",
+    "38": "img/jira.png" 
+  },
+  "content_scripts": [ {
+    "js": [ "lib/jquery.min.js" ],
+    "matches": [ "*://*.google.com/*"]
+  }]
+}
