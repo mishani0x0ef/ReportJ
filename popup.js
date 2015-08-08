@@ -24,22 +24,27 @@
         return url.substring(startIndex, endIndex);
     }
 
-    var getParentInfo = function (parent, info) {
-        if (parent.fields.parent) {
-            info = getParentInfo(parent.fields.parent, info);
+    var resolveSummaryFromIssue = function (issue, summary) {
+        var issueTitle = issue.fields.summary;
+        if (!summary) {
+            summary = "";
         }
-        info += parent.key + " " + parent.fields.summary + ". ";
-        return info;
+
+        if (issue.fields.parent) {
+            summary = resolveSummaryFromIssue(issue.fields.parent, summary);
+        }
+        if(issueTitle[issueTitle.length - 1] != "."){
+                issueTitle += ".";
+        }
+        
+        summary += issue.key + ". " + issueTitle + " ";
+        return summary;
     }
     
     var getIssueInfo = function(issueKey, delegate){
         var api = apiUrl + issueKey + "?" + issueInfoParams;
         $.getJSON(api, function(issue){
-            var summary = "";
-            if(issue.fields.parent){
-                summary = getParentInfo(issue.fields.parent, summary);
-            }
-            summary += issue.key + " " + issue.fields.summary + ". ";
+            var summary = resolveSummaryFromIssue(issue);
             delegate(summary);
         });
     }
@@ -52,7 +57,7 @@
             var issueKey = getIssueKey(tab.url);
             getIssueInfo(issueKey, function(issueSummary){
                 chrome.tabs.executeScript({
-                    code: "document.activeElement.value = '" + issueSummary + "'"
+                    code: "document.activeElement.value = '" + issueSummary + "' + document.activeElement.value"
                 });
             });            
         });
