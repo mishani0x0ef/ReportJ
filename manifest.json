@@ -6,8 +6,7 @@
   "version": "1.0.0",
   "permissions": ["activeTab", "contextMenus"],
   "background": {
-    "scripts": ["lib/jquery.min.js", "popup.js"],
-    "persistent": false
+    "scripts": ["lib/jquery.min.js", "popup.js"]
   },
   "browser_action": {
     "name": "JIRA Repor Helper",
