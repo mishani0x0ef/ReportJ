@@ -57,7 +57,7 @@
             var issueKey = getIssueKey(tab.url);
             getIssueInfo(issueKey, function(issueSummary){
                 chrome.tabs.executeScript({
-                    code: "document.activeElement.value = '" + issueSummary + "' + document.activeElement.value"
+                    code: "document.activeElement.value = " + JSON.stringify(issueSummary) + " + document.activeElement.value"
                 });
             });            
         });
