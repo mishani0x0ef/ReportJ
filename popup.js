@@ -37,7 +37,7 @@
                 issueTitle += ".";
         }
         
-        summary += issue.key + ". " + issueTitle + " ";
+        summary += issue.key + ". " + issueTitle + "\n";
         return summary;
     }
     
