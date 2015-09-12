@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jira.Extension.Svn", "Jira.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jira.Extension.TestTool", "Jira.Extension.TestTool\Jira.Extension.TestTool.csproj", "{B3BC6089-4A25-4796-9559-122CCF68D2FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jira.Extension.RepoBase", "Jira.Extension.RepoBase\Jira.Extension.RepoBase.csproj", "{73F2126C-DD82-4659-95FB-D2097E343BE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{B3BC6089-4A25-4796-9559-122CCF68D2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3BC6089-4A25-4796-9559-122CCF68D2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3BC6089-4A25-4796-9559-122CCF68D2FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F2126C-DD82-4659-95FB-D2097E343BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F2126C-DD82-4659-95FB-D2097E343BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F2126C-DD82-4659-95FB-D2097E343BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F2126C-DD82-4659-95FB-D2097E343BE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

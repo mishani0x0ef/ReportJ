@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using Jira.Extension.Svn;
 
 namespace Jira.Extension.TestTool
@@ -11,11 +12,12 @@ namespace Jira.Extension.TestTool
             try
             {
                 var defaultRepoUrl = "test";
-                var test = new Test();
-                var commits = test.GetLastCommits(args == null || !args.Any() ? defaultRepoUrl : args[0], 10);
+                var repositoryService = new SvnRepositoryService();
+                var commits = repositoryService.GetLastCommits(args == null || !args.Any() ? defaultRepoUrl : args[0],
+                    new NetworkCredential("test", "test"), "test");
                 foreach (var commit in commits)
                 {
-                    Console.WriteLine("Author: {0}; Message: '{1}', Date: {2}", commit.Author, commit.Message, commit.Date);
+                    Console.WriteLine("\nAuthor: {0}\nMessage: '{1}'\nDate: {2}", commit.Author, commit.Message, commit.Date);
                 }
             }
             catch (Exception ex)
