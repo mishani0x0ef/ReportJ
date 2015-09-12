@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jira.Extension.RepositoryApi", "Jira.Extension.RepositoryApi\Jira.Extension.RepositoryApi.csproj", "{A59AB295-C4B2-4265-B73E-034953925889}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assemblies", "Assemblies", "{30BFC07D-E89C-45B2-AE7A-FD98DE63BB04}"
+	ProjectSection(SolutionItems) = preProject
+		Assemblies\SharpSvn.dll = Assemblies\SharpSvn.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jira.Extension.Svn", "Jira.Extension.Svn\Jira.Extension.Svn.csproj", "{2CB09F6C-F72A-4CB4-B42D-037739903ECB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A59AB295-C4B2-4265-B73E-034953925889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A59AB295-C4B2-4265-B73E-034953925889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A59AB295-C4B2-4265-B73E-034953925889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A59AB295-C4B2-4265-B73E-034953925889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB09F6C-F72A-4CB4-B42D-037739903ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB09F6C-F72A-4CB4-B42D-037739903ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB09F6C-F72A-4CB4-B42D-037739903ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB09F6C-F72A-4CB4-B42D-037739903ECB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
