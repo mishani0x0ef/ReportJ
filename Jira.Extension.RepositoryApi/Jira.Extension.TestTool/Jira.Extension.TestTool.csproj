@@ -52,10 +52,6 @@
       <Project>{73f2126c-dd82-4659-95fb-d2097e343be1}</Project>
       <Name>Jira.Extension.RepoBase</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Jira.Extension.Svn\Jira.Extension.Svn.csproj">
-      <Project>{2CB09F6C-F72A-4CB4-B42D-037739903ECB}</Project>
-      <Name>Jira.Extension.Svn</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

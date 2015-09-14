@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using Jira.Extension.Svn;
+using Jira.Extension.RepoBase.Svn;
 
 namespace Jira.Extension.TestTool
 {
