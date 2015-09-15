@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<title>Jira.Extension Settings</title>
+<body>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+        
+    <div id="container-fluid">
+       <div class="row row-centered">
+           <div id="main-container" class="col-lg-6 col-md-offset-3 panel panel-default">
+              <div class="panel-body">
+                <h2 class="text-center">Jira.Extension Settings</h2>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#generalSettings" data-toggle="tab" aria-expanded="true">General</a></li>
+                    <li class=""><a href="#repositorySettings" data-toggle="tab" aria-expanded="false">Repository</a></li>
+                    <li class=""><a href="#about" data-toggle="tab" aria-expanded="false">About</a></li>
+                </ul>
+                
+                <div id="settings" class="tab-content well">
+                    
+                <div id="generalSettings" class="tab-pane fade active in">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>Issue Summary Format</legend>
+                            <div class="form-group">
+                                <label for="summarySummaryFormat" class="col-lg-3 control-label">Use title of issue</label>
+                                <div class="col-lg-9">
+                                    <select class="form-control" id="summarySummaryFormat">
+                                      <option value="parentAndChild">Parent and current issue</option>
+                                      <option value="parentOnly">Parent issue only</option>
+                                      <option value="childOnly">Current issue only</option>
+                                    </select>
+                                </div>
+                                <label for="summarySummarySeparator" class="col-lg-3 control-label">Separator character</label>
+                                <div class="col-lg-9">
+                                    <select class="form-control" id="summarySummarySeparator">
+                                      <option value="newLine">New Line</option>
+                                      <option value="dot">Dot</option>
+                                      <option value="space">Space</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="textArea" class="col-lg-3 control-label">Issue Summary Example</label>
+                                <div class="col-lg-9">
+                                    <textarea class="form-control text-justify" rows="3" id="issueSummaryExample" readonly>JIRA-55. Base story for implementing awersome functionality. JIRA-78. Implement single part of the new great functionality.
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-4 col-lg-offset-8">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="reset" class="btn btn-default">Cancel</button>                                 
+                                </div>                                
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                
+                <div id="repositorySettings" class="tab-pane fade well">
+                   <form class="form-horizontal">
+                        <fieldset>
+                            <legend>Commits Settings</legend>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox"> Use commits history during reporting
+                                </label>
+                            </div>
+                            <div class="form-group">
+                               <div class="col-lg-3">Information to display</div>
+                               <div class="col-lg-9">
+                                   <label class="col-lg-4"><input type="checkbox"> Commit date</label>
+                                   <label class="col-lg-4"><input type="checkbox"> Commit time</label>
+                                   <label class="col-lg-4"><input type="checkbox"> Author</label>
+                                   <label class="col-lg-4"><input type="checkbox"> Message</label>
+                               </div>                                
+                            </div>
+                        </fieldset>
+                    </form>
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>SVN Repositories</legend>                            
+                        </fieldset>
+                        <div id="svnRepositories">
+                            <div id="svnRepository" class="col-lg-12 panel panel-default">
+                               <div class="panel-body">
+                                   <div id="repositoryName" class="col-lg-10"><b>Testing svn repository</b></div>
+                                   <div id="refreshTime" class="col-lg-2"><span class="glyphicon glyphicon-time" title="Refresh time"> 60min</span></div>
+                                   <div id="repositoryUrl" class="col-lg-10"><p>http://repository.address/folder</p></div>
+                                   <button type="button" class="btn btn-link col-lg-1"><span class="glyphicon glyphicon-pencil"></span></button>
+                                   <button type="button" class="btn btn-link col-lg-1"><span class="glyphicon glyphicon-trash"></span></button>
+                               </div>                                
+                            </div>
+                            <div id="svnRepository1" class="col-lg-12 panel panel-default">
+                               <div class="panel-body">
+                                   <div id="repositoryName" class="col-lg-10"><b>Repository of the greates project ever</b></div>
+                                   <div id="refreshTime" class="col-lg-2"><span class="glyphicon glyphicon-time" title="Refresh time"> Never</span></div>
+                                   <div id="repositoryUrl" class="col-lg-10"><p>http://best-project.repository/awersome-folder</p></div>
+                                   <button type="button" class="btn btn-link col-lg-1"><span class="glyphicon glyphicon-pencil"></span></button>
+                                   <button type="button" class="btn btn-link col-lg-1"><span class="glyphicon glyphicon-trash"></span></button>
+                               </div>                                
+                            </div>
+                        </div>
+                    </form>
+                    <button id="btnAddRepository" class="btn btn-primary">Add Repository</button>
+                </div>
+                
+                <div id="repositoryEditModal" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    <span class="">&times;</span>
+                                </button>
+                                <h4 class="modal-title">SVN Repository Settings</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal">
+                        <fieldset>
+                            <legend></legend>
+                            <div class="form-group">
+                                <label for="repositoryName" class="col-lg-3 control-label">Name</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" id="repositoryName" placeholder="Repository Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="repositoryUrl" class="col-lg-3 control-label">Repository URL</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" id="repositoryUrl" placeholder="Repository URL">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="repositoryUsername" class="col-lg-3 control-label">User Name</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" id="repositoryUsername" placeholder="User Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="repositoryPassword" class="col-lg-3 control-label">Password</label>
+                                <div class="col-lg-9">
+                                    <input type="password" class="form-control" id="repositoryPassword" placeholder="Password">
+                                    <div class="checkbox col-lg-11 col-md-11 col-xs-10">
+                                        <label>
+                                            <input type="checkbox"> Show only commits from current user
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-xs-2">
+                                        <span class="glyphicon glyphicon-question-sign" title="Check if you want to see only commits where author is the same as loggined user."></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="repositoryRefreshSettings" class="col-lg-3 control-label">Refresh every</label>
+                                <div class="col-lg-9">
+                                    <select class="form-control" id="repositoryRefreshSettings">
+                                      <option value="10">10 minutes</option>
+                                      <option value="30">30 minutes</option>
+                                      <option value="60" selected>60 minutes</option>
+                                      <option value="-1">Never</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="about" class="tab-pane fade well">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora alias pariatur blanditiis dolorem tenetur ab, enim rerum recusandae, expedita, repellendus itaque corporis necessitatibus illum vel iste quidem eos modi obcaecati in hic impedit neque? Unde nostrum minima et odit dolorem, libero beatae at accusamus delectus consequuntur architecto fuga distinctio eveniet nam animi omnis sunt esse optio dolore excepturi tenetur earum sit soluta itaque. Sed quia optio, reprehenderit doloribus neque ad ratione? Perferendis, quam. Iusto, dolorem. Nisi tenetur dolor cum minima odit corporis iure ratione voluptatem fugiat, dolorem aliquid, culpa pariatur nemo deserunt sapiente repudiandae id ad.</div>           
+                               
+              </div>               
+           </div>
+       </div>
+    </div>  
+    
+    <script src="options.js"></script>
+</body>
+</html>
