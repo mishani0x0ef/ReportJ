@@ -2,11 +2,11 @@
     var self = this;
     var eleksJiraUrl = "https://jd.eleks.com";
     
-    $("#settings").click(function(){
-        chrome.tabs.create({ url: "options.html" });
-    });
-    
-    $("#addIssueSummary").click(function(){
+    var contextMenuHandler = function(e){
+        if(e.menuItemId !== self.contextMenuId){
+            return;
+        };
+        
         chrome.tabs.getSelected(null, function(tab) {             
             var jira = new JiraWrapper(eleksJiraUrl);
             var issueKey = jira.getIssueKey(tab.url);
@@ -18,6 +18,14 @@
                 })} 
                 ,self);          
         });
+    }
+    
+    chrome.runtime.onInstalled.addListener(function() {
+        var context = "editable";
+        var title = "JIRA add issue summary";
+        self.contextMenuId = chrome.contextMenus.create({"title": title, "contexts":[context], "id": "context" + context});  
     });
-        
+
+    chrome.contextMenus.onClicked.addListener(contextMenuHandler);
+    
 }(chrome));

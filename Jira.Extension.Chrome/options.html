@@ -11,7 +11,7 @@
        <div class="row row-centered">
            <div id="main-container" class="col-lg-6 col-md-offset-3 panel panel-default">
               <div class="panel-body">
-                <h2 class="text-center">Jira.Extension Settings</h2>
+                <h3 class="text-center">JIRA Report Helper Settings</h3>
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#generalSettings" data-toggle="tab" aria-expanded="true">General</a></li>
                     <li class=""><a href="#repositorySettings" data-toggle="tab" aria-expanded="false">Repository</a></li>
@@ -89,8 +89,8 @@
                                    <div id="repositoryName" class="col-lg-10"><b>Testing svn repository</b></div>
                                    <div id="refreshTime" class="col-lg-2"><span class="glyphicon glyphicon-time" title="Refresh time"> 60min</span></div>
                                    <div id="repositoryUrl" class="col-lg-10"><p>http://repository.address/folder</p></div>
-                                   <button type="button" class="btn btn-link col-lg-1"><span class="glyphicon glyphicon-pencil"></span></button>
-                                   <button type="button" class="btn btn-link col-lg-1"><span class="glyphicon glyphicon-trash"></span></button>
+                                   <button type="button" class="btn btn-link col-lg-1" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                   <button type="button" class="btn btn-link col-lg-1" title="Delete"><span class="glyphicon glyphicon-trash"></span></button>
                                </div>                                
                             </div>
                             <div id="svnRepository1" class="col-lg-12 panel panel-default">
@@ -105,6 +105,18 @@
                         </div>
                     </form>
                     <button id="btnAddRepository" class="btn btn-primary">Add Repository</button>
+                    
+                    <div class="well"></div>
+                    
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>Git Repositories</legend>                            
+                        </fieldset>
+                        <div id="gitRepositories" class="well">
+                            Comming soon ...
+                        </div>
+                    </form>
+                    <button id="btnAddRepository" class="btn btn-primary disabled">Add Repository</button>
                 </div>
                 
                 <div id="repositoryEditModal" class="modal">

@@ -1,0 +1,17 @@
+.panel-clickable{
+    cursor: pointer;
+}
+
+.panel-clickable:hover .panel-body{
+    background: #f4f4f4;
+}
+
+.panel-clickable:hover .panel-heading{
+    background: #e8e8e8;
+    color: #2196f3;
+}
+
+.commits-panel{
+    height: 440px;
+    overflow:auto;
+}

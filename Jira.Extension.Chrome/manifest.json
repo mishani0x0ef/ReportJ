@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "permissions": ["activeTab", "contextMenus"],
   "background": {
-    "scripts": ["lib/jquery.min.js", "popup.js"]
+    "scripts": ["lib/jquery.min.js", "lib/jira.js", "background.js"]
   },
   "browser_action": {
     "name": "JIRA Repor Helper",
@@ -14,7 +14,7 @@
     "default_title": "JIRA Repor Helper",
     "options_page": "options.html"
     // Uncomment to activate popup view. MR
-    //,"default_popup": "popup.html"
+    ,"default_popup": "popup.html"
   },
   "icons":{
     "16":"img/jira.png",
