@@ -1,3 +1,3 @@
 $('#btnAddRepository').click(function(){
-            $('#repositoryEditModal').modal('show');
-        });
+    $('#repositoryEditModal').modal('show');
+});

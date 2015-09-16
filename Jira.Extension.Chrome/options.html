@@ -4,8 +4,6 @@
 <body>
     <link rel="stylesheet" href="lib/bootstrap.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
-    <script src="lib/jquery.min.js"></script>
-    <script src="lib/bootstrap.min.js"></script>
         
     <div id="container-fluid">
        <div class="row row-centered">
@@ -87,7 +85,7 @@
                             <div id="svnRepository" class="col-lg-12 panel panel-default">
                                <div class="panel-body">
                                    <div id="repositoryName" class="col-lg-10"><b>Testing svn repository</b></div>
-                                   <div id="refreshTime" class="col-lg-2"><span class="glyphicon glyphicon-time" title="Refresh time"> 60min</span></div>
+                                   <div id="refreshTime" class="col-lg-2 text-right"><span class="glyphicon glyphicon-time" title="Refresh time"> 60min</span></div>
                                    <div id="repositoryUrl" class="col-lg-10"><p>http://repository.address/folder</p></div>
                                    <button type="button" class="btn btn-link col-lg-1" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button>
                                    <button type="button" class="btn btn-link col-lg-1" title="Delete"><span class="glyphicon glyphicon-trash"></span></button>
@@ -96,7 +94,7 @@
                             <div id="svnRepository1" class="col-lg-12 panel panel-default">
                                <div class="panel-body">
                                    <div id="repositoryName" class="col-lg-10"><b>Repository of the greates project ever</b></div>
-                                   <div id="refreshTime" class="col-lg-2"><span class="glyphicon glyphicon-time" title="Refresh time"> Never</span></div>
+                                   <div id="refreshTime" class="col-lg-2 text-right"><span class="glyphicon glyphicon-time" title="Refresh time"> Never</span></div>
                                    <div id="repositoryUrl" class="col-lg-10"><p>http://best-project.repository/awersome-folder</p></div>
                                    <button type="button" class="btn btn-link col-lg-1"><span class="glyphicon glyphicon-pencil"></span></button>
                                    <button type="button" class="btn btn-link col-lg-1"><span class="glyphicon glyphicon-trash"></span></button>
@@ -193,6 +191,10 @@
        </div>
     </div>  
     
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/knockout-3.3.0.js"></script>
     <script src="options.js"></script>
+    
 </body>
 </html>
