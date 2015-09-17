@@ -9,7 +9,7 @@
     "scripts": ["lib/jquery.min.js", "js/jira.js", "background.js"]
   },
   "sandbox":{
-    "pages": ["html/options-general.html"]
+    "pages": ["html/options-main.html"]
   },
   "browser_action": {
     "name": "JIRA Repor Helper",
