@@ -8,13 +8,15 @@
   "background": {
     "scripts": ["lib/jquery.min.js", "js/jira.js", "background.js"]
   },
+  "sandbox":{
+    "pages": ["html/options-general.html"]
+  },
   "browser_action": {
     "name": "JIRA Repor Helper",
     "default_icon": "img/jira.png",
     "default_title": "JIRA Repor Helper",
-    "options_page": "options.html"
-    // Uncomment to activate popup view. MR
-    ,"default_popup": "popup.html"
+    "options_page": "options.html",
+    "default_popup": "popup.html"
   },
   "icons":{
     "16":"img/jira.png",
