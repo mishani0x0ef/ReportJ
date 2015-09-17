@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-</head>
-<body style="width: 500px; height: 500px;">
-    <link rel="stylesheet" href="lib/main.css">
+    
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="lib/bootstrap.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
-    <script src="lib/jquery.min.js"></script>
-    <script src="lib/bootstrap.min.js"></script>
+    
+</head>
+<body class="extension-popup">
     
     <div class="well-sm col-xs-12 center-block">
       <div id="addIssueSummary" class="col-xs-6 btn btn-link text-center">
@@ -24,7 +24,7 @@
     
     <ul class="nav nav-tabs">
         <li class="active"><a href="#svnCommits" data-toggle="tab">SVN Commits</a></li>
-        <li class="disabled" title="Comming soon ..."><a href="#gitCommits" data-toggle="tab">Git Commits</a></li>
+        <li class="disabled" title="Comming soon ..."><a href="#gitCommits">Git Commits</a></li>
     </ul>
     
     <div id="commitsTab" class="tab-content col-xs-12 well">
@@ -63,12 +63,13 @@
                 <div class="panel-body text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</div>
             </div>
         </div>
-    </div>
+    </div>    
     
-    
-    
-    <script src="lib/jira.js"></script>
-    <script src="popup.js"></script>    
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="js/jira.js"></script>
+    <script src="js/popup.js"></script>
+     
 </body>
 </html>
 
