@@ -62,6 +62,45 @@ var OptionsViewModel = function(){
     }, self);
     
     self.save = function(){
-        //todo: implement saving into chrome store.
+        window.parent.postMessage(self.getModel(), "*");
+        new PNotify({
+            title: 'Well done!',
+            text: 'General options was successfully saved.',
+            type: 'success',
+            cornerclass: 'ui-pnotify-sharp',
+            delay: 2000,
+            styling: 'bootstrap3',
+            icon: 'glyphicon glyphicon-ok-circle'
+        });
     }
+    
+    self.initOptions = function(optionsModel){
+        var types = self.titleTypes();
+        var separators = self.issueSeparators();
+        
+        for(var i = 0; i < types.length; i++){
+            if(types[i].value === optionsModel.titleType){
+                self["selectedTitleType"](types[i]);
+            }
+        }
+        
+        for(var i = 0; i < separators.length; i++){
+            if(separators[i].value === optionsModel.issueSeparator){
+                self["selectedIssueSeparator"](separators[i]);
+            }
+        }
+    }
+    
+    self.getModel = function(){
+        return {
+            titleType: self.selectedTitleType().value,
+            issueSeparator: self.selectedIssueSeparator().value
+        }
+    };
+    
+    window.addEventListener("message", function(event){
+        self.initOptions(event.data);
+    }, false);
 };
+
+ko.applyBindings(new OptionsViewModel());

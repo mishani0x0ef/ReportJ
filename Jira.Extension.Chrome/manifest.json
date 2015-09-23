@@ -4,7 +4,7 @@
   "name": "JIRA Report Helper",
   "description": "This extension help reporting in JIRA system. It's adding issue summary to report.",
   "version": "1.0.0",
-  "permissions": ["activeTab", "contextMenus"],
+  "permissions": ["storage", "activeTab", "contextMenus"],
   "background": {
     "scripts": ["lib/jquery.min.js", "js/jira.js", "background.js"]
   },
