@@ -28,7 +28,7 @@ namespace Jira.Extension.RepoBase.Svn
             int count = 10)
         {
             return GetLastCommits(repoUrl, credential, count,
-                args => String.Equals(args.Author, author, StringComparison.CurrentCultureIgnoreCase));
+                args => string.Equals(args.Author, author, StringComparison.CurrentCultureIgnoreCase));
         }
 
         private IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count,

@@ -5,7 +5,6 @@ using Jira.Extension.RepositoryApi.Dto;
 
 namespace Jira.Extension.RepositoryApi
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ISvnService" in both code and config file together.
     [ServiceContract]
     public interface ISvnService
     {
@@ -14,7 +13,11 @@ namespace Jira.Extension.RepositoryApi
         /// </summary>
         /// <returns>Return last 10 commits.</returns>
         [OperationContract]
-        [WebGet(UriTemplate = "commits")]
-        List<CommitDto> GetCommits();
+        [WebGet(UriTemplate = "commits/test")]
+        List<CommitDto> GetCommitsTest();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "commits?repo={repoUrl}&username={userName}&password={password}&count={count}&author={author}")]
+        List<CommitDto> GetCommits(string repoUrl, string userName, string password, int count, string author);
     }
 }

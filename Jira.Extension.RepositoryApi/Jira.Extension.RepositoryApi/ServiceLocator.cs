@@ -32,6 +32,7 @@ namespace Jira.Extension.RepositoryApi
         private void RegisterRepostiories(IUnityContainer container)
         {
             container.RegisterType<IRepoService, SvnRepositoryService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IRepoService, MockRepository>("Mock", new ContainerControlledLifetimeManager());
         }
     }
 }

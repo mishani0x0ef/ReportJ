@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Commit.cs" />
+    <Compile Include="MockRepository.cs" />
     <Compile Include="Svn\Extensions.cs" />
     <Compile Include="IRepoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
