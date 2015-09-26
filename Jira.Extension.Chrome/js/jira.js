@@ -1,4 +1,4 @@
-// jQuery required.
+if("undefined"==typeof jQuery)throw new Error("JIRA Wrapper JavaScript requires jQuery");
 
 var JiraWrapper = function JiraWrapper(baseJiraUrl){
     self = this;

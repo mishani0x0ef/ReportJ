@@ -24,6 +24,6 @@
   },
   "content_scripts": [ {
     "js": [ "lib/jquery.min.js" ],
-    "matches": [ "*://*.google.com/*"]
+    "matches": [ "*://*.google.com/*", "*://*.localhost/*"]
   }]
 }
