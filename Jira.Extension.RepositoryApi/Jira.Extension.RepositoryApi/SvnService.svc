@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Jira.Extension.RepositoryApi.SvnService" CodeBehind="SvnService.svc.cs" %>

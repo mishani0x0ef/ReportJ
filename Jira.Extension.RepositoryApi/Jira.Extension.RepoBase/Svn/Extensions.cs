@@ -9,6 +9,7 @@ namespace Jira.Extension.RepoBase.Svn
         {
             return new Commit
             {
+                CommitId = logEvent.Revision.ToString(),
                 Author = logEvent.Author,
                 Message = logEvent.LogMessage,
                 Date = logEvent.Time
