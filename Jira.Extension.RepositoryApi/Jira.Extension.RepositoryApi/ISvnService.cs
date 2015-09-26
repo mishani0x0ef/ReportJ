@@ -13,11 +13,11 @@ namespace Jira.Extension.RepositoryApi
         /// </summary>
         /// <returns>Return last 10 commits.</returns>
         [OperationContract]
-        [WebGet(UriTemplate = "commits/test")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "commits/test")]
         List<CommitDto> GetCommitsTest();
 
         [OperationContract]
-        [WebGet(UriTemplate = "commits?repo={repoUrl}&username={userName}&password={password}&count={count}&author={author}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "commits?repo={repoUrl}&username={userName}&password={password}&count={count}&author={author}")]
         List<CommitDto> GetCommits(string repoUrl, string userName, string password, int count, string author);
     }
 }
