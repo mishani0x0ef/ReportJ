@@ -7,6 +7,8 @@ var OptionsViewModel = function(){
     var self = this;
     self.optionKey = ko.observable();
     
+    var generalOptonsMessageKey = 'generalOptions';
+    
     self.titleTypes = ko.observableArray([
         new SelectorItem("parentAndCurrent", "Parent and current issue"), 
         new SelectorItem("parent", "Parent Issue only"), 
@@ -62,16 +64,8 @@ var OptionsViewModel = function(){
     }, self);
     
     self.save = function(){
-        window.parent.postMessage(self.getModel(), "*");
-        new PNotify({
-            title: 'Well done!',
-            text: 'General options was successfully saved.',
-            type: 'success',
-            cornerclass: 'ui-pnotify-sharp',
-            delay: 2000,
-            styling: 'bootstrap3',
-            icon: 'glyphicon glyphicon-ok-circle'
-        });
+        var message = new Message(generalOptonsMessageKey, messageType.post, window.parent, self.getModel());
+        message.send();
     }
     
     self.initOptions = function(optionsModel){
@@ -98,9 +92,48 @@ var OptionsViewModel = function(){
         }
     };
     
+    $(function(){
+        new Message(generalOptonsMessageKey, messageType.get, window.parent).send();
+    });
+    
     window.addEventListener("message", function(event){
-        self.initOptions(event.data);
+        messageParser(event.data);
     }, false);
+    
+    var messageParser = function(message){
+        switch(message.messageId){
+            case generalOptonsMessageKey:
+                switch(message.type){
+                    case messageType.success:
+                        notifyOptionsSaving(true);
+                        return;
+                    case messageType.error:
+                        notifyOptionsSaving(false);
+                        return;
+                    case messageType.post:
+                        self.initOptions(message.message);
+                        return;
+                    default:
+                        console.error("Type " + message.type + " wasn't expected for messageID " + message.messageId);
+                        return;
+                }
+            default:
+                console.warn('Unsupported messageID - ' + message.messageId);
+                return;
+        }
+    }
+    
+    var notifyOptionsSaving = function(isSuccess, errorMessage){
+        new PNotify({
+            title: isSuccess ? 'Well done!' : "Ooops!",
+            text: isSuccess ? 'General options was successfully saved.' : 'Error occured while saving options: ' + errorMessage,
+            type: isSuccess ? 'success' : 'error',
+            cornerclass: 'ui-pnotify-sharp',
+            delay: 2000,
+            styling: 'bootstrap3',
+            icon: isSuccess ? 'glyphicon glyphicon-ok-circle' : 'glyphicon glyphicon-remove-circle'
+        });
+    }
 };
 
 ko.applyBindings(new OptionsViewModel());
