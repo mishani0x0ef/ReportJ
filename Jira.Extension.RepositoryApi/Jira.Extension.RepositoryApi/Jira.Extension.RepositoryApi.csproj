@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Dto\CommitDto.cs" />
     <Compile Include="Dto\DtoConventer.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

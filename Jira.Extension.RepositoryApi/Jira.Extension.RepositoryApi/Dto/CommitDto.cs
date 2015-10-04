@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Jira.Extension.RepositoryApi.Dto
 {
@@ -16,6 +15,6 @@ namespace Jira.Extension.RepositoryApi.Dto
         public string Message { get; set; }
 
         [DataMember]
-        public DateTime Date { get; set; }
+        public double Date { get; set; }
     }
 }

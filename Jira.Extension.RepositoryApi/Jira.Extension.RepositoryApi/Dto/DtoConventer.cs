@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Jira.Extension.RepoBase.Entities;
+using Jira.Extension.RepositoryApi.Extensions;
 
 namespace Jira.Extension.RepositoryApi.Dto
 {
@@ -12,7 +13,7 @@ namespace Jira.Extension.RepositoryApi.Dto
             {
                 CommitId = commit.CommitId,
                 Author = commit.Author,
-                Date = commit.Date,
+                Date = commit.Date.ToUnixTimestamp(),
                 Message = commit.Message
             };
         }
