@@ -21,6 +21,9 @@ var RepositoryApi = function(){
                 count: options.count, 
                 author: options.author},
             success: function(commits){
+                $.each(commits, function(index, commit) {
+                    commit.Date = new Date(commit.Date);
+                })
                 handler(commits);
             }
         });
