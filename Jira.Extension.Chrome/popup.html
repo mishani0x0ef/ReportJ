@@ -1,76 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    
+
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="lib/bootstrap.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
-    
+
 </head>
+
 <body class="extension-popup">
-    
-    <div class="well-sm col-xs-12 center-block">
-      <div id="addIssueSummary" class="col-xs-6 btn btn-link text-center">
-           <div class="col-xs-10">Add issue summary</div>
-           <div class="col-xs-2"><span class="glyphicon glyphicon-plus"></span></div>
-       </div>
-       <div id="settings" class="col-xs-4 col-xs-offset-2 btn btn-link">
-            <div class="col-xs-9 text-right">Settings</div>
-            <div class="col-xs-3"><span class="glyphicon glyphicon-cog"></span></div>
-       </div>        
+
+    <div class="header-buttons">
+        <div class="container">
+            <div class="row">
+
+                <div id="addIssueSummary" class="btn-wrap col-xs-5">
+                    <div id="addIssueSummary" class="btn btn-link text-center">
+                        <span class="btn-caption">Add issue summary</span>
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </div>
+                </div>
+
+                <div id="settings" class="btn-wrap col-xs-4 col-xs-offset-3 text-right">
+                    <div id="settings" class="btn btn-link">
+                        <span class="btn-caption">Settings</span>
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-    
+
+
     <ul class="nav nav-tabs">
         <li class="active"><a href="#svnCommits" data-toggle="tab">SVN Commits</a></li>
         <li class="disabled" title="Comming soon ..."><a href="#gitCommits">Git Commits</a></li>
     </ul>
-    
+
     <div id="commitsTab" class="tab-content col-xs-12 well">
-        <div class="tab-pane fade active in commits-panel" id="svnCommits">
-            <div class="panel panel-default panel-clickable">
-                <div class="panel-heading col-xs-12">
-                    <div class="col-xs-6">
-                        <span>21 Aug 12:15</span>
+        <div class="tab-pane fade active in commits" id="svnCommits">
+            <div class="container">
+                <div class="row">
+
+                    <div class="commit">
+                        <div class="panel panel-default">
+                            <div class="panel-heading col-xs-12">
+                                <div class="col-xs-6">
+                                    <span>21 Aug 12:15</span>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <span class="text-right"><b>Adam Codeman</b></span>
+                                </div>
+                            </div>
+                            <div class="panel-body text-justify">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-xs-6 text-right">
-                        <span class="text-right"><b>First Name</b></span>
-                    </div>                
-                </div>
-                <div class="panel-body text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</div>
-            </div>
-            <div class="panel panel-default panel-clickable">
-                <div class="panel-heading col-xs-12">
-                    <div class="col-xs-6">
-                        <span>21 Aug 12:15</span>
+
+                    <div class="commit">
+                        <div class="panel panel-default">
+                            <div class="panel-heading col-xs-12">
+                                <div class="col-xs-6">
+                                    <span>21 Aug 12:15</span>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <span class="text-right"><b>Adam Codeman</b></span>
+                                </div>
+                            </div>
+                            <div class="panel-body text-justify">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-xs-6 text-right">
-                        <span class="text-right"><b>First Name</b></span>
-                    </div>                
-                </div>
-                <div class="panel-body text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</div>
-            </div>
-            <div class="panel panel-default panel-clickable">
-                <div class="panel-heading col-xs-12">
-                    <div class="col-xs-6">
-                        <span>21 Aug 12:15</span>
+
+                    <div class="commit">
+                        <div class="panel panel-default">
+                            <div class="panel-heading col-xs-12">
+                                <div class="col-xs-6">
+                                    <span>21 Aug 12:15</span>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <span class="text-right"><b>Adam Codeman</b></span>
+                                </div>
+                            </div>
+                            <div class="panel-body text-justify">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-xs-6 text-right">
-                        <span class="text-right"><b>First Name</b></span>
-                    </div>                
+
+                    <div class="commit">
+                        <div class="panel panel-default">
+                            <div class="panel-heading col-xs-12">
+                                <div class="col-xs-6">
+                                    <span>21 Aug 12:15</span>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <span class="text-right"><b>Adam Codeman</b></span>
+                                </div>
+                            </div>
+                            <div class="panel-body text-justify">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="commit">
+                        <div class="panel panel-default">
+                            <div class="panel-heading col-xs-12">
+                                <div class="col-xs-6">
+                                    <span>21 Aug 12:15</span>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <span class="text-right"><b>Adam Codeman</b></span>
+                                </div>
+                            </div>
+                            <div class="panel-body text-justify">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="commit">
+                        <div class="panel panel-default">
+                            <div class="panel-heading col-xs-12">
+                                <div class="col-xs-6">
+                                    <span>21 Aug 12:15</span>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <span class="text-right"><b>First Name</b></span>
+                                </div>
+                            </div>
+                            <div class="panel-body text-justify">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="panel-body text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!</div>
             </div>
         </div>
-    </div>    
-    
+    </div>
+
     <script src="lib/jquery.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
     <script src="js/jira.js"></script>
     <script src="js/repository.js"></script>
     <script src="js/popup.js"></script>
-     
-</body>
-</html>
 
+</body>
+
+</html>

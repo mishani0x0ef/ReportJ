@@ -1,34 +1,69 @@
-.panel-clickable{
-    cursor: pointer;
+.extension-popup {
+    height: 600px;
+    width: 600px;
 }
 
-.panel-clickable:hover .panel-body{
-    background: #f4f4f4;
+.extension-popup .tab-content {
+    padding: 0;
+    margin: 0;
 }
 
-.panel-clickable:hover .panel-heading{
-    background: #e8e8e8;
-    color: #2196f3;
-}
-
-.commits-panel{
-    height: 440px;
-    overflow:auto;
-}
-
-.extension-popup{
+.commits {
     height: 500px;
-    width: 500px;
+    overflow: auto;
 }
 
-.options{
+.commits .container {
+    
+}
+
+.commits .commit div {
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.commits .commit div p {
+    transition: all .5s ease;
+}
+
+.commits .commit .panel {
+    margin: 0;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.commits .commit .panel-heading {
+    padding: 0;
+    line-height: 30px;
+    background-color: #fff;
+}
+
+.commits .commit .panel-body {
+    padding-bottom: 8px;
+    line-height: 20px;
+}
+
+.commits .commit .panel-body p {
+    margin-bottom: 0;
+}
+
+.commits .commit:hover .panel-body {
+    background: #f4f4f4;
+    color: #225f91;
+}
+
+.commits .commit:hover .panel-heading {
+    background: #f0f0f1;
+    color: #185d95;
+}
+
+.options {
     margin: 0; 
     padding: 0; 
     height: 100%; 
     overflow: hidden;
 }
 
-.full-screen{
+.full-screen {
     position:absolute; 
     left: 0; 
     right: 0; 
@@ -38,4 +73,23 @@
 
 textarea.resize-vertical {
     resize: vertical;
+}
+
+.header-buttons {
+    padding: 10px 0 0;
+}
+
+.header-buttons .container {
+    padding: 0 5px;
+}
+
+.btn-wrap {
+}
+
+.btn-wrap .btn-caption {
+    margin-right: 10px;
+}
+
+.btn-wrap:hover .btn-link {
+    color: #185d95;
 }
