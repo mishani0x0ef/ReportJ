@@ -1,0 +1,1 @@
+var jiraReporterApp = angular.module('jiraReporterApp', []);
