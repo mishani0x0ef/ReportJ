@@ -15,7 +15,7 @@ jiraReporterApp.controller('PopupController', function ($scope) {
             }, 
             function(data) {
                 $scope.svnCommits = data;
-                $scope.$apply();
+                $scope.$apply($scope.svnCommits);
             }
         );
     };
@@ -42,8 +42,14 @@ jiraReporterApp.controller('PopupController', function ($scope) {
     };
     
     $scope.addCommitInfo = function(commit) {
+        commit.justAdded = true;
+        setTimeout(function() {
+            commit.justAdded = false;
+            $scope.$apply(commit);
+        }, 1000);
+        
         chrome.tabs.executeScript({
-            code: "document.activeElement.value = document.activeElement.value + " + JSON.stringify(commit.message)
+            code: "document.activeElement.value = document.activeElement.value + " + JSON.stringify(commit.message) + ";true"
         });
     };
 });

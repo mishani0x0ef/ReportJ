@@ -10,7 +10,7 @@ var RepositoryApi = function(){
     * @return {void} do not return data.
     */
     this.getLastSvnCommits = function(options, handler){
-        var apiUrl = svnApiUrl + "commits";
+        var apiUrl = svnApiUrl + "commits/test";
         $.ajax({
             dataType: "json",
             url: apiUrl,

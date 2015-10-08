@@ -13,8 +13,9 @@
     overflow: auto;
 }
 
-.commits .container {
-    
+.commits .commit {
+    position: relative;
+    overflow: hidden;
 }
 
 .commits .commit div {
@@ -54,6 +55,27 @@
 .commits .commit:hover .panel-heading {
     background: #f0f0f1;
     color: #185d95;
+}
+
+.commits .commit .result-wrap {
+    text-transform: uppercase;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -50px;
+    opacity: 0.0;
+    transition: all 0.3 ease;
+}
+
+.commits .commit .result-wrap.on {
+    top: 0;
+    opacity: 0.95;
+}
+
+.commits .commit .result-wrap .add-confirm {
+    padding: 7px 30px;
+    background-color: #185d95;
+    color: white;    
 }
 
 .options {
