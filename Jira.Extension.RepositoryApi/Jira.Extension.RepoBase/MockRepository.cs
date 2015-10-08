@@ -15,6 +15,8 @@ namespace Jira.Extension.RepoBase
         public int MaxCountOfCommits { get; private set; }
         public int MaxRepositoryDiscoverDepth { get; set; }
 
+        private readonly string[] _authors = {"Mark Commit", "Debby Revert", "Ostin Merge"};
+
         public IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count = 10)
         {
             count = count > MaxCountOfCommits ? MaxCountOfCommits : count;
@@ -24,9 +26,12 @@ namespace Jira.Extension.RepoBase
                     new Commit
                     {
                         CommitId = i.ToString(),
-                        Author = string.Format("Test Author {0}", i),
+                        Author = _authors[i%_authors.Length],
                         Date = DateTime.Now.AddMinutes(i*(-1)),
-                        Message = string.Format("Test message {0}", i)
+                        Message =
+                            string.Format(
+                                "Test message with very long test and without any sense. Just for testing and with index - {0}",
+                                i)
                     };
             }
         }

@@ -10,7 +10,12 @@
 
 .commits {
     height: 500px;
+    position: relative;
     overflow: auto;
+}
+
+.commits.disabled {
+    overflow: hidden;
 }
 
 .commits .commit {
@@ -61,6 +66,7 @@
     text-transform: uppercase;
     display: inline-block;
     position: absolute;
+    height: 0;
     left: 0;
     top: -50px;
     opacity: 0.0;
@@ -69,6 +75,7 @@
 
 .commits .commit .result-wrap.on {
     top: 0;
+    height: auto;
     opacity: 0.95;
 }
 
@@ -76,6 +83,35 @@
     padding: 7px 30px;
     background-color: #185d95;
     color: white;    
+}
+
+.commits .warning-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    text-align: center;
+    background: #fff;
+    opacity: 0.0;
+    z-index: -1;
+    overflow: hidden;
+    transition: all 0.25 ease;    
+}
+
+.commits.disabled .warning-wrap {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.9;
+}
+
+.commits .warning-wrap .warning {
+    padding: 100px 30px;
+}
+
+.commits .warning-wrap .warning .warning-icon {
+    font-size: 40px;
 }
 
 .options {

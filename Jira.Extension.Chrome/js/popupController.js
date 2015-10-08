@@ -3,6 +3,15 @@ jiraReporterApp.controller('PopupController', function ($scope) {
     var eleksJiraUrl = "https://jd.eleks.com";
 
     $scope.svnCommits = [];
+    $scope.reportingAllowed = false;
+    
+    $scope.checkReportingAllowance = function() {
+        chrome.tabs.getSelected(null, function(tab) {
+            $scope.reportingAllowed = tab.url.indexOf(eleksJiraUrl) > -1;
+            $scope.$apply($scope.reportingAllowed);
+        });
+    }
+    $scope.checkReportingAllowance();
     
     $scope.refreshCommits = function() {
         var repository = new RepositoryApi();
@@ -49,7 +58,7 @@ jiraReporterApp.controller('PopupController', function ($scope) {
         }, 1000);
         
         chrome.tabs.executeScript({
-            code: "document.activeElement.value = document.activeElement.value + " + JSON.stringify(commit.message) + ";true"
+            code: "document.activeElement.value = document.activeElement.value + " + JSON.stringify(commit.Message) + " + '\\n';true"
         });
     };
 });
