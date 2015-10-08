@@ -3,26 +3,8 @@ jiraReporterApp.controller('PopupController', function ($scope) {
     var eleksJiraUrl = "https://jd.eleks.com";
 
     $scope.svnCommits = [];
-//        [{
-//        author: "Mark Commit",
-//        date: "21 Aug 21:45",
-//        message: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!"
-//        }, {
-//        author: "Adam Merge",
-//        date: "21 Aug 21:45",
-//        message: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!"
-//        }, {
-//        author: "Ostin Revert",
-//        date: "21 Aug 21:45",
-//        message: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!"
-//        }, {
-//        author: "Lora Pull",
-//        date: "21 Aug 21:45",
-//        message: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita accusantium, pariatur voluptatem, commodi recusandae alias consequuntur. Dignissimos libero, optio a vitae. Accusamus a deleniti sed eaque!"
-//        }];
     
     $scope.refreshCommits = function() {
-        alert("Inside refreshCommits");
         var repository = new RepositoryApi();
         repository.getLastSvnCommits(
             {
@@ -32,8 +14,8 @@ jiraReporterApp.controller('PopupController', function ($scope) {
                 count: 5
             }, 
             function(data) {
-                alert(data.length);
-                $scope.svnCommits = data;                
+                $scope.svnCommits = data;
+                $scope.$apply();
             }
         );
     };
