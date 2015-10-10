@@ -11,6 +11,7 @@
     <script type="text/javascript" src="lib/jquery.min.js"></script>
     <script type="text/javascript" src="lib/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/storageService.js"></script>
     <script type="text/javascript" src="js/optionsController.js"></script>
 </head>
 
@@ -67,7 +68,7 @@
                             </form>
                             <div class="inline-group">
                                 <button class="btn btn-primary" ng-click="editRepository(null, 'svn')" ng-disabled="isMaxSvnRepoCountExceed">Add Repository</button>
-                                <p ng-class="{ off: isMaxSvnRepoCountExceed !== true }" style="width: 20px;">Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong> for each repository type.</p>
+                                <p class="off" ng-class="{ off: isMaxSvnRepoCountExceed !== true }" style="width: 20px;">Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong> for each repository type.</p>
                             </div>
 
                             <div class="well"></div>

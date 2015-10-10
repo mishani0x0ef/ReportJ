@@ -1,4 +1,4 @@
-jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout) {
+jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService) {
     
     var showNotification = function (isSuccess, message) {
         $scope.isNoticaitionSuccess = isSuccess;
@@ -11,35 +11,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     };
     
     $scope.maxRepoQuota = 2;
-    $scope.repositories = [
-        { 
-            repositoryId: 1,
-            type: "svn",
-            name: "Repository for very important things",
-            url: "http://svn.imporant-things/",
-            userName: "Mark.Commit",
-            password: "secret word",
-            passwordConfirm: "secret word"
-        },
-        { 
-            repositoryId: 0,
-            type: "svn",
-            name: "Awersome application repository",
-            url: "http://repository.address/folder",
-            userName: "Mark.Commit",
-            password: "secret word",
-            passwordConfirm: "secret word"
-        },
-        { 
-            repositoryId: 2,
-            type: "git",
-            name: "It's mine gite repository",
-            url: "http://git.mine-only/",
-            userName: "Mark.Commit",
-            password: "secret word",
-            passwordConfirm: "secret word"
-        }
-    ];
+    $scope.repositories = [];
     
     $scope.$watchCollection('repositories', function(newRepositories, oldRepositories) {
         var svnReposCount = 0, 
@@ -61,8 +33,6 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         $scope.isMaxSvnRepoCountExceed = svnReposCount >= $scope.maxRepoQuota;
         $scope.isMaxGitRepoCountExceed = gitReposCount >= $scope.maxRepoQuota;
     });
-    
-    $scope.editedRepository = "";
     
     $scope.editRepository = function (repository, repositoryType) {
         if(typeof (repository) !== "undefined" && repository !== null){
@@ -97,34 +67,31 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         }
         
         $("#repositoryEditModal").modal("hide");
-        //todo: implement saving settings into chrome storage and notification about success. MR
+        $scope.saveSettings();
     };
     
     $scope.removeRepository = function (repository) {
         var index = $scope.repositories.indexOf(repository);
         $scope.repositories.splice(index, 1);
-        //todo: implement saving settings into chrome storage and notification about success. MR
-    }
+        $scope.saveSettings();
+    };
     
-    // Mock of method for saving settings.
-    // todo: finish that method with appropriate exception handling and saving. MR
-    $scope.saveSettings = function(settings){
-        chrome.runtime.lastError = null;
-    
-        chrome.storage.sync.set({
-            settings: settings
-            }, function(){        
-                if(typeof(chrome.runtime.lastError) !== 'undefined' && chrome.runtime.lastError !== null){
-                    message.message = chrome.runtime.lastError;
-                }
-            }
-        );
-    }
-
-    // Mock of method for getting settings.
-    // todo: finish that method with appropriate exception handling and getting. MR
-    $scope.getSettings = function(){    
-        chrome.storage.sync.get(["settings1", "settings2"], function(options){        
+    $scope.saveSettings = function(){
+        storageService.saveRepositories($scope.repositories, function (isSuccess) {
+            var message = isSuccess ? "Options saved" : "Saving failed";
+            showNotification(isSuccess, message);
+            $scope.$apply();
         });
-    }
+    };
+
+    $scope.getSettings = function(){ 
+        storageService.getRepositories(function (repositories) {
+            $scope.repositories = [];
+            angular.forEach(repositories, function (repo) {
+                $scope.repositories.push(repo);                
+            });
+            $scope.$apply();
+        });
+    };
+    $scope.getSettings();
 });
