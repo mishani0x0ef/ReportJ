@@ -180,3 +180,41 @@
 .options .header h3 {
     color: #003366;
 }
+
+.notification-wrap {
+    position: absolute;
+    top: -50px;
+    right: 25px;
+    height: 0;
+    opacity: 0;
+    padding: 10px 25px 5px 20px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 15px;
+    transition: all 1s ease;
+}
+
+.notification-wrap.on {
+    top: 0;
+    height: 42px;
+    opacity: 0.95;
+}
+
+.notification-wrap .notification-icon {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.notification-wrap .notification-message {
+    display: inline-block;
+    margin: 0 5px;
+    letter-spacing: 1.3px;
+}
+
+.notification-wrap.success {
+    background-color: #185d95;
+}
+
+.notification-wrap.warning {
+    background-color: #FF9800;
+}

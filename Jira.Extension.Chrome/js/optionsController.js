@@ -1,4 +1,14 @@
-jiraReporterApp.controller('OptionsController', function ($scope) {
+jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout) {
+    
+    var showNotification = function (isSuccess, message) {
+        $scope.isNoticaitionSuccess = isSuccess;
+        $scope.notificationMessage = message;
+        $scope.notify = true;
+        
+        $timeout(function () {
+            $scope.notify = false;         
+        }, 5000);
+    };
     
     $scope.svnRepositories = [
         { 
@@ -38,18 +48,6 @@ jiraReporterApp.controller('OptionsController', function ($scope) {
     // todo: finish that method with appropriate exception handling and getting. MR
     $scope.getSettings = function(){    
         chrome.storage.sync.get(["settings1", "settings2"], function(options){        
-        });
-    }
-
-    var notifyOptionsSaving = function(isSuccess, title, message){
-        new PNotify({
-            title: title,
-            text: message,
-            type: isSuccess ? 'success' : 'error',
-            cornerclass: 'ui-pnotify-sharp',
-            delay: 2000,
-            styling: 'bootstrap3',
-            icon: isSuccess ? 'glyphicon glyphicon-ok-circle' : 'glyphicon glyphicon-remove-circle'
         });
     }
 });

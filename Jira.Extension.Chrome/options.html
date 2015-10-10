@@ -6,7 +6,6 @@
     <title>Jira.Extension Settings</title>
 
     <link rel="stylesheet" href="lib/bootstrap.paper.min.css">
-    <link rel="stylesheet" href="lib/pnotify.custom.min.css">
     <link rel="stylesheet" href="css/main.css">
 
     <script type="text/javascript" src="lib/jquery.min.js"></script>
@@ -132,9 +131,15 @@
             </div>
         </div>
     </div>
+    
+    <div class="notification-wrap" ng-class="{ on: notify === true, success: isNoticaitionSuccess === true, warning: isNoticaitionSuccess !== true }">
+        <div class="notification-icon">
+            <span class="glyphicon" ng-class="{ 'glyphicon-ok': isNoticaitionSuccess === true, 'glyphicon-remove': isNoticaitionSuccess !== true }"></span>
+        </div>
+        <div class="notification-message"><strong>Options saved</strong></div>
+    </div>
 
     <script src="lib/bootstrap.min.js"></script>
-    <script src="lib/pnotify.custom.min.js"></script>
 </body>
 
 </html>
