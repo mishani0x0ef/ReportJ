@@ -10,6 +10,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         }, 5000);
     };
     
+    $scope.maxRepoQuota = 2;
     $scope.repositories = [
         { 
             repositoryId: 1,
@@ -39,6 +40,27 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             passwordConfirm: "secret word"
         }
     ];
+    
+    $scope.$watchCollection('repositories', function(newRepositories, oldRepositories) {
+        var svnReposCount = 0, 
+            gitReposCount = 0;
+        
+        angular.forEach(newRepositories, function (repo) {
+            switch(repo.type) {
+                case "svn":
+                    svnReposCount++;
+                    break;
+                case "git":
+                    gitReposCount++;
+                    break;
+                default:
+                    break;
+            }
+        });
+        
+        $scope.isMaxSvnRepoCountExceed = svnReposCount >= $scope.maxRepoQuota;
+        $scope.isMaxGitRepoCountExceed = gitReposCount >= $scope.maxRepoQuota;
+    });
     
     $scope.editedRepository = "";
     

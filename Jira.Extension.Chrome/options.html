@@ -51,7 +51,9 @@
                                                     <span class="glyphicon glyphicon-user"></span>
                                                     <strong>{{repository.userName}}</strong>
                                                 </div>
-                                                <div class="col-lg-10"><p>{{repository.url}}</p></div>
+                                                <div class="col-lg-10">
+                                                    <p>{{repository.url}}</p>
+                                                </div>
                                                 <button type="button" class="btn btn-link col-lg-1" title="Edit" ng-click="editRepository(repository)">
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </button>
@@ -63,7 +65,10 @@
                                     </div>
                                 </div>
                             </form>
-                            <button class="btn btn-primary" ng-click="editRepository(null, 'svn')">Add Repository</button>
+                            <div class="inline-group">
+                                <button class="btn btn-primary" ng-click="editRepository(null, 'svn')" ng-disabled="isMaxSvnRepoCountExceed">Add Repository</button>
+                                <p ng-class="{ off: isMaxSvnRepoCountExceed !== true }" style="width: 20px;">Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong> for each repository type.</p>
+                            </div>
 
                             <div class="well"></div>
 
@@ -75,7 +80,7 @@
                                     Comming soon ...
                                 </div>
                             </form>
-                            <button id="btnAddRepository" class="btn btn-primary disabled" ng-click="editRepository({}, 'git')" disabled>Add Repository</button>
+                            <button class="btn btn-primary disabled" ng-click="editRepository({}, 'git')" disabled>Add Repository</button>
                         </div>
 
                         <div id="repositoryEditModal" class="modal modal-custom">
@@ -141,7 +146,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="notification-wrap" ng-class="{ on: notify === true, success: isNoticaitionSuccess === true, warning: isNoticaitionSuccess !== true }">
         <div class="notification-icon">
             <span class="glyphicon" ng-class="{ 'glyphicon-ok': isNoticaitionSuccess === true, 'glyphicon-remove': isNoticaitionSuccess !== true }"></span>

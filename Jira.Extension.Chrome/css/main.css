@@ -218,3 +218,27 @@
 .notification-wrap.warning {
     background-color: #FF9800;
 }
+
+.inline-group {
+    display: inline-block;
+}
+
+.inline-group > * {
+    display: inline;
+    transition: all 0.5s ease;
+}
+
+.inline-group > p {
+    margin-left: 10px;
+    width: 1px;
+    min-width: 1px;
+    max-width: 1px;
+}
+
+.inline-group > .off {
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+}

@@ -21,10 +21,10 @@
             <div class="row">
 
                 <div class="btn-wrap col-xs-5" ng-click="addIssueSummary()">
-                    <div class="btn btn-link text-center" ng-class="{ disabled: reportingAllowed !== true }">
+                    <button class="btn btn-link text-center" ng-disabled="reportingAllowed !== true">
                         <span class="btn-caption">Add issue summary</span>
                         <span class="glyphicon glyphicon-plus"></span>
-                    </div>
+                    </button>
                 </div>
 
                 <div class="btn-wrap col-xs-4 col-xs-offset-3 text-right" ng-click="openOptions()">
