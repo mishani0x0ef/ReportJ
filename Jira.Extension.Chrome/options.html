@@ -43,23 +43,27 @@
                                     <legend>SVN Repositories</legend>
                                 </fieldset>
                                 <div class="repositories">
-                                    <div class="repository" ng-repeat="repository in svnRepositories">
+                                    <div class="repository" ng-repeat="repository in repositories | filter: { type: 'svn' } | orderBy: 'name'">
                                         <div class="col-lg-12 panel panel-default">
                                             <div class="panel-body">
-                                                <div class="col-lg-8"><b>{{repository.Name}}</b></div>
+                                                <div class="col-lg-8"><b>{{repository.name}}</b></div>
                                                 <div class="col-lg-4 text-right" title="User Name">
                                                     <span class="glyphicon glyphicon-user"></span>
-                                                    <strong>{{repository.UserName}}</strong>
+                                                    <strong>{{repository.userName}}</strong>
                                                 </div>
-                                                <div class="col-lg-10"><p>{{repository.Url}}</p></div>
-                                                <button type="button" class="btn btn-link col-lg-1" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                                <button type="button" class="btn btn-link col-lg-1" title="Delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                                <div class="col-lg-10"><p>{{repository.url}}</p></div>
+                                                <button type="button" class="btn btn-link col-lg-1" title="Edit" ng-click="editRepository(repository)">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-link col-lg-1" title="Delete" ng-click="removeRepository(repository)">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#repositoryEditModal" ng-click="addSvnRepository">Add Repository</button>
+                            <button class="btn btn-primary" ng-click="editRepository(null, 'svn')">Add Repository</button>
 
                             <div class="well"></div>
 
@@ -71,7 +75,7 @@
                                     Comming soon ...
                                 </div>
                             </form>
-                            <button id="btnAddRepository" class="btn btn-primary disabled">Add Repository</button>
+                            <button id="btnAddRepository" class="btn btn-primary disabled" ng-click="editRepository({}, 'git')" disabled>Add Repository</button>
                         </div>
 
                         <div id="repositoryEditModal" class="modal modal-custom">
@@ -90,32 +94,38 @@
                                                 <div class="form-group">
                                                     <label for="repositoryName" class="col-lg-3 control-label">Name</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" id="repositoryName" placeholder="Repository Name">
+                                                        <input type="text" class="form-control" ng-model="editedRepository.name" placeholder="Repository Name" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="repositoryUrl" class="col-lg-3 control-label">Repository URL</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" id="repositoryUrl" placeholder="Repository URL">
+                                                        <input type="text" class="form-control" ng-model="editedRepository.url" placeholder="Repository URL" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="repositoryUsername" class="col-lg-3 control-label">User Name</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" id="repositoryUsername" placeholder="User Name">
+                                                        <input type="text" class="form-control" ng-model="editedRepository.userName" placeholder="User Name" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="repositoryPassword" class="col-lg-3 control-label">Password</label>
                                                     <div class="col-lg-9">
-                                                        <input type="password" class="form-control" id="repositoryPassword" placeholder="Password">
+                                                        <input type="password" class="form-control" ng-model="editedRepository.password" placeholder="Password" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="repositoryPasswordConfirm" class="col-lg-3 control-label">Confirm Password</label>
+                                                    <div class="col-lg-9">
+                                                        <input type="password" class="form-control" ng-model="editedRepository.passwordConfirm" placeholder="Password Confirmation" required>
                                                     </div>
                                                 </div>
                                             </fieldset>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveRepository(editedRepository)">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                     </div>
                                 </div>

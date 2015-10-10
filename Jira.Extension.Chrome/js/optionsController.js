@@ -10,24 +10,79 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         }, 5000);
     };
     
-    $scope.svnRepositories = [
+    $scope.repositories = [
         { 
-            Name: "Awersome application repository",
-            Url: "http://repository.address/folder",
-            UserName: "Mark.Commit",
-            Password: "secret word"
+            repositoryId: 1,
+            type: "svn",
+            name: "Repository for very important things",
+            url: "http://svn.imporant-things/",
+            userName: "Mark.Commit",
+            password: "secret word",
+            passwordConfirm: "secret word"
         },
         { 
-            Name: "Repository for very important things",
-            Url: "http://svn.imporant-things/",
-            UserName: "Mark.Commit",
-            Password: "secret word"
+            repositoryId: 0,
+            type: "svn",
+            name: "Awersome application repository",
+            url: "http://repository.address/folder",
+            userName: "Mark.Commit",
+            password: "secret word",
+            passwordConfirm: "secret word"
+        },
+        { 
+            repositoryId: 2,
+            type: "git",
+            name: "It's mine gite repository",
+            url: "http://git.mine-only/",
+            userName: "Mark.Commit",
+            password: "secret word",
+            passwordConfirm: "secret word"
         }
     ];
     
-    $scope.addSvnRepository = function () {
+    $scope.editedRepository = "";
+    
+    $scope.editRepository = function (repository, repositoryType) {
+        if(typeof (repository) !== "undefined" && repository !== null){
+            $scope.editedRepository = angular.copy(repository);
+        }
+        else {
+            $scope.editedRepository = {};
+            $scope.editedRepository.type = repositoryType;
+        }
         
+        $("#repositoryEditModal").modal("show");
     };
+    
+    $scope.saveRepository = function (repository) {
+        if(typeof (repository.repositoryId) === "undefined") {
+            var repoId = 0;
+            angular.forEach($scope.repositories, function (repo) {
+                if(repo.repositoryId > repoId) {
+                    repoId = repo.repositoryId;
+                }
+            });
+            repository.repositoryId = ++repoId;
+            
+            $scope.repositories.push(repository);
+        }
+        else { 
+            angular.forEach($scope.repositories, function (repo) {
+                if(repo.repositoryId === repository.repositoryId) {
+                    angular.copy(repository, repo);                    
+                }
+            });
+        }
+        
+        $("#repositoryEditModal").modal("hide");
+        //todo: implement saving settings into chrome storage and notification about success. MR
+    };
+    
+    $scope.removeRepository = function (repository) {
+        var index = $scope.repositories.indexOf(repository);
+        $scope.repositories.splice(index, 1);
+        //todo: implement saving settings into chrome storage and notification about success. MR
+    }
     
     // Mock of method for saving settings.
     // todo: finish that method with appropriate exception handling and saving. MR
