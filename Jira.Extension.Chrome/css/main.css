@@ -1,3 +1,33 @@
+.modal.modal-custom .modal-dialog .modal-content .modal-header {
+    border-bottom: 1px solid #d1d1d1;
+    position: relative;
+    line-height: 40px;
+}
+
+.modal.modal-custom .modal-dialog .modal-content .modal-header .modal-title {
+    padding-left: 15px;
+    color: #003366;
+    line-height: 40px;
+}
+
+.modal.modal-custom .modal-dialog .modal-content .modal-header .modal-header-icon {
+    padding-left: 25px;
+    margin-top: -7px;
+    height: 40px;
+}
+
+.modal.modal-custom .modal-dialog .modal-content .modal-header h1,h2,h3,h4,p,a {
+    display: inline;
+}
+
+.modal.modal-custom .modal-dialog .modal-content .modal-footer {
+    border-top: 1px solid #d1d1d1;
+}
+
+.modal.modal-custom .modal-dialog .modal-content .modal-body {
+    margin: 25px 15px;
+}
+
 .extension-popup {
     height: 600px;
     width: 600px;
@@ -114,25 +144,6 @@
     font-size: 40px;
 }
 
-.options {
-    margin: 0; 
-    padding: 0; 
-    height: 100%; 
-    overflow: hidden;
-}
-
-.full-screen {
-    position:absolute; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    top: 0px; 
-}
-
-textarea.resize-vertical {
-    resize: vertical;
-}
-
 .header-buttons {
     padding: 10px 0 0;
 }
@@ -150,4 +161,22 @@ textarea.resize-vertical {
 
 .btn-wrap:hover .btn-link {
     color: #185d95;
+}
+
+/* Options styles */
+
+.options {
+    margin: 0; 
+    padding: 0; 
+    height: 100%; 
+}
+
+.options .header {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+.options .header h3 {
+    color: #003366;
 }
