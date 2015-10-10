@@ -44,16 +44,19 @@
                                 <fieldset>
                                     <legend>SVN Repositories</legend>
                                 </fieldset>
-                                <div>
-                                    <div class="col-lg-12 panel panel-default">
-                                        <div class="panel-body">
-                                            <div class="col-lg-10"><b>Testing svn repository</b></div>
-                                            <div class="col-lg-2 text-right"><span class="glyphicon glyphicon-time" title="Refresh time"> 60min</span></div>
-                                            <div class="col-lg-10">
-                                                <p>http://repository.address/folder</p>
+                                <div class="repositories">
+                                    <div class="repository" ng-repeat="repository in svnRepositories">
+                                        <div class="col-lg-12 panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="col-lg-8"><b>{{repository.Name}}</b></div>
+                                                <div class="col-lg-4 text-right" title="User Name">
+                                                    <span class="glyphicon glyphicon-user"></span>
+                                                    <strong>{{repository.UserName}}</strong>
+                                                </div>
+                                                <div class="col-lg-10"><p>{{repository.Url}}</p></div>
+                                                <button type="button" class="btn btn-link col-lg-1" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                <button type="button" class="btn btn-link col-lg-1" title="Delete"><span class="glyphicon glyphicon-trash"></span></button>
                                             </div>
-                                            <button type="button" class="btn btn-link col-lg-1" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                            <button type="button" class="btn btn-link col-lg-1" title="Delete"><span class="glyphicon glyphicon-trash"></span></button>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +83,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                             <span class="">&times;</span>
                                         </button>
-                                        <img class="modal-header-icon" src="img/svn.png" alt="svn"/>
+                                        <img class="modal-header-icon" src="img/svn.png" alt="svn" />
                                         <h4 class="modal-title">SVN Repository Settings</h4>
                                     </div>
                                     <div class="modal-body">
