@@ -15,7 +15,7 @@
     <script type="text/javascript" src="js/optionsController.js"></script>
 </head>
 
-<body ng-controller="OptionsController" style="width: 100%">
+<body class="options-wrap" ng-controller="OptionsController">
 
     <div id="container">
         <div class="col-lg-6 col-md-offset-3 panel panel-default">
@@ -153,6 +153,25 @@
             <span class="glyphicon" ng-class="{ 'glyphicon-ok': isNoticaitionSuccess === true, 'glyphicon-remove': isNoticaitionSuccess !== true }"></span>
         </div>
         <div class="notification-message"><strong>Options saved</strong></div>
+    </div>
+
+    <div class="round-btn-wrap">
+        <div class="round-btn-menu">
+            <div class="round-btn-menu-item">
+                <a type="button" class="btn btn-icon github-icon" data-title="View on GitHub" target="_blank" href="https://github.com/mishani0x0ef/Jira.Extrension">
+                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64pt" height="64pt" viewBox="0 0 64 64">
+                        <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000" stroke="none">
+                            <path d="M224 626 c-232 -76 -298 -370 -119 -535 42 -39 99 -71 125 -71 5 0 10 16 10 35 0 33 -2 35 -35 35 -35 0 -42 5 -90 66 -44 56 -23 62 32 9 42 -40 75 -45 98 -12 14 21 14 22 -7 30 -60 23 -88 42 -102 72 -21 43 -21 124 0 153 8 12 12 27 9 32 -10 16 5 70 18 70 7 0 24 -6 38 -14 17 -9 60 -14 119 -14 59 0 102 5 119 14 14 8 31 14 38 14 13 0 28 -54 18 -70 -3 -5 1 -20 9 -32 18 -25 21 -103 7 -141 -14 -36 -50 -66 -93 -78 -33 -9 -37 -12 -28 -29 5 -10 10 -46 10 -79 0 -35 4 -61 10 -61 52 0 158 88 198 165 23 43 27 63 27 135 0 70 -4 94 -24 135 -32 63 -93 125 -155 155 -60 28 -171 36 -232 16z" />
+                        </g>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="round-btn">
+            <a type="button" class="btn btn-primary btn-lg" data-title="Send Feedback" target="_blank" href="https://docs.google.com/forms/d/1x3dH1dE1GtiwZO8lsT8YNthr4d1R_8pZsU2Om1aBLLw/viewform?usp=send_form">
+                <span class="glyphicon glyphicon-envelope"></span>
+            </a>
+        </div>
     </div>
 
     <script src="lib/bootstrap.min.js"></script>

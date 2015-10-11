@@ -165,6 +165,10 @@
 
 /* Options styles */
 
+.options-wrap {
+    background: #F2F2F2;
+}
+
 .options {
     margin: 0; 
     padding: 0; 
@@ -241,4 +245,94 @@
     opacity: 0;
     overflow: hidden;
     visibility: hidden;
+}
+
+.round-btn-wrap {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    padding: 5px;
+    transition: all 0.5s ease;
+}
+
+.round-btn-wrap .btn:hover {
+    box-shadow: 1px 1px 10px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.round-btn-wrap a {
+    position: relative;
+}
+
+.round-btn-wrap a[data-title]:hover:after {
+    content: attr(data-title);
+    position: absolute;
+    top: 0;
+    right: 70px;
+    z-index: 20;
+    color: #003366;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: none;
+}
+
+.round-btn-wrap .round-btn .btn {
+    border-radius: 10em;
+    padding: 0;
+    margin: 0;
+    width: 56px;
+    height: 56px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 22px;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.round-btn-wrap .round-btn:hover .btn {
+    box-shadow: 2px 2px 17px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.round-btn-wrap .round-btn:hover .btn {
+    font-size: 24px;
+}
+
+.round-btn-wrap .round-btn-menu {
+    transition: all 1s ease;
+    opacity: 0;
+}
+
+.round-btn-wrap:hover .round-btn-menu {
+    opacity: 1;
+}
+
+.round-btn-wrap .round-btn-menu .round-btn-menu-item {
+    padding: 5px 0;
+    text-align: center;
+}
+
+.round-btn-wrap .round-btn-menu .round-btn-menu-item .btn {
+    border-radius: 10em;
+    padding: 0;
+    margin: 5px 0;
+    width: 42px;
+    height: 42px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.round-btn-wrap .round-btn-menu .round-btn-menu-item .btn img,svg {
+    width: 42px;
+    height: 42px;
+}
+
+.round-btn-wrap .round-btn-menu .round-btn-menu-item .github-icon svg path {
+    fill: #55297D;
+}
+
+.round-btn-wrap .round-btn-menu .round-btn-menu-item:hover .github-icon svg path {
+    fill: #482469;
+}
+
+.btn-icon {
+    background-color: transparent;
 }

@@ -1,25 +1,25 @@
 jiraReporterApp.controller('PopupController', function ($scope, storageService, commitsService) {
-    
+
     var eleksJiraUrl = "https://jd.eleks.com";
 
     $scope.svnCommits = [];
     $scope.reportingAllowed = false;
-    
-    $scope.checkReportingAllowance = function() {
-        chrome.tabs.getSelected(null, function(tab) {
+
+    $scope.checkReportingAllowance = function () {
+        chrome.tabs.getSelected(null, function (tab) {
             $scope.reportingAllowed = tab.url.indexOf(eleksJiraUrl) > -1;
             $scope.$apply($scope.reportingAllowed);
         });
     }
     $scope.checkReportingAllowance();
-    
+
     $scope.addCommits = function (commits) {
         angular.forEach(commits, function (commit) {
-           $scope.svnCommits.push(commit);
+            $scope.svnCommits.push(commit);
         });
     };
-    
-    $scope.refreshCommits = function() {
+
+    $scope.refreshCommits = function () {
         $scope.svnCommits = [];
         storageService.getRepositories(function (repositories) {
             angular.forEach(repositories, function (repo) {
@@ -29,13 +29,13 @@ jiraReporterApp.controller('PopupController', function ($scope, storageService, 
     };
     $scope.refreshCommits();
 
-    $scope.openOptions = function() {
+    $scope.openOptions = function () {
         chrome.tabs.create({
             url: "options.html"
         });
     };
 
-    $scope.addIssueSummary = function() {
+    $scope.addIssueSummary = function () {
         chrome.tabs.getSelected(null, function (tab) {
             var jira = new JiraWrapper(eleksJiraUrl);
             var issueKey = jira.getIssueKey(tab.url);
@@ -48,14 +48,14 @@ jiraReporterApp.controller('PopupController', function ($scope, storageService, 
                 }, chrome);
         });
     };
-    
-    $scope.addCommitInfo = function(commit) {
+
+    $scope.addCommitInfo = function (commit) {
         commit.justAdded = true;
-        setTimeout(function() {
+        setTimeout(function () {
             commit.justAdded = false;
             $scope.$apply(commit);
         }, 1000);
-        
+
         chrome.tabs.executeScript({
             code: "document.activeElement.value = document.activeElement.value + " + JSON.stringify(commit.Message) + " + '\\n';true"
         });
