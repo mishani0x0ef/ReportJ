@@ -1,4 +1,4 @@
-jiraReporterApp.controller('PopupController', function ($scope) {
+jiraReporterApp.controller('PopupController', function ($scope, storageService, commitsService) {
     
     var eleksJiraUrl = "https://jd.eleks.com";
 
@@ -13,20 +13,19 @@ jiraReporterApp.controller('PopupController', function ($scope) {
     }
     $scope.checkReportingAllowance();
     
+    $scope.addCommits = function (commits) {
+        angular.forEach(commits, function (commit) {
+           $scope.svnCommits.push(commit);
+        });
+    };
+    
     $scope.refreshCommits = function() {
-        var repository = new RepositoryApi();
-        repository.getLastSvnCommits(
-            {
-                repoUrl: "test",
-                username: "test", 
-                password: "test", 
-                count: 5
-            }, 
-            function(data) {
-                $scope.svnCommits = data;
-                $scope.$apply($scope.svnCommits);
-            }
-        );
+        $scope.svnCommits = [];
+        storageService.getRepositories(function (repositories) {
+            angular.forEach(repositories, function (repo) {
+                commitsService.getLastCommits(repo, $scope.addCommits);
+            })
+        });
     };
     $scope.refreshCommits();
 

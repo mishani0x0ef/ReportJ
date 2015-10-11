@@ -28,7 +28,7 @@ namespace Jira.Extension.RepoBase
         public IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count = 10)
         {
             count = count > MaxCountOfCommits ? MaxCountOfCommits : count;
-            var random = new Random();
+            var random = new Random((int)DateTime.Now.Ticks);
             for (var i = 0; i < count; i++)
             {
                 yield return
@@ -45,15 +45,16 @@ namespace Jira.Extension.RepoBase
         public IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, string author, int count = 10)
         {
             count = count > MaxCountOfCommits ? MaxCountOfCommits : count;
+            var random = new Random((int) DateTime.Now.Ticks);
             for (var i = 0; i < count; i++)
             {
                 yield return
                     new Commit
                     {
                         CommitId = i.ToString(),
-                        Author = author,
-                        Date = DateTime.Now.AddMinutes(i * (-1)),
-                        Message = string.Format("Test message {0}", i)
+                        Author = string.IsNullOrEmpty(author) ? _authors[random.Next(0, _authors.Length - 1)] : author,
+                        Date = DateTime.Now.AddMinutes(random.Next(0, 1000)*(-1)),
+                        Message = _commits[random.Next(0, _commits.Length - 1)]
                     };
             }
         }
