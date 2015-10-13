@@ -1,4 +1,4 @@
-jiraReporterApp.controller('PopupController', function ($scope, storageService, commitsService) {
+jiraReporterApp.controller('PopupController', function ($scope, $interval, storageService, commitsService) {
 
     var eleksJiraUrl = "https://jd.eleks.com";
 
@@ -17,10 +17,13 @@ jiraReporterApp.controller('PopupController', function ($scope, storageService, 
         angular.forEach(commits, function (commit) {
             $scope.svnCommits.push(commit);
         });
+        $scope.loadingCommits = false;
     };
 
     $scope.refreshCommits = function () {
         $scope.svnCommits = [];
+        $scope.loadingCommits = true;
+        $scope.loadingDescription = "Loading commits ...";
         storageService.getRepositories(function (repositories) {
             angular.forEach(repositories, function (repo) {
                 commitsService.getLastCommits(repo, $scope.addCommits);

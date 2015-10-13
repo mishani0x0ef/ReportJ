@@ -60,7 +60,7 @@ namespace Jira.Extension.RepoBase.Svn
                     commits.AddRange(logEvents.Where(filter).Select(logEvent => logEvent.ToCommit()));
 
                     discoveredDepth += endRevision - startRevision;
-                    endRevision = endRevision > repoDiscoveryStep ? endRevision - repoDiscoveryStep : 1;
+                    endRevision = endRevision - 1 > repoDiscoveryStep ? endRevision - repoDiscoveryStep - 1 : 1;
                 }
 
                 return commits.OrderByDescending(commit => commit.Date).Take(count);

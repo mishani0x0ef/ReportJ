@@ -1,12 +1,10 @@
 jiraReporterApp.service('commitsService', function ($q, $http) {
     var self = this;
-    var svnApiUrl = "http://localhost/Jira.Extension.RepositoryApi/svn/";
-    var gitApiUrl = "http://localhost/Jira.Extension.RepositoryApi/git/";
+    var baseApiUrl = "http://ws-if-cp0565/Jira.Extension.RepositoryApi/";
     var defaultCommitsCount = 10;
 
     this.getLastCommits = function (repository, handler) {
-        var apiUrl = repository.type === "svn" ? svnApiUrl : gitApiUrl;
-        apiUrl = apiUrl + "commits";
+        var apiUrl = baseApiUrl + repository.type + "/commits";
 
         $http({
             method: "GET",
