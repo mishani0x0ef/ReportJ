@@ -77,6 +77,13 @@
 
                         </div>
                     </div>
+                    
+                    <div class="loading-wrap text-center" ng-class="{ on: loadingCommits === true }">
+                        <div class="progress-wrap">
+                            <span class="icon glyphicon glyphicon-download"></span>
+                            <div class="progress-description"><strong>{{loadingDescription}}</strong></div>
+                        </div>                        
+                    </div>
 
                     <div class="warning-wrap">
                         <div class="warning">
