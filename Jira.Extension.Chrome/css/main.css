@@ -1,3 +1,11 @@
+.header .header-icon {
+    margin-bottom: 10px;
+}
+
+.header .header-title {
+    padding-bottom: 10px;
+}
+
 .modal.modal-custom .modal-dialog .modal-content .modal-header {
     border-bottom: 1px solid #d1d1d1;
     position: relative;
