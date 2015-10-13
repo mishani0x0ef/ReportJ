@@ -11,8 +11,7 @@ namespace Jira.Extension.RepositoryApi
 {
     public class SvnService : ISvnService
     {
-        // todo: use ordinar repository after testing. MR
-        [Dependency("Mock")]
+        [Dependency]
         public IRepoService RepoService { get; set; }
 
         private const int DefautCommitsCount = 10;
