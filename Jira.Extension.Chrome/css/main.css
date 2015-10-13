@@ -312,12 +312,16 @@
 .round-btn-wrap .round-btn-menu .round-btn-menu-item .btn {
     border-radius: 10em;
     padding: 0;
-    margin: 5px 0;
+    margin: 20px 0;
     width: 42px;
     height: 42px;
     line-height: 44px;
     text-align: center;
     font-size: 14px;
+}
+
+.round-btn-wrap:hover .round-btn-menu .round-btn-menu-item .btn {
+    margin: 5px 0;
 }
 
 .round-btn-wrap .round-btn-menu .round-btn-menu-item .btn img,svg {
