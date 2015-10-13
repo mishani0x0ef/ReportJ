@@ -93,6 +93,8 @@
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="Services\AppSettings.cs" />
     <Compile Include="Services\IAppSettings.cs" />
+    <Compile Include="Services\ISafeExecutor.cs" />
+    <Compile Include="Services\SafeExecutor.cs" />
     <Compile Include="SvnService.svc.cs">
       <DependentUpon>SvnService.svc</DependentUpon>
     </Compile>

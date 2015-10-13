@@ -1,4 +1,4 @@
-jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService) {
+jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, commitsService) {
 
     var showNotification = function (isSuccess, message) {
         $scope.isNoticaitionSuccess = isSuccess;
@@ -46,26 +46,34 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     };
 
     $scope.saveRepository = function (repository) {
-        if (typeof (repository.repositoryId) === "undefined") {
-            var repoId = 0;
-            angular.forEach($scope.repositories, function (repo) {
-                if (repo.repositoryId > repoId) {
-                    repoId = repo.repositoryId;
+        commitsService.checkConnection(repository, function(connectionEstablished) {        
+            if(!connectionEstablished){
+                // todo: provide more beautiful dialog than default confirm. MR
+                if(!confirm("We wasn't able to establish connection using your settings. Save it anyway?")){
+                    return;
                 }
-            });
-            repository.repositoryId = ++repoId;
+            }
+        
+            if (typeof (repository.repositoryId) === "undefined") {
+                var repoId = 0;
+                angular.forEach($scope.repositories, function (repo) {
+                    if (repo.repositoryId > repoId) {
+                        repoId = repo.repositoryId;
+                    }
+                });
+                repository.repositoryId = ++repoId;
+                $scope.repositories.push(repository);
+            } else {
+                angular.forEach($scope.repositories, function (repo) {
+                    if (repo.repositoryId === repository.repositoryId) {
+                        angular.copy(repository, repo);
+                    }
+                });
+            }
 
-            $scope.repositories.push(repository);
-        } else {
-            angular.forEach($scope.repositories, function (repo) {
-                if (repo.repositoryId === repository.repositoryId) {
-                    angular.copy(repository, repo);
-                }
-            });
-        }
-
-        $("#repositoryEditModal").modal("hide");
-        $scope.saveSettings();
+            $("#repositoryEditModal").modal("hide");
+            $scope.saveSettings();
+        });        
     };
 
     $scope.removeRepository = function (repository) {

@@ -14,6 +14,9 @@ namespace Jira.Extension.RepositoryApi
         [Dependency]
         public IRepoService RepoService { get; set; }
 
+        [Dependency]
+        public ISafeExecutor SafeExecutor { get; set; }
+
         private const int DefautCommitsCount = 10;
 
         public SvnService()
@@ -47,6 +50,12 @@ namespace Jira.Extension.RepositoryApi
             }
             
             return commits.ToDto().ToList();
+        }
+
+        public bool TestConnection(string repoUrl, string userName, string password)
+        {
+            return SafeExecutor
+                .TryExecute(() => RepoService.GetLastCommits(repoUrl, new NetworkCredential(userName, password), 1));
         }
     }
 }

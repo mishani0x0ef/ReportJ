@@ -1,5 +1,6 @@
 ﻿using Jira.Extension.RepoBase;
 using Jira.Extension.RepoBase.Svn;
+using Jira.Extension.RepositoryApi.Services;
 using Microsoft.Practices.Unity;
 
 namespace Jira.Extension.RepositoryApi
@@ -18,6 +19,7 @@ namespace Jira.Extension.RepositoryApi
         {
             Container = new UnityContainer();
             RegisterRepostiories(Container);
+            RegisterServices(Container);
         }
 
         /// <summary>
@@ -29,10 +31,15 @@ namespace Jira.Extension.RepositoryApi
             Container.BuildUp(target.GetType(), target);
         }
 
-        private void RegisterRepostiories(IUnityContainer container)
+        private static void RegisterRepostiories(IUnityContainer container)
         {
             container.RegisterType<IRepoService, SvnRepositoryService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IRepoService, MockRepository>("Mock", new ContainerControlledLifetimeManager());
+        }
+
+        private static void RegisterServices(IUnityContainer container)
+        {
+            container.RegisterType<ISafeExecutor, SafeExecutor>(new ContainerControlledLifetimeManager());
         }
     }
 }
