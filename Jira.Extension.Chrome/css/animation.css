@@ -1,0 +1,33 @@
+@keyframes loading-from-left {
+    0% {
+        font-size: 5px;
+    }
+    45% {
+        font-size: 10px;
+    }
+    55% {
+        font-size: 10px;
+    }
+    100% {
+        font-size: 5px;
+    }
+}
+
+.loading-points * {
+    animation: loading-from-left 1.5s infinite;
+    font-size: 5px;
+    border-radius: 10em;
+    background-color: #6D6D6D;
+}
+
+.loading-points :nth-child(2n+1) {
+    animation-delay: 0.0s;
+}
+
+.loading-points :nth-child(2n+2) {
+    animation-delay: 0.5s;
+}
+
+.loading-points :nth-child(2n+3) {
+    animation-delay: 1s;
+}

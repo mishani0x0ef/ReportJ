@@ -23,7 +23,7 @@ jiraReporterApp.controller('PopupController', function ($scope, $interval, stora
     $scope.refreshCommits = function () {
         $scope.svnCommits = [];
         $scope.loadingCommits = true;
-        $scope.loadingDescription = "Loading commits ...";
+        $scope.loadingDescription = "Loading commits";
         storageService.getRepositories(function (repositories) {
             angular.forEach(repositories, function (repo) {
                 commitsService.getLastCommits(repo, $scope.addCommits);
