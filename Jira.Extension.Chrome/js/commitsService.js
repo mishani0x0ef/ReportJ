@@ -20,6 +20,7 @@ jiraReporterApp.service('commitsService', function ($q, $http) {
             //todo: provide error handling. MR
             alert("Cannot establish connection with API.");
             console.error("Error while checking connection: " + status);
+            resultHandler(false);
         });
     };
 

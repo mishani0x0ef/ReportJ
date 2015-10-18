@@ -68,8 +68,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="text-center" ng-show="repositories.length === 0">
+                                    <div><span class="glyphicon glyphicon-default glyphicon-search"></span></div>
+                                    <h5>You have no repositories!</h5>
+                                    <h6>It's perfect chance to <a href="#" ng-click="editRepository(null, 'svn')"> add your first one</a></h6>
+                                </div>
+                                
                             </form>
-                            <div class="inline-group">
+                            <div class="inline-group" ng-show="repositories.length > 0">
                                 <button class="btn btn-primary" ng-click="editRepository(null, 'svn')" ng-disabled="isMaxSvnRepoCountExceed">Add Repository</button>
                                 <p class="off" ng-class="{ off: isMaxSvnRepoCountExceed !== true }" style="width: 20px;">Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong> for each repository type.</p>
                             </div>
