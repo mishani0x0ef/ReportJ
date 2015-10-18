@@ -42,6 +42,7 @@ jiraReporterApp.service('commitsService', function ($q, $http) {
             //todo: provide error handling. MR
             alert("Oops! Something went wrong while getting your commits. ");
             console.error("Error while getting commits. Status: " + status);
+            handler();
         });
     };
 });

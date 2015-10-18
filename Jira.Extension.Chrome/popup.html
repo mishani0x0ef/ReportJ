@@ -78,6 +78,16 @@
 
                         </div>
                     </div>
+                    
+                    <div class="warning-wrap" ng-class="{ on: svnCommits.length === 0 }">
+                        <div class="warning">
+                            <div class="warning-icon">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </div>
+                            <h4>We haven't found commits info!</h4>
+                            <h5>Maybe it's time to <a href="#" ng-click="openOptions()">refresh your settings</a> and add some new repositories?</h5>
+                        </div>
+                    </div>
 
                     <div class="loading-wrap text-center" ng-class="{ on: loadingCommits === true }">
                         <div class="progress-wrap">
@@ -92,8 +102,8 @@
                             <span>.</span>
                         </div>
                     </div>
-
-                    <div class="warning-wrap">
+                    
+                    <div class="warning-wrap" ng-class="{ on: reportingAllowed !== true }">
                         <div class="warning">
                             <div class="warning-icon">
                                 <span class="glyphicon glyphicon-ban-circle"></span>
