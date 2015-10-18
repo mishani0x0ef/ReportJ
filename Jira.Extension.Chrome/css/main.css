@@ -24,7 +24,7 @@
     height: 40px;
 }
 
-.modal.modal-custom .modal-dialog .modal-content .modal-header h1,h2,h3,h4,p,a {
+.modal.modal-custom .modal-dialog .modal-content .modal-header h4 {
     display: inline;
 }
 
