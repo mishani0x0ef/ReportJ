@@ -1,4 +1,4 @@
-@keyframes loading-from-left {
+@keyframes resize-animation {
     0% {
         font-size: 5px;
     }
@@ -14,7 +14,7 @@
 }
 
 .loading-points * {
-    animation: loading-from-left 1.5s infinite;
+    animation: resize-animation 1.5s infinite;
     font-size: 5px;
     border-radius: 10em;
     background-color: #6D6D6D;
@@ -25,9 +25,9 @@
 }
 
 .loading-points :nth-child(2n+2) {
-    animation-delay: 0.5s;
+    animation-delay: -0.5s;
 }
 
 .loading-points :nth-child(2n+3) {
-    animation-delay: 1s;
+    animation-delay: -1s;
 }
