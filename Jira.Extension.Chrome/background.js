@@ -2,6 +2,13 @@
     var self = this;
     var eleksJiraUrl = "https://jd.eleks.com";
     
+    var initContextMenu = function() {
+        var context = "editable";
+        var title = "JIRA add issue summary";
+        self.contextMenuId = chrome.contextMenus.create({"title": title, "contexts":[context], "id": "context" + context});  
+    }
+    initContextMenu();
+    
     var contextMenuHandler = function(e){
         if(e.menuItemId !== self.contextMenuId){
             return;
@@ -19,13 +26,6 @@
                 ,self);          
         });
     }
-    
-    var initContextMenu = function() {
-        var context = "editable";
-        var title = "JIRA add issue summary";
-        self.contextMenuId = chrome.contextMenus.create({"title": title, "contexts":[context], "id": "context" + context});  
-    }
-    initContextMenu();
 
     chrome.contextMenus.onClicked.addListener(contextMenuHandler);
     
