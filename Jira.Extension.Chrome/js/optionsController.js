@@ -35,14 +35,18 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     });
 
     $scope.editRepository = function (repository, repositoryType) {
+        $scope.repoForm.$setPristine(true);
         if (typeof (repository) !== "undefined" && repository !== null) {
             $scope.editedRepository = angular.copy(repository);
         } else {
             $scope.editedRepository = {};
-            $scope.editedRepository.type = repositoryType;
+            $scope.editedRepository.type = repositoryType;            
         }
 
-        $("#repositoryEditModal").modal("show");
+        // delay added to prevent from blinking errors on form in case if they was on form before cleaning with $setPristine(true). MR
+        $timeout(function () { 
+            $("#repositoryEditModal").modal("show")
+        }, 100);
     };
 
     $scope.saveRepository = function (repository) {

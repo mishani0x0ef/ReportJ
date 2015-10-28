@@ -30,7 +30,7 @@
                         </div>
                         <div class="header-title text-center">
                             <h3 class="text-center">JIRA Report Helper Settings</h3>
-                        </div>                        
+                        </div>
                     </div>
 
                     <ul class="nav nav-tabs">
@@ -68,13 +68,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="text-center" ng-show="repositories.length === 0">
                                     <div><span class="glyphicon glyphicon-default glyphicon-search"></span></div>
                                     <h5>You have no repositories!</h5>
                                     <h6>It's perfect chance to <a href="#" ng-click="editRepository(null, 'svn')"> add your first one</a></h6>
                                 </div>
-                                
+
                             </form>
                             <div class="inline-group" ng-show="repositories.length > 0">
                                 <button class="btn btn-primary" ng-click="editRepository(null, 'svn')" ng-disabled="isMaxSvnRepoCountExceed">Add Repository</button>
@@ -105,43 +105,57 @@
                                         <h4 class="modal-title">SVN Repository Settings</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="form-horizontal">
+                                        <form class="form-horizontal" name="repoForm" ng-submit="saveRepository(editedRepository)">
                                             <fieldset>
-                                                <div class="form-group">
+                                                <div class="form-group" ng-class="{ 'has-error': repoForm.name.$dirty && repoForm.name.$invalid}">
                                                     <label for="repositoryName" class="col-lg-3 control-label">Name</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" ng-model="editedRepository.name" placeholder="Repository Name" required>
+                                                        <input type="text" class="form-control" placeholder="Repository Name" required 
+                                                            name="name" ng-model="editedRepository.name">
+                                                        <span ng-class="{ required: repoForm.name.$error.required }"></span>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" ng-class="{ 'has-error': repoForm.url.$dirty && repoForm.url.$invalid}">
                                                     <label for="repositoryUrl" class="col-lg-3 control-label">Repository URL</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" ng-model="editedRepository.url" placeholder="Repository URL" required>
+                                                        <input type="text" class="form-control" placeholder="Repository URL" required
+                                                            name="url" ng-model="editedRepository.url">
+                                                        <span ng-class="{ required: repoForm.url.$error.required }"></span>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" ng-class="{ 'has-error': repoForm.username.$dirty && repoForm.username.$invalid}">
                                                     <label for="repositoryUsername" class="col-lg-3 control-label">User Name</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" ng-model="editedRepository.userName" placeholder="User Name" required>
+                                                        <input type="text" class="form-control" placeholder="User Name" required
+                                                            name="username" ng-model="editedRepository.userName">
+                                                        <span ng-class="{ required: repoForm.username.$error.required }"></span>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" ng-class="{ 'has-error': repoForm.password.$dirty && repoForm.password.$invalid}">
                                                     <label for="repositoryPassword" class="col-lg-3 control-label">Password</label>
                                                     <div class="col-lg-9">
-                                                        <input type="password" class="form-control" ng-model="editedRepository.password" placeholder="Password" required>
+                                                        <input type="password" class="form-control" placeholder="Password" required
+                                                            name="password" ng-model="editedRepository.password"
+                                                            equals="{{editedRepository.passwordConfirm}}">
+                                                        <span ng-class="{ required: repoForm.password.$error.required }"></span>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" 
+                                                   ng-class="{ 'has-error': repoForm.passwordConfirm.$dirty && repoForm.passwordConfirm.$invalid}">
                                                     <label for="repositoryPasswordConfirm" class="col-lg-3 control-label">Confirm Password</label>
                                                     <div class="col-lg-9">
-                                                        <input type="password" class="form-control" ng-model="editedRepository.passwordConfirm" placeholder="Password Confirmation" required>
+                                                        <input type="password" class="form-control" placeholder="Password Confirmation" required
+                                                            name="passwordConfirm" ng-model="editedRepository.passwordConfirm"
+                                                            equals="{{editedRepository.password}}">
+                                                        <span ng-class="{ required: repoForm.passwordConfirm.$error.required }"></span>
                                                     </div>
                                                 </div>
                                             </fieldset>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveRepository(editedRepository)">
+                                        <input type="submit" value="Save changes" class="btn btn-primary" 
+                                            ng-click="saveRepository(editedRepository)" ng-disabled="repoForm.$invalid">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                     </div>
                                 </div>

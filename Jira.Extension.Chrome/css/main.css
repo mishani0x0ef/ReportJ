@@ -377,3 +377,13 @@
 .glyphicon-default {
     font-size: 24px;
 }
+
+.required:after {
+    content:"*"; 
+    color: red;
+    position: absolute; 
+    top: 0;
+    right: 25px;
+    font-size: 20px;
+    opacity: 0.5;
+}
