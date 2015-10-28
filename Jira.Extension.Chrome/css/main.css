@@ -387,3 +387,8 @@
     font-size: 20px;
     opacity: 0.5;
 }
+
+.repository .panel-body div {
+    overflow: hidden;
+    white-space: nowrap;
+}

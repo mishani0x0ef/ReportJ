@@ -110,7 +110,7 @@
                                                 <div class="form-group" ng-class="{ 'has-error': repoForm.name.$dirty && repoForm.name.$invalid}">
                                                     <label for="repositoryName" class="col-lg-3 control-label">Name</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" placeholder="Repository Name" required 
+                                                        <input type="text" class="form-control" placeholder="Repository Name" required maxlength="50" 
                                                             name="name" ng-model="editedRepository.name">
                                                         <span ng-class="{ required: repoForm.name.$error.required }"></span>
                                                     </div>
@@ -118,7 +118,7 @@
                                                 <div class="form-group" ng-class="{ 'has-error': repoForm.url.$dirty && repoForm.url.$invalid}">
                                                     <label for="repositoryUrl" class="col-lg-3 control-label">Repository URL</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" placeholder="Repository URL" required
+                                                        <input type="text" class="form-control" placeholder="Repository URL" required maxlength="255"
                                                             name="url" ng-model="editedRepository.url">
                                                         <span ng-class="{ required: repoForm.url.$error.required }"></span>
                                                     </div>
@@ -126,7 +126,7 @@
                                                 <div class="form-group" ng-class="{ 'has-error': repoForm.username.$dirty && repoForm.username.$invalid}">
                                                     <label for="repositoryUsername" class="col-lg-3 control-label">User Name</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" placeholder="User Name" required
+                                                        <input type="text" class="form-control" placeholder="User Name" required maxlength="30" 
                                                             name="username" ng-model="editedRepository.userName">
                                                         <span ng-class="{ required: repoForm.username.$error.required }"></span>
                                                     </div>
@@ -134,7 +134,7 @@
                                                 <div class="form-group" ng-class="{ 'has-error': repoForm.password.$dirty && repoForm.password.$invalid}">
                                                     <label for="repositoryPassword" class="col-lg-3 control-label">Password</label>
                                                     <div class="col-lg-9">
-                                                        <input type="password" class="form-control" placeholder="Password" required
+                                                        <input type="password" class="form-control" placeholder="Password" required maxlength="30"
                                                             name="password" ng-model="editedRepository.password"
                                                             equals="{{editedRepository.passwordConfirm}}">
                                                         <span ng-class="{ required: repoForm.password.$error.required }"></span>
@@ -144,7 +144,7 @@
                                                    ng-class="{ 'has-error': repoForm.passwordConfirm.$dirty && repoForm.passwordConfirm.$invalid}">
                                                     <label for="repositoryPasswordConfirm" class="col-lg-3 control-label">Confirm Password</label>
                                                     <div class="col-lg-9">
-                                                        <input type="password" class="form-control" placeholder="Password Confirmation" required
+                                                        <input type="password" class="form-control" placeholder="Password Confirmation" required maxlength="30"
                                                             name="passwordConfirm" ng-model="editedRepository.passwordConfirm"
                                                             equals="{{editedRepository.password}}">
                                                         <span ng-class="{ required: repoForm.passwordConfirm.$error.required }"></span>
