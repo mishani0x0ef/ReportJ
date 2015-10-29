@@ -1,5 +1,7 @@
 jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, commitsService) {
 
+    // Private handlers
+    
     var showNotification = function (isSuccess, message) {
         $scope.isNoticaitionSuccess = isSuccess;
         $scope.notificationMessage = message;
@@ -9,9 +11,29 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             $scope.notify = false;
         }, 5000);
     };
+    
+    var setInitialValidity = function (validationObject) {
+        validationObject.$dirtyInvalid = validationObject.$invalid && validationObject.$dirty;
+        validationObject.$errorMessage = "";
+    }
+    
+    var setValidity = function (baseObject, validationObject, errorValidationMessage, concatErrorMsgWithExisting) {;
+        if (validationObject === true) {
+            if (concatErrorMsgWithExisting) {
+                baseObject.$errorMessage += " " + errorValidationMessage;
+            } else {
+                baseObject.$errorMessage = errorValidationMessage;
+            }
+        }
+        else {
+            baseObject.$errorMessage = concatErrorMsgWithExisting ? baseObject.$errorMessage : "";
+        }
+    }
 
     $scope.maxRepoQuota = 2;
     $scope.repositories = [];
+    
+    // Wathcers
 
     $scope.$watchCollection('repositories', function (newRepositories, oldRepositories) {
         var svnReposCount = 0,
@@ -33,6 +55,46 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         $scope.isMaxSvnRepoCountExceed = svnReposCount >= $scope.maxRepoQuota;
         $scope.isMaxGitRepoCountExceed = gitReposCount >= $scope.maxRepoQuota;
     });
+    
+    $scope.$watch('repoForm.name.$invalid', function (newValid, oldValid) {
+        var baseObj = $scope.repoForm.name;
+        setInitialValidity(baseObj);
+        setValidity(baseObj, baseObj.$error.required, "Repository name is required.");
+    });
+    
+    $scope.$watch('repoForm.url.$invalid', function (newValid, oldValid) {
+        var baseObj = $scope.repoForm.url;
+        setInitialValidity(baseObj);
+        setValidity(baseObj, baseObj.$error.required, "Repository URL is required.");
+    });
+    
+    $scope.$watch('repoForm.username.$invalid', function (newValid, oldValid) {
+        var baseObj = $scope.repoForm.username;
+        setInitialValidity(baseObj);
+        setValidity(baseObj, baseObj.$error.required, "User Name is required.");
+    });
+    
+    $scope.$watch('repoForm.password.$invalid', function (newValid, oldValid) {
+        var baseObj = $scope.repoForm.password;
+        setInitialValidity(baseObj);
+        setValidity(baseObj, baseObj.$error.required, "Password is required.");
+    });
+    
+    $scope.$watch('repoForm.password.$invalid', function (newValid, oldValid) {
+        var baseObj = $scope.repoForm.password;
+        setInitialValidity(baseObj);
+        setValidity(baseObj, baseObj.$error.required, "Password is required.", true);
+        setValidity(baseObj, baseObj.$error.equals, "Password and confirmation should match each other.", true);
+    });
+    
+    $scope.$watch('repoForm.passwordConfirm.$invalid', function (newValid, oldValid) {
+        var baseObj = $scope.repoForm.passwordConfirm;
+        setInitialValidity(baseObj);
+        setValidity(baseObj, baseObj.$error.required, "Confirmation is required.", true);
+        setValidity(baseObj, baseObj.$error.equals, "Password and confirmation should match each other.", true);
+    });
+    
+    // Handlers
 
     $scope.editRepository = function (repository, repositoryType) {
         $scope.repoForm.$setPristine(true);

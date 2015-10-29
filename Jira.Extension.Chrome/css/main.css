@@ -392,3 +392,50 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
+.title-on[data-title]:hover:before, .modal-footer.title-on[data-title]:hover:before{
+    content: attr(data-title);
+    position: absolute;
+    z-index: 20;
+    width: 250px;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 1px 1px 10px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: none;
+}
+
+.title-bottom[data-title]:hover:before {
+    top: 45px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title-top[data-title]:hover:before {
+    top: -60px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title-default[data-title]:hover:before {
+    color: #003366; 
+}
+
+.title-warn[data-title]:hover:before {
+    color: #e68900; 
+}
+
+.repository-edit .form-group {
+    position: relative;
+}
+
+.repository-edit .modal-footer {
+    position: relative;
+}
