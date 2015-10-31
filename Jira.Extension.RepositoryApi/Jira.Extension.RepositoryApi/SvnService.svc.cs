@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Jira.Extension.Common.Services;
 using Jira.Extension.RepoBase;
-using Jira.Extension.RepoBase.Entities;
 using Jira.Extension.RepositoryApi.Dto;
 using Jira.Extension.RepositoryApi.Services;
 using Microsoft.Practices.Unity;
+using NLog;
 
 namespace Jira.Extension.RepositoryApi
 {
@@ -17,6 +18,10 @@ namespace Jira.Extension.RepositoryApi
         [Dependency]
         public ISafeExecutor SafeExecutor { get; set; }
 
+        [Dependency]
+        public IExecutionLogger ExecutionLogger { get; set; }
+
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
         private const int DefautCommitsCount = 10;
 
         public SvnService()
@@ -36,18 +41,12 @@ namespace Jira.Extension.RepositoryApi
             //todo: add input parameters validation. MR
             //todo: add decrypt of password with RSA when decrypt will be implemented on client side. MR
             count = count > 0 ? count : DefautCommitsCount;
-            List<Commit> commits;
 
-            if (string.IsNullOrEmpty(author))
-            {
-                commits = RepoService.GetLastCommits(repoUrl, new NetworkCredential(userName, password), count).ToList();
-            }
-            else
-            {
-                commits = RepoService
-                    .GetLastCommits(repoUrl, new NetworkCredential(userName, password), author, count)
-                    .ToList();
-            }
+            var commits = ExecutionLogger.ExecuteWithDurationLogging(
+                () => string.IsNullOrEmpty(author)
+                    ? RepoService.GetLastCommits(repoUrl, new NetworkCredential(userName, password), count)
+                    : RepoService.GetLastCommits(repoUrl, new NetworkCredential(userName, password), author, count),
+                _logger, "Total time for GetCommits");
             
             return commits.ToDto().ToList();
         }

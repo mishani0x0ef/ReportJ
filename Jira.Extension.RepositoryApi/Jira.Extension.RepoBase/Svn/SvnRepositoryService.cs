@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using Jira.Extension.Common.Services;
 using Jira.Extension.RepoBase.Entities;
+using Microsoft.Practices.Unity;
+using NLog;
 using SharpSvn;
 
 namespace Jira.Extension.RepoBase.Svn
@@ -13,10 +16,20 @@ namespace Jira.Extension.RepoBase.Svn
         public int MaxCountOfCommits { get; private set; }
         public int MaxRepositoryDiscoverDepth { get; set; }
 
+        [Dependency("RepoBase")]
+        public IExecutionLogger ExecutionLogger { get; set; }
+
+        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
+
         public SvnRepositoryService()
         {
             MaxCountOfCommits = 30;
             MaxRepositoryDiscoverDepth = 100;
+        }
+
+        public SvnRepositoryService(IExecutionLogger executionLogger) : this()
+        {
+            ExecutionLogger = executionLogger;
         }
 
         public IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count = 10)
@@ -31,40 +44,57 @@ namespace Jira.Extension.RepoBase.Svn
                 args => string.Equals(args.Author, author, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        private IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count,
+        private IEnumerable<Commit> GetLastCommits(string repoUrl, ICredentials credential, int count,
             Func<SvnLogEventArgs, bool> filter)
         {
-            const int repoDiscoveryStep = 10;
             using (var svn = new SvnClient())
             {
-                var commits = new List<Commit>();
-
                 svn.Authentication.Clear();
                 svn.Authentication.DefaultCredentials = credential;
 
-                SvnInfoEventArgs info;
-                svn.GetInfo(repoUrl, out info);
+                var client = svn;
 
-                long discoveredDepth = 0;
-                var endRevision = info.Revision;
+                var endRevision = ExecutionLogger
+                    .ExecuteWithDurationLogging(() => GetLastRevision(client, repoUrl), _logger, "Open connection to svn");
 
-                while (commits.Count < count && discoveredDepth <= MaxRepositoryDiscoverDepth && endRevision > 1)
-                {
-                    var startRevision = endRevision > repoDiscoveryStep ? endRevision - repoDiscoveryStep : 1;
-
-                    var logArguments = new SvnLogArgs {Start = startRevision, End = endRevision};
-
-                    Collection<SvnLogEventArgs> logEvents;
-                    svn.GetLog(new Uri(repoUrl), logArguments, out logEvents);
-
-                    commits.AddRange(logEvents.Where(filter).Select(logEvent => logEvent.ToCommit()));
-
-                    discoveredDepth += endRevision - startRevision;
-                    endRevision = endRevision - 1 > repoDiscoveryStep ? endRevision - repoDiscoveryStep - 1 : 1;
-                }
+                var commits =ExecutionLogger
+                    .ExecuteWithDurationLogging(() => GetCommits(client, repoUrl, endRevision, count, filter),
+                    _logger, "Resolve commits info");
 
                 return commits.OrderByDescending(commit => commit.Date).Take(count);
             }
-        } 
+        }
+
+        private long GetLastRevision(SvnClient client, string repoUrl)
+        {
+            SvnInfoEventArgs info;
+            client.GetInfo(repoUrl, out info);
+            return info.Revision;
+        }
+
+        private IEnumerable<Commit> GetCommits(SvnClient client, string repoUrl, long endRevision, int count, Func<SvnLogEventArgs, bool> filter)
+        {
+            const int repoDiscoveryStep = 10;
+
+            var commits = new List<Commit>();
+            long discoveredDepth = 0;
+
+            while (commits.Count < count && discoveredDepth <= MaxRepositoryDiscoverDepth && endRevision > 1)
+            {
+                var startRevision = endRevision > repoDiscoveryStep ? endRevision - repoDiscoveryStep : 1;
+
+                var logArguments = new SvnLogArgs { Start = startRevision, End = endRevision };
+
+                Collection<SvnLogEventArgs> logEvents;
+                client.GetLog(new Uri(repoUrl), logArguments, out logEvents);
+
+                commits.AddRange(logEvents.Where(filter).Select(logEvent => logEvent.ToCommit()));
+
+                discoveredDepth += endRevision - startRevision;
+                endRevision = endRevision - 1 > repoDiscoveryStep ? endRevision - repoDiscoveryStep - 1 : 1;
+            }
+
+            return commits;
+        }
     }
 }

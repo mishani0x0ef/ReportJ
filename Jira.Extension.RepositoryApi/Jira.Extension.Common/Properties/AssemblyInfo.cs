@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Jira.Extension.TestTool")]
+[assembly: AssemblyTitle("Jira.Extension.Common")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Jira.Extension.TestTool")]
+[assembly: AssemblyProduct("Jira.Extension.Common")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e23e4231-c624-4a16-a7be-f6b35416bfdf")]
+[assembly: Guid("9400ccdb-3785-44d0-b743-a3a3360417c2")]
 
 // Version information for an assembly consists of the following four values:
 //
