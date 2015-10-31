@@ -9,7 +9,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
 
         $timeout(function () {
             $scope.notify = false;
-        }, 5000);
+        }, 2000);
     };
     
     var setInitialValidity = function (validationObject) {
