@@ -20,7 +20,7 @@ namespace Jira.Extension.RepoBase.Svn
         public IExecutionLogger ExecutionLogger { get; set; }
 
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
-        private const int RepoDiscoveryStepCoef = 10;
+        private const int RepoDiscoveryStepCoef = 20;
 
         public SvnRepositoryService()
         {
