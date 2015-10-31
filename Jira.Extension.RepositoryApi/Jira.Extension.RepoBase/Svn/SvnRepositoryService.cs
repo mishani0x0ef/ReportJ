@@ -20,11 +20,12 @@ namespace Jira.Extension.RepoBase.Svn
         public IExecutionLogger ExecutionLogger { get; set; }
 
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
+        private const int RepoDiscoveryStepCoef = 10;
 
         public SvnRepositoryService()
         {
             MaxCountOfCommits = 30;
-            MaxRepositoryDiscoverDepth = 100;
+            MaxRepositoryDiscoverDepth = 1000;
         }
 
         public SvnRepositoryService(IExecutionLogger executionLogger) : this()
@@ -74,7 +75,7 @@ namespace Jira.Extension.RepoBase.Svn
 
         private IEnumerable<Commit> GetCommits(SvnClient client, string repoUrl, long endRevision, int count, Func<SvnLogEventArgs, bool> filter)
         {
-            const int repoDiscoveryStep = 10;
+            var repoDiscoveryStep = RepoDiscoveryStepCoef * count;
 
             var commits = new List<Commit>();
             long discoveredDepth = 0;
