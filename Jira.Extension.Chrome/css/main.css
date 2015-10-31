@@ -411,7 +411,7 @@
 }
 
 .title-bottom[data-title]:hover:before {
-    top: 45px;
+    top: 40px;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -419,7 +419,7 @@
 }
 
 .title-top[data-title]:hover:before {
-    top: -60px;
+    top: -50px;
     left: 0;
     right: 0;
     margin-left: auto;
