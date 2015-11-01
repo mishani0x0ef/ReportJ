@@ -116,6 +116,12 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     });
 
     // Handlers
+    
+    $scope.setLoading = function (isLoading, operationDescription) {
+        $scope.loading = {};
+        $scope.loading.inProgress = isLoading;
+        $scope.loading.description = operationDescription;
+    }
 
     $scope.editRepository = function (repository, repositoryType) {
         $scope.repoForm.$setPristine(true);
@@ -133,7 +139,10 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     };
 
     $scope.saveRepository = function (repository) {
+        $scope.setLoading(true, "Checking settings on our servers ...")
+        
         commitsService.checkConnection(repository, function (connectionEstablished) {
+            $scope.setLoading(false);
             if (!connectionEstablished) {
                 bootbox.confirm(
                     "We wasn't able to establish connection using repository settings that you have defined. Save it anyway?",

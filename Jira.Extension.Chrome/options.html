@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="lib/bootstrap.paper.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animation.css">
 
     <script type="text/javascript" src="lib/jquery.min.js"></script>
     <script type="text/javascript" src="lib/angular.min.js"></script>
@@ -107,81 +108,81 @@
                                     <div class="modal-body">
                                         <form class="form-horizontal" name="repoForm" ng-submit="saveRepository(editedRepository)">
                                             <fieldset>
-                                               
-                                                <div class="form-group title-bottom title-warn" 
-                                                    ng-class="{ 'has-error': repoForm.name.$dirtyInvalid, 'title-on': repoForm.name.$invalid }"
-                                                    data-title="{{repoForm.name.$errorMessage}}">
-                                                    
+
+                                                <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.name.$dirtyInvalid, 'title-on': repoForm.name.$invalid }" data-title="{{repoForm.name.$errorMessage}}">
+
                                                     <label for="repositoryName" class="col-lg-3 control-label">Name</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" placeholder="Repository Name" required maxlength="50" 
-                                                            name="name" ng-model="editedRepository.name">
+                                                        <input type="text" class="form-control" placeholder="Repository Name" required maxlength="50" name="name" ng-model="editedRepository.name">
                                                         <span ng-class="{ required: repoForm.name.$error.required }"></span>
                                                     </div>
-                                                    
+
                                                 </div>
-                                                
-                                                <div class="form-group title-bottom title-warn" 
-                                                    ng-class="{ 'has-error': repoForm.url.$dirtyInvalid, 'title-on': repoForm.url.$invalid }"
-                                                    data-title="{{repoForm.url.$errorMessage}}">
-                                                    
+
+                                                <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.url.$dirtyInvalid, 'title-on': repoForm.url.$invalid }" data-title="{{repoForm.url.$errorMessage}}">
+
                                                     <label for="repositoryUrl" class="col-lg-3 control-label">Repository URL</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" placeholder="Repository URL" required maxlength="255"
-                                                            name="url" ng-model="editedRepository.url">
+                                                        <input type="text" class="form-control" placeholder="Repository URL" required maxlength="255" name="url" ng-model="editedRepository.url">
                                                         <span ng-class="{ required: repoForm.url.$error.required }"></span>
                                                     </div>
-                                                    
+
                                                 </div>
-                                                
-                                                <div class="form-group title-bottom title-warn" 
-                                                    ng-class="{ 'has-error': repoForm.username.$dirtyInvalid, 'title-on': repoForm.username.$invalid }"
-                                                    data-title="{{repoForm.username.$errorMessage}}">
-                                                    
+
+                                                <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.username.$dirtyInvalid, 'title-on': repoForm.username.$invalid }" data-title="{{repoForm.username.$errorMessage}}">
+
                                                     <label for="repositoryUsername" class="col-lg-3 control-label">User Name</label>
                                                     <div class="col-lg-9">
-                                                        <input type="text" class="form-control" placeholder="User Name" required maxlength="30" 
-                                                            name="username" ng-model="editedRepository.userName">
+                                                        <input type="text" class="form-control" placeholder="User Name" required maxlength="30" name="username" ng-model="editedRepository.userName">
                                                         <span ng-class="{ required: repoForm.username.$error.required }"></span>
                                                     </div>
-                                                    
+
                                                 </div>
-                                                
-                                                <div class="form-group title-bottom title-warn" 
-                                                   ng-class="{ 'has-error': repoForm.password.$dirtyInvalid, 'title-on': repoForm.password.$invalid }"
-                                                   data-title="{{repoForm.password.$errorMessage}}">
-                                                    
+
+                                                <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.password.$dirtyInvalid, 'title-on': repoForm.password.$invalid }" data-title="{{repoForm.password.$errorMessage}}">
+
                                                     <label for="repositoryPassword" class="col-lg-3 control-label">Password</label>
                                                     <div class="col-lg-9">
-                                                        <input type="password" class="form-control" placeholder="Password" required maxlength="30"
-                                                            name="password" ng-model="editedRepository.password"
-                                                            equals="{{editedRepository.passwordConfirm}}">
-                                                        <span ng-class="{ required: repoForm.password.$error.required }"></span>                                                    
+                                                        <input type="password" class="form-control" placeholder="Password" required maxlength="30" name="password" ng-model="editedRepository.password" equals="{{editedRepository.passwordConfirm}}">
+                                                        <span ng-class="{ required: repoForm.password.$error.required }"></span>
                                                     </div>
-                                                    
+
                                                 </div>
-                                                
-                                                <div class="form-group title-bottom title-warn" 
-                                                   ng-class="{ 'has-error': repoForm.passwordConfirm.$dirtyInvalid, 'title-on': repoForm.passwordConfirm.$invalid }"
-                                                   data-title="{{repoForm.passwordConfirm.$errorMessage}}">
-                                                    
+
+                                                <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.passwordConfirm.$dirtyInvalid, 'title-on': repoForm.passwordConfirm.$invalid }" data-title="{{repoForm.passwordConfirm.$errorMessage}}">
+
                                                     <label for="repositoryPasswordConfirm" class="col-lg-3 control-label">Confirm Password</label>
                                                     <div class="col-lg-9">
-                                                        <input type="password" class="form-control" placeholder="Password Confirmation" required maxlength="30"
-                                                            name="passwordConfirm" ng-model="editedRepository.passwordConfirm"
-                                                            equals="{{editedRepository.password}}">
+                                                        <input type="password" class="form-control" placeholder="Password Confirmation" required maxlength="30" name="passwordConfirm" ng-model="editedRepository.passwordConfirm" equals="{{editedRepository.password}}">
                                                         <span ng-class="{ required: repoForm.passwordConfirm.$error.required }"></span>
                                                     </div>
-                                                    
+
                                                 </div>
-                                                
+
                                             </fieldset>
                                         </form>
                                     </div>
                                     <div class="modal-footer title-top title-warn" ng-class="{ 'title-on': repoForm.$invalid }" data-title="Please fill all fields correctly">
-                                        <input type="submit" value="Save changes" class="btn btn-primary" 
-                                            ng-click="saveRepository(editedRepository)" ng-disabled="repoForm.$invalid">
+                                        <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveRepository(editedRepository)" ng-disabled="repoForm.$invalid">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+
+                                    <div class="loading-wrap text-center" ng-class="{ on: loading.inProgress === true }">
+                                        <div class="progress-wrap">
+                                            <div class="icon">
+                                                <span class="glyphicon glyphicon-globe"></span>
+                                                <span class="glyphicon glyphicon-transfer"></span>
+                                                <span class="glyphicon glyphicon-globe"></span>
+                                            </div>
+                                            <div class="progress-description"><strong>{{loading.description}}</strong></div>
+                                        </div>
+                                        <div class="loading-points">
+                                            <span>.</span>
+                                            <span>.</span>
+                                            <span>.</span>
+                                            <span>.</span>
+                                            <span>.</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
