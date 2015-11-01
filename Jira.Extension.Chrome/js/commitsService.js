@@ -17,8 +17,6 @@ jiraReporterApp.service('commitsService', function ($q, $http) {
         }).success(function (data, status, headers, config) {
             resultHandler(data);
         }).error(function (data, status, headers, config) {
-            //todo: provide error handling. MR
-            alert("Cannot establish connection with API.");
             console.error("Error while checking connection: " + status);
             resultHandler(false);
         });
@@ -40,8 +38,7 @@ jiraReporterApp.service('commitsService', function ($q, $http) {
         }).success(function (data, status, headers, config) {
             handler(data);
         }).error(function (data, status, headers, config) {
-            //todo: provide error handling. MR
-            alert("Oops! Something went wrong while getting your commits. ");
+            bootbox.alert("Oops! Something went wrong while getting your commits. ");
             console.error("Error while getting commits. Status: " + status);
             handler();
         });
