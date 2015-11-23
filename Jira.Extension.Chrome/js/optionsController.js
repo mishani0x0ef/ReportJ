@@ -1,4 +1,4 @@
-jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, commitsService) {
+jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, commitsService, encryptService) {
 
     // Private handlers
 
@@ -30,6 +30,8 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     }
 
     var saveRepository = function (repository) {
+        repository.passChangeAllowed = false;
+        
         if (typeof (repository.repositoryId) === "undefined") {
             var repoId = 0;
             angular.forEach($scope.repositories, function (repo) {
@@ -38,6 +40,10 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
                 }
             });
             repository.repositoryId = ++repoId;
+            
+            repository.password = encryptService.encrypt(repository.password);
+            repository.passwordConfirm = repository.password;
+            
             $scope.repositories.push(repository);
         } else {
             angular.forEach($scope.repositories, function (repo) {
@@ -126,10 +132,13 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     $scope.editRepository = function (repository, repositoryType) {
         $scope.repoForm.$setPristine(true);
         if (typeof (repository) !== "undefined" && repository !== null) {
+            // Exited tepository. MR
             $scope.editedRepository = angular.copy(repository);
         } else {
+            // New repository. MR
             $scope.editedRepository = {};
             $scope.editedRepository.type = repositoryType;
+            $scope.editedRepository.passChangeAllowed = true;
         }
 
         // delay added to prevent from blinking errors on form in case if they was on form before cleaning with $setPristine(true). MR
