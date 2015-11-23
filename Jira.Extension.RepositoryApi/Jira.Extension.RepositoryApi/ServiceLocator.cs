@@ -1,4 +1,5 @@
-﻿using Jira.Extension.Common.Services;
+﻿using Jira.Extension.Common.Interfaces;
+using Jira.Extension.Common.Services;
 using Jira.Extension.RepoBase;
 using Jira.Extension.RepoBase.Svn;
 using Microsoft.Practices.Unity;

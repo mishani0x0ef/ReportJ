@@ -1,4 +1,5 @@
-﻿using Jira.Extension.Common.Services;
+﻿using Jira.Extension.Common.Interfaces;
+using Jira.Extension.Common.Services;
 using Microsoft.Practices.Unity;
 
 namespace Jira.Extension.RepoBase

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using Jira.Extension.Common.Services;
+using Jira.Extension.Common.Interfaces;
 using Jira.Extension.RepoBase;
 using Jira.Extension.RepositoryApi.Dto;
 using Jira.Extension.RepositoryApi.Services;

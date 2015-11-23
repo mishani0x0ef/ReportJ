@@ -1,4 +1,5 @@
 ﻿using System;
+using Jira.Extension.Common.Interfaces;
 using NLog;
 
 namespace Jira.Extension.Common.Services

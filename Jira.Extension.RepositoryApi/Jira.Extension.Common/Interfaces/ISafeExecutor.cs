@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jira.Extension.Common.Services
+namespace Jira.Extension.Common.Interfaces
 {
     public interface ISafeExecutor
     {

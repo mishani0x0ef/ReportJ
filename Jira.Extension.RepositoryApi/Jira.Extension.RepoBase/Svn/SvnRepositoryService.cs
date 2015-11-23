@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
-using Jira.Extension.Common.Services;
+using Jira.Extension.Common.Interfaces;
 using Jira.Extension.RepoBase.Entities;
 using Microsoft.Practices.Unity;
 using NLog;

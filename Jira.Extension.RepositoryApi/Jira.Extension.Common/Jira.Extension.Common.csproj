@@ -41,8 +41,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ExecutionLogger.cs" />
-    <Compile Include="Services\IExecutionLogger.cs" />
-    <Compile Include="Services\ISafeExecutor.cs" />
+    <Compile Include="Interfaces\IExecutionLogger.cs" />
+    <Compile Include="Interfaces\ISafeExecutor.cs" />
     <Compile Include="Services\SafeExecutor.cs" />
   </ItemGroup>
   <ItemGroup>

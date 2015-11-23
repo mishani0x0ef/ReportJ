@@ -1,7 +1,7 @@
 ﻿using System;
 using NLog;
 
-namespace Jira.Extension.Common.Services
+namespace Jira.Extension.Common.Interfaces
 {
     public interface IExecutionLogger
     {
