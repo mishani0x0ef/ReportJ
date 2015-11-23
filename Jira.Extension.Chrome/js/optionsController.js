@@ -30,6 +30,10 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     }
 
     var saveRepository = function (repository) {
+        if(repository.passChangeAllowed === true) {
+            repository.password = encryptService.encrypt(repository.password);
+            repository.passwordConfirm = repository.password;
+        }
         repository.passChangeAllowed = false;
         
         if (typeof (repository.repositoryId) === "undefined") {
@@ -39,11 +43,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
                     repoId = repo.repositoryId;
                 }
             });
-            repository.repositoryId = ++repoId;
-            
-            repository.password = encryptService.encrypt(repository.password);
-            repository.passwordConfirm = repository.password;
-            
+            repository.repositoryId = ++repoId;            
             $scope.repositories.push(repository);
         } else {
             angular.forEach($scope.repositories, function (repo) {
@@ -146,6 +146,12 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             $("#repositoryEditModal").modal("show")
         }, 100);
     };
+    
+    $scope.enableRepoPassChange = function(repository) {
+        repository.password = "";
+        repository.passwordConfirm = "";
+        repository.passChangeAllowed = true;
+    }
 
     $scope.saveRepository = function (repository) {
         $scope.setLoading(true, "Checking settings on our servers ...")

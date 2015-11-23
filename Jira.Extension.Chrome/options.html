@@ -160,6 +160,13 @@
                                                     </div>
 
                                                 </div>
+                                                
+                                                <div class="text-center" ng-hide="editedRepository.passChangeAllowed">
+                                                   <div class="btn btn-lg btn-link" ng-click="enableRepoPassChange(editedRepository)">
+                                                       <span class="glyphicon glyphicon-lock"></span>
+                                                       <span>Change password</span>
+                                                   </div>
+                                                </div>
 
                                             </fieldset>
                                         </form>
