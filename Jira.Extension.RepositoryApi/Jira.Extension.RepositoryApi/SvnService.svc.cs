@@ -16,6 +16,9 @@ namespace Jira.Extension.RepositoryApi
         public IRepoService RepoService { get; set; }
 
         [Dependency]
+        public ICryptoService CryptoService { get; set; }
+
+        [Dependency]
         public ISafeExecutor SafeExecutor { get; set; }
 
         [Dependency]
@@ -38,9 +41,9 @@ namespace Jira.Extension.RepositoryApi
 
         public List<CommitDto> GetCommits(string repoUrl, string userName, string password, int count, string author)
         {
-            //todo: add input parameters validation. MR
-            //todo: add decrypt of password with RSA when decrypt will be implemented on client side. MR
             count = count > 0 ? count : DefautCommitsCount;
+
+            password = CryptoService.Decrypt(password);
 
             var commits = ExecutionLogger.ExecuteWithDurationLogging(
                 () => string.IsNullOrEmpty(author)

@@ -21,6 +21,11 @@ namespace Jira.Extension.RepositoryApi.Services
         public string DefaultRepositoryUrl { get; private set; }
         public NetworkCredential DefaultRepositoryCredential { get; private set; }
 
+        public string RsaKeyFilePath
+        {
+            get { return ConfigurationManager.AppSettings["RsaKeyXmlFilePath"]; }
+        }
+
         private AppSettings()
         {
             DefaultRepositoryUrl = ConfigurationManager.AppSettings["DefaultRepositoryUrl"];

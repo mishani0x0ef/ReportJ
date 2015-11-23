@@ -2,6 +2,7 @@
 using Jira.Extension.Common.Services;
 using Jira.Extension.RepoBase;
 using Jira.Extension.RepoBase.Svn;
+using Jira.Extension.RepositoryApi.Services;
 using Microsoft.Practices.Unity;
 
 namespace Jira.Extension.RepositoryApi
@@ -20,8 +21,8 @@ namespace Jira.Extension.RepositoryApi
         {
             Container = new UnityContainer();
             RegisterLibraryComponents(Container);
-            RegisterRepostiories(Container);
             RegisterServices(Container);
+            RegisterRepostiories(Container);
         }
 
         /// <summary>
@@ -38,16 +39,19 @@ namespace Jira.Extension.RepositoryApi
             RepoBase.ServiceLocator.Instance.Initialize(container);
         }
 
-        private static void RegisterRepostiories(IUnityContainer container)
-        {
-            container.RegisterType<IRepoService, SvnRepositoryService>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IRepoService, MockRepository>("Mock", new ContainerControlledLifetimeManager());
-        }
-
         private static void RegisterServices(IUnityContainer container)
         {
             container.RegisterType<ISafeExecutor, SafeExecutor>(new ContainerControlledLifetimeManager());
             container.RegisterType<IExecutionLogger, ExecutionLogger>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IKeyProvider, FileKeyProvider>(new ContainerControlledLifetimeManager(),
+                new InjectionConstructor(AppSettings.Instance.RsaKeyFilePath));
+            container.RegisterType<ICryptoService, RsaCryptoService>(new ContainerControlledLifetimeManager());
+        }
+
+        private static void RegisterRepostiories(IUnityContainer container)
+        {
+            container.RegisterType<IRepoService, SvnRepositoryService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IRepoService, MockRepository>("Mock", new ContainerControlledLifetimeManager());
         }
     }
 }

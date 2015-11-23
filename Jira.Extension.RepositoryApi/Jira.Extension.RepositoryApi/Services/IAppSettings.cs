@@ -6,5 +6,7 @@ namespace Jira.Extension.RepositoryApi.Services
     {
         string DefaultRepositoryUrl { get; }
         NetworkCredential DefaultRepositoryCredential { get; }
+
+        string RsaKeyFilePath { get; }
     }
 }
