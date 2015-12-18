@@ -30,12 +30,12 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     }
 
     var saveRepository = function (repository) {
-        if(repository.passChangeAllowed === true) {
+        if (repository.passChangeAllowed === true) {
             repository.password = encryptService.encrypt(repository.password);
             repository.passwordConfirm = repository.password;
         }
         repository.passChangeAllowed = false;
-        
+
         if (typeof (repository.repositoryId) === "undefined") {
             var repoId = 0;
             angular.forEach($scope.repositories, function (repo) {
@@ -43,7 +43,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
                     repoId = repo.repositoryId;
                 }
             });
-            repository.repositoryId = ++repoId;            
+            repository.repositoryId = ++repoId;
             $scope.repositories.push(repository);
         } else {
             angular.forEach($scope.repositories, function (repo) {
@@ -122,7 +122,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     });
 
     // Handlers
-    
+
     $scope.setLoading = function (isLoading, operationDescription) {
         $scope.loading = {};
         $scope.loading.inProgress = isLoading;
@@ -132,7 +132,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     $scope.editRepository = function (repository, repositoryType) {
         $scope.repoForm.$setPristine(true);
         if (typeof (repository) !== "undefined" && repository !== null) {
-            // Exited tepository. MR
+            // Exited repository. MR
             $scope.editedRepository = angular.copy(repository);
         } else {
             // New repository. MR
@@ -146,8 +146,8 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             $("#repositoryEditModal").modal("show")
         }, 100);
     };
-    
-    $scope.enableRepoPassChange = function(repository) {
+
+    $scope.enableRepoPassChange = function (repository) {
         repository.password = "";
         repository.passwordConfirm = "";
         repository.passChangeAllowed = true;
@@ -155,23 +155,26 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
 
     $scope.saveRepository = function (repository) {
         $scope.setLoading(true, "Checking settings on our servers ...")
-        
-        commitsService.checkConnection(repository, function (connectionEstablished) {
-            $scope.setLoading(false);
-            if (!connectionEstablished) {
-                bootbox.confirm(
-                    "We wasn't able to establish connection using repository settings that you have defined. Save it anyway?",
-                    "Connection problem!",
-                    function (confirmed) {
-                        if (confirmed) {
-                            saveRepository(repository);
+
+        commitsService.checkConnection(
+            repository,
+            function (connectionEstablished) {
+                $scope.setLoading(false);
+                if (!connectionEstablished) {
+                    bootbox.confirm(
+                        "We wasn't able to establish connection using repository settings that you have defined. Save it anyway?",
+                        "Connection problem!",
+                        function (confirmed) {
+                            if (confirmed) {
+                                saveRepository(repository);
+                            }
                         }
-                    }
-                );
-            } else {
-                saveRepository(repository);
-            }
-        });
+                    );
+                } else {
+                    saveRepository(repository);
+                }
+            },
+            repository.passChangeAllowed);
     };
 
     $scope.removeRepository = function (repository) {

@@ -56,6 +56,7 @@ namespace Jira.Extension.RepositoryApi
 
         public bool TestConnection(string repoUrl, string userName, string password)
         {
+            password = CryptoService.Decrypt(password);
             return SafeExecutor
                 .TryExecute(() => RepoService.GetLastCommits(repoUrl, new NetworkCredential(userName, password), 1));
         }

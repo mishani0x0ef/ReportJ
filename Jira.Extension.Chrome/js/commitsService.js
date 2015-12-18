@@ -1,18 +1,26 @@
-jiraReporterApp.service('commitsService', function ($q, $http) {
+jiraReporterApp.service('commitsService', function ($q, $http, encryptService) {
     var self = this;
     var baseApiUrl = "http://ws-if-cp0565/Jira.Extension.RepositoryApi/";
     var defaultCommitsCount = 10;
     
-    this.checkConnection = function(repository, resultHandler){
+    this.checkConnection = function(repository, resultHandler, encryptPassword){
         var apiUrl = baseApiUrl + repository.type + "/connection/test";
+        
+        var userName = repository.userName, 
+            password = repository.password,
+            url = repository.url;
+        
+        if(encryptPassword === true) {
+            password = encryptService.encrypt(password);
+        }
         
         $http({
             method: "GET",
             url: apiUrl,
             params: {
-                username: repository.userName,
-                password: repository.password,
-                repo: repository.url
+                username: userName,
+                password: password,
+                repo: url
             }
         }).success(function (data, status, headers, config) {
             resultHandler(data);
