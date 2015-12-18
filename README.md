@@ -8,7 +8,7 @@ Idea and functionality of extension was gets from personal experience of work wi
 
 To use extension you need to do next steps:
 
-1. Download latest release by [link](https://github.com/mishani0x0ef/Jira.Extrension/releases)
+1. Download [latest release](https://github.com/mishani0x0ef/Jira.Extrension/releases)
 2. Unpack Source Code
 3. Open Chrome settings, go to extension tab and select "Developer mode" checkbox. Developer mode will be activated
 4. Click button "Load unpacked extension..". Folder select dialog should appear
