@@ -194,7 +194,7 @@
 }
 
 .notification-wrap {
-    position: absolute;
+    position: fixed;
     top: -50px;
     right: 25px;
     height: 0;
