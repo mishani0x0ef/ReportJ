@@ -2,6 +2,7 @@ jiraReporterApp.controller('PopupController', function ($scope, $interval, stora
 
     var config = new AppConfig();
     var eleksJiraUrl = config.urls.jiraUrl;
+    var jira = new JiraWrapper(eleksJiraUrl);
 
     $scope.svnCommits = [];
     $scope.reportingAllowed = false;
@@ -44,10 +45,8 @@ jiraReporterApp.controller('PopupController', function ($scope, $interval, stora
 
     $scope.addIssueSummary = function () {
         chrome.tabs.getSelected(null, function (tab) {
-            var jira = new JiraWrapper(eleksJiraUrl);
-            var issueKey = jira.getIssueKey(tab.url);
             jira.getIssueInfo(
-                issueKey,
+                tab.url,
                 function (issueSummary, context) {
                     chrome.tabs.executeScript({
                         code: "document.activeElement.value = " + JSON.stringify(issueSummary) + " + document.activeElement.value"

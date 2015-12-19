@@ -1,18 +1,24 @@
-if ("undefined" === typeof jQuery) throw new Error("JiraWrapper JavaScript requires jQuery");
+if (typeof jQuery === "undefined") {
+    throw new Error("JiraWrapper requires jQuery");
+}
 
 var JiraWrapper = function JiraWrapper(baseJiraUrl) {
-    self = this;
-    this.jiraUrl = baseJiraUrl;
-    this.apiUrl = baseJiraUrl + "/rest/api/latest/issue/";
 
-    this.resolveSummaryFromIssue = function (issue, summary) {
+    'use strict';
+
+    var self = this;
+    var issueInfoParams = "fields=summary,parent";
+    var jiraUrl = baseJiraUrl;
+    var apiUrl = baseJiraUrl + "/rest/api/latest/issue/";
+
+    var resolveSummaryFromIssue = function (issue, summary) {
         var issueTitle = issue.fields.summary;
         if (!summary) {
             summary = "";
         }
 
         if (issue.fields.parent) {
-            summary = this.resolveSummaryFromIssue(issue.fields.parent, summary);
+            summary = resolveSummaryFromIssue(issue.fields.parent, summary);
         }
         if (issueTitle[issueTitle.length - 1] != ".") {
             issueTitle += ".";
@@ -21,12 +27,8 @@ var JiraWrapper = function JiraWrapper(baseJiraUrl) {
         summary += issue.key + ". " + issueTitle + "\n";
         return summary;
     };
-};
 
-JiraWrapper.prototype = {
-    issueInfoParams: "fields=summary,parent",
-
-    getIssueKey: function (url) {
+    var getIssueKey = function (url) {
         var issueStartStrDetailsScreen = "browse/";
         var issueStartStrBoard = "selectedIssue=";
         var startIndex, endIndex;
@@ -43,13 +45,14 @@ JiraWrapper.prototype = {
         }
 
         return url.substring(startIndex, endIndex);
-    },
+    };
 
-    getIssueInfo: function (issueKey, delegate, context) {
-        var api = self.apiUrl + issueKey + "?" + self.issueInfoParams;
+    self.getIssueInfo = function (url, callback, callbackContext) {
+        var issueKey = getIssueKey(url);
+        var api = apiUrl + issueKey + "?" + issueInfoParams;
         $.getJSON(api, function (issue) {
-            var summary = self.resolveSummaryFromIssue(issue);
-            delegate(summary, context);
+            var summary = resolveSummaryFromIssue(issue);
+            callback(summary, callbackContext);
         });
-    }
+    };
 };
