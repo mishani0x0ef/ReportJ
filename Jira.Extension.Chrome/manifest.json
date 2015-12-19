@@ -1,29 +1,29 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "JIRA Report Helper",
-  "description": "This extension help reporting in JIRA system. It's adding issue summary to report.",
-  "version": "2.0.0",
-  "permissions": ["storage", "activeTab", "contextMenus"],
-  "background": {
-    "scripts": ["lib/jquery.min.js", "js/jira.js", "background.js"]
-  },
-  "sandbox":{
-    "pages": ["html/options-main.html"]
-  },
-  "browser_action": {
-    "name": "JIRA Repor Helper",
-    "default_icon": "img/jira.png",
-    "default_title": "JIRA Repor Helper",
-    "options_page": "options.html",
-    "default_popup": "popup.html"
-  },
-  "icons":{
-    "16":"img/jira.png",
-    "38": "img/jira.png" 
-  },
-  "content_scripts": [ {
-    "js": [ "lib/jquery.min.js" ],
-    "matches": [ "*://*.google.com/*", "*://*.localhost/*"]
+    "name": "JIRA Report Helper",
+    "description": "This extension help reporting in JIRA system. It's adding issue summary to report.",
+    "version": "2.0.0",
+    "permissions": ["storage", "activeTab", "contextMenus"],
+    "background": {
+        "scripts": ["config.js", "lib/jquery.min.js", "js/jira.js", "background.js"]
+    },
+    "sandbox": {
+        "pages": ["html/options-main.html"]
+    },
+    "browser_action": {
+        "name": "JIRA Repor Helper",
+        "default_icon": "img/jira.png",
+        "default_title": "JIRA Repor Helper",
+        "options_page": "options.html",
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "img/jira.png",
+        "38": "img/jira.png"
+    },
+    "content_scripts": [{
+        "js": ["lib/jquery.min.js"],
+        "matches": ["*://*.google.com/*", "*://*.localhost/*"]
   }]
 }

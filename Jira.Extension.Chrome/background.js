@@ -1,6 +1,7 @@
 (function (chrome) {
     var self = this;
-    var eleksJiraUrl = "https://jd.eleks.com";
+    var config = new AppConfig();
+    var eleksJiraUrl = config.urls.jiraUrl;
     
     var initContextMenu = function() {
         var context = "editable";

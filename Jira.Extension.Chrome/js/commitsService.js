@@ -1,6 +1,7 @@
 jiraReporterApp.service('commitsService', function ($q, $http, encryptService) {
     var self = this;
-    var baseApiUrl = "http://ws-if-cp0565/Jira.Extension.RepositoryApi/";
+    var config = new AppConfig();
+    var baseApiUrl = config.urls.versionControllApiUrl;
     var defaultCommitsCount = 10;
     
     this.checkConnection = function(repository, resultHandler, encryptPassword){

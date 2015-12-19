@@ -1,6 +1,7 @@
 jiraReporterApp.controller('PopupController', function ($scope, $interval, storageService, commitsService) {
 
-    var eleksJiraUrl = "https://jd.eleks.com";
+    var config = new AppConfig();
+    var eleksJiraUrl = config.urls.jiraUrl;
 
     $scope.svnCommits = [];
     $scope.reportingAllowed = false;
