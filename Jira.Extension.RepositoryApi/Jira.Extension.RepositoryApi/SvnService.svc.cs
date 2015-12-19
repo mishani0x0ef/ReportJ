@@ -4,7 +4,6 @@ using System.Net;
 using Jira.Extension.Common.Interfaces;
 using Jira.Extension.RepoBase;
 using Jira.Extension.RepositoryApi.Dto;
-using Jira.Extension.RepositoryApi.Services;
 using Microsoft.Practices.Unity;
 using NLog;
 
@@ -30,13 +29,6 @@ namespace Jira.Extension.RepositoryApi
         public SvnService()
         {
             ServiceLocator.Instance.BuildUp(this);
-        }
-
-        public List<CommitDto> GetCommitsTest()
-        {
-            var commits = RepoService.GetLastCommits(AppSettings.Instance.DefaultRepositoryUrl,
-                AppSettings.Instance.DefaultRepositoryCredential);
-            return commits.ToDto().ToList();
         }
 
         public List<CommitDto> GetCommits(string repoUrl, string userName, string password, int count, string author)
