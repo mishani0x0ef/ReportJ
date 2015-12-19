@@ -1,12 +1,13 @@
 ﻿using System;
 using Jira.Extension.Common.Interfaces;
-using NLog;
+using Microsoft.Practices.Unity;
 
 namespace Jira.Extension.Common.Services
 {
     public class SafeExecutor : ISafeExecutor
     {
-        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
+        [Dependency]
+        public ILogger Logger { get; set; }
 
         public bool TryExecute(Action action)
         {
@@ -17,7 +18,7 @@ namespace Jira.Extension.Common.Services
             }
             catch (Exception ex)
             {
-                _logger.Error(ex);
+                Logger.Error(ex);
                 return false;
             }
         }

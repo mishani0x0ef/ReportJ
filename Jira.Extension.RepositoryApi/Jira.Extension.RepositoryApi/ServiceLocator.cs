@@ -41,6 +41,7 @@ namespace Jira.Extension.RepositoryApi
 
         private static void RegisterServices(IUnityContainer container)
         {
+            container.RegisterType<ILogger, NlogLogger>(new ContainerControlledLifetimeManager());
             container.RegisterType<ISafeExecutor, SafeExecutor>(new ContainerControlledLifetimeManager());
             container.RegisterType<IExecutionLogger, ExecutionLogger>(new ContainerControlledLifetimeManager());
             container.RegisterType<IKeyProvider, FileKeyProvider>(new ContainerControlledLifetimeManager(),

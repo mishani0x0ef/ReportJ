@@ -6,7 +6,6 @@ using System.Net;
 using Jira.Extension.Common.Interfaces;
 using Jira.Extension.RepoBase.Entities;
 using Microsoft.Practices.Unity;
-using NLog;
 using SharpSvn;
 
 namespace Jira.Extension.RepoBase.Svn
@@ -19,7 +18,9 @@ namespace Jira.Extension.RepoBase.Svn
         [Dependency("RepoBase")]
         public IExecutionLogger ExecutionLogger { get; set; }
 
-        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
+        [Dependency]
+        public ILogger Logger { get; set; }
+
         private const int RepoDiscoveryStepCoef = 20;
 
         public SvnRepositoryService()
@@ -56,11 +57,11 @@ namespace Jira.Extension.RepoBase.Svn
                 var client = svn;
 
                 var endRevision = ExecutionLogger
-                    .ExecuteWithDurationLogging(() => GetLastRevision(client, repoUrl), _logger, "Open connection to svn");
+                    .ExecuteWithDurationLogging(() => GetLastRevision(client, repoUrl), Logger, "Open connection to svn");
 
                 var commits =ExecutionLogger
                     .ExecuteWithDurationLogging(() => GetCommits(client, repoUrl, endRevision, count, filter),
-                    _logger, "Resolve commits info");
+                    Logger, "Resolve commits info");
 
                 return commits.OrderByDescending(commit => commit.Date).Take(count);
             }

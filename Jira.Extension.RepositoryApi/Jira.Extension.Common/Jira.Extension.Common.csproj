@@ -53,11 +53,13 @@
   <ItemGroup>
     <Compile Include="Interfaces\ICryptoService.cs" />
     <Compile Include="Interfaces\IKeyProvider.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ExecutionLogger.cs" />
     <Compile Include="Interfaces\IExecutionLogger.cs" />
     <Compile Include="Interfaces\ISafeExecutor.cs" />
     <Compile Include="Services\FileKeyProvider.cs" />
+    <Compile Include="Services\NlogLogger.cs" />
     <Compile Include="Services\RsaCryptoService.cs" />
     <Compile Include="Services\SafeExecutor.cs" />
   </ItemGroup>

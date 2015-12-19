@@ -1,6 +1,5 @@
 ﻿using System;
 using Jira.Extension.Common.Interfaces;
-using NLog;
 
 namespace Jira.Extension.Common.Services
 {
@@ -13,7 +12,7 @@ namespace Jira.Extension.Common.Services
             action();
 
             var operationDuration = DateTime.Now - operationStartTime;
-            logger.Debug("{0}. - {1}", message, operationDuration);
+            logger.Debug(string.Format("{0}. - {1}", message, operationDuration));
         }
 
         public T ExecuteWithDurationLogging<T>(Func<T> func, ILogger logger, string message)
@@ -23,7 +22,7 @@ namespace Jira.Extension.Common.Services
             var result = func();
 
             var operationDuration = DateTime.Now - operationStartTime;
-            logger.Debug("{0}. - {1}", message, operationDuration);
+            logger.Debug(string.Format("{0}. - {1}", message, operationDuration));
 
             return result;
         }

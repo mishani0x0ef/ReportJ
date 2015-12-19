@@ -5,7 +5,6 @@ using Jira.Extension.Common.Interfaces;
 using Jira.Extension.RepoBase;
 using Jira.Extension.RepositoryApi.Dto;
 using Microsoft.Practices.Unity;
-using NLog;
 
 namespace Jira.Extension.RepositoryApi
 {
@@ -20,10 +19,6 @@ namespace Jira.Extension.RepositoryApi
         [Dependency]
         public ISafeExecutor SafeExecutor { get; set; }
 
-        [Dependency]
-        public IExecutionLogger ExecutionLogger { get; set; }
-
-        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
         private const int DefautCommitsCount = 10;
 
         public SvnService()
@@ -37,11 +32,9 @@ namespace Jira.Extension.RepositoryApi
 
             password = CryptoService.Decrypt(password);
 
-            var commits = ExecutionLogger.ExecuteWithDurationLogging(
-                () => string.IsNullOrEmpty(author)
-                    ? RepoService.GetLastCommits(repoUrl, new NetworkCredential(userName, password), count)
-                    : RepoService.GetLastCommits(repoUrl, new NetworkCredential(userName, password), author, count),
-                _logger, "Total time for GetCommits");
+            var commits = string.IsNullOrEmpty(author)
+                ? RepoService.GetLastCommits(repoUrl, new NetworkCredential(userName, password), count)
+                : RepoService.GetLastCommits(repoUrl, new NetworkCredential(userName, password), author, count);
             
             return commits.ToDto().ToList();
         }
