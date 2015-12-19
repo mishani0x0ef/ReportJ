@@ -47,7 +47,8 @@ jiraReporterApp.service('commitsService', function ($q, $http, encryptService) {
         }).success(function (data, status, headers, config) {
             handler(data);
         }).error(function (data, status, headers, config) {
-            bootbox.alert("Oops! Something went wrong while getting your commits. ");
+            var msg = "Oops! Something went wrong while getting your commits for '" + repository.name + "' repository.";
+            bootbox.alert(msg, "Warning!");
             console.error("Error while getting commits. Status: " + status);
             handler();
         });
