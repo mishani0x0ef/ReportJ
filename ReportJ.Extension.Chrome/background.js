@@ -6,7 +6,7 @@
 
     var initContextMenu = function () {
         var context = "editable";
-        var title = "JIRA add issue summary";
+        var title = config.app.name + " add issue summary";
         self.contextMenuId = chrome.contextMenus.create({
             "title": title,
             "contexts": [context],
