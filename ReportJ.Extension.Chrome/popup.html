@@ -61,7 +61,33 @@
         <div role="tabpanel" class="tab-pane fade active in commits" id="templates" ng-class="{ disabled: reportingAllowed !== true }">
             <div class="container">
                 <div class="row">
-                    <h3>Comming soon...</h3>
+                    <div ng-repeat="template in templates track by $index">                        
+                        <div class="commit" ng-click="addMessageToReport(template, template.description)">                            
+                            <div class="panel panel-default">
+                                <div class="panel-body text-justify">
+                                    <p>{{template.description}}</p>
+                                </div>
+                            </div>
+                            <div class="result-wrap" ng-class="{ on: template.justAdded === true }">
+                                <div class="add-confirm">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <span><strong>Added</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>       
+                   <div class="warning-wrap" ng-class="{ on: templates.length === 0 }">
+                        <div class="warning">
+                            <div class="warning-icon">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </div>
+                            <h4>We haven't found templates!</h4>
+                            <h5>
+                                You can try to <a href="#" ng-click="refreshTemplates()">refresh data</a> 
+                                or you can <a href="#" ng-click="openOptions()">update settings</a> and add some new templates.
+                            </h5>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -72,7 +98,8 @@
 
                     <div ng-repeat="commit in svnCommits | orderBy: '-Date'">
 
-                        <div class="commit" ng-click="addCommitInfo(commit)">
+                        <div class="commit" ng-click="addMessageToReport(commit, commit.Message)">
+                            
                             <div class="panel panel-default">
                                 <div class="panel-heading col-xs-12">
                                     <div class="col-xs-6">
@@ -95,6 +122,7 @@
                             </div>
 
                         </div>
+                        
                     </div>
                     
                     <div class="warning-wrap" ng-class="{ on: svnCommits.length === 0 }">
@@ -110,21 +138,21 @@
                         </div>
                     </div>
 
-                    <div class="loading-wrap text-center" ng-class="{ on: loadingCommits === true }">
-                        <div class="progress-wrap">
-                            <span class="icon glyphicon glyphicon-download"></span>
-                            <div class="progress-description"><strong>{{loadingDescription}}</strong></div>
-                        </div>
-                        <div class="loading-points">
-                            <span>.</span>
-                            <span>.</span>
-                            <span>.</span>
-                            <span>.</span>
-                            <span>.</span>
-                        </div>
-                    </div>
-
                 </div>
+            </div>
+        </div>
+        
+        <div class="loading-wrap text-center" ng-class="{ on: loading === true }">
+            <div class="progress-wrap">
+                <span class="icon glyphicon glyphicon-download"></span>
+                <div class="progress-description"><strong>{{loadingDescription}}</strong></div>
+            </div>
+            <div class="loading-points">
+                <span>.</span>
+                <span>.</span>
+                <span>.</span>
+                <span>.</span>
+                <span>.</span>
             </div>
         </div>
         

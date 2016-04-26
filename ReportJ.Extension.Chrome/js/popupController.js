@@ -1,4 +1,4 @@
-jiraReporterApp.controller('PopupController', function ($scope, $interval, storageService, commitsService) {
+jiraReporterApp.controller('PopupController', function ($scope, $timeout, storageService, commitsService) {
 
     $scope.config = new AppConfig();
     
@@ -6,6 +6,7 @@ jiraReporterApp.controller('PopupController', function ($scope, $interval, stora
     var jira = new JiraWrapper(eleksJiraUrl);
 
     $scope.svnCommits = [];
+    $scope.templates = [];
     $scope.reportingAllowed = false;
 
     $scope.checkReportingAllowance = function () {
@@ -20,22 +21,38 @@ jiraReporterApp.controller('PopupController', function ($scope, $interval, stora
         angular.forEach(commits, function (commit) {
             $scope.svnCommits.push(commit);
         });
-        $scope.loadingCommits = false;
+        $scope.loading = false;
     };
 
     $scope.refreshCommits = function () {
         $scope.svnCommits = [];
-        $scope.loadingCommits = true;
+        $scope.loading = true;
         $scope.loadingDescription = "Loading commits";
         storageService.getRepositories(function (repositories) {
             if(typeof repositories === "undefined" || repositories.length === 0){
-                $interval(function() {$scope.loadingCommits = false;}, 200);
+                $timeout(function() {$scope.loading = false;}, 200);
             }
             angular.forEach(repositories, function (repo) {
                 commitsService.getLastCommits(repo, $scope.addCommits);
-            })
+            });
         });
     };
+    
+    $scope.refreshTemplates = function () {
+        $scope.templates = [];
+        $scope.loading = true;
+        $scope.loadingDescription = "Loading templates";
+        storageService.getTemplates(function (templates) {
+            if(typeof templates === "undefined" || templates.length === 0){
+                $timeout(function() {$scope.loading = false;}, 200);
+            }
+            angular.forEach(templates, function (template) {
+                $scope.templates.push(template);
+            });
+            $timeout(function() {$scope.loading = false;}, 200);
+        });
+    };
+    $scope.refreshTemplates();
 
     $scope.openOptions = function () {
         chrome.tabs.create({
@@ -54,16 +71,16 @@ jiraReporterApp.controller('PopupController', function ($scope, $interval, stora
                 }, chrome);
         });
     };
-
-    $scope.addCommitInfo = function (commit) {
-        commit.justAdded = true;
+    
+    $scope.addMessageToReport = function (subject, message){
+        subject.justAdded = true;
         setTimeout(function () {
-            commit.justAdded = false;
-            $scope.$apply(commit);
+            subject.justAdded = false;
+            $scope.$apply(subject);
         }, 1000);
 
         chrome.tabs.executeScript({
-            code: "document.activeElement.value = document.activeElement.value + " + JSON.stringify(commit.Message) + " + '\\n';true"
+            code: "document.activeElement.value = document.activeElement.value + " + JSON.stringify(message) + " + '\\n';true"
         });
     };
 });
