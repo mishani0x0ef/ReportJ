@@ -36,7 +36,6 @@ jiraReporterApp.controller('PopupController', function ($scope, $interval, stora
             })
         });
     };
-    $scope.refreshCommits();
 
     $scope.openOptions = function () {
         chrome.tabs.create({

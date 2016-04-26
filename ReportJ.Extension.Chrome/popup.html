@@ -44,14 +44,29 @@
         </div>
     </div>
 
-
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#svnCommits" data-toggle="tab">SVN Commits</a></li>
-        <li class="disabled" title="Comming soon ..."><a href="#gitCommits">Git Commits</a></li>
+        <li class="active" role="presentation">
+            <a href="#templates" aria-controls="templates" role="tab" data-toggle="tab">Templates</a>
+        </li>
+        <li class="" role="presentation">
+            <a href="#svnCommits" aria-controls="svnCommits" role="tab" data-toggle="tab" ng-click="refreshCommits()">SVN Commits</a>
+        </li>
+        <li class="disabled" role="presentation" title="Comming soon ...">
+            <a href="#gitCommits">Git Commits</a>
+        </li>
     </ul>
 
-    <div id="commitsTab" class="tab-content col-xs-12 well">
-        <div class="tab-pane fade active in commits" id="svnCommits" ng-class="{ disabled: reportingAllowed !== true }">
+    <div class="tab-content col-xs-12 well">
+       
+        <div role="tabpanel" class="tab-pane fade active in commits" id="templates" ng-class="{ disabled: reportingAllowed !== true }">
+            <div class="container">
+                <div class="row">
+                    <h3>Comming soon...</h3>
+                </div>
+            </div>
+        </div>
+       
+        <div role="tabpanel" class="tab-pane fade in commits" id="svnCommits" ng-class="{ disabled: reportingAllowed !== true }">
             <div class="container">
                 <div class="row">
 
@@ -88,7 +103,10 @@
                                 <span class="glyphicon glyphicon-search"></span>
                             </div>
                             <h4>We haven't found commits info!</h4>
-                            <h5>Maybe it's time to <a href="#" ng-click="openOptions()">refresh your settings</a> and add some new repositories?</h5>
+                            <h5>
+                                You can try to <a href="#" ng-click="refreshCommits()">refresh data</a> 
+                                or you can <a href="#" ng-click="openOptions()">update settings</a> and add some new repositories.
+                            </h5>
                         </div>
                     </div>
 
@@ -105,23 +123,24 @@
                             <span>.</span>
                         </div>
                     </div>
-                    
-                    <div class="warning-wrap" ng-class="{ on: reportingAllowed !== true }">
-                        <div class="warning">
-                            <div class="warning-icon">
-                                <span class="glyphicon glyphicon-ban-circle"></span>
-                            </div>
-                            <h4><strong>Probably you are not inside a JIRA page!</strong></h4>
-                            <h5>
-                                <span>Open JIRA and put your cursor inside some editable field to use the magic of</span> 
-                                <img src="img/logo-wide.png" height="22px" style="margin-top: -3px;" alt="{{config.app.name}} logo">
-                            </h5>
-                        </div>
-                    </div>
 
                 </div>
             </div>
         </div>
+        
+        <div class="warning-wrap" ng-class="{ on: reportingAllowed !== true }">
+            <div class="warning">
+                <div class="warning-icon">
+                    <span class="glyphicon glyphicon-ban-circle"></span>
+                </div>
+                <h4><strong>Probably you are not inside a JIRA page!</strong></h4>
+                <h5>
+                    <span>Open JIRA and put your cursor inside some editable field to use the magic of</span> 
+                    <img src="img/logo-wide.png" height="22px" style="margin-top: -3px;" alt="{{config.app.name}} logo">
+                </h5>
+            </div>
+        </div>
+        
     </div>
 
     <script type="text/javascript" src="lib/bootstrap.min.js"></script>
