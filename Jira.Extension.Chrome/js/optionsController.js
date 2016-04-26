@@ -57,6 +57,8 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         $scope.saveSettings();
     }
 
+    $scope.config = new AppConfig();
+    
     $scope.maxRepoQuota = 2;
     $scope.repositories = [];
 

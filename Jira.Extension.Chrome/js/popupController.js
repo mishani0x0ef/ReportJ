@@ -1,7 +1,8 @@
 jiraReporterApp.controller('PopupController', function ($scope, $interval, storageService, commitsService) {
 
-    var config = new AppConfig();
-    var eleksJiraUrl = config.urls.jiraUrl;
+    $scope.config = new AppConfig();
+    
+    var eleksJiraUrl = $scope.config.urls.jiraUrl;
     var jira = new JiraWrapper(eleksJiraUrl);
 
     $scope.svnCommits = [];

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>JIRA Report Helper Settings</title>
+    <title>ReportJ Settings</title>
 
     <link rel="stylesheet" href="lib/bootstrap.paper.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -30,10 +30,10 @@
 
                     <div class="header">
                         <div class="header-icon">
-                            <img src="img/jira.png" alt="jira" />
+                            <img src="img/logo.png" alt="jira" />
                         </div>
                         <div class="header-title text-center">
-                            <h3 class="text-center">JIRA Report Helper Settings</h3>
+                            <h3 class="text-center">{{config.app.name}} Settings</h3>
                         </div>
                     </div>
 
@@ -199,14 +199,14 @@
                         </div>
 
                         <div id="about" class="tab-pane fade well text-justify">
-                            <h5>JIRA Report Helper v2.0</h5>
+                            <h5>{{config.app.name}} {{config.app.version}}</h5>
                             <p>This extension designed to improve reporting experience inside JIRA system. It's made to make reporting easier and provide short way for adding of main report parts such as issue title or your previous commits information.</p>
                             <p>Idea and functionality of extension was gets from personal experience of work with JIRA. And I will be happy to hear about your suggestions. So, don't hesitate to click on button in right-bottom corner.</p>
-                            <p>If you want to help to improve extension you could visit <a target="_blank" href="https://github.com/mishani0x0ef/Jira.Extrension">GitHub page</a> and put your weight. Exspecially i would be appritiated if someone can create extension for Firefox.</p>
+                            <p>If you want to help to improve extension you could visit <a target="_blank" ng-href="{{config.app.homePage}}">GitHub page</a> and put your weight. Exspecially i would be appritiated if someone can create extension for Firefox.</p>
                             <h6>Contact me:</h6>
                             <ul>
-                                <li><a href="mailto:mishani0x0ef@gmail.com?subject=JIRA Report Helper">Email</a></li>
-                                <li><a target="_blank" href="https://docs.google.com/forms/d/1x3dH1dE1GtiwZO8lsT8YNthr4d1R_8pZsU2Om1aBLLw/viewform?usp=send_form">Leave feedback</a></li>
+                                <li><a ng-href="mailto:{{config.author.email}}?subject={{config.app.name}}">Email</a></li>
+                                <li><a target="_blank" ng-href="{{config.app.feedbackPage}}">Leave feedback</a></li>
                             </ul>
                         </div>
 
@@ -228,7 +228,7 @@
     <div class="round-btn-wrap">
         <div class="round-btn-menu">
             <div class="round-btn-menu-item">
-                <a type="button" class="btn btn-icon github-icon" data-title="View on GitHub" target="_blank" href="https://github.com/mishani0x0ef/Jira.Extrension">
+                <a type="button" class="btn btn-icon github-icon" data-title="View on GitHub" target="_blank" ng-href="{{config.app.homePage}}">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64pt" height="64pt" viewBox="0 0 64 64">
                         <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000" stroke="none">
                             <path d="M224 626 c-232 -76 -298 -370 -119 -535 42 -39 99 -71 125 -71 5 0 10 16 10 35 0 33 -2 35 -35 35 -35 0 -42 5 -90 66 -44 56 -23 62 32 9 42 -40 75 -45 98 -12 14 21 14 22 -7 30 -60 23 -88 42 -102 72 -21 43 -21 124 0 153 8 12 12 27 9 32 -10 16 5 70 18 70 7 0 24 -6 38 -14 17 -9 60 -14 119 -14 59 0 102 5 119 14 14 8 31 14 38 14 13 0 28 -54 18 -70 -3 -5 1 -20 9 -32 18 -25 21 -103 7 -141 -14 -36 -50 -66 -93 -78 -33 -9 -37 -12 -28 -29 5 -10 10 -46 10 -79 0 -35 4 -61 10 -61 52 0 158 88 198 165 23 43 27 63 27 135 0 70 -4 94 -24 135 -32 63 -93 125 -155 155 -60 28 -171 36 -232 16z" />
@@ -238,7 +238,7 @@
             </div>
         </div>
         <div class="round-btn">
-            <a type="button" class="btn btn-primary btn-lg" data-title="Send Feedback" target="_blank" href="https://docs.google.com/forms/d/1x3dH1dE1GtiwZO8lsT8YNthr4d1R_8pZsU2Om1aBLLw/viewform?usp=send_form">
+            <a type="button" class="btn btn-primary btn-lg" data-title="Send Feedback" target="_blank" ng-href="{{config.app.feedbackPage}}">
                 <span class="glyphicon glyphicon-envelope"></span>
             </a>
         </div>

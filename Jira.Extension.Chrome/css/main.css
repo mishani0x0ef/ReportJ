@@ -203,6 +203,7 @@
     text-transform: uppercase;
     color: #fff;
     font-size: 15px;
+    box-shadow: 1px 1px 10px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
     transition: all 1s ease;
 }
 

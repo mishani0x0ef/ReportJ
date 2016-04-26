@@ -1,9 +1,10 @@
 {
     "manifest_version": 2,
 
-    "name": "JIRA Report Helper",
-    "description": "This extension help reporting in JIRA system. It's adding issue summary to report.",
-    "version": "2.1.0",
+    "name": "ReportJ",
+    "description": "The reporting helper for JIRA system.",
+    "homepage_url": "https://github.com/mishani0x0ef/reportj",
+    "version": "2.2.0",
     "permissions": ["storage", "activeTab", "contextMenus"],
     "background": {
         "scripts": ["config.js", "lib/jquery.min.js", "js/jira.js", "background.js"]
@@ -12,15 +13,15 @@
         "pages": ["html/options-main.html"]
     },
     "browser_action": {
-        "name": "JIRA Repor Helper",
-        "default_icon": "img/jira.png",
-        "default_title": "JIRA Repor Helper",
+        "name": "ReportJ",
+        "default_icon": "img/logo.png",
+        "default_title": "ReportJ",
         "options_page": "options.html",
         "default_popup": "popup.html"
     },
     "icons": {
-        "16": "img/jira.png",
-        "38": "img/jira.png"
+        "16": "img/logo.png",
+        "38": "img/logo.png"
     },
     "content_scripts": [{
         "js": ["lib/jquery.min.js"],
