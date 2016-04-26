@@ -61,8 +61,15 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     
     $scope.maxRepoQuota = 2;
     $scope.repositories = [];
+    
+    $scope.maxTemplateQuota = 10;
+    $scope.templates = [];
 
     // Wathcers
+    
+     $scope.$watchCollection('templates', function (newTemplates, oldTemplates) {
+        $scope.isMaxTemplatesCountExceed = newTemplates.length >= $scope.maxTemplateQuota;
+    });
 
     $scope.$watchCollection('repositories', function (newRepositories, oldRepositories) {
         var svnReposCount = 0,
@@ -188,11 +195,65 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             var index = $scope.repositories.indexOf(repository);
             $scope.repositories.splice(index, 1);
             $scope.saveSettings();
-        })
+        });
+    };
+    
+    $scope.editTemplate = function (template) {
+        $scope.templateForm.$setPristine(true);
+        if (typeof (template) !== "undefined" && template !== null) {
+            // Existed template. MR
+            $scope.editedTemplate = angular.copy(template);
+        } else {
+            // New template. MR
+            $scope.editedTemplate = {};
+        }
+
+        // delay added to prevent from blinking errors on form in case if they was on form before cleaning with $setPristine(true). MR
+        $timeout(function () {
+            $("#templateEditModal").modal("show")
+        }, 100);
+    }
+    
+    $scope.saveTemplate = function (template) {
+        if (typeof (template.templateId) === "undefined") {
+            var templateId = 0;
+            angular.forEach($scope.templates, function (templ) {
+                if (templ.templateId > templateId) {
+                    templateId = templ.templateId;
+                }
+            });
+            template.templateId = ++templateId;
+            $scope.templates.push(template);
+        } else {
+            angular.forEach($scope.templates, function (templ) {
+                if (templ.templateId === template.templateId) {
+                    angular.copy(template, templ);
+                }
+            });
+        }
+
+        $("#templateEditModal").modal("hide");
+        $scope.saveSettings();
+    };
+    
+    $scope.removeTemplate = function (template) {
+        var warningMessage = "Are you sure you want to delete such a wonderful template?";
+        bootbox.confirm(warningMessage, "Delete confirmation", function (confirmed) {
+            if (!confirmed) {
+                return;
+            }
+            var index = $scope.templates.indexOf(template);
+            $scope.templates.splice(index, 1);
+            $scope.saveSettings();
+        });
     };
 
     $scope.saveSettings = function () {
-        storageService.saveRepositories($scope.repositories, function (isSuccess) {
+        var settings = {
+            templates: $scope.templates,
+            repositories: $scope.repositories,            
+        };
+        storageService.saveSettings(settings, function (isSuccess) {
             var message = isSuccess ? "Options saved" : "Saving failed";
             showNotification(isSuccess, message);
             $scope.$apply();
@@ -204,6 +265,13 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             $scope.repositories = [];
             angular.forEach(repositories, function (repo) {
                 $scope.repositories.push(repo);
+                $scope.$apply();
+            });
+        });
+        storageService.getTemplates(function (templates) {
+            $scope.templates = [];
+            angular.forEach(templates, function (template) {
+                $scope.templates.push(template);
                 $scope.$apply();
             });
         });

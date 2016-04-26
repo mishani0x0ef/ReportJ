@@ -442,3 +442,9 @@
 .repository-edit .modal-footer {
     position: relative;
 }
+
+.repository .panel-body .template-description {
+    word-spacing: normal;
+    white-space: normal;
+    word-wrap: normal;
+}

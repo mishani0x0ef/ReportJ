@@ -38,14 +38,84 @@
                     </div>
 
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#repositorySettings" data-toggle="tab" aria-expanded="true">Repositories</a></li>
+                        <li class="active"><a href="#templatesSettings" data-toggle="tab" aria-expanded="true">Templates</a></li>
+                        <li class=""><a href="#repositorySettings" data-toggle="tab" aria-expanded="false">Repositories</a></li>
                         <li class=""><a href="#about" data-toggle="tab" aria-expanded="false">About</a></li>
                     </ul>
 
                     <div id="settings" class="tab-content well">
+                        
+                        <div id="templatesSettings" class="fade tab-pane active in">
+                            <h4>What is this?</h3>
+                            <p>Templates allow you to pre-define your common used reports and get quick access to them via ReportJ popup.</p>
+                            
+                            <form class="form-horizontal">
+                                <fieldset>
+                                    <legend>Templates</legend>
+                                </fieldset>
+                                <div class="repositories">
+                                    
+                                    <div class="repository" ng-repeat="template in templates">
+                                        <div class="col-lg-12 panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="col-lg-10">
+                                                   <span class="template-description">{{template.description}}</span>
+                                                </div>
+                                                <button type="button" class="btn btn-link col-lg-1" title="Edit" ng-click="editTemplate(template)">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-link col-lg-1" title="Delete" ng-click="removeTemplate(template)">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                            
+                            <div class="inline-group" ng-show="templates.length > 0">
+                                <button class="btn btn-primary" ng-click="editTemplate()" ng-disabled="isMaxTemplatesCountExceed">Add Template</button>
+                                <p class="off" ng-class="{ off: isMaxTemplatesCountExceed !== true }" style="width: 20px;">Sorry, but quota for templates is <strong>{{maxTemplateQuota}}</strong> templates.</p>
+                            </div>
+                            
+                        </div>
+                        
+                        <div id="templateEditModal" class="modal modal-custom">
+                            <div class="modal-dialog">
+                                <div class="modal-content repository-edit">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            <span class="">&times;</span>
+                                        </button>
+                                        <!--todo: replace image with template image. MR-->
+                                        <img class="modal-header-icon" src="img/svn.png" alt="svn" />
+                                        <h4 class="modal-title">Template</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" name="templateForm" ng-submit="saveTemplate(editedTemplate)">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <textarea class="form-control" rows="5" placeholder="Template text here" maxlength="255" name="description" ng-model="editedTemplate.description"></textarea>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveTemplate(editedTemplate)">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <div id="repositorySettings" class="fade tab-pane active in">
+                        <div id="repositorySettings" class="fade tab-pane">
 
+                            <h4>What is this?</h3>
+                            <p>You can configurate your SVN and Git repositories to get quick acccess to your last commits info via ReportJ popup.</p>
+                           
                             <form class="form-horizontal">
                                 <fieldset>
                                     <legend>SVN Repositories</legend>
