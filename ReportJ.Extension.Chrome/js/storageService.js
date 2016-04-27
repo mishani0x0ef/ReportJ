@@ -47,5 +47,20 @@ jiraReporterApp.service('storageService', function ($q) {
             }
             callback(isSuccess);
         });
+    };
+    
+    this.saveTemplates = function (templates, callback) {
+        chrome.storage.sync.set({
+            settings: {
+                templates: templates
+            },
+        }, function () {
+            var isSuccess = true;
+            if (typeof (chrome.runtime.lastError) !== 'undefined' && chrome.runtime.lastError !== null) {
+                console.error(chrome.runtime.lastError);
+                isSuccess = false;
+            }
+            callback(isSuccess);
+        });
     }
 });
