@@ -1,3 +1,5 @@
+![ReportJ Logo](https://github.com/mishani0x0ef/ReportJ/blob/master/ReportJ.Extension.Chrome/img/logo-wide.png)
+
 # What is idea of ReportJ?
 
 This extension designed to improve reporting experience inside JIRA system. It's made to make reporting easier and provide short way for adding of main report parts such as issue title, reporting templates or your previous commits information.
