@@ -27,8 +27,8 @@
         <div class="container">
             <div class="row">
 
-                <div class="btn-wrap col-xs-5" ng-click="addIssueSummary()">
-                    <button class="btn btn-link text-center" ng-disabled="!insideJiraPage">
+                <div class="btn-wrap col-xs-5">
+                    <button class="btn btn-link text-center" ng-disabled="!insideJiraPage" ng-click="addIssueSummary()">
                         <span class="btn-caption ">Add issue summary</span>
                         <span class="glyphicon glyphicon-plus "></span>
                     </button>
@@ -71,7 +71,7 @@
                                     <p>{{template.description}}</p>
                                 </div>
                             </div>
-                            <div class="result-wrap " ng-class="{ on: template.justAdded===t rue } ">
+                            <div class="result-wrap " ng-class="{ on: template.justAdded } ">
                                 <div class="add-confirm ">
                                     <span class="glyphicon glyphicon-ok "></span>
                                     <span><strong>Added</strong></span>
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
 
-                            <div class="result-wrap " ng-class="{ on: commit.justAdded===t rue } ">
+                            <div class="result-wrap " ng-class="{ on: commit.justAdded } ">
                                 <div class="add-confirm ">
                                     <span class="glyphicon glyphicon-ok "></span>
                                     <span><strong>Added</strong></span>
@@ -145,7 +145,7 @@
             </div>
         </div>
 
-        <div class="loading-wrap text-center " ng-class="{ on: loading===t rue } ">
+        <div class="loading-wrap text-center " ng-class="{ on: loading } ">
             <div class="progress-wrap ">
                 <span class="icon glyphicon glyphicon-download "></span>
                 <div class="progress-description "><strong>{{loadingDescription}}</strong></div>

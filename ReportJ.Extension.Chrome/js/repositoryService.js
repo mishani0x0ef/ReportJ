@@ -3,18 +3,18 @@ jiraReporterApp.service('repositoryService', function ($q, $http, encryptService
     var config = new AppConfig();
     var baseApiUrl = config.urls.versionControllApiUrl;
     var defaultCommitsCount = 10;
-    
-    this.checkConnection = function(repository, resultHandler, encryptPassword){
+
+    this.checkConnection = function (repository, resultHandler, encryptPassword) {
         var apiUrl = baseApiUrl + repository.type + "/connection/test";
-        
-        var userName = repository.userName, 
+
+        var userName = repository.userName,
             password = repository.password,
             url = repository.url;
-        
-        if(encryptPassword === true) {
+
+        if (encryptPassword === true) {
             password = encryptService.encrypt(password);
         }
-        
+
         $http({
             method: "GET",
             url: apiUrl,
