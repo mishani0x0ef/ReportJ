@@ -7,7 +7,7 @@
     "version": "2.2.0",
     "permissions": ["storage", "activeTab", "contextMenus"],
     "background": {
-        "scripts": ["config.js", "lib/jquery.min.js", "js/jira.js", "background.js"]
+        "scripts": ["config.js", "js/urlService.js", "lib/jquery.min.js", "js/jira.js", "background.js"]
     },
     "sandbox": {
         "pages": ["html/options-main.html"]

@@ -1,21 +1,24 @@
 jiraReporterApp.controller('PopupController', function ($scope, $timeout, storageService, commitsService) {
 
     $scope.config = new AppConfig();
-    
-    var eleksJiraUrl = $scope.config.urls.jiraUrl;
-    var jira = new JiraWrapper(eleksJiraUrl);
+    $scope.insideJiraPage = false;
+
+    var urlService = new UrlService();
+    var jira = {};
+
+    var initJira = function () {
+        urlService.getCurrentBaseUrl(function (url) {
+            jira = new JiraWrapper(url);
+            jira.checkIsInsideJira(function (inJira) {
+                $scope.insideJiraPage = inJira;
+                $scope.$apply($scope.insideJiraPage);
+            })
+        });
+    }
+    initJira();
 
     $scope.svnCommits = [];
     $scope.templates = [];
-    $scope.reportingAllowed = false;
-
-    $scope.checkReportingAllowance = function () {
-        chrome.tabs.getSelected(null, function (tab) {
-            $scope.reportingAllowed = tab.url.indexOf(eleksJiraUrl) > -1;
-            $scope.$apply($scope.reportingAllowed);
-        });
-    }
-    $scope.checkReportingAllowance();
 
     $scope.addCommits = function (commits) {
         angular.forEach(commits, function (commit) {
@@ -29,27 +32,33 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
         $scope.loading = true;
         $scope.loadingDescription = "Loading commits";
         storageService.getRepositories(function (repositories) {
-            if(typeof repositories === "undefined" || repositories.length === 0){
-                $timeout(function() {$scope.loading = false;}, 200);
+            if (typeof repositories === "undefined" || repositories.length === 0) {
+                $timeout(function () {
+                    $scope.loading = false;
+                }, 200);
             }
             angular.forEach(repositories, function (repo) {
                 commitsService.getLastCommits(repo, $scope.addCommits);
             });
         });
     };
-    
+
     $scope.refreshTemplates = function () {
         $scope.templates = [];
         $scope.loading = true;
         $scope.loadingDescription = "Loading templates";
         storageService.getTemplates(function (templates) {
-            if(typeof templates === "undefined" || templates.length === 0){
-                $timeout(function() {$scope.loading = false;}, 200);
+            if (typeof templates === "undefined" || templates.length === 0) {
+                $timeout(function () {
+                    $scope.loading = false;
+                }, 200);
             }
             angular.forEach(templates, function (template) {
                 $scope.templates.push(template);
             });
-            $timeout(function() {$scope.loading = false;}, 200);
+            $timeout(function () {
+                $scope.loading = false;
+            }, 200);
         });
     };
     $scope.refreshTemplates();
@@ -71,8 +80,8 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
                 }, chrome);
         });
     };
-    
-    $scope.addMessageToReport = function (subject, message){
+
+    $scope.addMessageToReport = function (subject, message) {
         subject.justAdded = true;
         setTimeout(function () {
             subject.justAdded = false;

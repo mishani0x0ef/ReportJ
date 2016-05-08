@@ -1,8 +1,7 @@
 (function (chrome) {
     var self = this;
     var config = new AppConfig();
-    var eleksJiraUrl = config.urls.jiraUrl;
-    var jira = new JiraWrapper(eleksJiraUrl);
+    var urlService = new UrlService();
 
     var initContextMenu = function () {
         var context = "editable";
@@ -21,6 +20,9 @@
         };
 
         chrome.tabs.getSelected(null, function (tab) {
+            var baseUrl = urlService.getBaseUrl(tab.url);
+            jira = new JiraWrapper(baseUrl);
+
             jira.getIssueInfo(
                 tab.url,
                 function (issueSummary, context) {

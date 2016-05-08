@@ -9,7 +9,7 @@ var JiraWrapper = function JiraWrapper(baseJiraUrl) {
     var self = this;
     var issueInfoParams = "fields=summary,parent";
     var jiraUrl = baseJiraUrl;
-    var apiUrl = baseJiraUrl + "/rest/api/latest/issue/";
+    var apiUrl = baseJiraUrl + "/rest/api/latest/";
 
     var resolveSummaryFromIssue = function (issue, summary) {
         var issueTitle = issue.fields.summary;
@@ -49,10 +49,25 @@ var JiraWrapper = function JiraWrapper(baseJiraUrl) {
 
     self.getIssueInfo = function (url, callback, callbackContext) {
         var issueKey = getIssueKey(url);
-        var api = apiUrl + issueKey + "?" + issueInfoParams;
+        var api = apiUrl + "issue/" + issueKey + "?" + issueInfoParams;
         $.getJSON(api, function (issue) {
             var summary = resolveSummaryFromIssue(issue);
             callback(summary, callbackContext);
         });
     };
+
+    self.checkIsInsideJira = function (callback) {
+        var api = apiUrl + "mypermissions";
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            url: api,
+            success: function () {
+                callback(true);
+            },
+            error: function () {
+                callback(false);
+            }
+        })
+    }
 };
