@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="lib/bootstrap.paper.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/animation.css">
-    
+
     <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript" src="lib/jsencrypt.min.js"></script>
     <script type="text/javascript" src="lib/jquery.min.js"></script>
@@ -96,23 +96,23 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                             <span class="">&times;</span>
                                         </button>
-                                        <!--todo: replace image with template image. MR-->
-                                        <img class="modal-header-icon" src="img/svn.png" alt="svn" />
+                                        <img class="modal-header-icon" src="img/template.png" alt="template" />
                                         <h4 class="modal-title">Template</h4>
                                     </div>
                                     <div class="modal-body">
                                         <form class="form-horizontal" name="templateForm" ng-submit="saveTemplate(editedTemplate)">
                                             <fieldset>
-                                                <div class="form-group">
+                                                <div class="form-group title-top title-warn" ng-class="{ 'has-error': templateForm.description.$dirtyInvalid, 'title-on': templateForm.description.$invalid }" data-title="{{templateForm.description.$errorMessage}}">
                                                     <div class="col-lg-12">
-                                                        <textarea class="form-control" rows="5" placeholder="Template text here" maxlength="255" name="description" ng-model="editedTemplate.description"></textarea>
+                                                        <textarea class="form-control" rows="5" placeholder="Template text here" required maxlength="255" name="description" ng-model="editedTemplate.description"></textarea>
+                                                        <span ng-class="{ required: templateForm.description.$error.required }"></span>
                                                     </div>
                                                 </div>
                                             </fieldset>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveTemplate(editedTemplate)">
+                                        <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveTemplate(editedTemplate)" ng-disabled="templateForm.$invalid">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                     </div>
                                 </div>

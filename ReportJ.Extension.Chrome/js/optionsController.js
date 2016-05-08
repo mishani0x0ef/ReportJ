@@ -58,16 +58,16 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     }
 
     $scope.config = new AppConfig();
-    
+
     $scope.maxRepoQuota = 2;
     $scope.repositories = [];
-    
+
     $scope.maxTemplateQuota = 10;
     $scope.templates = [];
 
     // Wathcers
-    
-     $scope.$watchCollection('templates', function (newTemplates, oldTemplates) {
+
+    $scope.$watchCollection('templates', function (newTemplates, oldTemplates) {
         $scope.isMaxTemplatesCountExceed = newTemplates.length >= $scope.maxTemplateQuota;
     });
 
@@ -128,6 +128,12 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         setInitialValidity(baseObj);
         setValidity(baseObj, baseObj.$error.required, "Confirmation is required.", true);
         setValidity(baseObj, baseObj.$error.equals, "Password and confirmation should match each other.", true);
+    });
+
+    $scope.$watch('templateForm.description.$invalid', function (newValid, oldValid) {
+        var baseObj = $scope.templateForm.description;
+        setInitialValidity(baseObj);
+        setValidity(baseObj, baseObj.$error.required, "Description is required.", true);
     });
 
     // Handlers
@@ -197,7 +203,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             $scope.saveSettings();
         });
     };
-    
+
     $scope.editTemplate = function (template) {
         $scope.templateForm.$setPristine(true);
         if (typeof (template) !== "undefined" && template !== null) {
@@ -213,7 +219,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             $("#templateEditModal").modal("show")
         }, 100);
     }
-    
+
     $scope.saveTemplate = function (template) {
         if (typeof (template.templateId) === "undefined") {
             var templateId = 0;
@@ -235,7 +241,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         $("#templateEditModal").modal("hide");
         $scope.saveSettings();
     };
-    
+
     $scope.removeTemplate = function (template) {
         var warningMessage = "Are you sure you want to delete such a wonderful template?";
         bootbox.confirm(warningMessage, "Delete confirmation", function (confirmed) {
@@ -251,7 +257,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     $scope.saveSettings = function () {
         var settings = {
             templates: $scope.templates,
-            repositories: $scope.repositories,            
+            repositories: $scope.repositories,
         };
         storageService.saveSettings(settings, function (isSuccess) {
             var message = isSuccess ? "Options saved" : "Saving failed";
