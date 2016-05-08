@@ -1,4 +1,4 @@
-jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, commitsService, encryptService) {
+jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, repositoryService, encryptService) {
 
     // Private handlers
 
@@ -171,7 +171,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     $scope.saveRepository = function (repository) {
         $scope.setLoading(true, "Checking settings on our servers ...")
 
-        commitsService.checkConnection(
+        repositoryService.checkConnection(
             repository,
             function (connectionEstablished) {
                 $scope.setLoading(false);

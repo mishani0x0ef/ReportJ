@@ -1,4 +1,4 @@
-jiraReporterApp.service('commitsService', function ($q, $http, encryptService) {
+jiraReporterApp.service('repositoryService', function ($q, $http, encryptService) {
     var self = this;
     var config = new AppConfig();
     var baseApiUrl = config.urls.versionControllApiUrl;

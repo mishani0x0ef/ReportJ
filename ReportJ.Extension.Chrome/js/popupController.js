@@ -1,4 +1,4 @@
-jiraReporterApp.controller('PopupController', function ($scope, $timeout, storageService, commitsService) {
+jiraReporterApp.controller('PopupController', function ($scope, $timeout, storageService, repositoryService) {
 
     $scope.config = new AppConfig();
     $scope.insideJiraPage = false;
@@ -38,7 +38,7 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
                 }, 200);
             }
             angular.forEach(repositories, function (repo) {
-                commitsService.getLastCommits(repo, $scope.addCommits);
+                repositoryService.getLastCommits(repo, $scope.addCommits);
             });
         });
     };
