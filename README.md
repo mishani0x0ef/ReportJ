@@ -1,4 +1,4 @@
-![ReportJ Logo](https://github.com/mishani0x0ef/ReportJ/blob/master/ReportJ.Extension.Chrome/img/logo-wide.png)
+![ReportJ Logo](https://github.com/mishani0x0ef/ReportJ/blob/master/ReportJ.Extension.Chrome/img/logo-lg.png)
 
 # What is idea of ReportJ?
 
