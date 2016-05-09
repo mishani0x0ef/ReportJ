@@ -23,7 +23,7 @@
 <body class="options-wrap" ng-controller="OptionsController">
 
     <div id="container">
-        <div class="col-lg-6 col-md-offset-3 panel panel-default">
+        <div class="col-lg-6 col-md-10 col-sm-12 col-lg-offset-3 col-md-offset-1 panel panel-default">
             <div class="panel-body">
 
                 <div class="options">
@@ -64,15 +64,15 @@
                                 <div class="repositories">
                                     
                                     <div class="repository" ng-repeat="template in templates track by $index">
-                                        <div class="col-lg-12 panel panel-default">
+                                        <div class="col-md-12 panel panel-default">
                                             <div class="panel-body">
-                                                <div class="col-lg-10">
+                                                <div class="col-md-10">
                                                    <span class="template-description">{{template.description}}</span>
                                                 </div>
-                                                <button type="button" class="btn btn-link col-lg-1" title="Edit" ng-click="editTemplate(template)">
+                                                <button type="button" class="btn btn-link col-md-1" title="Edit" ng-click="editTemplate(template)">
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </button>
-                                                <button type="button" class="btn btn-link col-lg-1" title="Delete" ng-click="removeTemplate(template)">
+                                                <button type="button" class="btn btn-link col-md-1" title="Delete" ng-click="removeTemplate(template)">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
                                             </div>
@@ -103,7 +103,7 @@
                                         <form class="form-horizontal" name="templateForm" ng-submit="saveTemplate(editedTemplate)">
                                             <fieldset>
                                                 <div class="form-group title-top title-warn" ng-class="{ 'has-error': templateForm.description.$dirtyInvalid, 'title-on': templateForm.description.$invalid }" data-title="{{templateForm.description.$errorMessage}}">
-                                                    <div class="col-lg-12">
+                                                    <div class="col-md-12">
                                                         <textarea class="form-control" rows="5" placeholder="Template text here" required maxlength="255" name="description" ng-model="editedTemplate.description"></textarea>
                                                         <span ng-class="{ required: templateForm.description.$error.required }"></span>
                                                     </div>
@@ -130,20 +130,20 @@
                                 </fieldset>
                                 <div class="repositories">
                                     <div class="repository" ng-repeat="repository in repositories | filter: { type: 'svn' } | orderBy: 'name'">
-                                        <div class="col-lg-12 panel panel-default">
+                                        <div class="col-md-12 panel panel-default">
                                             <div class="panel-body">
-                                                <div class="col-lg-8"><b>{{repository.name}}</b></div>
-                                                <div class="col-lg-4 text-right" title="User Name">
+                                                <div class="col-md-8"><b>{{repository.name}}</b></div>
+                                                <div class="col-md-4 text-right" title="User Name">
                                                     <span class="glyphicon glyphicon-user"></span>
                                                     <strong>{{repository.userName}}</strong>
                                                 </div>
-                                                <div class="col-lg-10">
+                                                <div class="col-md-10">
                                                     <p>{{repository.url}}</p>
                                                 </div>
-                                                <button type="button" class="btn btn-link col-lg-1" title="Edit" ng-click="editRepository(repository)">
+                                                <button type="button" class="btn btn-link col-md-1" title="Edit" ng-click="editRepository(repository)">
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </button>
-                                                <button type="button" class="btn btn-link col-lg-1" title="Delete" ng-click="removeRepository(repository)">
+                                                <button type="button" class="btn btn-link col-md-1" title="Delete" ng-click="removeRepository(repository)">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
                                             </div>
@@ -192,8 +192,8 @@
 
                                                 <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.name.$dirtyInvalid, 'title-on': repoForm.name.$invalid }" data-title="{{repoForm.name.$errorMessage}}">
 
-                                                    <label for="repositoryName" class="col-lg-3 control-label">Name</label>
-                                                    <div class="col-lg-9">
+                                                    <label for="repositoryName" class="col-md-3 control-label">Name</label>
+                                                    <div class="col-md-9">
                                                         <input type="text" class="form-control" placeholder="Repository Name" required maxlength="50" name="name" ng-model="editedRepository.name">
                                                         <span ng-class="{ required: repoForm.name.$error.required }"></span>
                                                     </div>
@@ -202,8 +202,8 @@
 
                                                 <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.url.$dirtyInvalid, 'title-on': repoForm.url.$invalid }" data-title="{{repoForm.url.$errorMessage}}">
 
-                                                    <label for="repositoryUrl" class="col-lg-3 control-label">Repository URL</label>
-                                                    <div class="col-lg-9">
+                                                    <label for="repositoryUrl" class="col-md-3 control-label">Repository URL</label>
+                                                    <div class="col-md-9">
                                                         <input type="text" class="form-control" placeholder="Repository URL" required maxlength="255" name="url" ng-model="editedRepository.url">
                                                         <span ng-class="{ required: repoForm.url.$error.required }"></span>
                                                     </div>
@@ -212,8 +212,8 @@
 
                                                 <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.username.$dirtyInvalid, 'title-on': repoForm.username.$invalid }" data-title="{{repoForm.username.$errorMessage}}">
 
-                                                    <label for="repositoryUsername" class="col-lg-3 control-label">User Name</label>
-                                                    <div class="col-lg-9">
+                                                    <label for="repositoryUsername" class="col-md-3 control-label">User Name</label>
+                                                    <div class="col-md-9">
                                                         <input type="text" class="form-control" placeholder="User Name" required maxlength="30" name="username" ng-model="editedRepository.userName">
                                                         <span ng-class="{ required: repoForm.username.$error.required }"></span>
                                                     </div>
@@ -222,8 +222,8 @@
 
                                                 <div class="form-group title-bottom title-warn" ng-show="editedRepository.passChangeAllowed" disable-validation="!editedRepository.passChangeAllowed" ng-class="{ 'has-error': repoForm.password.$dirtyInvalid, 'title-on': repoForm.password.$invalid }" data-title="{{repoForm.password.$errorMessage}}">
 
-                                                    <label for="repositoryPassword" class="col-lg-3 control-label">Password</label>
-                                                    <div class="col-lg-9">
+                                                    <label for="repositoryPassword" class="col-md-3 control-label">Password</label>
+                                                    <div class="col-md-9">
                                                         <input type="password" class="form-control" placeholder="Password" required maxlength="{{editedRepository.passChangeAllowed ? 30 : 3000}}" name="password" ng-model="editedRepository.password" equals="{{editedRepository.passwordConfirm}}">
                                                         <span ng-class="{ required: repoForm.password.$error.required }"></span>
                                                     </div>
@@ -232,8 +232,8 @@
 
                                                 <div class="form-group title-bottom title-warn" ng-show="editedRepository.passChangeAllowed" disable-validation="!editedRepository.passChangeAllowed" ng-class="{ 'has-error': repoForm.passwordConfirm.$dirtyInvalid, 'title-on': repoForm.passwordConfirm.$invalid }" data-title="{{repoForm.passwordConfirm.$errorMessage}}">
 
-                                                    <label for="repositoryPasswordConfirm" class="col-lg-3 control-label">Confirm Password</label>
-                                                    <div class="col-lg-9">
+                                                    <label for="repositoryPasswordConfirm" class="col-md-3 control-label">Confirm Password</label>
+                                                    <div class="col-md-9">
                                                         <input type="password" class="form-control" placeholder="Password Confirmation" required maxlength="{{editedRepository.passChangeAllowed ? 30 : 3000}}" name="passwordConfirm" ng-model="editedRepository.passwordConfirm" equals="{{editedRepository.password}}">
                                                         <span ng-class="{ required: repoForm.passwordConfirm.$error.required }"></span>
                                                     </div>
