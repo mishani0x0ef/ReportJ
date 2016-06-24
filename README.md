@@ -1,4 +1,4 @@
-![ReportJ Logo](https://github.com/mishani0x0ef/ReportJ/blob/master/ReportJ.Extension.Chrome/img/logo-wide.png)
+<img src="https://github.com/mishani0x0ef/ReportJ/blob/master/ReportJ.Extension.Chrome/img/logo-lg.png" alt="ReportJ logo" height="100" style="text-align: center; display: block;">
 
 # What is idea of ReportJ?
 
@@ -10,22 +10,15 @@ Idea and functionality of extension was gets from personal experience of work wi
 
 To use extension you need to do next steps:
 
-1. Download [latest release](https://github.com/mishani0x0ef/Jira.Extrension/releases)
-2. Unpack Source Code
-3. Open Chrome settings, go to extension tab and select "Developer mode" checkbox. Developer mode will be activated
-4. Click button "Load unpacked extension..". Folder select dialog should appear
-5. Select folder "Jira.Extension.Chrome" inside Source Code and confirm selection. Extension should appear in list of extensions
-6. Make sure that extension have "Enabled" checkbox checked
-
-NOTE: it could be request from browser to disable developer mode extension. Don’t disable those extension to made JIRA Report Helper turned on.
+1. Open Chrome Web Store - https://chrome.google.com/webstore/detail/reportj/hijbdbjoelgicnhnghhhlkpbhjdmchfg?hl=en-US
+2. Click "ADD TO CHROME"
+3. You are awersome
 
 # How to use Chrome extension?
 
 Chrome extension is made to make your life easier. So I want to explain some main tips of "how to use it".
 
 ## Restrictions
-
-Reporting functionality of extension work only on JIRA pages.
 
 Report information could be added only into editable text fields on page. It works on issue's details and on agile as well. Maybe it works somewhere else, but it's main pages I'm personally using :)
 
