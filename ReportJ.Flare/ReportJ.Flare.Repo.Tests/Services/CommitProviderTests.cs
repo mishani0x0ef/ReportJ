@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using ReportJ.Flare.Repo.Interfaces;
 using System.Net;
+using ReportJ.Common.Exceptions;
 
 namespace ReportJ.Flare.Repo.Tests.Services
 {
@@ -23,9 +24,66 @@ namespace ReportJ.Flare.Repo.Tests.Services
         }
 
         [Test]
-        public void GetLastCommitsTest()
+        public void GetLastCommits_EmptyRepoUrl_ValidationExceptionThrown()
         {
-            Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials), Throws.Nothing);
+            _repoUrl = string.Empty;
+
+            Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
+                Throws.Exception.TypeOf<ValidationException<string>>());
+        }
+
+        [Test]
+        public void GetLastCommits_ToLongRepoUrl_ValidationExceptionThrown()
+        {
+            _repoUrl = new string('a', 256);
+
+            Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
+                Throws.Exception.TypeOf<ValidationException<string>>());
+        }
+
+        [Test]
+        public void GetLastCommits_MissedCredentials_ValidationExceptionThrown()
+        {
+            _credentials = null;
+
+            Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
+                Throws.Exception.TypeOf<ValidationException<object>>());
+        }
+
+        [Test]
+        public void GetLastCommits_EmptyUserName_ValidationExceptionThrown()
+        {
+            _credentials.UserName = string.Empty;
+
+            Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
+                Throws.Exception.TypeOf<ValidationException<string>>());
+        }
+
+        [Test]
+        public void GetLastCommits_ToLongUserName_ValidationExceptionThrown()
+        {
+            _credentials.UserName = new string('a', 256);
+
+            Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
+                Throws.Exception.TypeOf<ValidationException<string>>());
+        }
+
+        [Test]
+        public void GetLastCommits_EmptyPassword_ValidationExceptionThrown()
+        {
+            _credentials.Password = string.Empty;
+
+            Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
+                Throws.Exception.TypeOf<ValidationException<string>>());
+        }
+
+        [Test]
+        public void GetLastCommits_ToLongPassword_ValidationExceptionThrown()
+        {
+            _credentials.Password = new string('a', 256);
+
+            Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
+                Throws.Exception.TypeOf<ValidationException<string>>());
         }
     }
 }

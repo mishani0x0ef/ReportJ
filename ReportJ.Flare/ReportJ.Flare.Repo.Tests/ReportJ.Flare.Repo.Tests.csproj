@@ -73,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="Services\CommitProviderTests.cs" />
+    <Compile Include="Services\SvnCommitProviderTests.cs" />
     <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +81,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\ReportJ.Common\ReportJ.Common.csproj">
+      <Project>{DA88F121-628A-4BB1-8838-14ED902AC881}</Project>
+      <Name>ReportJ.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReportJ.Flare.Repo\ReportJ.Flare.Repo.csproj">
       <Project>{5D6E8217-FB9A-44FF-A3C2-F76AA08D7E02}</Project>
       <Name>ReportJ.Flare.Repo</Name>

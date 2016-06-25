@@ -6,6 +6,8 @@ using ReportJ.Flare.Repo.Entities;
 using System.Net;
 using SharpSvn;
 using System.Collections.ObjectModel;
+using ReportJ.Common.Interfaces;
+using ReportJ.Common.Services.Validation;
 
 namespace ReportJ.Flare.Repo.Services
 {
@@ -15,15 +17,17 @@ namespace ReportJ.Flare.Repo.Services
         public int MaxRepositoryDiscoverDepth { get; set; }
 
         private readonly IEntityMapper _mapper;
+        private readonly IValidator _validator;
 
         private const int RepoDiscoveryStepCoef = 20;
 
-        public SvnCommitProvider(IEntityMapper mapper)
+        public SvnCommitProvider(IEntityMapper mapper, IValidator validator)
         {
             MaxCountOfCommits = 30;
             MaxRepositoryDiscoverDepth = 1000;
 
             _mapper = mapper;
+            _validator = validator;
         }
 
         public IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count = 10)
@@ -38,9 +42,15 @@ namespace ReportJ.Flare.Repo.Services
                 args => string.Equals(args.Author, author, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        private IEnumerable<Commit> GetLastCommits(string repoUrl, ICredentials credential, int count,
+        private IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count,
             Func<SvnLogEventArgs, bool> filter)
         {
+            _validator
+                .ValidateAndThrow(repoUrl, ValidatorsFactory.Length(1, 255))
+                .ValidateAndThrow(credential, ValidatorsFactory.NotNull())
+                .ValidateAndThrow(credential.UserName, ValidatorsFactory.Length(1, 255))
+                .ValidateAndThrow(credential.Password, ValidatorsFactory.Length(1, 255));
+
             using (var svn = new SvnClient())
             {
                 svn.Authentication.Clear();

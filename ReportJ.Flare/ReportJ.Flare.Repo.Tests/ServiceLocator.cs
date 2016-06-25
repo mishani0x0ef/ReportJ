@@ -1,4 +1,6 @@
 ﻿using Ninject;
+using ReportJ.Common.Interfaces;
+using ReportJ.Common.Services;
 using ReportJ.Flare.Repo.Interfaces;
 using ReportJ.Flare.Repo.Services;
 
@@ -56,7 +58,14 @@ namespace ReportJ.Flare.Repo.Tests
         private void Initialize()
         {
             _kernel = new StandardKernel();
+
+            InitializeCommon(_kernel);
             InitializeServices(_kernel);
+        }
+
+        private void InitializeCommon(IKernel kernel)
+        {
+            kernel.Bind<IValidator>().To<Validator>();
         }
 
         private void InitializeServices(IKernel kernel)
