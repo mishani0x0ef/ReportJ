@@ -11,20 +11,18 @@ namespace ReportJ.Flare.Repo.Services
 {
     public class SvnCommitProvider : ICommitProvider
     {
-        public int MaxCountOfCommits { get; private set; }
+        public int MaxCountOfCommits { get; }
         public int MaxRepositoryDiscoverDepth { get; set; }
 
-        private IRequestProxy _proxy;
-        private IEntityMapper _mapper;
+        private readonly IEntityMapper _mapper;
 
         private const int RepoDiscoveryStepCoef = 20;
 
-        public SvnCommitProvider(IRequestProxy connection, IEntityMapper mapper)
+        public SvnCommitProvider(IEntityMapper mapper)
         {
             MaxCountOfCommits = 30;
             MaxRepositoryDiscoverDepth = 1000;
 
-            _proxy = connection;
             _mapper = mapper;
         }
 
@@ -43,12 +41,15 @@ namespace ReportJ.Flare.Repo.Services
         private IEnumerable<Commit> GetLastCommits(string repoUrl, ICredentials credential, int count,
             Func<SvnLogEventArgs, bool> filter)
         {
-            return _proxy.ExecuteWithSvn(svn =>
+            using (var svn = new SvnClient())
             {
+                svn.Authentication.Clear();
+                svn.Authentication.DefaultCredentials = credential;
+
                 var endRevision = GetLastRevision(svn, repoUrl);
                 var commits = GetCommits(svn, repoUrl, endRevision, count, filter);
                 return commits.OrderByDescending(commit => commit.Date).Take(count);
-            }, credential);
+            }
         }
 
         private long GetLastRevision(SvnClient client, string repoUrl)
@@ -74,7 +75,7 @@ namespace ReportJ.Flare.Repo.Services
                 Collection<SvnLogEventArgs> logEvents;
                 client.GetLog(new Uri(repoUrl), logArguments, out logEvents);
 
-                commits.AddRange(logEvents.Where(filter).Select(_mapper.Map<SvnLogEventArgs, Commit>));
+                commits.AddRange(_mapper.Map<SvnLogEventArgs, Commit>(logEvents.Where(filter)));
 
                 discoveredDepth += endRevision - startRevision;
                 endRevision = endRevision - 1 > repoDiscoveryStep ? endRevision - repoDiscoveryStep - 1 : 1;

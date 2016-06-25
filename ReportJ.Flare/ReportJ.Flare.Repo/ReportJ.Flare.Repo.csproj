@@ -54,10 +54,8 @@
   <ItemGroup>
     <Compile Include="Entities\Commit.cs" />
     <Compile Include="Interfaces\ICommitProvider.cs" />
-    <Compile Include="Interfaces\IRequestProxy.cs" />
     <Compile Include="Interfaces\IEntityMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\RequestProxy.cs" />
     <Compile Include="Services\EntityMapper.cs" />
     <Compile Include="Services\SvnCommitProvider.cs" />
     <Compile Include="Services\Mapping\GeneralMappingProfile.cs" />

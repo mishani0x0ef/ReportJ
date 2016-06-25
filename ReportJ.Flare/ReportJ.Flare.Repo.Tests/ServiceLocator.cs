@@ -11,7 +11,7 @@ namespace ReportJ.Flare.Repo.Tests
             get
             {
                 if (_instance != null) return _instance;
-                lock (_locker)
+                lock (Locker)
                 {
                     return _instance ?? (_instance = new ServiceLocator());
                 }
@@ -20,7 +20,7 @@ namespace ReportJ.Flare.Repo.Tests
 
         private static IKernel _kernel;
         private static ServiceLocator _instance;
-        private static object _locker = new object();
+        private static readonly object Locker = new object();
 
         private ServiceLocator()
         {
@@ -62,7 +62,6 @@ namespace ReportJ.Flare.Repo.Tests
         private void InitializeServices(IKernel kernel)
         {
             kernel.Bind<IEntityMapper>().To<EntityMapper>();
-            kernel.Bind<IRequestProxy>().To<RequestProxy>();
             kernel.Bind<ICommitProvider>().To<SvnCommitProvider>();
         }
     }
