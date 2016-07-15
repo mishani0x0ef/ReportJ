@@ -33,7 +33,7 @@ namespace ReportJ.Flare.Repo.Tests.Services
         }
 
         [Test]
-        public void GetLastCommits_ToLongRepoUrl_ValidationExceptionThrown()
+        public void GetLastCommits_TooLongRepoUrl_ValidationExceptionThrown()
         {
             _repoUrl = new string('a', 256);
 
@@ -60,7 +60,7 @@ namespace ReportJ.Flare.Repo.Tests.Services
         }
 
         [Test]
-        public void GetLastCommits_ToLongUserName_ValidationExceptionThrown()
+        public void GetLastCommits_TooLongUserName_ValidationExceptionThrown()
         {
             _credentials.UserName = new string('a', 256);
 
@@ -78,7 +78,7 @@ namespace ReportJ.Flare.Repo.Tests.Services
         }
 
         [Test]
-        public void GetLastCommits_ToLongPassword_ValidationExceptionThrown()
+        public void GetLastCommits_TooLongPassword_ValidationExceptionThrown()
         {
             _credentials.Password = new string('a', 256);
 
