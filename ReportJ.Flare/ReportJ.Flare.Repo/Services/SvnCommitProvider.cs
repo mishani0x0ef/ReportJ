@@ -6,8 +6,9 @@ using ReportJ.Flare.Repo.Entities;
 using System.Net;
 using SharpSvn;
 using System.Collections.ObjectModel;
-using ReportJ.Common.Interfaces;
-using ReportJ.Common.Services.Validation;
+using ReportJ.Common.Utils;
+using ReportJ.Flare.Repo.Validation;
+using IValidator = ReportJ.Common.Interfaces.IValidator;
 
 namespace ReportJ.Flare.Repo.Services
 {
@@ -45,11 +46,8 @@ namespace ReportJ.Flare.Repo.Services
         private IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count,
             Func<SvnLogEventArgs, bool> filter)
         {
-            _validator
-                .ValidateAndThrow(repoUrl, ValidatorsFactory.Length(1, 255))
-                .ValidateAndThrow(credential, ValidatorsFactory.NotNull())
-                .ValidateAndThrow(credential.UserName, ValidatorsFactory.Length(1, 255))
-                .ValidateAndThrow(credential.Password, ValidatorsFactory.Length(1, 255));
+            _validator.ValidateFluentAndThrow<NetworkCredential, NetworkCredentialValidator>(credential);
+            _validator.ValidateFluentAndThrow<string, UrlValidator>(repoUrl);
 
             using (var svn = new SvnClient())
             {

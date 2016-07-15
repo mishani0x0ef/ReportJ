@@ -65,7 +65,7 @@ namespace ReportJ.Flare.Repo.Tests
 
         private void InitializeCommon(IKernel kernel)
         {
-            kernel.Bind<IValidator>().To<Validator>();
+            kernel.Bind<IValidator>().To<FluentValidator>();
         }
 
         private void InitializeServices(IKernel kernel)

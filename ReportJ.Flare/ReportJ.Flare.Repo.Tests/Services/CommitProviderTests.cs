@@ -47,7 +47,7 @@ namespace ReportJ.Flare.Repo.Tests.Services
             _credentials = null;
 
             Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
-                Throws.Exception.TypeOf<ValidationException<object>>());
+                Throws.Exception.TypeOf<ValidationException<NetworkCredential>>());
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace ReportJ.Flare.Repo.Tests.Services
             _credentials.UserName = string.Empty;
 
             Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
-                Throws.Exception.TypeOf<ValidationException<string>>());
+                Throws.Exception.TypeOf<ValidationException<NetworkCredential>>());
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace ReportJ.Flare.Repo.Tests.Services
             _credentials.UserName = new string('a', 256);
 
             Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
-                Throws.Exception.TypeOf<ValidationException<string>>());
+                Throws.Exception.TypeOf<ValidationException<NetworkCredential>>());
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace ReportJ.Flare.Repo.Tests.Services
             _credentials.Password = string.Empty;
 
             Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
-                Throws.Exception.TypeOf<ValidationException<string>>());
+                Throws.Exception.TypeOf<ValidationException<NetworkCredential>>());
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace ReportJ.Flare.Repo.Tests.Services
             _credentials.Password = new string('a', 256);
 
             Assert.That(() => TestUnit.GetLastCommits(_repoUrl, _credentials),
-                Throws.Exception.TypeOf<ValidationException<string>>());
+                Throws.Exception.TypeOf<ValidationException<NetworkCredential>>());
         }
     }
 }
