@@ -46,7 +46,7 @@ namespace ReportJ.Flare.Repo.Services
         private IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count,
             Func<SvnLogEventArgs, bool> filter)
         {
-            _validator.ValidateFluentAndThrow<NetworkCredential, NetworkCredentialValidator>(credential);
+            _validator.ValidateAndThrow(credential);
             _validator.ValidateFluentAndThrow<string, UrlValidator>(repoUrl);
 
             using (var svn = new SvnClient())

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using ReportJ.Flare.Repo.Validation;
 
 namespace ReportJ.Flare.Repo.Tests
 {
@@ -19,6 +20,11 @@ namespace ReportJ.Flare.Repo.Tests
 
         protected virtual void PreSetUp()
         {
+            var validationConfigurator = ServiceLocator.Instance.Resolve<Configurator>();
+            if (!validationConfigurator.ValidationConfigured)
+            {
+                validationConfigurator.Configure();
+            }
         }
 
         protected virtual void PostSetUp()

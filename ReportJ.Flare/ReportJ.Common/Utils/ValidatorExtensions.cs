@@ -8,7 +8,8 @@ namespace ReportJ.Common.Utils
     public static class ValidatorExtensions
     {
         /// <summary>
-        /// Validate applicant using fluent validator for validated type. 
+        /// Validate applicant using fluent validator for validated type.
+        /// Useful in case if more than one validator for type exists.
         /// Throw ValidationException if applicant invalid.
         /// </summary>
         /// <typeparam name="T">Type of validated object.</typeparam>
