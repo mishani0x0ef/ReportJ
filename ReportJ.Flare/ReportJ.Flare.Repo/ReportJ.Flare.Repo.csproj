@@ -38,8 +38,8 @@
       <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentValidation.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.Configuration.0.1.1-beta\lib\net452\FluentValidation.Configuration.dll</HintPath>
+    <Reference Include="FluentValidation.Configuration, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.Configuration.0.1.5-beta\lib\net452\FluentValidation.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SharpSvn, Version=1.8016.3866.130, Culture=neutral, PublicKeyToken=d729672594885a28, processorArchitecture=AMD64">
@@ -67,7 +67,7 @@
     <Compile Include="Services\EntityMapper.cs" />
     <Compile Include="Services\SvnCommitProvider.cs" />
     <Compile Include="Services\Mapping\GeneralMappingProfile.cs" />
-    <Compile Include="Validation\Configurator.cs" />
+    <Compile Include="Validation\ValidationProfile.cs" />
     <Compile Include="Validation\NetworkCredentialValidator.cs" />
     <Compile Include="Validation\UrlValidator.cs" />
     <Compile Include="Validation\ValidatorBase.cs" />

@@ -20,7 +20,7 @@ namespace ReportJ.Flare.Repo.Tests
 
         protected virtual void PreSetUp()
         {
-            var validationConfigurator = ServiceLocator.Instance.Resolve<Configurator>();
+            var validationConfigurator = ServiceLocator.Instance.Resolve<ValidationProfile>();
             if (!validationConfigurator.ValidationConfigured)
             {
                 validationConfigurator.Configure();

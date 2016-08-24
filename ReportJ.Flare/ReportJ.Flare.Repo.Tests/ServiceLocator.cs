@@ -68,7 +68,7 @@ namespace ReportJ.Flare.Repo.Tests
         private void InitializeCommon(IKernel kernel)
         {
             kernel.Bind<IValidationConfiguration>().To<ValidationConfiguration>().InSingletonScope();
-            kernel.Bind<Configurator>().ToSelf().InSingletonScope();
+            kernel.Bind<ValidationProfile>().ToSelf().InSingletonScope();
             kernel.Bind<IValidator>().To<FluentValidator>();
         }
 
