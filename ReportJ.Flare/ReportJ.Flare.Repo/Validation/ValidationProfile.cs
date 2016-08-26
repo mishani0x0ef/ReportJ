@@ -1,23 +1,21 @@
 ﻿using FluentValidation.Configuration;
+using ReportJ.Flare.Common.Interfaces;
 
 namespace ReportJ.Flare.Repo.Validation
 {
-    public class ValidationProfile
+    public class ValidationProfile : IValidationProfile
     {
-        public bool ValidationConfigured { get; set; }
+        public IValidationConfiguration Configuration { get; }
 
-        private readonly IValidationConfiguration _configuration;
-
-        public ValidationProfile(IValidationConfiguration configuration)
+        public ValidationProfile(IValidationConfiguration config)
         {
-            _configuration = configuration;
+            Configuration = config;
+            Configure();
         }
 
         public void Configure()
         {
-            _configuration.Register(new NetworkCredentialValidator());
-
-            ValidationConfigured = true;
+            Configuration.Register(new NetworkCredentialValidator());
         }
     }
 }

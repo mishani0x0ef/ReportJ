@@ -1,22 +1,22 @@
 ﻿using System;
-using FluentValidation.Configuration;
 using ReportJ.Common.Exceptions;
 using IValidator = ReportJ.Common.Interfaces.IValidator;
+using ReportJ.Flare.Common.Interfaces;
 
 namespace ReportJ.Common.Services
 {
     public class FluentValidator : IValidator
     {
-        private readonly IValidationConfiguration _configuration;
+        private readonly IValidationProfile _profile;
 
-        public FluentValidator(IValidationConfiguration configuration)
+        public FluentValidator(IValidationProfile profile)
         {
-            _configuration = configuration;
+            _profile = profile;
         }
 
         public IValidator ValidateAndThrow<T>(T applicant)
         {
-            var validator = _configuration.GetValidator<T>();
+            var validator = _profile.Configuration.GetValidator<T>();
             var result = validator.Validate(applicant);
             if (!result.IsValid)
             {
@@ -27,7 +27,7 @@ namespace ReportJ.Common.Services
 
         public bool Validate<T>(T applicant)
         {
-            var validator = _configuration.GetValidator<T>();
+            var validator = _profile.Configuration.GetValidator<T>();
             var result = validator.Validate(applicant);
             return result.IsValid;
         }

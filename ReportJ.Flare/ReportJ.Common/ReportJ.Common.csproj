@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\ReportjExceptionBase.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
+    <Compile Include="Interfaces\IValidationProfile.cs" />
     <Compile Include="Interfaces\IValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FluentValidator.cs" />
