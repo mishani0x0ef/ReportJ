@@ -2,7 +2,7 @@
 
 namespace ReportJ.Common.Exceptions
 {
-    public class ValidationException<T> : ReportjExceptionBase
+    public class ValidationException<T> : ValidationExceptionBase
     {
         public T Applicant { get; }
 

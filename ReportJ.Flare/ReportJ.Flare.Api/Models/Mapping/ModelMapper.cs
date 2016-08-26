@@ -12,7 +12,7 @@ namespace ReportJ.Flare.Api.Models.Mapping
         static ModelMapper()
         {
             _config = new MapperConfiguration(cfg => cfg.AddProfile<GeneralMappingProfile>());
-            _config.CreateMapper();
+            _mapper = _config.CreateMapper();
         }
 
         public static CommitModel ToModel(this Commit commit)

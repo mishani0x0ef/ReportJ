@@ -220,10 +220,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Constraints\Git.cs" />
-    <Compile Include="Constraints\Svn.cs" />
+    <Compile Include="Constraints\GitAttribute.cs" />
+    <Compile Include="Constraints\SvnAttribute.cs" />
     <Compile Include="Controllers\Api\SvnCommitsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\ValidationExceptionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -243,7 +244,6 @@
     <Content Include="Content\images\logo-wide.png" />
     <Content Include="Content\images\logo128x128.png" />
     <Content Include="Content\images\svn-icon.png" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
@@ -320,7 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReportJ.Common\ReportJ.Common.csproj">
