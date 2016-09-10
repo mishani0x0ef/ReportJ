@@ -57,7 +57,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FluentValidation.Configuration, Version=0.1.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.Configuration.0.1.6-beta\lib\net452\FluentValidation.Configuration.dll</HintPath>
+      <HintPath>..\packages\FluentValidation.Configuration.0.3.0-rc\lib\net452\FluentValidation.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">

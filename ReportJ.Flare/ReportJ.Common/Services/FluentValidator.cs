@@ -1,7 +1,7 @@
 ﻿using System;
 using ReportJ.Common.Exceptions;
 using IValidator = ReportJ.Common.Interfaces.IValidator;
-using ReportJ.Flare.Common.Interfaces;
+using FluentValidation.Configuration;
 
 namespace ReportJ.Common.Services
 {

@@ -1,15 +1,11 @@
 ﻿using FluentValidation.Configuration;
-using ReportJ.Flare.Common.Interfaces;
 
 namespace ReportJ.Flare.Repo.Validation
 {
-    public class ValidationProfile : IValidationProfile
+    public class ValidationProfile : AbstractValidationProfile
     {
-        public IValidationConfiguration Configuration { get; }
-
-        public ValidationProfile(IValidationConfiguration config)
+        public ValidationProfile(IValidationConfiguration config) : base(config)
         {
-            Configuration = config;
             Configure();
         }
 
