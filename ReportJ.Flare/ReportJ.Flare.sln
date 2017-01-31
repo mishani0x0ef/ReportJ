@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportJ.Common", "ReportJ.Common\ReportJ.Common.csproj", "{DA88F121-628A-4BB1-8838-14ED902AC881}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportJ.Flare.Repo", "ReportJ.Flare.Repo\ReportJ.Flare.Repo.csproj", "{5D6E8217-FB9A-44FF-A3C2-F76AA08D7E02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportJ.Flare.Api", "ReportJ.Flare.Api\ReportJ.Flare.Api.csproj", "{A0CE6CEB-5422-426B-9908-877657C46FB3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportJ.Flare.Repo.Tests", "ReportJ.Flare.Repo.Tests\ReportJ.Flare.Repo.Tests.csproj", "{10B2E73C-837B-474B-A75B-9EF2980B4811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportJ.Flare.Api", "ReportJ.Flare.Api\ReportJ.Flare.Api.csproj", "{EB2FDA08-F488-4486-A178-1C84190D8823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportJ.Flare.Client", "ReportJ.Flare.Client\ReportJ.Flare.Client.csproj", "{57AC5BDB-B649-49CF-B862-4A04B2E8F4BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +27,18 @@ Global
 		{5D6E8217-FB9A-44FF-A3C2-F76AA08D7E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D6E8217-FB9A-44FF-A3C2-F76AA08D7E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D6E8217-FB9A-44FF-A3C2-F76AA08D7E02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0CE6CEB-5422-426B-9908-877657C46FB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0CE6CEB-5422-426B-9908-877657C46FB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0CE6CEB-5422-426B-9908-877657C46FB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0CE6CEB-5422-426B-9908-877657C46FB3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10B2E73C-837B-474B-A75B-9EF2980B4811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10B2E73C-837B-474B-A75B-9EF2980B4811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10B2E73C-837B-474B-A75B-9EF2980B4811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10B2E73C-837B-474B-A75B-9EF2980B4811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB2FDA08-F488-4486-A178-1C84190D8823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2FDA08-F488-4486-A178-1C84190D8823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2FDA08-F488-4486-A178-1C84190D8823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2FDA08-F488-4486-A178-1C84190D8823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57AC5BDB-B649-49CF-B862-4A04B2E8F4BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57AC5BDB-B649-49CF-B862-4A04B2E8F4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57AC5BDB-B649-49CF-B862-4A04B2E8F4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57AC5BDB-B649-49CF-B862-4A04B2E8F4BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
