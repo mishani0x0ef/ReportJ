@@ -189,7 +189,9 @@
     <Resource Include="Resources\Images\chrome-logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.ico" />
+    <Content Include="icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\icon48x48.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
