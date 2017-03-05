@@ -11,30 +11,37 @@
         SizeToContent="Height"
         Style="{StaticResource WindowDefaultStyle}"
         Title="About" Height="400" Width="350">
-    <StackPanel Margin="5 10 5 15">
-        <Image Source="/Resources/Images/logo-wide.png" MaxWidth="150" Margin="15"></Image>
-        <TextBlock Text="ReportJ.Flare v2.3" Style="{StaticResource TextHeaderStyle}"></TextBlock>
-        <TextBlock Text="{x:Static resx:Messages.ApplicationDescription}" Style="{StaticResource TextBlockDefaultStyle}"/>
-        <TextBlock Text="For more information:" Style="{StaticResource TextBlockDefaultStyle}" FontWeight="Bold"></TextBlock>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource TextBlockDefaultStyle}">
+    <StackPanel>
+        <StackPanel Background="{StaticResource BackgroundDarkBrush}" HorizontalAlignment="Stretch">
+            <Image Source="/Resources/Images/logo-wide.png" MaxWidth="150" Margin="20"></Image>
+        </StackPanel>
+        <StackPanel Margin="10 15">
+            <TextBlock Text="ReportJ v2.3" Style="{StaticResource TextHeaderStyle}"></TextBlock>
+            <TextBlock Text="{x:Static resx:Messages.ApplicationDescription}" Style="{StaticResource TextBlockDefaultStyle}"/>
+            <TextBlock Text="For more information:" Style="{StaticResource TextBlockDefaultStyle}" FontWeight="Normal"></TextBlock>
+            <StackPanel Margin="0 20" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Style="{StaticResource TextBlockDefaultStyle}" TextAlignment="Center">
                 <Hyperlink NavigateUri="https://github.com/mishani0x0ef/reportj"
-                       RequestNavigate="Hyperlink_RequestNavigate">
+                           Style="{StaticResource HyperLinkStyle}"
+                           RequestNavigate="Hyperlink_RequestNavigate">
                     <StackPanel>
                         <Image Source="/Resources/Images/github.png" MaxWidth="50" Margin="15"></Image>
                         <TextBlock>Visit GitHub</TextBlock> 
                     </StackPanel>                
                 </Hyperlink>
             </TextBlock>
-            <TextBlock Style="{StaticResource TextBlockDefaultStyle}">
+                <TextBlock Style="{StaticResource TextBlockDefaultStyle}" TextAlignment="Center">
                 <Hyperlink NavigateUri="https://chrome.google.com/webstore/detail/reportj/hijbdbjoelgicnhnghhhlkpbhjdmchfg?hl=en-US"
-                       RequestNavigate="Hyperlink_RequestNavigate">
+                           Style="{StaticResource HyperLinkStyle}"
+                           RequestNavigate="Hyperlink_RequestNavigate">
                     <StackPanel>
                         <Image Source="/Resources/Images/chrome-logo.png" MaxWidth="50" Margin="15"/>
                         <TextBlock>Chrome Extension</TextBlock> 
                     </StackPanel>  
                 </Hyperlink>
             </TextBlock>
+            </StackPanel>
         </StackPanel>
+
     </StackPanel>
 </Window>

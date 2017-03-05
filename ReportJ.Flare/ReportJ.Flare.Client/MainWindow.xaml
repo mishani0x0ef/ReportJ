@@ -8,7 +8,7 @@
         Visibility="Hidden"
         Title="MainWindow" Height="0" Width="0">
     <tb:TaskbarIcon
-        IconSource="Resources/icon.ico"
+        IconSource="Resources/icon48x48.ico"
         Visibility="Visible" 
         ToolTipText="ReportJ.Flare"
         MenuActivation="LeftOrRightClick">

@@ -20,4 +20,14 @@
         <Setter Property="Padding" Value="5"/>
     </Style>
 
+    <Style x:Key="HyperLinkStyle" TargetType="{x:Type Hyperlink}">
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="TextDecorations" Value="None"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PrimaryHoverBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

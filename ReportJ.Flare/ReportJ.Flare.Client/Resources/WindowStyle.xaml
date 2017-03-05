@@ -4,7 +4,6 @@
     
     <Style x:Key="WindowDefaultStyle" TargetType="{x:Type Window}">
         <Setter Property="FontFamily" Value="Calibri" />
-        <Setter Property="Padding" Value="5"/>
     </Style>
     
 </ResourceDictionary>

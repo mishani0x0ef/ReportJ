@@ -3,11 +3,15 @@
                     xmlns:local="clr-namespace:ReportJ.Flare.Client.Resources">
     
     <Color x:Key="PrimaryColor">#2196f3</Color>
+    <Color x:Key="PrimaryHoverColor">#0c7cd5</Color>
     <Color x:Key="BackgroundColor">#f9f9f9</Color>
+    <Color x:Key="BackgroundDarkColor">#F2F2F2</Color>
     <Color x:Key="TextMainCoror">#444444</Color>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryHoverColor}" />
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+    <SolidColorBrush x:Key="BackgroundDarkBrush" Color="{StaticResource BackgroundDarkColor}" />
     <SolidColorBrush x:Key="TextMainBrush" Color="{StaticResource TextMainCoror}" />
 
 </ResourceDictionary>
