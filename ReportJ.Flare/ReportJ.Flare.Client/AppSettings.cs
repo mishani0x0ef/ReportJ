@@ -24,5 +24,7 @@
         }
 
         public string ApiBaseAddress => "http://localhost:1062/";
+
+        public string FullVersion => "ReportJ.Flare v2.3";
     }
 }
