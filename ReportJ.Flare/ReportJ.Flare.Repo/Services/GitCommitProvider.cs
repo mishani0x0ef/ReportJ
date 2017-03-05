@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using LibGit2Sharp;
 
 namespace ReportJ.Flare.Repo.Services
@@ -25,7 +24,7 @@ namespace ReportJ.Flare.Repo.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<Entities.Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count = 10)
+        public IEnumerable<Entities.Commit> GetLastCommits(string repoUrl, int count = 10)
         {
             count = Math.Min(count, MaxCountOfCommits);
 
@@ -37,11 +36,11 @@ namespace ReportJ.Flare.Repo.Services
             }
         }
 
-        public IEnumerable<Entities.Commit> GetLastCommits(string repoUrl, NetworkCredential credential, string author, int count = 10)
+        public IEnumerable<Entities.Commit> GetLastCommits(string repoUr, string author, int count = 10)
         {
             count = Math.Min(count, MaxCountOfCommits);
 
-            using (var repo = new Repository())
+            using (var repo = new Repository(repoUr))
             {
                 var commits = repo.Commits.Where(c => c.Author.Name == author).Take(count);
 

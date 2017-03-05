@@ -21,19 +21,17 @@ namespace ReportJ.Flare.Repo.Interfaces
         /// Get count of last commits.
         /// </summary>
         /// <param name="repoUrl">URL address of repository.</param>
-        /// <param name="credential">Credentials with authority to view repository.</param>
         /// <param name="count">Count of commits to be resolved.</param>
         /// <returns>Last commits.</returns>
-        IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, int count = 10);
+        IEnumerable<Commit> GetLastCommits(string repoUrl, int count = 10);
 
         /// <summary>
         /// Get count of last commits provided by specific user.
         /// </summary>
         /// <param name="repoUrl">URL address of repository.</param>
-        /// <param name="credential">Credentials with authority to view repository.</param>
         /// <param name="author">Author of commits</param>
         /// <param name="count">Count of commits to be resolved.</param>
         /// <returns>Last commits.</returns>
-        IEnumerable<Commit> GetLastCommits(string repoUrl, NetworkCredential credential, string author, int count = 10);
+        IEnumerable<Commit> GetLastCommits(string repoUrl, string author, int count = 10);
     }
 }

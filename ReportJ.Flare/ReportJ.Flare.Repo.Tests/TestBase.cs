@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using ReportJ.Flare.Repo.Validation;
 
 namespace ReportJ.Flare.Repo.Tests
 {

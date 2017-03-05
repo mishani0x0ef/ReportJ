@@ -1,10 +1,6 @@
-﻿using FluentValidation.Configuration;
-using Ninject;
-using ReportJ.Common.Interfaces;
-using ReportJ.Common.Services;
+﻿using Ninject;
 using ReportJ.Flare.Repo.Interfaces;
 using ReportJ.Flare.Repo.Services;
-using ReportJ.Flare.Repo.Validation;
 
 namespace ReportJ.Flare.Repo.Tests
 {
@@ -67,9 +63,6 @@ namespace ReportJ.Flare.Repo.Tests
 
         private void InitializeCommon(IKernel kernel)
         {
-            kernel.Bind<IValidationConfiguration>().To<ValidationConfiguration>().InSingletonScope();
-            kernel.Bind<ValidationProfile>().ToSelf().InSingletonScope();
-            kernel.Bind<IValidator>().To<FluentValidator>();
         }
 
         private void InitializeServices(IKernel kernel)
