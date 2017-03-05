@@ -121,6 +121,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constraints\GitAttribute.cs" />
     <Compile Include="Constraints\SvnAttribute.cs" />
+    <Compile Include="Controllers\Api\GitCommitsController.cs" />
     <Compile Include="Controllers\Api\SvnCommitsController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Filters\ErrorFilterAttribute.cs" />

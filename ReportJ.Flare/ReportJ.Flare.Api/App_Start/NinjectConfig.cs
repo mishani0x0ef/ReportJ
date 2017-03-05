@@ -33,6 +33,7 @@ namespace ReportJ.Flare.Api.App_Start
         private static void RegisterProviders(StandardKernel kernel)
         {
             kernel.Bind<ICommitProvider>().To<SvnCommitProvider>().WhenTargetHas<SvnAttribute>().InSingletonScope();
+            kernel.Bind<ICommitProvider>().To<GitCommitProvider>().WhenTargetHas<GitAttribute>().InSingletonScope();
         }
     }
 }
