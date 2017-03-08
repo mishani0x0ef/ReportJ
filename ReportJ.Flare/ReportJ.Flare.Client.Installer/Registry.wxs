@@ -2,15 +2,14 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
   <?include Variables.wxi?>
-  
-	<Fragment>
+
+  <Fragment>
 
     <!--Path to app to registry-->
     <DirectoryRef Id="INSTALLLOCATION">
       <Component Id ="RegDir" Guid="3B93BD85-5F56-4E85-AF95-43FBB3EA7F82">
         <RegistryKey Key="Software\$(var.Manufacturer)\$(var.ProductName)" Root="HKLM">
-          <!--todo: provide this functionality on installer UI-->
-          <!--<RegistryValue Id="RegInstallDir" Type="string" Name="InstallDir" Value="[INSTALLLOCATION]" />-->
+          <RegistryValue Id="RegInstallDir" Type="string" Name="InstallDir" Value="[INSTALLLOCATION]" />
         </RegistryKey>
       </Component>
     </DirectoryRef>
@@ -19,9 +18,8 @@
     <DirectoryRef Id="INSTALLLOCATION">
       <Component Id ="RegDirPermanent" Guid="7147C6AC-DDB4-4845-B37F-CF81C4A3F0CB" Permanent="yes">
         <RegistryKey Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)">
-          <!--todo: provide this functionality on installer UI-->
-          <!--<RegistryValue Name="StartMenuReg" Type="binary" Value="[INSTALLSTARTMENUSHORTCUT]" />
-          <RegistryValue Name="DesktopReg" Value="[INSTALLDESCKTOPSHORTCUT]" Type="binary" />-->
+          <RegistryValue Name="StartMenuReg" Type="binary" Value="[INSTALLSTARTMENUSHORTCUT]" />
+          <RegistryValue Name="DesktopReg" Value="[INSTALLDESCKTOPSHORTCUT]" Type="binary" />
         </RegistryKey>
       </Component>
     </DirectoryRef>

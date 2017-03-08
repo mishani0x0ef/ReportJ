@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <?include Variables.wxi?>
+
+  <Fragment>
+
+    <CustomAction Id="LaunchApp"
+                  Directory="INSTALLLOCATION"
+                  ExeCommand="[SystemFolder]cmd.exe /C start $(var.ExeFileName)"
+                  Return="asyncNoWait">
+    </CustomAction>
+
+  </Fragment>
+</Wix>

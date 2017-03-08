@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLLOCATION">
+            <Component Id="cmpD3152F19D34BA7C70190D15EEFDA3024" Guid="*">
+                <File Id="fil0C27833B1602F80F2FA903E33F7FDD26" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\AutoMapper.dll" />
+            </Component>
+            <Component Id="cmpF054B1DC6720107FFDCC3689E7E2004D" Guid="*">
+                <File Id="filEE975B712278FC8DC854C3008EE61D79" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Hardcodet.Wpf.TaskbarNotification.dll" />
+            </Component>
+            <Component Id="cmp601AE52B6727CAE51BBBE4E116EC9F3D" Guid="*">
+                <File Id="fil55D4EB943C8B3080970C6F78444AC94B" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\icon.ico" />
+            </Component>
+            <Component Id="cmpC82F65739AE0572E5B1A0D87129F62CA" Guid="*">
+                <File Id="filFE3CDF8BD7733BCC2ECC55B57CC2F394" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\LibGit2Sharp.dll" />
+            </Component>
+            <Component Id="cmpC7BC2CB5A0A63501D89C7D7BC6DCB97B" Guid="*">
+                <File Id="fil0B50BC7111AADC2B0C0D576F0FFB29C3" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Microsoft.Owin.dll" />
+            </Component>
+            <Component Id="cmp1CAF53E1325D6DE1FF0C6B1DC686F2EC" Guid="*">
+                <File Id="fil0C18A1FCD00961A9BACE19A4E8EB3D4B" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Microsoft.Owin.Host.HttpListener.dll" />
+            </Component>
+            <Component Id="cmp4A19503B4C88966032CA75F37FF921A8" Guid="*">
+                <File Id="filFC6E8BAF5AF7B019D3F1B6C17FCDC101" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Microsoft.Owin.Hosting.dll" />
+            </Component>
+            <Component Id="cmpE48528C4F5932A4EFD89F7331108F45D" Guid="*">
+                <File Id="filF1B84C2C6BCC693224B7A7959445B74F" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Newtonsoft.Json.dll" />
+            </Component>
+            <Component Id="cmp09935A19E62F557F1283D8B2856AAFF4" Guid="*">
+                <File Id="filB3467F5442DD3EF32A3C43894512D9CC" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Ninject.dll" />
+            </Component>
+            <Component Id="cmp02B76731DDCCD33F293C0CE650FF0313" Guid="*">
+                <File Id="fil3FFD5BE7436B103EB19882F4B4E6C063" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Ninject.Extensions.NamedScope.dll" />
+            </Component>
+            <Component Id="cmp9781FE0AF3F0F28D59A383F6B109D093" Guid="*">
+                <File Id="filF8B2252B8B226BDD4204B21C5C11C717" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Ninject.Web.Common.dll" />
+            </Component>
+            <Component Id="cmp88F5DAC24F0B49A5615A3813606309C2" Guid="*">
+                <File Id="filAD76117826D0434CBB1D461A0FC36AE4" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Ninject.Web.Common.OwinHost.dll" />
+            </Component>
+            <Component Id="cmp959608FF90F7DE45693CD17925300FB6" Guid="*">
+                <File Id="fil3B05D5DED97B690C6E9A307EF02A8E67" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Ninject.Web.WebApi.dll" />
+            </Component>
+            <Component Id="cmp4F45F77E6B5B87DDCAEA5FB4916605B8" Guid="*">
+                <File Id="fil357DDBA3C8F113F2D7012FC3785D9D0E" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Ninject.Web.WebApi.OwinHost.dll" />
+            </Component>
+            <Component Id="cmp060E0EAB19A08B32377F04956A2BAA1F" Guid="*">
+                <File Id="fil997A5C3BF9E356D4D06B9EC2DAC04313" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Owin.dll" />
+            </Component>
+            <Component Id="cmp1D0231B2D9211736B472DCBEF1FB603A" Guid="*">
+                <File Id="filF37F8A42B5930061087F2E80370DE166" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\ReportJ.Flare.Api.dll" />
+            </Component>
+            <Component Id="cmpD00674E3213E31B3027E42F1EF296A52" Guid="*">
+                <File Id="filDF421322CEEC94AA57CF7A463ECB5A19" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\ReportJ.Flare.Client.exe" />
+            </Component>
+            <Component Id="cmp38E9B6698DAEBFB0800943778FB1ED89" Guid="*">
+                <File Id="fil3CC0867FDCCAEE60E78E661CA61F4226" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\ReportJ.Flare.Client.exe.config" />
+            </Component>
+            <Component Id="cmpF4944CFE20B7755994DBC73E5A9F81D2" Guid="*">
+                <File Id="filBB3DC8A4D3230954B156CA303E783BAE" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\ReportJ.Flare.Repo.dll" />
+            </Component>
+            <Component Id="cmp22F5A311334D92C95F8230414BAE49D4" Guid="*">
+                <File Id="fil2B2465BC89213E6DBC361CC5452EEADB" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\SharpPlink-Win32.svnExe" />
+            </Component>
+            <Component Id="cmpA72E22824AD15D9D3FC317E10DBEEBB6" Guid="*">
+                <File Id="fil194D91D27FF4CE4800ADB3A06B6D2B23" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\SharpSvn.dll" />
+            </Component>
+            <Component Id="cmpEA91C11143DFF811F6600626A763E59E" Guid="*">
+                <File Id="filFEB315C3C6B699CE2FC29308C8D97E21" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\System.Net.Http.Formatting.dll" />
+            </Component>
+            <Component Id="cmpE14FFAF1F3ACC5839D1BCCE279CE198E" Guid="*">
+                <File Id="fil37EEDCF7DFCD64074480DE2736B458B9" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\System.Web.Http.dll" />
+            </Component>
+            <Component Id="cmp65878A44BDE4CCD0005EA15F490424EA" Guid="*">
+                <File Id="filC824513C3A271E27450246D0A54B50B9" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\System.Web.Http.Owin.dll" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="ProductComponents">
+            <ComponentRef Id="cmpD3152F19D34BA7C70190D15EEFDA3024" />
+            <ComponentRef Id="cmpF054B1DC6720107FFDCC3689E7E2004D" />
+            <ComponentRef Id="cmp601AE52B6727CAE51BBBE4E116EC9F3D" />
+            <ComponentRef Id="cmpC82F65739AE0572E5B1A0D87129F62CA" />
+            <ComponentRef Id="cmpC7BC2CB5A0A63501D89C7D7BC6DCB97B" />
+            <ComponentRef Id="cmp1CAF53E1325D6DE1FF0C6B1DC686F2EC" />
+            <ComponentRef Id="cmp4A19503B4C88966032CA75F37FF921A8" />
+            <ComponentRef Id="cmpE48528C4F5932A4EFD89F7331108F45D" />
+            <ComponentRef Id="cmp09935A19E62F557F1283D8B2856AAFF4" />
+            <ComponentRef Id="cmp02B76731DDCCD33F293C0CE650FF0313" />
+            <ComponentRef Id="cmp9781FE0AF3F0F28D59A383F6B109D093" />
+            <ComponentRef Id="cmp88F5DAC24F0B49A5615A3813606309C2" />
+            <ComponentRef Id="cmp959608FF90F7DE45693CD17925300FB6" />
+            <ComponentRef Id="cmp4F45F77E6B5B87DDCAEA5FB4916605B8" />
+            <ComponentRef Id="cmp060E0EAB19A08B32377F04956A2BAA1F" />
+            <ComponentRef Id="cmp1D0231B2D9211736B472DCBEF1FB603A" />
+            <ComponentRef Id="cmpD00674E3213E31B3027E42F1EF296A52" />
+            <ComponentRef Id="cmp38E9B6698DAEBFB0800943778FB1ED89" />
+            <ComponentRef Id="cmpF4944CFE20B7755994DBC73E5A9F81D2" />
+            <ComponentRef Id="cmp22F5A311334D92C95F8230414BAE49D4" />
+            <ComponentRef Id="cmpA72E22824AD15D9D3FC317E10DBEEBB6" />
+            <ComponentRef Id="cmpEA91C11143DFF811F6600626A763E59E" />
+            <ComponentRef Id="cmpE14FFAF1F3ACC5839D1BCCE279CE198E" />
+            <ComponentRef Id="cmp65878A44BDE4CCD0005EA15F490424EA" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

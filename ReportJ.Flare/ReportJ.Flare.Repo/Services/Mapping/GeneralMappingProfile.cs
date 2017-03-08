@@ -6,7 +6,7 @@ namespace ReportJ.Flare.Repo.Services.Mapping
 {
     internal class GeneralMappingProfile : Profile
     {
-        protected override void Configure()
+        public GeneralMappingProfile()
         {
             CreateMap<SvnLogEventArgs, Commit>()
                 .ForMember(c => c.CommitId, e => e.MapFrom(x => x.Revision))
