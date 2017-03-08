@@ -44,6 +44,12 @@
             <Component Id="cmp4F45F77E6B5B87DDCAEA5FB4916605B8" Guid="*">
                 <File Id="fil357DDBA3C8F113F2D7012FC3785D9D0E" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Ninject.Web.WebApi.OwinHost.dll" />
             </Component>
+            <Component Id="cmp295132C96403F485605D108E940A4059" Guid="*">
+                <File Id="fil1E38ADE9C3863D5D3F8644F9DAB2E901" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\NLog.config" />
+            </Component>
+            <Component Id="cmp0758E167CC73C057A0ECE2DC5E35F506" Guid="*">
+                <File Id="fil61D8D3E960CBBF3448E98CF5D5492B82" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\NLog.dll" />
+            </Component>
             <Component Id="cmp060E0EAB19A08B32377F04956A2BAA1F" Guid="*">
                 <File Id="fil997A5C3BF9E356D4D06B9EC2DAC04313" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Owin.dll" />
             </Component>
@@ -74,6 +80,32 @@
             <Component Id="cmp65878A44BDE4CCD0005EA15F490424EA" Guid="*">
                 <File Id="filC824513C3A271E27450246D0A54B50B9" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\System.Web.Http.Owin.dll" />
             </Component>
+            <Directory Id="dir9CDED95B4F5F0C2733B72C71CFEB5832" Name="lib">
+                <Directory Id="dir02B0EA804E6FD3DF0ABF91236BE53A4C" Name="linux">
+                    <Directory Id="dirE0167AA00D32B2E2F7101C14EA7C25E9" Name="x86_64">
+                        <Component Id="cmpA7D61A43A6AB1C7A83EC83C920643D63" Guid="*">
+                            <File Id="filCF929148A0392B29286C9F0928809863" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\lib\linux\x86_64\libgit2-a5cf255.so" />
+                        </Component>
+                    </Directory>
+                </Directory>
+                <Directory Id="dirB51A91D5B464F6BE0A6F60C64DDE10C6" Name="osx">
+                    <Component Id="cmp3EA5694443A23ED8638AA39E54EBB95F" Guid="*">
+                        <File Id="filB6DC2B2FC943DEBA57827048FBB79DB0" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\lib\osx\libgit2-a5cf255.dylib" />
+                    </Component>
+                </Directory>
+                <Directory Id="dir51147C27F2C6A439F45803D5A1AB1F76" Name="win32">
+                    <Directory Id="dirE7A2D43B8385060B6E28D7A8F030B7F4" Name="x64">
+                        <Component Id="cmp8613EBBD23513A4579F25D629E5576A2" Guid="*">
+                            <File Id="filD6FEF81685422302CAC5FAFC3C85F712" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\lib\win32\x64\git2-a5cf255.dll" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dir25B13AFE7C8DB711A392CD5F82D9C2FB" Name="x86">
+                        <Component Id="cmpC5FF8146CCE34B93E11F70F83810DD4D" Guid="*">
+                            <File Id="fil78011299CC6D9377DA830BDCF3D6C74C" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\lib\win32\x86\git2-a5cf255.dll" />
+                        </Component>
+                    </Directory>
+                </Directory>
+            </Directory>
         </DirectoryRef>
     </Fragment>
     <Fragment>
@@ -92,6 +124,8 @@
             <ComponentRef Id="cmp88F5DAC24F0B49A5615A3813606309C2" />
             <ComponentRef Id="cmp959608FF90F7DE45693CD17925300FB6" />
             <ComponentRef Id="cmp4F45F77E6B5B87DDCAEA5FB4916605B8" />
+            <ComponentRef Id="cmp295132C96403F485605D108E940A4059" />
+            <ComponentRef Id="cmp0758E167CC73C057A0ECE2DC5E35F506" />
             <ComponentRef Id="cmp060E0EAB19A08B32377F04956A2BAA1F" />
             <ComponentRef Id="cmp1D0231B2D9211736B472DCBEF1FB603A" />
             <ComponentRef Id="cmpD00674E3213E31B3027E42F1EF296A52" />
@@ -102,6 +136,10 @@
             <ComponentRef Id="cmpEA91C11143DFF811F6600626A763E59E" />
             <ComponentRef Id="cmpE14FFAF1F3ACC5839D1BCCE279CE198E" />
             <ComponentRef Id="cmp65878A44BDE4CCD0005EA15F490424EA" />
+            <ComponentRef Id="cmpA7D61A43A6AB1C7A83EC83C920643D63" />
+            <ComponentRef Id="cmp3EA5694443A23ED8638AA39E54EBB95F" />
+            <ComponentRef Id="cmp8613EBBD23513A4579F25D629E5576A2" />
+            <ComponentRef Id="cmpC5FF8146CCE34B93E11F70F83810DD4D" />
         </ComponentGroup>
     </Fragment>
 </Wix>

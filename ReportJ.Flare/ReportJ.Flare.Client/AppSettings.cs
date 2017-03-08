@@ -1,4 +1,7 @@
-﻿namespace ReportJ.Flare.Client
+﻿using System;
+using System.Reflection;
+
+namespace ReportJ.Flare.Client
 {
     public class AppSettings
     {
@@ -25,6 +28,7 @@
 
         public string ApiBaseAddress => "http://localhost:1062/";
 
-        public string FullVersion => "ReportJ.Flare v2.3";
+        public Version Version = Assembly.GetEntryAssembly().GetName().Version;
+        public string FullVersion => $"ReportJ.Flare v{Version.Major}.{Version.Minor}";
     }
 }
