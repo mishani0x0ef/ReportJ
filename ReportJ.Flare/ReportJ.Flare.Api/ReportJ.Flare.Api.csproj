@@ -112,6 +112,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettings.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constraints\GitAttribute.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Controllers\Api\SvnCommitsController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Filters\ErrorFilterAttribute.cs" />
+    <Compile Include="Filters\VersionFilterAttribute.cs" />
     <Compile Include="Models\CommitModel.cs" />
     <Compile Include="Models\Mapping\GeneralMappingProfile.cs" />
     <Compile Include="Models\Mapping\Mapper.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="Models\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Util\ResponseExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

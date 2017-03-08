@@ -3,6 +3,7 @@ using System.Web.Http;
 
 namespace ReportJ.Flare.Api.Controllers
 {
+    [VersionFilter]
     [ErrorFilter]
     public abstract class BaseApiController : ApiController
     {

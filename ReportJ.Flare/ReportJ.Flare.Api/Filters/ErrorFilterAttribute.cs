@@ -1,5 +1,6 @@
 ﻿using NLog;
 using ReportJ.Flare.Api.Models;
+using ReportJ.Flare.Api.Util;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
@@ -16,8 +17,11 @@ namespace ReportJ.Flare.Api.Filters
 
             Logger.Error(ex);
 
-            context.Response = context.Request.CreateResponse(HttpStatusCode.InternalServerError,
-                new ResultModel<string>("Error occured on server side.", Status.Error));
+            var body = new ResultModel<string>("Error occured on server side.", Status.Error);
+
+            context.Response = context.Request
+                .CreateResponse(HttpStatusCode.InternalServerError, body)
+                .AddVersion();
         }
     }
 }
