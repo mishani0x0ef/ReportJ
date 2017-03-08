@@ -71,6 +71,10 @@
         <Control Id="Folder" Type="PathEdit" X="20" Y="100" Width="320" Height="18" Property="WIXUI_INSTALLDIR" Indirect="yes" />
         <Control Id="ChangeFolder" Type="PushButton" X="20" Y="120" Width="56" Height="17" Text="!(loc.InstallDirDlgChange)" />
 
+        <Control Id="StartupCheckBox" Type="CheckBox" 
+                 X="20" Y="160" Width="220" Height="17" 
+                 Property="ADDTOSTARTUP" CheckBoxValue="1" 
+                 Text="Add to startup" />
         <Control Id="InstallDescktopShortcutCheckbox" Type="CheckBox"
                  X="20" Y="180" Width="200" Height="17"
                  Property="INSTALLDESCKTOPSHORTCUT" CheckBoxValue="1"

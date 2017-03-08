@@ -25,6 +25,7 @@
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
 
     <!--Shortcuts-->
+    <Property Id="ADDTOSTARTUP" Value="1" />
     <Property Id="INSTALLDESCKTOPSHORTCUT" Value="1" />
     <Property Id="INSTALLSTARTMENUSHORTCUT" Value="1" />
     <Property Id="WIXUI_EXITDIALOGLAUNCHE" Value="1" />
@@ -40,6 +41,7 @@
 
     <Feature Id="ProductFeature" Title="$(var.InstallerTitle)" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="StartupShortcut" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="DesktopShortcut" />
     </Feature>
@@ -55,6 +57,8 @@
       </Directory>
       <Directory Id="DesktopMenuItem">
         <Directory Id="DesktopFolder" Name="$(var.ProductName)" />
+      </Directory>
+      <Directory Id="StartupFolder">
       </Directory>
     </Directory>
   </Fragment>

@@ -5,6 +5,18 @@
 
   <Fragment>
 
+    <DirectoryRef Id="StartupFolder">
+      <Component Id="StartupShortcut" Guid="171a0a48-e096-41df-9ffc-6a8d9c3c8250">
+        <Condition>ADDTOSTARTUP</Condition>
+        <RegistryValue Root="HKCU" Key="Software\$(var.Manufacturer)\$(var.ProductName)" Name="Startup" Type="integer" Value="1" KeyPath="yes" />
+        <Shortcut Id="AppStartupShortcut"
+                  Name="$(var.ProductName)"
+                  Description="$(var.ProductName)"
+                  Target="[INSTALLLOCATION]$(var.ExeFileName)"
+                  WorkingDirectory="INSTALLLOCATION" />
+      </Component>
+    </DirectoryRef>
+    
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="e4f8574d-a69b-4f90-bfd4-7f8350b37760">
         <Condition>INSTALLSTARTMENUSHORTCUT</Condition>
