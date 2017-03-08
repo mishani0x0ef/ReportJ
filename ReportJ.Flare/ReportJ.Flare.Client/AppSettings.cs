@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReportJ.Common.Extension;
+using System;
 using System.Reflection;
 
 namespace ReportJ.Flare.Client
@@ -28,7 +29,8 @@ namespace ReportJ.Flare.Client
 
         public string ApiBaseAddress => "http://localhost:1062/";
 
-        public Version Version = Assembly.GetEntryAssembly().GetName().Version;
+        public Guid AppGuid => Assembly.GetEntryAssembly().GetGuid();
+        public Version Version => Assembly.GetEntryAssembly().GetName().Version;
         public string FullVersion => $"ReportJ.Flare v{Version.Major}.{Version.Minor}";
     }
 }

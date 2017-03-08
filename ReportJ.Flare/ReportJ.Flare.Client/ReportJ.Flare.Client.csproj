@@ -177,6 +177,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ReportJ.Common\ReportJ.Common.csproj">
+      <Project>{DA88F121-628A-4BB1-8838-14ED902AC881}</Project>
+      <Name>ReportJ.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReportJ.Flare.Api\ReportJ.Flare.Api.csproj">
       <Project>{eb2fda08-f488-4486-a178-1c84190d8823}</Project>
       <Name>ReportJ.Flare.Api</Name>

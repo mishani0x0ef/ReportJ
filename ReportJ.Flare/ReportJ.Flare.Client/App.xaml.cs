@@ -2,6 +2,7 @@
 using NLog;
 using ReportJ.Flare.Api;
 using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -9,12 +10,27 @@ namespace ReportJ.Flare.Client
 {
     public partial class App : Application
     {
+        protected static Mutex AppMutex { get; set; }
+
         private static ILogger Logger = LogManager.GetCurrentClassLogger();
         private IDisposable _host;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            if (AlreadyRunning())
+            {
+                MessageBox.Show(
+                    "Application is already running. Please check notifications area.",
+                    "Already Running",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information,
+                    MessageBoxResult.No,
+                    MessageBoxOptions.DefaultDesktopOnly);
+
+                Environment.Exit(0);
+            }
 
             DispatcherUnhandledException += App_DispatcherUnhandledException;
             Exit += App_Exit;
@@ -27,6 +43,21 @@ namespace ReportJ.Flare.Client
 
             var view = new MainWindow();
             view.ShowDialog();
+        }
+
+        private bool AlreadyRunning()
+        {
+            bool newInstance;
+            var mutexName = string.Format("Local\\{{{0}}}", AppSettings.Instance.AppGuid.ToString());
+
+            Logger.Info($"Check is exist mutex with name '{mutexName}'");
+
+            AppMutex = new Mutex(true, mutexName, out newInstance);
+
+            var state = newInstance ? "has first instance" : "already running";
+            Logger.Info($"Application is {state}");
+
+            return !newInstance;
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
