@@ -7,7 +7,6 @@
 }
 
 .modal.modal-custom .modal-dialog .modal-content .modal-header {
-    border-bottom: 1px solid #d1d1d1;
     position: relative;
     line-height: 40px;
 }
@@ -19,7 +18,6 @@
 }
 
 .modal.modal-custom .modal-dialog .modal-content .modal-header .modal-header-icon {
-    padding-left: 25px;
     margin-top: -7px;
     height: 40px;
 }
@@ -28,12 +26,8 @@
     display: inline;
 }
 
-.modal.modal-custom .modal-dialog .modal-content .modal-footer {
-    border-top: 1px solid #d1d1d1;
-}
-
 .modal.modal-custom .modal-dialog .modal-content .modal-body {
-    margin: 25px 15px;
+    margin: 15px;
 }
 
 .extension-popup {

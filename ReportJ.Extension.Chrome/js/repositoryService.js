@@ -1,55 +1,44 @@
-jiraReporterApp.service('repositoryService', function ($q, $http, encryptService) {
-    var self = this;
+jiraReporterApp.service('repositoryService', function ($q, $http) {
     var config = new AppConfig();
-    var baseApiUrl = config.urls.versionControllApiUrl;
+    var baseApiUrl = config.urls.reportjApiUrl;
     var defaultCommitsCount = 10;
 
-    this.checkConnection = function (repository, resultHandler, encryptPassword) {
-        var apiUrl = baseApiUrl + repository.type + "/connection/test";
+    this.checkConnection = function (repository, handler) {
+        var apiUrl = baseApiUrl + repository.type + "Commits";
 
-        var userName = repository.userName,
-            password = repository.password,
-            url = repository.url;
-
-        if (encryptPassword === true) {
-            password = encryptService.encrypt(password);
-        }
-
-        $http({
-            method: "GET",
-            url: apiUrl,
-            params: {
-                username: userName,
-                password: password,
-                repo: url
-            }
-        }).success(function (data, status, headers, config) {
-            resultHandler(data);
-        }).error(function (data, status, headers, config) {
-            console.error("Error while checking connection: " + status);
-            resultHandler(false);
-        });
-    };
-
-    this.getLastCommits = function (repository, handler) {
-        var apiUrl = baseApiUrl + repository.type + "/commits";
-
+        // todo: handle response message properly. MR
         $http({
             method: "GET",
             url: apiUrl,
             params: {
                 username: repository.userName,
-                password: repository.password,
-                repo: repository.url,
-                count: defaultCommitsCount,
-                author: repository.userName
+                repoUrl: repository.url,
+                count: 1
+            }
+        }).success(function () {
+            handler(true);
+        }).error(function () {
+            handler(false);
+        });
+    };
+
+    this.getLastCommits = function (repository, handler) {
+        var apiUrl = baseApiUrl + repository.type + "Commits";
+
+        // todo: parse response message properly. MR
+        $http({
+            method: "GET",
+            url: apiUrl,
+            params: {
+                username: repository.userName,
+                repoUrl: repository.url,
+                count: defaultCommitsCount
             }
         }).success(function (data, status, headers, config) {
             handler(data);
         }).error(function (data, status, headers, config) {
             var msg = "Oops! Something went wrong while getting your commits for '" + repository.name + "' repository.";
             bootbox.alert(msg, "Warning!");
-            console.error("Error while getting commits. Status: " + status);
             handler();
         });
     };

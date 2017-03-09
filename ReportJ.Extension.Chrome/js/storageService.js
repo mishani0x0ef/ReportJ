@@ -17,7 +17,7 @@ jiraReporterApp.service('storageService', function ($q) {
                     return;
                 }
             }
-            self.saveTemplates(defaultTemplates, function(){});
+            self.saveTemplates(defaultTemplates, () => {});
             callback(defaultTemplates);
             return;
         });

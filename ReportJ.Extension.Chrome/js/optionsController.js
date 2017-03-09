@@ -1,4 +1,4 @@
-jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, repositoryService, encryptService) {
+jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, repositoryService) {
 
     // Private handlers
 
@@ -30,12 +30,6 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     }
 
     var saveRepository = function (repository) {
-        if (repository.passChangeAllowed === true) {
-            repository.password = encryptService.encrypt(repository.password);
-            repository.passwordConfirm = repository.password;
-        }
-        repository.passChangeAllowed = false;
-
         if (typeof (repository.repositoryId) === "undefined") {
             var repoId = 0;
             angular.forEach($scope.repositories, function (repo) {
@@ -110,26 +104,6 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         setValidity(baseObj, baseObj.$error.required, "User Name is required.");
     });
 
-    $scope.$watch('repoForm.password.$invalid', function (newValid, oldValid) {
-        var baseObj = $scope.repoForm.password;
-        setInitialValidity(baseObj);
-        setValidity(baseObj, baseObj.$error.required, "Password is required.");
-    });
-
-    $scope.$watch('repoForm.password.$invalid', function (newValid, oldValid) {
-        var baseObj = $scope.repoForm.password;
-        setInitialValidity(baseObj);
-        setValidity(baseObj, baseObj.$error.required, "Password is required.", true);
-        setValidity(baseObj, baseObj.$error.equals, "Password and confirmation should match each other.", true);
-    });
-
-    $scope.$watch('repoForm.passwordConfirm.$invalid', function (newValid, oldValid) {
-        var baseObj = $scope.repoForm.passwordConfirm;
-        setInitialValidity(baseObj);
-        setValidity(baseObj, baseObj.$error.required, "Confirmation is required.", true);
-        setValidity(baseObj, baseObj.$error.equals, "Password and confirmation should match each other.", true);
-    });
-
     $scope.$watch('templateForm.description.$invalid', function (newValid, oldValid) {
         var baseObj = $scope.templateForm.description;
         setInitialValidity(baseObj);
@@ -153,7 +127,6 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             // New repository. MR
             $scope.editedRepository = {};
             $scope.editedRepository.type = repositoryType;
-            $scope.editedRepository.passChangeAllowed = true;
         }
 
         // delay added to prevent from blinking errors on form in case if they was on form before cleaning with $setPristine(true). MR
@@ -161,12 +134,6 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             $("#repositoryEditModal").modal("show")
         }, 100);
     };
-
-    $scope.enableRepoPassChange = function (repository) {
-        repository.password = "";
-        repository.passwordConfirm = "";
-        repository.passChangeAllowed = true;
-    }
 
     $scope.saveRepository = function (repository) {
         $scope.setLoading(true, "Checking settings on our servers ...")
@@ -188,8 +155,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
                 } else {
                     saveRepository(repository);
                 }
-            },
-            repository.passChangeAllowed);
+            });
     };
 
     $scope.removeRepository = function (repository) {

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" ng-app="jiraReporterApp">
 
 <head>
@@ -11,12 +11,10 @@
 
     <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript" src="js/urlService.js"></script>
-    <script type="text/javascript" src="lib/jsencrypt.min.js"></script>
     <script type="text/javascript" src="lib/jquery.min.js"></script>
     <script type="text/javascript" src="lib/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/storageService.js"></script>
-    <script type="text/javascript" src="js/encryptService.js"></script>
     <script type="text/javascript" src="js/repositoryService.js"></script>
     <script type="text/javascript" src="js/popupController.js"></script>
 </head>
@@ -46,22 +44,22 @@
     </div>
 
     <ul class="nav nav-tabs ">
-        <li class="active " role="presentation ">
-            <a href="#templates " aria-controls="templates " role="tab " data-toggle="tab ">Templates</a>
+        <li class="active " role="presentation">
+            <a href="#templates " aria-controls="templates " role="tab" data-toggle="tab ">Templates</a>
         </li>
-        <li class="disabled " role="presentation " title="Comming soon ... ">
+        <li class="disabled " role="presentation" title="Comming soon ... ">
             <a href="# ">SVN Commits</a>
             <!--todo: uncomment after implementation of commits feature. MR-->
             <!--            <a href="#svnCommits " aria-controls="svnCommits " role="tab " data-toggle="tab " ng-click="refreshCommits() ">SVN Commits</a>-->
         </li>
-        <li class="disabled " role="presentation " title="Comming soon ... ">
+        <li class="disabled " role="presentation" title="Comming soon ... ">
             <a href="#gitCommits ">Git Commits</a>
         </li>
     </ul>
 
     <div class="tab-content col-xs-12 well ">
 
-        <div role="tabpanel " class="tab-pane fade active in commits " id="templates ">
+        <div role="tabpanel" class="tab-pane fade active in commits " id="templates ">
             <div class="container ">
                 <div class="row ">
                     <div ng-repeat="template in templates track by $index ">
@@ -86,7 +84,7 @@
                             </div>
                             <h4>We haven't found templates!</h4>
                             <h5>
-                                You can try to <a href="# " ng-click="refreshTemplates() ">refresh data</a> 
+                                You can try to <a href="# " ng-click="refreshTemplates() ">refresh data</a>
                                 or you can <a href="# " ng-click="openOptions() ">update settings</a> and add some new templates.
                             </h5>
                         </div>
@@ -135,7 +133,7 @@
                             </div>
                             <h4>We haven't found commits info!</h4>
                             <h5>
-                                You can try to <a href="# " ng-click="refreshCommits() ">refresh data</a> 
+                                You can try to <a href="# " ng-click="refreshCommits() ">refresh data</a>
                                 or you can <a href="# " ng-click="openOptions() ">update settings</a> and add some new repositories.
                             </h5>
                         </div>

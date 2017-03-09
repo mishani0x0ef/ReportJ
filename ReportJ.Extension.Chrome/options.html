@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" ng-app="jiraReporterApp">
 
 <head>
@@ -10,12 +10,10 @@
     <link rel="stylesheet" href="css/animation.css">
 
     <script type="text/javascript" src="config.js"></script>
-    <script type="text/javascript" src="lib/jsencrypt.min.js"></script>
     <script type="text/javascript" src="lib/jquery.min.js"></script>
     <script type="text/javascript" src="lib/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/storageService.js"></script>
-    <script type="text/javascript" src="js/encryptService.js"></script>
     <script type="text/javascript" src="js/repositoryService.js"></script>
     <script type="text/javascript" src="js/optionsController.js"></script>
 </head>
@@ -33,7 +31,7 @@
                             <h2 class="text-center">
                                 <img src="img/logo-wide.png" alt="{{config.app.name}} logo"> 
                                 <span>Settings</span>
-                            </h3>
+                            </h2>
                         </div>
                     </div>
 
@@ -41,12 +39,10 @@
                         <li class="active">
                             <a href="#templatesSettings" data-toggle="tab" aria-expanded="true">Templates</a>
                         </li>
-                        <li class="disabled" title="Comming soon ...">
-                            <a href="#">Repositories</a>
-                            <!--todo: uncomment after implementation of commits feature. MR-->
-<!--                            <a href="#repositorySettings" data-toggle="tab" aria-expanded="false">Repositories</a>-->
+                        <li>
+                            <a href="#repositorySettings" data-toggle="tab" aria-expanded="false">Repositories</a>
                         </li>
-                        <li class="">
+                        <li>
                             <a href="#about" data-toggle="tab" aria-expanded="false">About</a>
                         </li>
                     </ul>
@@ -54,37 +50,35 @@
                     <div id="settings" class="tab-content well">
                         
                         <div id="templatesSettings" class="fade tab-pane active in">
-                            <h4>What is this?</h3>
+                            <h4>What is this?</h4>
                             <p>Templates allow you to pre-define your common used reports and get quick access to them via ReportJ popup.</p>
                             
                             <form class="form-horizontal">
                                 <fieldset>
                                     <legend>Templates</legend>
                                 </fieldset>
-                                <div class="repositories">
-                                    
+                                <div class="repositories">                                    
                                     <div class="repository" ng-repeat="template in templates track by $index">
-                                        <div class="col-md-12 panel panel-default">
+                                        <div class="col-xs-12 panel panel-default">
                                             <div class="panel-body">
-                                                <div class="col-md-10">
+                                                <div class="col-xs-10">
                                                    <span class="template-description">{{template.description}}</span>
                                                 </div>
-                                                <button type="button" class="btn btn-link col-md-1" title="Edit" ng-click="editTemplate(template)">
+                                                <button type="button" class="btn btn-link col-xs-1" title="Edit" ng-click="editTemplate(template)">
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </button>
-                                                <button type="button" class="btn btn-link col-md-1" title="Delete" ng-click="removeTemplate(template)">
+                                                <button type="button" class="btn btn-link col-xs-1" title="Delete" ng-click="removeTemplate(template)">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
-                                    
+                                    </div>                                    
                                 </div>
                             </form>
                             
                             <div class="inline-group" ng-show="templates.length > 0">
                                 <button class="btn btn-primary" ng-click="editTemplate()" ng-disabled="isMaxTemplatesCountExceed">Add Template</button>
-                                <p class="off" ng-class="{ off: isMaxTemplatesCountExceed !== true }" style="width: 20px;">Sorry, but quota for templates is <strong>{{maxTemplateQuota}}</strong> templates.</p>
+                                <p class="off" ng-class="{ off: isMaxTemplatesCountExceed !== true }">Sorry, but quota for templates is <strong>{{maxTemplateQuota}}</strong> templates.</p>
                             </div>
                             
                         </div>
@@ -94,7 +88,7 @@
                                 <div class="modal-content repository-edit">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            <span class="">&times;</span>
+                                            <span>&times;</span>
                                         </button>
                                         <img class="modal-header-icon" src="img/template.png" alt="template" />
                                         <h4 class="modal-title">Template</h4>
@@ -103,8 +97,8 @@
                                         <form class="form-horizontal" name="templateForm" ng-submit="saveTemplate(editedTemplate)">
                                             <fieldset>
                                                 <div class="form-group title-top title-warn" ng-class="{ 'has-error': templateForm.description.$dirtyInvalid, 'title-on': templateForm.description.$invalid }" data-title="{{templateForm.description.$errorMessage}}">
-                                                    <div class="col-md-12">
-                                                        <textarea class="form-control" rows="5" placeholder="Template text here" required maxlength="255" name="description" ng-model="editedTemplate.description"></textarea>
+                                                    <div class="col-xs-12">
+                                                        <textarea class="form-control" rows="5" placeholder="Put template text here..." required maxlength="255" name="description" ng-model="editedTemplate.description"></textarea>
                                                         <span ng-class="{ required: templateForm.description.$error.required }"></span>
                                                     </div>
                                                 </div>
@@ -121,8 +115,8 @@
 
                         <div id="repositorySettings" class="fade tab-pane">
 
-                            <h4>What is this?</h3>
-                            <p>You can configurate your SVN and Git repositories to get quick acccess to your last commits info via ReportJ popup.</p>
+                            <h4>What is this?</h4>
+                            <p>You can configure your SVN and Git repositories to get quick acccess to your latest commits info via ReportJ popup.</p>
                            
                             <form class="form-horizontal">
                                 <fieldset>
@@ -130,22 +124,23 @@
                                 </fieldset>
                                 <div class="repositories">
                                     <div class="repository" ng-repeat="repository in repositories | filter: { type: 'svn' } | orderBy: 'name'">
-                                        <div class="col-md-12 panel panel-default">
+                                        <div class="col-xs-12 panel panel-default">
                                             <div class="panel-body">
-                                                <div class="col-md-8"><b>{{repository.name}}</b></div>
-                                                <div class="col-md-4 text-right" title="User Name">
-                                                    <span class="glyphicon glyphicon-user"></span>
+                                                <div class="col-xs-8"><b>{{repository.name}}</b></div>
+                                                <div class="col-xs-4">
+                                                    <button type="button" class="btn btn-link pull-right" title="Delete" ng-click="removeRepository(repository)">
+                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-link pull-right" title="Edit" ng-click="editRepository(repository)">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </button>                                                    
+                                                </div>
+                                                <div class="col-md-4" title="User Name">
                                                     <strong>{{repository.userName}}</strong>
                                                 </div>
-                                                <div class="col-md-10">
+                                                <div class="col-md-8">
                                                     <p>{{repository.url}}</p>
                                                 </div>
-                                                <button type="button" class="btn btn-link col-md-1" title="Edit" ng-click="editRepository(repository)">
-                                                    <span class="glyphicon glyphicon-pencil"></span>
-                                                </button>
-                                                <button type="button" class="btn btn-link col-md-1" title="Delete" ng-click="removeRepository(repository)">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -189,64 +184,27 @@
                                     <div class="modal-body">
                                         <form class="form-horizontal" name="repoForm" ng-submit="saveRepository(editedRepository)">
                                             <fieldset>
-
                                                 <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.name.$dirtyInvalid, 'title-on': repoForm.name.$invalid }" data-title="{{repoForm.name.$errorMessage}}">
-
-                                                    <label for="repositoryName" class="col-md-3 control-label">Name</label>
-                                                    <div class="col-md-9">
-                                                        <input type="text" class="form-control" placeholder="Repository Name" required maxlength="50" name="name" ng-model="editedRepository.name">
+                                                    <label for="repositoryName" class="col-xs-12">Name</label>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control" placeholder="Friendly name for your repository" required maxlength="50" name="name" ng-model="editedRepository.name">
                                                         <span ng-class="{ required: repoForm.name.$error.required }"></span>
                                                     </div>
-
                                                 </div>
-
                                                 <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.url.$dirtyInvalid, 'title-on': repoForm.url.$invalid }" data-title="{{repoForm.url.$errorMessage}}">
-
-                                                    <label for="repositoryUrl" class="col-md-3 control-label">Repository URL</label>
-                                                    <div class="col-md-9">
-                                                        <input type="text" class="form-control" placeholder="Repository URL" required maxlength="255" name="url" ng-model="editedRepository.url">
+                                                    <label for="repositoryUrl" class="col-xs-12">Repository URL</label>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control" placeholder="URL address to repository" required maxlength="255" name="url" ng-model="editedRepository.url">
                                                         <span ng-class="{ required: repoForm.url.$error.required }"></span>
                                                     </div>
-
                                                 </div>
-
                                                 <div class="form-group title-bottom title-warn" ng-class="{ 'has-error': repoForm.username.$dirtyInvalid, 'title-on': repoForm.username.$invalid }" data-title="{{repoForm.username.$errorMessage}}">
-
-                                                    <label for="repositoryUsername" class="col-md-3 control-label">User Name</label>
-                                                    <div class="col-md-9">
-                                                        <input type="text" class="form-control" placeholder="User Name" required maxlength="30" name="username" ng-model="editedRepository.userName">
+                                                    <label for="repositoryUsername" class="col-xs-12">Username</label>
+                                                    <div class="col-xs-12">
+                                                        <input type="text" class="form-control" placeholder="Name of user that should be tracked" required maxlength="30" name="username" ng-model="editedRepository.userName">
                                                         <span ng-class="{ required: repoForm.username.$error.required }"></span>
                                                     </div>
-
                                                 </div>
-
-                                                <div class="form-group title-bottom title-warn" ng-show="editedRepository.passChangeAllowed" disable-validation="!editedRepository.passChangeAllowed" ng-class="{ 'has-error': repoForm.password.$dirtyInvalid, 'title-on': repoForm.password.$invalid }" data-title="{{repoForm.password.$errorMessage}}">
-
-                                                    <label for="repositoryPassword" class="col-md-3 control-label">Password</label>
-                                                    <div class="col-md-9">
-                                                        <input type="password" class="form-control" placeholder="Password" required maxlength="{{editedRepository.passChangeAllowed ? 30 : 3000}}" name="password" ng-model="editedRepository.password" equals="{{editedRepository.passwordConfirm}}">
-                                                        <span ng-class="{ required: repoForm.password.$error.required }"></span>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="form-group title-bottom title-warn" ng-show="editedRepository.passChangeAllowed" disable-validation="!editedRepository.passChangeAllowed" ng-class="{ 'has-error': repoForm.passwordConfirm.$dirtyInvalid, 'title-on': repoForm.passwordConfirm.$invalid }" data-title="{{repoForm.passwordConfirm.$errorMessage}}">
-
-                                                    <label for="repositoryPasswordConfirm" class="col-md-3 control-label">Confirm Password</label>
-                                                    <div class="col-md-9">
-                                                        <input type="password" class="form-control" placeholder="Password Confirmation" required maxlength="{{editedRepository.passChangeAllowed ? 30 : 3000}}" name="passwordConfirm" ng-model="editedRepository.passwordConfirm" equals="{{editedRepository.password}}">
-                                                        <span ng-class="{ required: repoForm.passwordConfirm.$error.required }"></span>
-                                                    </div>
-
-                                                </div>
-                                                
-                                                <div class="text-center" ng-hide="editedRepository.passChangeAllowed">
-                                                   <div class="btn btn-lg btn-link" ng-click="enableRepoPassChange(editedRepository)">
-                                                       <span class="glyphicon glyphicon-lock"></span>
-                                                       <span>Change password</span>
-                                                   </div>
-                                                </div>
-
                                             </fieldset>
                                         </form>
                                     </div>
