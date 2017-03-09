@@ -54,6 +54,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     $scope.config = new AppConfig();
 
     $scope.maxRepoQuota = 2;
+    $scope.repoApiAvailable = false;
     $scope.repositories = [];
 
     $scope.maxTemplateQuota = 10;
@@ -138,7 +139,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     $scope.saveRepository = function (repository) {
         $scope.setLoading(true, "Checking settings on our servers ...")
 
-        repositoryService.checkConnection(
+        repositoryService.checkRepo(
             repository,
             function (connectionEstablished) {
                 $scope.setLoading(false);
@@ -232,7 +233,15 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         });
     };
 
-    $scope.getSettings = function () {
+    this.initialize = function () {
+        repositoryService.checkConnection()
+            .then(function (established) {
+                $scope.repoApiAvailable = established;
+            })
+            .catch(function () {
+                $scope.repoApiAvailable = false;
+            });
+
         storageService.getRepositories(function (repositories) {
             $scope.repositories = [];
             angular.forEach(repositories, function (repo) {
@@ -247,6 +256,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
                 $scope.$apply();
             });
         });
-    };
-    $scope.getSettings();
+    }
+
+    this.initialize();
 });

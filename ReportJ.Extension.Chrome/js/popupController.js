@@ -17,6 +17,7 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
     }
     initJira();
 
+    $scope.repoApiAvailable = false;
     $scope.svnCommits = [];
     $scope.templates = [];
 
@@ -61,7 +62,6 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
             }, 200);
         });
     };
-    $scope.refreshTemplates();
 
     $scope.openOptions = function () {
         chrome.tabs.create({
@@ -92,4 +92,21 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
             code: "document.activeElement.value = document.activeElement.value + " + JSON.stringify(message) + " + '\\n';true"
         });
     };
+
+    this.initialize = function () {
+        $scope.refreshTemplates();
+
+        repositoryService.checkConnection()
+            .then(function (established) {
+                $scope.repoApiAvailable = established;
+            })
+            .then(function () {
+                // todo: implement commits pre-loading. MR
+            })
+            .catch(function () {
+                $scope.repoApiAvailable = false;
+            });
+    }
+
+    this.initialize();
 });

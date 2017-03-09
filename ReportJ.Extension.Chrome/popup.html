@@ -24,68 +24,60 @@
     <div class="header-buttons">
         <div class="container">
             <div class="row">
-
                 <div class="btn-wrap col-xs-5">
                     <button class="btn btn-link text-center" ng-disabled="!insideJiraPage" ng-click="addIssueSummary()">
-                        <span class="btn-caption ">Add issue summary</span>
-                        <span class="glyphicon glyphicon-plus "></span>
+                        <span class="btn-caption">Add issue summary</span>
+                        <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div>
-
-                <div class="btn-wrap col-xs-4 col-xs-offset-3 text-right " ng-click="openOptions() ">
-                    <div class="btn btn-link ">
-                        <span class="btn-caption ">Settings</span>
-                        <span class="glyphicon glyphicon-cog "></span>
+                <div class="btn-wrap col-xs-4 col-xs-offset-3 text-right" ng-click="openOptions()">
+                    <div class="btn btn-link">
+                        <span class="btn-caption">Settings</span>
+                        <span class="glyphicon glyphicon-cog"></span>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <ul class="nav nav-tabs ">
-        <li class="active " role="presentation">
-            <a href="#templates " aria-controls="templates " role="tab" data-toggle="tab ">Templates</a>
+    <ul class="nav nav-tabs">
+        <li class="active" role="presentation">
+            <a href="#templates" aria-controls="templates" role="tab" data-toggle="tab">Templates</a>
         </li>
-        <li class="disabled " role="presentation" title="Comming soon ... ">
-            <a href="# ">SVN Commits</a>
-            <!--todo: uncomment after implementation of commits feature. MR-->
-            <!--            <a href="#svnCommits " aria-controls="svnCommits " role="tab " data-toggle="tab " ng-click="refreshCommits() ">SVN Commits</a>-->
-        </li>
-        <li class="disabled " role="presentation" title="Comming soon ... ">
-            <a href="#gitCommits ">Git Commits</a>
+        <li role="presentation">
+            <a href="#commits" aria-controls="commits" role="tab" data-toggle="tab">Commits</a>
         </li>
     </ul>
 
-    <div class="tab-content col-xs-12 well ">
+    <div class="tab-content col-xs-12 well">
 
-        <div role="tabpanel" class="tab-pane fade active in commits " id="templates ">
-            <div class="container ">
-                <div class="row ">
+        <div role="tabpanel" class="tab-pane fade active in commits" id="templates">
+            <div class="container">
+                <div class="row">
                     <div ng-repeat="template in templates track by $index ">
-                        <div class="commit " ng-click="addMessageToReport(template, template.description) ">
-                            <div class="panel panel-default ">
-                                <div class="panel-body text-justify ">
+                        <div class="commit" ng-click="addMessageToReport(template, template.description)">
+                            <div class="panel panel-default">
+                                <div class="panel-body text-justify">
                                     <p>{{template.description}}</p>
                                 </div>
                             </div>
-                            <div class="result-wrap " ng-class="{ on: template.justAdded } ">
-                                <div class="add-confirm ">
-                                    <span class="glyphicon glyphicon-ok "></span>
-                                    <span><strong>Added</strong></span>
+                            <div class="result-wrap" ng-class="{ on: template.justAdded }">
+                                <div class="add-confirm">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <strong>Added</strong>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="warning-wrap " ng-class="{ on: templates.length===0 } ">
-                        <div class="warning ">
-                            <div class="warning-icon ">
-                                <span class="glyphicon glyphicon-search "></span>
+                    <div class="warning-wrap" ng-class="{ on: templates.length===0 }">
+                        <div class="warning">
+                            <div class="warning-icon">
+                                <span class="glyphicon glyphicon-search"></span>
                             </div>
                             <h4>We haven't found templates!</h4>
                             <h5>
-                                You can try to <a href="# " ng-click="refreshTemplates() ">refresh data</a>
-                                or you can <a href="# " ng-click="openOptions() ">update settings</a> and add some new templates.
+                                You can try to <a href="# " ng-click="refreshTemplates()">refresh data</a>
+                                or you can <a href="# " ng-click="openOptions()">update settings</a> and add some new templates.
                             </h5>
                         </div>
                     </div>
@@ -93,62 +85,73 @@
             </div>
         </div>
 
-        <div role="tabpanel " class="tab-pane fade in commits " id="svnCommits ">
-            <div class="container ">
-                <div class="row ">
-
-                    <div ng-repeat="commit in svnCommits | orderBy: '-Date' ">
-
-                        <div class="commit " ng-click="addMessageToReport(commit, commit.Message) ">
-
-                            <div class="panel panel-default ">
-                                <div class="panel-heading col-xs-12 ">
-                                    <div class="col-xs-6 ">
-                                        <span><strong>{{commit.Date | date: 'dd MMM HH:mm'}}</strong></span>
+        <div role="tabpanel" class="tab-pane fade in commits" id="commits">
+            <div class="container">
+                <div class="row" ng-show="repoApiAvailable">
+                    <div ng-repeat="commit in svnCommits | orderBy: '-Date'">
+                        <div class="commit" ng-click="addMessageToReport(commit, commit.Message)">
+                            <div class="panel panel-default">
+                                <div class="panel-heading col-xs-12">
+                                    <div class="col-xs-6">
+                                        <strong>{{commit.Date | date: 'dd MMM HH:mm'}}</strong>
                                     </div>
-                                    <div class="col-xs-6 text-right ">
-                                        <span class="text-right "><strong>{{commit.Author}}</strong></span>
+                                    <div class="col-xs-6 text-right">
+                                        <strong class="text-right">{{commit.Author}}</strong>
                                     </div>
                                 </div>
-                                <div class="panel-body text-justify ">
+                                <div class="panel-body text-justify">
                                     <p>{{commit.Message}}</p>
                                 </div>
                             </div>
-
-                            <div class="result-wrap " ng-class="{ on: commit.justAdded } ">
-                                <div class="add-confirm ">
-                                    <span class="glyphicon glyphicon-ok "></span>
-                                    <span><strong>Added</strong></span>
+                            <div class="result-wrap" ng-class="{ on: commit.justAdded }">
+                                <div class="add-confirm">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <strong>Added</strong>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
 
-                    <div class="warning-wrap " ng-class="{ on: svnCommits.length===0 } ">
-                        <div class="warning ">
-                            <div class="warning-icon ">
-                                <span class="glyphicon glyphicon-search "></span>
+                    <div class="warning-wrap" ng-class="{ on: svnCommits.length===0 }">
+                        <div class="warning">
+                            <div class="warning-icon">
+                                <span class="glyphicon glyphicon-search"></span>
                             </div>
                             <h4>We haven't found commits info!</h4>
                             <h5>
-                                You can try to <a href="# " ng-click="refreshCommits() ">refresh data</a>
-                                or you can <a href="# " ng-click="openOptions() ">update settings</a> and add some new repositories.
+                                You can try to <a href="# " ng-click="refreshCommits()">refresh data</a>
+                                or you can <a href="# " ng-click="openOptions()">update settings</a> and add some new repositories.
                             </h5>
                         </div>
                     </div>
+                </div>
 
+                <div class="row text-center" ng-show="!repoApiAvailable">
+                    <div class="warning-wrap" ng-class="{on: !repoApiAvailable}">
+                        <div class="warning">
+                            <div class="warning-icon">
+                                <span class="glyphicon glyphicon-heart-empty"></span>
+                            </div>
+                            <h4>You need to install desktop application first.</h4>
+                            <h5>It's really easy and won't take long time. Believe me.</h5>
+                            <div>
+                                <a type="button" class="btn btn-primary btn-lg" href="https://github.com/mishani0x0ef/ReportJ/releases/latest" target="_blank">
+                                    <span>Download</span>
+                                    <span class="glyphicon glyphicon-download"></span>
+                                </a>
+                            </div> 
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>
 
-        <div class="loading-wrap text-center " ng-class="{ on: loading } ">
-            <div class="progress-wrap ">
-                <span class="icon glyphicon glyphicon-download "></span>
-                <div class="progress-description "><strong>{{loadingDescription}}</strong></div>
+        <div class="loading-wrap text-center" ng-class="{ on: loading }">
+            <div class="progress-wrap">
+                <span class="icon glyphicon glyphicon-download"></span>
+                <div class="progress-description"><strong>{{loadingDescription}}</strong></div>
             </div>
-            <div class="loading-points ">
+            <div class="loading-points">
                 <span>.</span>
                 <span>.</span>
                 <span>.</span>
@@ -159,9 +162,9 @@
 
     </div>
 
-    <script type="text/javascript " src="lib/bootstrap.min.js "></script>
-    <script type="text/javascript " src="lib/bootbox.min.js "></script>
-    <script type="text/javascript " src="js/jira.js "></script>
+    <script type="text/javascript " src="lib/bootstrap.min.js"></script>
+    <script type="text/javascript " src="lib/bootbox.min.js"></script>
+    <script type="text/javascript " src="js/jira.js"></script>
 
 </body>
 

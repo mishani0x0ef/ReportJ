@@ -117,58 +117,78 @@
 
                             <h4>What is this?</h4>
                             <p>You can configure your SVN and Git repositories to get quick acccess to your latest commits info via ReportJ popup.</p>
-                           
-                            <form class="form-horizontal">
-                                <fieldset>
-                                    <legend>SVN Repositories</legend>
-                                </fieldset>
-                                <div class="repositories">
-                                    <div class="repository" ng-repeat="repository in repositories | filter: { type: 'svn' } | orderBy: 'name'">
-                                        <div class="col-xs-12 panel panel-default">
-                                            <div class="panel-body">
-                                                <div class="col-xs-8"><b>{{repository.name}}</b></div>
-                                                <div class="col-xs-4">
-                                                    <button type="button" class="btn btn-link pull-right" title="Delete" ng-click="removeRepository(repository)">
-                                                        <span class="glyphicon glyphicon-trash"></span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-link pull-right" title="Edit" ng-click="editRepository(repository)">
-                                                        <span class="glyphicon glyphicon-pencil"></span>
-                                                    </button>                                                    
-                                                </div>
-                                                <div class="col-md-4" title="User Name">
-                                                    <strong>{{repository.userName}}</strong>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p>{{repository.url}}</p>
+
+                            <div class="text-center" ng-show="!repoApiAvailable">
+                                <b>To use commits browser you need to install desktop application first.</b>
+                                <p>
+                                    Install desktop application or run it if it's already installed. 
+                                    Then you can reload this page and use awersome commits browse features in your reporting.
+                                </p>
+                                <div>
+                                    <a type="button" class="btn btn-primary btn-lg" href="https://github.com/mishani0x0ef/ReportJ/releases/latest" target="_blank">
+                                        <span>Download</span>
+                                        <span class="glyphicon glyphicon-download"></span>
+                                    </a>
+                                </div>                                
+                            </div>
+
+                            <div ng-show="repoApiAvailable">
+                                <p ng-show="repoApiAvailable">If you need ReportJ desktop application - <a href="https://github.com/mishani0x0ef/ReportJ/releases/latest">here is the link to latest release</a></p>
+                            
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <legend>SVN Repositories</legend>
+                                    </fieldset>
+                                    <div class="repositories">
+                                        <div class="repository" ng-repeat="repository in repositories | filter: { type: 'svn' } | orderBy: 'name'">
+                                            <div class="col-xs-12 panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="col-xs-8"><b>{{repository.name}}</b></div>
+                                                    <div class="col-xs-4">
+                                                        <button type="button" class="btn btn-link pull-right" title="Delete" ng-click="removeRepository(repository)">
+                                                            <span class="glyphicon glyphicon-trash"></span>
+                                                        </button>
+                                                        <button type="button" class="btn btn-link pull-right" title="Edit" ng-click="editRepository(repository)">
+                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-4" title="User Name">
+                                                        <strong>{{repository.userName}}</strong>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <p>{{repository.url}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="text-center" ng-show="repositories.length === 0">
+                                        <div><span class="glyphicon glyphicon-default glyphicon-search"></span></div>
+                                        <h5>You have no repositories!</h5>
+                                        <h6>It's perfect chance to <a href="#" ng-click="editRepository(null, 'svn')"> add your first one</a></h6>
+                                    </div>
+
+                                </form>
+                                <div class="inline-group" ng-show="repositories.length > 0">
+                                    <button class="btn btn-primary" ng-click="editRepository(null, 'svn')" ng-disabled="isMaxSvnRepoCountExceed">Add Repository</button>
+                                    <p class="off" ng-class="{ off: isMaxSvnRepoCountExceed !== true }" style="width: 20px;">Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong> for each repository type.</p>
                                 </div>
 
-                                <div class="text-center" ng-show="repositories.length === 0">
-                                    <div><span class="glyphicon glyphicon-default glyphicon-search"></span></div>
-                                    <h5>You have no repositories!</h5>
-                                    <h6>It's perfect chance to <a href="#" ng-click="editRepository(null, 'svn')"> add your first one</a></h6>
-                                </div>
+                                <div class="well"></div>
 
-                            </form>
-                            <div class="inline-group" ng-show="repositories.length > 0">
-                                <button class="btn btn-primary" ng-click="editRepository(null, 'svn')" ng-disabled="isMaxSvnRepoCountExceed">Add Repository</button>
-                                <p class="off" ng-class="{ off: isMaxSvnRepoCountExceed !== true }" style="width: 20px;">Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong> for each repository type.</p>
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <legend>Git Repositories</legend>
+                                    </fieldset>
+                                    <div id="gitRepositories" class="well">
+                                        Comming soon ...
+                                    </div>
+                                </form>
+                                <button class="btn btn-primary disabled" ng-click="editRepository({}, 'git')" disabled>Add Repository</button>
+                            
                             </div>
-
-                            <div class="well"></div>
-
-                            <form class="form-horizontal">
-                                <fieldset>
-                                    <legend>Git Repositories</legend>
-                                </fieldset>
-                                <div id="gitRepositories" class="well">
-                                    Comming soon ...
-                                </div>
-                            </form>
-                            <button class="btn btn-primary disabled" ng-click="editRepository({}, 'git')" disabled>Add Repository</button>
+                            
                         </div>
 
                         <div id="repositoryEditModal" class="modal modal-custom">
