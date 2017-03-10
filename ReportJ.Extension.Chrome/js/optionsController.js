@@ -17,12 +17,12 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         validationObject.$errorMessage = "";
     }
 
-    var setValidity = function (baseObject, validationObject, errorValidationMessage, concatErrorMsgWithExisting) {;
+    var setValidity = function (baseObject, validationObject, message, concatErrorMsgWithExisting) {;
         if (validationObject === true) {
             if (concatErrorMsgWithExisting) {
-                baseObject.$errorMessage += " " + errorValidationMessage;
+                baseObject.$errorMessage += " " + message;
             } else {
-                baseObject.$errorMessage = errorValidationMessage;
+                baseObject.$errorMessage = message;
             }
         } else {
             baseObject.$errorMessage = concatErrorMsgWithExisting ? baseObject.$errorMessage : "";
@@ -31,13 +31,8 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
 
     var saveRepository = function (repository) {
         if (typeof (repository.repositoryId) === "undefined") {
-            var repoId = 0;
-            angular.forEach($scope.repositories, function (repo) {
-                if (repo.repositoryId > repoId) {
-                    repoId = repo.repositoryId;
-                }
-            });
-            repository.repositoryId = ++repoId;
+            var ids = $scope.repositories.map((r) => { return r.repositoryId; });
+            repository.repositoryId = Math.max(...ids) + 1;
             $scope.repositories.push(repository);
         } else {
             angular.forEach($scope.repositories, function (repo) {
@@ -66,22 +61,9 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         $scope.isMaxTemplatesCountExceed = newTemplates.length >= $scope.maxTemplateQuota;
     });
 
-    $scope.$watchCollection('repositories', function (newRepositories, oldRepositories) {
-        var svnReposCount = 0,
-            gitReposCount = 0;
-
-        angular.forEach(newRepositories, function (repo) {
-            switch (repo.type) {
-            case "svn":
-                svnReposCount++;
-                break;
-            case "git":
-                gitReposCount++;
-                break;
-            default:
-                break;
-            }
-        });
+    $scope.$watchCollection('repositories', function (newRepos, oldRepos) {
+        var svnReposCount = newRepos.filter(function (repo) { return repo.type == "svn" }).length,
+            gitReposCount = newRepos.filter(function (repo) { return repo.type == "git" }).length;
 
         $scope.isMaxSvnRepoCountExceed = svnReposCount >= $scope.maxRepoQuota;
         $scope.isMaxGitRepoCountExceed = gitReposCount >= $scope.maxRepoQuota;
@@ -114,21 +96,17 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     // Handlers
 
     $scope.setLoading = function (isLoading, operationDescription) {
-        $scope.loading = {};
-        $scope.loading.inProgress = isLoading;
-        $scope.loading.description = operationDescription;
+        $scope.loading = {
+            inProgress: isLoading,
+            description: operationDescription
+        };
     }
 
-    $scope.editRepository = function (repository, repositoryType) {
+    $scope.editRepository = function (repo, type) {
         $scope.repoForm.$setPristine(true);
-        if (typeof (repository) !== "undefined" && repository !== null) {
-            // Exited repository. MR
-            $scope.editedRepository = angular.copy(repository);
-        } else {
-            // New repository. MR
-            $scope.editedRepository = {};
-            $scope.editedRepository.type = repositoryType;
-        }
+        $scope.editedRepository = repo
+            ? angular.copy(repo)
+            : { type: type };
 
         // delay added to prevent from blinking errors on form in case if they was on form before cleaning with $setPristine(true). MR
         $timeout(function () {
@@ -136,50 +114,42 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         }, 100);
     };
 
-    $scope.saveRepository = function (repository) {
+    $scope.saveRepository = function (repo) {
         $scope.setLoading(true, "Checking settings on our servers ...")
-
-        repositoryService.checkRepo(
-            repository,
-            function (connectionEstablished) {
-                $scope.setLoading(false);
-                if (!connectionEstablished) {
-                    bootbox.confirm(
-                        "We wasn't able to establish connection using repository settings that you have defined. Save it anyway?",
-                        "Connection problem!",
-                        function (confirmed) {
-                            if (confirmed) {
-                                saveRepository(repository);
-                            }
+        repositoryService.check(repo)
+            .then(function () {
+                saveRepository(repo);
+            })
+            .catch(function () {
+                bootbox.confirm(
+                    "We wasn't able to establish connection using repository settings that you have defined. Save it anyway?",
+                    "Connection problem!",
+                    function (confirmed) {
+                        if (confirmed) {
+                            saveRepository(repo);
                         }
-                    );
-                } else {
-                    saveRepository(repository);
-                }
+                    }
+                );
+            })
+            .finally(function () {
+                $scope.setLoading(false);
             });
     };
 
-    $scope.removeRepository = function (repository) {
-        var warningMessage = "Are you sure you want to delete that amazing repository '" + repository.name + "'?";
-        bootbox.confirm(warningMessage, "Delete confirmation", function (confirmed) {
-            if (!confirmed) {
-                return;
-            }
-            var index = $scope.repositories.indexOf(repository);
-            $scope.repositories.splice(index, 1);
+    $scope.removeRepository = function (repo) {
+        var message = "Are you sure you want to delete this amazing repository '" + repo.name + "'?";
+        bootbox.confirm(message, "Delete confirmation", function (confirmed) {
+            if (!confirmed) return;
+
+            $scope.repositories = $scope.repositories.filter((r) => { return r !== repo });
             $scope.saveSettings();
         });
     };
 
     $scope.editTemplate = function (template) {
         $scope.templateForm.$setPristine(true);
-        if (typeof (template) !== "undefined" && template !== null) {
-            // Existed template. MR
-            $scope.editedTemplate = angular.copy(template);
-        } else {
-            // New template. MR
-            $scope.editedTemplate = {};
-        }
+
+        $scope.editedTemplate = template ? angular.copy(template) : {};
 
         // delay added to prevent from blinking errors on form in case if they was on form before cleaning with $setPristine(true). MR
         $timeout(function () {
@@ -189,13 +159,8 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
 
     $scope.saveTemplate = function (template) {
         if (typeof (template.templateId) === "undefined") {
-            var templateId = 0;
-            angular.forEach($scope.templates, function (templ) {
-                if (templ.templateId > templateId) {
-                    templateId = templ.templateId;
-                }
-            });
-            template.templateId = ++templateId;
+            var ids = $scope.templates.map((t) => { return t.templateId; });
+            template.templateId = Math.max(...ids) + 1;
             $scope.templates.push(template);
         } else {
             angular.forEach($scope.templates, function (templ) {
@@ -210,13 +175,11 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     };
 
     $scope.removeTemplate = function (template) {
-        var warningMessage = "Are you sure you want to delete such a wonderful template?";
-        bootbox.confirm(warningMessage, "Delete confirmation", function (confirmed) {
-            if (!confirmed) {
-                return;
-            }
-            var index = $scope.templates.indexOf(template);
-            $scope.templates.splice(index, 1);
+        var message = "Are you sure you want to delete such a wonderful template?";
+        bootbox.confirm(message, "Delete confirmation", function (confirmed) {
+            if (!confirmed) return;
+
+            $scope.templates = $scope.templates.filter((t) => { return t !== template });
             $scope.saveSettings();
         });
     };
@@ -235,26 +198,16 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
 
     this.initialize = function () {
         repositoryService.checkConnection()
-            .then(function (established) {
-                $scope.repoApiAvailable = established;
-            })
-            .catch(function () {
-                $scope.repoApiAvailable = false;
-            });
+            .then((established) => { $scope.repoApiAvailable = established; })
+            .catch(() => { $scope.repoApiAvailable = false; });
 
-        storageService.getRepositories(function (repositories) {
-            $scope.repositories = [];
-            angular.forEach(repositories, function (repo) {
-                $scope.repositories.push(repo);
-                $scope.$apply();
-            });
+        storageService.getRepositories(function (repos) {
+            angular.copy(repos, $scope.repositories);
+            $scope.$apply();
         });
         storageService.getTemplates(function (templates) {
-            $scope.templates = [];
-            angular.forEach(templates, function (template) {
-                $scope.templates.push(template);
-                $scope.$apply();
-            });
+            angular.copy(templates, $scope.templates);
+            $scope.$apply();
         });
     }
 

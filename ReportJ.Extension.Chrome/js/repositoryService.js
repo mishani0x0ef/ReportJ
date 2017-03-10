@@ -22,22 +22,15 @@ jiraReporterApp.service('repositoryService', function ($q, $http) {
         return deferred.promise;
     }
 
-    this.checkRepo = function (repository, handler) {
+    this.check = function (repository) {
         var apiUrl = baseApiUrl + repository.type + "Commits";
 
-        // todo: handle response message properly. MR
-        $http({
-            method: "GET",
-            url: apiUrl,
+        return $http.get(apiUrl, {
             params: {
                 username: repository.userName,
                 repoUrl: repository.url,
                 count: 1
             }
-        }).success(function () {
-            handler(true);
-        }).error(function () {
-            handler(false);
         });
     };
 
