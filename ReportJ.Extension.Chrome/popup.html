@@ -55,11 +55,9 @@
             <div class="container">
                 <div class="row">
                     <div ng-repeat="template in templates track by $index ">
-                        <div class="commit" ng-click="addMessageToReport(template, template.description)">
-                            <div class="panel panel-default">
-                                <div class="panel-body text-justify">
-                                    <p>{{template.description}}</p>
-                                </div>
+                        <div class="list-item" ng-click="addMessageToReport(template, template.description)">
+                            <div class="text-justify">
+                                <p>{{template.description}}</p>
                             </div>
                             <div class="result-wrap" ng-class="{ on: template.justAdded }">
                                 <div class="add-confirm">

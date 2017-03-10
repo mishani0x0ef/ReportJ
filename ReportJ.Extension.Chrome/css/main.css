@@ -50,51 +50,7 @@
     overflow: hidden;
 }
 
-.commits .commit {
-    position: relative;
-    overflow: hidden;
-}
-
-.commits .commit div {
-    cursor: pointer;
-    transition: all .5s ease;
-}
-
-.commits .commit div p {
-    transition: all .5s ease;
-}
-
-.commits .commit .panel {
-    margin: 0;
-    border-bottom: 1px solid #d1d1d1;
-}
-
-.commits .commit .panel-heading {
-    padding: 0;
-    line-height: 30px;
-    background-color: #fff;
-}
-
-.commits .commit .panel-body {
-    padding-bottom: 8px;
-    line-height: 20px;
-}
-
-.commits .commit .panel-body p {
-    margin-bottom: 0;
-}
-
-.commits .commit:hover .panel-body {
-    background: #f4f4f4;
-    color: #225f91;
-}
-
-.commits .commit:hover .panel-heading {
-    background: #f0f0f1;
-    color: #185d95;
-}
-
-.commits .commit .result-wrap {
+.result-wrap {
     text-transform: uppercase;
     display: inline-block;
     position: absolute;
@@ -102,16 +58,41 @@
     left: 0;
     top: -50px;
     opacity: 0.0;
-    transition: all 0.3 ease;
+    transition: all 0.3s ease;
 }
 
-.commits .commit .result-wrap.on {
+.list {
+    position: relative;
+    display: block;
+    margin: 15px 0 20px;
+    background: #ffffff;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.list-item {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    padding: 7px 10px 8px;
+    background: #ffffff;
+    border-bottom: 1px solid #dedede;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.list-item:hover:not(:disabled) {
+    cursor: pointer;
+    background-color: #f4f4f4;
+}
+
+.result-wrap.on {
     top: 0;
     height: auto;
     opacity: 0.95;
 }
 
-.commits .commit .result-wrap .add-confirm {
+.result-wrap .add-confirm {
     padding: 7px 30px;
     background-color: #185d95;
     color: white;
@@ -395,61 +376,11 @@ svg {
     opacity: 0.5;
 }
 
-.repository .panel-body div {
-    overflow: hidden;
-    white-space: nowrap;
+/* New styles for commits, repositories and so on*/
+.error-summary {
+    margin: 0 15px;
 }
 
-.title-on[data-title]:hover:before,
-.modal-footer.title-on[data-title]:hover:before {
-    content: attr(data-title);
-    position: absolute;
-    z-index: 20;
-    width: 250px;
-    padding: 10px 20px;
-    background-color: white;
-    border-radius: 2px;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
-    font-size: 14px;
-    text-align: center;
-    font-weight: bold;
-    text-transform: none;
-}
-
-.title-bottom[data-title]:hover:before {
-    top: 40px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.title-top[data-title]:hover:before {
-    top: -50px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.title-default[data-title]:hover:before {
-    color: #003366;
-}
-
-.title-warn[data-title]:hover:before {
-    color: #e68900;
-}
-
-.repository-edit .form-group {
-    position: relative;
-}
-
-.repository-edit .modal-footer {
-    position: relative;
-}
-
-.repository .panel-body .template-description {
-    word-spacing: normal;
-    white-space: normal;
-    word-wrap: normal;
+.content-block {
+    margin: 40px 0;
 }

@@ -61,14 +61,6 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         $scope.isMaxTemplatesCountExceed = newTemplates.length >= $scope.maxTemplateQuota;
     });
 
-    $scope.$watchCollection('repositories', function (newRepos, oldRepos) {
-        var svnReposCount = newRepos.filter(function (repo) { return repo.type == "svn" }).length,
-            gitReposCount = newRepos.filter(function (repo) { return repo.type == "git" }).length;
-
-        $scope.isMaxSvnRepoCountExceed = svnReposCount >= $scope.maxRepoQuota;
-        $scope.isMaxGitRepoCountExceed = gitReposCount >= $scope.maxRepoQuota;
-    });
-
     $scope.$watch('repoForm.name.$invalid', function (newValid, oldValid) {
         var baseObj = $scope.repoForm.name;
         setInitialValidity(baseObj);
