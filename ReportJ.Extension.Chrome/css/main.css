@@ -40,25 +40,14 @@
     margin: 0;
 }
 
-.commits {
+.popup-content {
     height: 510px;
     position: relative;
     overflow: auto;
 }
 
-.commits.disabled {
+.popup-content.disabled {
     overflow: hidden;
-}
-
-.result-wrap {
-    text-transform: uppercase;
-    display: inline-block;
-    position: absolute;
-    height: 0;
-    left: 0;
-    top: -50px;
-    opacity: 0.0;
-    transition: all 0.3s ease;
 }
 
 .list {
@@ -84,6 +73,17 @@
 .list-item:hover:not(:disabled) {
     cursor: pointer;
     background-color: #f4f4f4;
+}
+
+.result-wrap {
+    text-transform: uppercase;
+    display: inline-block;
+    position: absolute;
+    height: 0;
+    left: 0;
+    top: -50px;
+    opacity: 0.0;
+    transition: all 0.3s ease;
 }
 
 .result-wrap.on {
@@ -376,7 +376,6 @@ svg {
     opacity: 0.5;
 }
 
-/* New styles for commits, repositories and so on*/
 .error-summary {
     margin: 0 15px;
 }

@@ -21,10 +21,11 @@
     },
     "icons": {
         "16": "img/logo.png",
-        "38": "img/logo.png"
+        "48": "img/logo.png",
+        "128": "img/logo128x128.png"
     },
     "content_scripts": [{
         "js": ["lib/jquery.min.js"],
-        "matches": ["*://*.google.com/*", "*://*.localhost/*"]
+        "matches": ["*://*.localhost/*"]
   }]
 }

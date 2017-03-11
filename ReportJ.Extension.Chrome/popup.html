@@ -51,7 +51,7 @@
 
     <div class="tab-content col-xs-12 well">
 
-        <div role="tabpanel" class="tab-pane fade active in commits" id="templates">
+        <div role="tabpanel" class="tab-pane fade active in popup-content" id="templates">
             <div class="container">
                 <div class="row">
                     <div ng-repeat="template in templates track by $index ">
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <div role="tabpanel" class="tab-pane fade in commits" id="commits">
+        <div role="tabpanel" class="tab-pane fade in popup-content" id="commits">
             <div class="container">
                 <div class="row" ng-show="repoApiAvailable">
                     <div ng-repeat="commit in svnCommits | orderBy: '-Date'">
