@@ -20,17 +20,18 @@ Chrome extension is made to make your life easier. So I want to explain some mai
 
 ## Restrictions
 
-Report information could be added only into editable text fields on page. It works on issue's details and on agile as well. Maybe it works somewhere else, but it's main pages I'm personally using :)
+Report information could be added only into editable text fields on page. In Jira it works on issue's details and on agile as well. Maybe it works somewhere else, but it's main pages I'm personally using :)
 
 ## Base workflows
 
 ### Add Issue Summary
 
-The best way to get this information - use context menu on right mouse click. In that menu after extension installation you could find additional point - "ReportJ add issue summary". So just do right mouse click in some editable field and choose mentioned point - title from issue will be automatically added to field.
+The best way to get this information - use context menu on right mouse click.
+Just do right mouse click in some editable field and choose "ReportJ add issue summary" point from context menu - title from issue will be added to field.
 
 ### Add pre-defined template
 
-Often we should report some common activities such as status meetings, retrospectives, deployments etc. To make it easier you could use "Reporting Templates" feature. It's allow you to define your common activities once and than use it at any moment.
+Often we should report some common activities such as status meetings, retrospectives, deployments etc. ReportJ has "Reporting Templates" feature which allow you to define your common activities once and than use it at any moment.
 
 *To configurate reporting templates:*
 
@@ -41,29 +42,31 @@ Often we should report some common activities such as status meetings, retrospec
 
 *To use templates in reporting*
 
-* Go to JIRA
-* Click on some editable field inside the issue
-* Open extension popup 
+* Click on some editable field inside a page
+* Open extension's popup 
 * Select "Templates" tab
-* Just click on any template in list and it will be added automatically
+* Click on any template in list and it will be added by magic
 
-### Add information from commits into the report *(Experemetal, Under Development)*
+### Add commit's message
 
-This functionality is currently under development and I'm looking for best way to deliver this features.
-It's not a secret that developers copy/paste this info into our reports. So, to add this info you need to do few steps:
+It's not a secret that developers copy&paste commit's message into reports. To do it in more convinient way:
+
+*Install desktop app that unblock Commits feature*
+
+* Download desktop app installer "ReportJ.Desktop.msi" from [latest release](https://github.com/mishani0x0ef/ReportJ/releases/latest) (it's free and have no any ads)
+* Run installer and follow wizard steps
+* Application installed and you can use Commits feature
 
 *Configurate repository information in extension settings*
 
 * Open extension options (settings) over Chrome Extensions page or from ReportJ's popup
 * Select "Repositories" tab
-* Click "Add new repository" and fill all fields with appropriate data
+* Click "Add Repository" and fill all fields with appropriate data
 * If you make all right and repository is available for API server - you are amazing
 
 *Use your commits information for reporting*
 
-* Go to JIRA
-* Click on some editable field inside the issue
+* Click on some editable field inside a page
 * Open extension popup 
 * Select "Commits" tab
-* Your previous commits will be loaded into popup
-* Just click on commit info you want to add and it will be added automatically
+* Just click on commit info you want to add and it will be added
