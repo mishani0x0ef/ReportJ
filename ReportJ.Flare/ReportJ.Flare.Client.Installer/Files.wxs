@@ -53,6 +53,9 @@
             <Component Id="cmp060E0EAB19A08B32377F04956A2BAA1F" Guid="*">
                 <File Id="fil997A5C3BF9E356D4D06B9EC2DAC04313" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\Owin.dll" />
             </Component>
+            <Component Id="cmp5F7E6E8D8878660847A96D85B22B1082" Guid="*">
+                <File Id="fil9B784F1A1D23F298F230B4A7371DC76A" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\ReportJ.Common.dll" />
+            </Component>
             <Component Id="cmp1D0231B2D9211736B472DCBEF1FB603A" Guid="*">
                 <File Id="filF37F8A42B5930061087F2E80370DE166" KeyPath="yes" Source="$(var.ReportJ.Flare.Client.TargetDir)\ReportJ.Flare.Api.dll" />
             </Component>
@@ -127,6 +130,7 @@
             <ComponentRef Id="cmp295132C96403F485605D108E940A4059" />
             <ComponentRef Id="cmp0758E167CC73C057A0ECE2DC5E35F506" />
             <ComponentRef Id="cmp060E0EAB19A08B32377F04956A2BAA1F" />
+            <ComponentRef Id="cmp5F7E6E8D8878660847A96D85B22B1082" />
             <ComponentRef Id="cmp1D0231B2D9211736B472DCBEF1FB603A" />
             <ComponentRef Id="cmpD00674E3213E31B3027E42F1EF296A52" />
             <ComponentRef Id="cmp38E9B6698DAEBFB0800943778FB1ED89" />
