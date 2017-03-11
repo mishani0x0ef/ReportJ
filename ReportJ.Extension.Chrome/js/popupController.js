@@ -102,6 +102,9 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
         repositoryService.checkConnection()
             .then(function (established) {
                 $scope.repoApiAvailable = established;
+                if (!established) {
+                    throw new Error("Repo API unavailable");
+                }
             })
             .then(function () {
                 $scope.refreshCommits();
