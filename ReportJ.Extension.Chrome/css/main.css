@@ -41,7 +41,7 @@
 }
 
 .commits {
-    height: 500px;
+    height: 510px;
     position: relative;
     overflow: auto;
 }

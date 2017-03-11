@@ -34,24 +34,24 @@ jiraReporterApp.service('repositoryService', function ($q, $http) {
         });
     };
 
-    this.getLastCommits = function (repository, handler) {
+    this.getLastCommits = function (repository) {
         var apiUrl = baseApiUrl + repository.type + "Commits";
 
-        // todo: parse response message properly. MR
-        $http({
-            method: "GET",
-            url: apiUrl,
+        return $http.get(apiUrl, {
             params: {
                 username: repository.userName,
                 repoUrl: repository.url,
                 count: defaultCommitsCount
             }
-        }).success(function (data, status, headers, config) {
-            handler(data);
-        }).error(function (data, status, headers, config) {
-            var msg = "Oops! Something went wrong while getting your commits for '" + repository.name + "' repository.";
-            bootbox.alert(msg, "Warning!");
-            handler();
+        }).then(function (e) {
+            var response = e.data,
+                success = response && response.Status === 1;
+
+            if (success) {
+                return response.Message;
+            }
+
+            return $q.deferred().reject().promise();
         });
     };
 });

@@ -87,19 +87,15 @@
             <div class="container">
                 <div class="row" ng-show="repoApiAvailable">
                     <div ng-repeat="commit in svnCommits | orderBy: '-Date'">
-                        <div class="commit" ng-click="addMessageToReport(commit, commit.Message)">
-                            <div class="panel panel-default">
-                                <div class="panel-heading col-xs-12">
-                                    <div class="col-xs-6">
-                                        <strong>{{commit.Date | date: 'dd MMM HH:mm'}}</strong>
-                                    </div>
-                                    <div class="col-xs-6 text-right">
-                                        <strong class="text-right">{{commit.Author}}</strong>
-                                    </div>
-                                </div>
-                                <div class="panel-body text-justify">
-                                    <p>{{commit.Message}}</p>
-                                </div>
+                        <div class="list-item" ng-click="addMessageToReport(commit, commit.Message)">
+                            <div class="col-xs-6">
+                                <strong>{{commit.Date | date: 'dd MMM HH:mm'}}</strong>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <i>{{commit.Author}}</i>
+                            </div>
+                            <div class="col-xs-12 text-justify">
+                                <p>{{commit.Message}}</p>
                             </div>
                             <div class="result-wrap" ng-class="{ on: commit.justAdded }">
                                 <div class="add-confirm">

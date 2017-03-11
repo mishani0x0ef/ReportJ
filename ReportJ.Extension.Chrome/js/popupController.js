@@ -21,13 +21,6 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
     $scope.svnCommits = [];
     $scope.templates = [];
 
-    $scope.addCommits = function (commits) {
-        angular.forEach(commits, function (commit) {
-            $scope.svnCommits.push(commit);
-        });
-        $scope.loading = false;
-    };
-
     $scope.refreshCommits = function () {
         $scope.svnCommits = [];
         $scope.loading = true;
@@ -39,7 +32,17 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
                 }, 200);
             }
             angular.forEach(repositories, function (repo) {
-                repositoryService.getLastCommits(repo, $scope.addCommits);
+                repositoryService.getLastCommits(repo, $scope.addCommits)
+                    .then(function (commits) {
+                        angular.copy(commits, $scope.svnCommits);
+                    })
+                    .catch(function () {
+                        var msg = "Oops! Something went wrong while getting your commits for '" + repo.name + "' repository.";
+                        bootbox.alert(msg, "Warning!");
+                    })
+                    .finally(function () {
+                        $scope.loading = false;
+                    });
             });
         });
     };
@@ -101,7 +104,7 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
                 $scope.repoApiAvailable = established;
             })
             .then(function () {
-                // todo: implement commits pre-loading. MR
+                $scope.refreshCommits();
             })
             .catch(function () {
                 $scope.repoApiAvailable = false;
