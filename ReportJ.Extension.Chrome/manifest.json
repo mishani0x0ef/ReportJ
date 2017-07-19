@@ -4,13 +4,10 @@
     "name": "ReportJ",
     "description": "The reporting helper for JIRA system.",
     "homepage_url": "https://github.com/mishani0x0ef/reportj",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "permissions": ["storage", "activeTab", "contextMenus"],
     "background": {
         "scripts": ["config.js", "js/urlService.js", "lib/jquery.min.js", "js/jira.js", "background.js"]
-    },
-    "sandbox": {
-        "pages": ["html/options-main.html"]
     },
     "browser_action": {
         "name": "ReportJ",
@@ -19,6 +16,7 @@
         "options_page": "options.html",
         "default_popup": "popup.html"
     },
+    "options_page": "options.html",
     "icons": {
         "16": "img/logo.png",
         "48": "img/logo.png",
