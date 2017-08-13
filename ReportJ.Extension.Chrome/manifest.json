@@ -4,7 +4,7 @@
     "name": "ReportJ",
     "description": "The reporting helper for JIRA system.",
     "homepage_url": "https://github.com/mishani0x0ef/reportj",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "permissions": ["storage", "activeTab", "contextMenus"],
     "background": {
         "scripts": ["config.js", "js/urlService.js", "lib/jquery.min.js", "js/jira.js", "background.js"]
