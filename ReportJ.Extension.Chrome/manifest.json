@@ -10,10 +10,8 @@
         "scripts": ["config.js", "js/urlService.js", "lib/jquery.min.js", "js/jira.js", "background.js"]
     },
     "browser_action": {
-        "name": "ReportJ",
         "default_icon": "img/logo.png",
         "default_title": "ReportJ",
-        "options_page": "options.html",
         "default_popup": "popup.html"
     },
     "options_page": "options.html",
