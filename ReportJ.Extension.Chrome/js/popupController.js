@@ -8,14 +8,15 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
 
     var initJira = function () {
         const urlService = new UrlService();
-        urlService.getCurrentBaseUrl((url) => {
-            jira = new JiraWrapper(url);
-            jira.checkIsInsideJira(url)
-                .then((inJira) => {
-                    $scope.insideJiraPage = inJira;
-                    $scope.$apply($scope.insideJiraPage);
-                });
-        });
+        urlService.getCurrentBaseUrl()
+            .then((url) => {
+                jira = new JiraWrapper(url);
+                return jira.checkIsInsideJira(url);
+            })
+            .then((inJira) => {
+                $scope.insideJiraPage = inJira;
+                $scope.$apply($scope.insideJiraPage);
+            });
     }
     initJira();
 

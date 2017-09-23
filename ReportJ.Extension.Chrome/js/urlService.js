@@ -1,21 +1,18 @@
-var UrlService = function UrlService() {
-    var self = this;
-
-    self.getCurrentBaseUrl = function (callback) {
-        chrome.tabs.getSelected(null, function (tab) {
-            if (callback) {
-                var baseUrl = self.getBaseUrl(tab.url);
-                callback(baseUrl);
-            }
+class UrlService {
+    getCurrentBaseUrl() {
+        return new Promise((resolve) => {
+            chrome.tabs.getSelected(null, (tab) => {
+                const baseUrl = this.getBaseUrl(tab.url);
+                resolve(baseUrl);
+            });
         });
     }
 
-    self.getBaseUrl = function (url) {
-        var urlComponents = url.split("/");
-        var protocol = urlComponents[0];
-        var host = urlComponents[2];
-        var baseUrl = protocol + "//" + host;
+    getBaseUrl(url) {
+        const urlComponents = url.split("/");
+        const protocol = urlComponents[0];
+        const host = urlComponents[2];
 
-        return baseUrl;
+        return `${protocol}//${host}`;
     }
 }
