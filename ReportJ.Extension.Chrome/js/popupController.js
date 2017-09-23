@@ -4,19 +4,25 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
     $scope.config = new AppConfig();
     $scope.insideJiraPage = false;
 
-    var urlService = new UrlService();
     var jira = {};
 
     var initJira = function () {
-        urlService.getCurrentBaseUrl(function (url) {
-            jira = new JiraWrapper(url);
-            jira.checkIsInsideJira(function (inJira) {
+        const urlService = new UrlService();
+        urlService.getCurrentBaseUrl()
+            .then((url) => {
+                jira = new JiraWrapper(url);
+                return jira.checkIsInsideJira(url);
+            })
+            .then((inJira) => {
                 $scope.insideJiraPage = inJira;
                 $scope.$apply($scope.insideJiraPage);
-            })
-        });
+            });
     }
     initJira();
+
+    var resetLoadingDeferred = function () {
+        $timeout(() => { $scope.loading = false; }, 200);
+    }
 
     $scope.repoApiAvailable = false;
     $scope.svnCommits = [];
@@ -26,24 +32,18 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
         $scope.svnCommits = [];
         $scope.loading = true;
         $scope.loadingDescription = "Loading commits";
-        storageService.getRepositories(function (repositories) {
+        storageService.getRepositories().then((repositories) => {
             if (typeof repositories === "undefined" || repositories.length === 0) {
-                $timeout(function () {
-                    $scope.loading = false;
-                }, 200);
+                resetLoadingDeferred();
             }
-            angular.forEach(repositories, function (repo) {
+            angular.forEach(repositories, (repo) => {
                 repositoryService.getLastCommits(repo, $scope.addCommits)
-                    .then(function (commits) {
-                        angular.copy(commits, $scope.svnCommits);
+                    .then((commits) => { angular.copy(commits, $scope.svnCommits); })
+                    .catch(() => {
+                        const msg = `Oops! Something went wrong while getting your commits for '${repo.name}' repository.`;
+                        dialog.alert(msg, "Warning!");
                     })
-                    .catch(function () {
-                        var msg = "Oops! Something went wrong while getting your commits for '" + repo.name + "' repository.";
-                        bootbox.alert(msg, "Warning!");
-                    })
-                    .finally(function () {
-                        $scope.loading = false;
-                    });
+                    .finally(() => { $scope.loading = false; });
             });
         });
     };
@@ -52,18 +52,13 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
         $scope.templates = [];
         $scope.loading = true;
         $scope.loadingDescription = "Loading templates";
-        storageService.getTemplates(function (templates) {
-            if (typeof templates === "undefined" || templates.length === 0) {
-                $timeout(function () {
-                    $scope.loading = false;
-                }, 200);
+        storageService.getTemplates().then((templates) => {
+            if (typeof templates !== "undefined" && templates.length !== 0) {
+                angular.forEach(templates, (template) => {
+                    $scope.templates.push(template);
+                });
             }
-            angular.forEach(templates, function (template) {
-                $scope.templates.push(template);
-            });
-            $timeout(function () {
-                $scope.loading = false;
-            }, 200);
+            resetLoadingDeferred();
         });
     };
 
@@ -74,45 +69,39 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
     };
 
     $scope.addIssueSummary = function () {
-        chrome.tabs.getSelected(null, function (tab) {
-            jira.getIssueInfo(
-                tab.url,
-                function (issueSummary, context) {
-                    chrome.tabs.executeScript({
-                        code: "document.activeElement.value = " + JSON.stringify(issueSummary) + " + document.activeElement.value"
-                    })
-                }, chrome);
+        chrome.tabs.getSelected(null, (tab) => {
+            jira.getIssueInfo(tab.url)
+                .then((summary) => {
+                    const issueSummary = JSON.stringify(summary);
+                    const code = `document.activeElement.value = ${issueSummary} + document.activeElement.value`;
+                    chrome.tabs.executeScript({ code });
+                });
         });
     };
 
     $scope.addMessageToReport = function (subject, message) {
         subject.justAdded = true;
-        setTimeout(function () {
+        setTimeout(() => {
             subject.justAdded = false;
             $scope.$apply(subject);
         }, 1000);
 
-        chrome.tabs.executeScript({
-            code: "document.activeElement.value = document.activeElement.value + " + JSON.stringify(message) + " + '\\n';true"
-        });
+        const code = `document.activeElement.value = document.activeElement.value + ${JSON.stringify(message)} + '\\n';true`;
+        chrome.tabs.executeScript({ code });
     };
 
     this.initialize = function () {
         $scope.refreshTemplates();
 
         repositoryService.checkConnection()
-            .then(function (established) {
+            .then((established) => {
                 $scope.repoApiAvailable = established;
                 if (!established) {
                     throw new Error("Repo API unavailable");
                 }
             })
-            .then(function () {
-                $scope.refreshCommits();
-            })
-            .catch(function () {
-                $scope.repoApiAvailable = false;
-            });
+            .then(() => $scope.refreshCommits())
+            .catch(() => { $scope.repoApiAvailable = false; });
     }
 
     this.initialize();

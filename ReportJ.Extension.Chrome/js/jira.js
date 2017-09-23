@@ -2,72 +2,69 @@ if (typeof jQuery === "undefined") {
     throw new Error("JiraWrapper requires jQuery");
 }
 
-var JiraWrapper = function JiraWrapper(baseJiraUrl) {
+class JiraWrapper {
+    constructor(baseJiraUrl) {
+        this.jiraUrl = baseJiraUrl;
 
-    'use strict';
+        this.issueInfoParams = "fields=summary,parent";
+        this.apiUrl = `${baseJiraUrl}/rest/api/latest/`;
+    }
 
-    var self = this;
-    var issueInfoParams = "fields=summary,parent";
-    var jiraUrl = baseJiraUrl;
-    var apiUrl = baseJiraUrl + "/rest/api/latest/";
+    getIssueInfo(url) {
+        const issueKey = this._getIssueKey(url);
+        const apiUrl = `${this.apiUrl}issue/${issueKey}?${this.issueInfoParams}`;
 
-    var resolveSummaryFromIssue = function (issue, summary) {
-        var issueTitle = issue.fields.summary;
+        return $.getJSON(apiUrl).then((issue) => this._getSummaryFromIssue(issue));
+    }
+
+    checkIsInsideJira() {
+        const api = this.apiUrl + "mypermissions";
+        const settings = {
+            method: "GET",
+            dataType: "json",
+            url: api
+        };
+
+        return $.ajax(settings)
+            .then(() => true)
+            .catch(() => false);
+    }
+
+    _getSummaryFromIssue(issue, summary) {
+        let issueTitle = issue.fields.summary;
+
         if (!summary) {
             summary = "";
         }
-
         if (issue.fields.parent) {
-            summary = resolveSummaryFromIssue(issue.fields.parent, summary);
+            summary = this._getSummaryFromIssue(issue.fields.parent, summary);
         }
         if (issueTitle[issueTitle.length - 1] != ".") {
             issueTitle += ".";
         }
 
-        summary += issue.key + ". " + issueTitle + "\n";
+        summary += `${issue.key}. ${issueTitle}\n`;
         return summary;
-    };
-
-    var getIssueKey = function (url) {
-        var issueStartStrDetailsScreen = "browse/";
-        var issueStartStrBoard = "selectedIssue=";
-        var startIndex, endIndex;
-
-        // Issue details screen opened. MR
-        if (url.indexOf(issueStartStrDetailsScreen) > -1) {
-            startIndex = url.indexOf(issueStartStrDetailsScreen) + issueStartStrDetailsScreen.length;
-            endIndex = url.indexOf("?") < 0 ? (url.length) : url.indexOf("?");
-        }
-        // Issue selected on board. MR
-        else {
-            startIndex = url.indexOf(issueStartStrBoard) + issueStartStrBoard.length;
-            endIndex = url.indexOf("&", startIndex) < 0 ? (url.length) : url.indexOf("&", startIndex);
-        }
-
-        return url.substring(startIndex, endIndex);
-    };
-
-    self.getIssueInfo = function (url, callback, callbackContext) {
-        var issueKey = getIssueKey(url);
-        var api = apiUrl + "issue/" + issueKey + "?" + issueInfoParams;
-        $.getJSON(api, function (issue) {
-            var summary = resolveSummaryFromIssue(issue);
-            callback(summary, callbackContext);
-        });
-    };
-
-    self.checkIsInsideJira = function (callback) {
-        var api = apiUrl + "mypermissions";
-        $.ajax({
-            method: "GET",
-            dataType: "json",
-            url: api,
-            success: function () {
-                callback(true);
-            },
-            error: function () {
-                callback(false);
-            }
-        })
     }
-};
+
+    _getIssueKey(url) {
+        const issueStartStrDetailsScreen = "browse/";
+        const issueDetailsOpened = url.indexOf(issueStartStrDetailsScreen) > -1;
+        let keyStartIndex, keyEndIndex;
+
+        if (issueDetailsOpened) {
+            const paramsIndex = url.indexOf("?");
+            keyStartIndex = url.indexOf(issueStartStrDetailsScreen) + issueStartStrDetailsScreen.length;
+            keyEndIndex = paramsIndex < 0 ? (url.length) : paramsIndex;
+        } else {
+            // issue selected on board.
+            const issueStartStrBoard = "selectedIssue=";
+            keyStartIndex = url.indexOf(issueStartStrBoard) + issueStartStrBoard.length;
+
+            const nextParamIndex = url.indexOf("&", keyStartIndex);
+            keyEndIndex = nextParamIndex < 0 ? (url.length) : nextParamIndex;
+        }
+
+        return url.substring(keyStartIndex, keyEndIndex);
+    }
+}

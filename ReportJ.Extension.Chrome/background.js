@@ -17,19 +17,18 @@
     var contextMenuHandler = function (e) {
         if (e.menuItemId !== self.contextMenuId) {
             return;
-        };
+        }
 
-        chrome.tabs.getSelected(null, function (tab) {
-            var baseUrl = urlService.getBaseUrl(tab.url);
-            jira = new JiraWrapper(baseUrl);
+        chrome.tabs.getSelected(null, (tab) => {
+            const baseUrl = urlService.getBaseUrl(tab.url);
+            const jira = new JiraWrapper(baseUrl);
 
-            jira.getIssueInfo(
-                tab.url,
-                function (issueSummary, context) {
-                    context.chrome.tabs.executeScript({
-                        code: "document.activeElement.value = " + JSON.stringify(issueSummary) + " + document.activeElement.value"
-                    })
-                }, self);
+            jira.getIssueInfo(tab.url)
+                .then((summary) => {
+                    const issueSummary = JSON.stringify(summary);
+                    const code = `document.activeElement.value = ${issueSummary} + document.activeElement.value`;
+                    chrome.tabs.executeScript({ code });
+                });
         });
     }
 

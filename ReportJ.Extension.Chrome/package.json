@@ -1,0 +1,22 @@
+{
+  "name": "reportj-extension",
+  "version": "2.3.4",
+  "description": "",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mishani0x0ef/ReportJ.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mishani0x0ef/ReportJ/issues"
+  },
+  "homepage": "https://github.com/mishani0x0ef/ReportJ#readme",
+  "devDependencies": {
+    "eslint": "^4.7.2"
+  }
+}
