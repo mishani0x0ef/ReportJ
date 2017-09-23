@@ -2,62 +2,28 @@ if (typeof jQuery === "undefined") {
     throw new Error("JiraWrapper requires jQuery");
 }
 
-var JiraWrapper = function JiraWrapper(baseJiraUrl) {
+class JiraWrapper {
+    constructor(baseJiraUrl) {
+        this.jiraUrl = baseJiraUrl;
 
-    'use strict';
+        this.issueInfoParams = "fields=summary,parent";
+        this.apiUrl = `${baseJiraUrl}/rest/api/latest/`;
+    }
 
-    var self = this;
-    var issueInfoParams = "fields=summary,parent";
-    var jiraUrl = baseJiraUrl;
-    var apiUrl = baseJiraUrl + "/rest/api/latest/";
+    getIssueInfo(url, callback, callbackContext) {
+        const issueKey = this._getIssueKey(url);
+        const api = `${this.apiUrl}issue/${issueKey}?${this.issueInfoParams}`;
 
-    var resolveSummaryFromIssue = function (issue, summary) {
-        var issueTitle = issue.fields.summary;
-        if (!summary) {
-            summary = "";
-        }
+        return $.getJSON(api)
+            .then((issue) => {
+                const summary = this._resolveSummaryFromIssue(issue);
+                callback(summary, callbackContext);
+                return summary;
+            });
+    }
 
-        if (issue.fields.parent) {
-            summary = resolveSummaryFromIssue(issue.fields.parent, summary);
-        }
-        if (issueTitle[issueTitle.length - 1] != ".") {
-            issueTitle += ".";
-        }
-
-        summary += issue.key + ". " + issueTitle + "\n";
-        return summary;
-    };
-
-    var getIssueKey = function (url) {
-        var issueStartStrDetailsScreen = "browse/";
-        var issueStartStrBoard = "selectedIssue=";
-        var startIndex, endIndex;
-
-        // Issue details screen opened. MR
-        if (url.indexOf(issueStartStrDetailsScreen) > -1) {
-            startIndex = url.indexOf(issueStartStrDetailsScreen) + issueStartStrDetailsScreen.length;
-            endIndex = url.indexOf("?") < 0 ? (url.length) : url.indexOf("?");
-        }
-        // Issue selected on board. MR
-        else {
-            startIndex = url.indexOf(issueStartStrBoard) + issueStartStrBoard.length;
-            endIndex = url.indexOf("&", startIndex) < 0 ? (url.length) : url.indexOf("&", startIndex);
-        }
-
-        return url.substring(startIndex, endIndex);
-    };
-
-    self.getIssueInfo = function (url, callback, callbackContext) {
-        var issueKey = getIssueKey(url);
-        var api = apiUrl + "issue/" + issueKey + "?" + issueInfoParams;
-        $.getJSON(api, function (issue) {
-            var summary = resolveSummaryFromIssue(issue);
-            callback(summary, callbackContext);
-        });
-    };
-
-    self.checkIsInsideJira = function (callback) {
-        var api = apiUrl + "mypermissions";
+    checkIsInsideJira(callback) {
+        const api = this.apiUrl + "mypermissions";
         $.ajax({
             method: "GET",
             dataType: "json",
@@ -68,6 +34,41 @@ var JiraWrapper = function JiraWrapper(baseJiraUrl) {
             error: function () {
                 callback(false);
             }
-        })
+        });
     }
-};
+
+    _resolveSummaryFromIssue(issue, summary) {
+        let issueTitle = issue.fields.summary;
+
+        if (!summary) {
+            summary = "";
+        }
+        if (issue.fields.parent) {
+            summary = this._resolveSummaryFromIssue(issue.fields.parent, summary);
+        }
+        if (issueTitle[issueTitle.length - 1] != ".") {
+            issueTitle += ".";
+        }
+
+        summary += `${issue.key}. ${issueTitle}\n`;
+        return summary;
+    }
+
+    _getIssueKey(url) {
+        const issueStartStrDetailsScreen = "browse/";
+        const issueStartStrBoard = "selectedIssue=";
+        let startIndex, endIndex;
+
+        if (url.indexOf(issueStartStrDetailsScreen) > -1) {
+            // issue details screen opened.
+            startIndex = url.indexOf(issueStartStrDetailsScreen) + issueStartStrDetailsScreen.length;
+            endIndex = url.indexOf("?") < 0 ? (url.length) : url.indexOf("?");
+        } else {
+            // issue selected on board.
+            startIndex = url.indexOf(issueStartStrBoard) + issueStartStrBoard.length;
+            endIndex = url.indexOf("&", startIndex) < 0 ? (url.length) : url.indexOf("&", startIndex);
+        }
+
+        return url.substring(startIndex, endIndex);
+    }
+}
