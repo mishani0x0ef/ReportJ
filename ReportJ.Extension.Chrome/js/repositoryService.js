@@ -12,7 +12,7 @@ jiraReporterApp.service('repositoryService', function ($q, $http) {
                 repoUrl: "test",
                 username: "test"
             }
-        }).catch(function (e) {
+        }).catch((e) => {
             var response = e.data,
                 responseValid = response && response.Status && response.Status === 2;
 
@@ -43,7 +43,7 @@ jiraReporterApp.service('repositoryService', function ($q, $http) {
                 repoUrl: repository.url,
                 count: defaultCommitsCount
             }
-        }).then(function (e) {
+        }).then((e) => {
             var response = e.data,
                 success = response && response.Status === 1;
 
