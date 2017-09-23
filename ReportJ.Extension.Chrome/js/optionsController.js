@@ -107,25 +107,25 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             .catch(() => {
                 const message = "We wasn't able to establish connection using repository settings that you have defined. Save it anyway?";
                 const caption = "Connection problem!";
-                bootbox.confirm(message, caption, (confirmed) => {
-                    if (confirmed) {
-                        saveRepository(repo);
-                    }
-                });
+                dialog.confirm(message, caption)
+                    .then((confirmed) => {
+                        if (confirmed) {
+                            saveRepository(repo);
+                        }
+                    });
             })
             .finally(() => { $scope.setLoading(false); });
     };
 
     $scope.removeRepository = function (repo) {
         const message = `Are you sure you want to delete this amazing repository '${repo.name}'?`;
-        bootbox.confirm(message, "Delete confirmation", (confirmed) => {
-            if (!confirmed) {
-                return;
-            }
-
-            $scope.repositories = $scope.repositories.filter((r) => r !== repo);
-            $scope.saveSettings();
-        });
+        dialog.confirm(message, "Delete confirmation")
+            .then((confirmed) => {
+                if (confirmed) {
+                    $scope.repositories = $scope.repositories.filter((r) => r !== repo);
+                    $scope.saveSettings();
+                }
+            });
     };
 
     $scope.editTemplate = function (template) {
@@ -156,14 +156,13 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
 
     $scope.removeTemplate = function (template) {
         const message = "Are you sure you want to delete such a wonderful template?";
-        bootbox.confirm(message, "Delete confirmation", (confirmed) => {
-            if (!confirmed) {
-                return;
-            }
-
-            $scope.templates = $scope.templates.filter((t) => t !== template);
-            $scope.saveSettings();
-        });
+        dialog.confirm(message, "Delete confirmation")
+            .then((confirmed) => {
+                if (confirmed) {
+                    $scope.templates = $scope.templates.filter((t) => t !== template);
+                    $scope.saveSettings();
+                }
+            });
     };
 
     $scope.saveSettings = function () {

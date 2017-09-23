@@ -41,7 +41,7 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
                     .then((commits) => { angular.copy(commits, $scope.svnCommits); })
                     .catch(() => {
                         const msg = `Oops! Something went wrong while getting your commits for '${repo.name}' repository.`;
-                        bootbox.alert(msg, "Warning!");
+                        dialog.alert(msg, "Warning!");
                     })
                     .finally(() => { $scope.loading = false; });
             });
