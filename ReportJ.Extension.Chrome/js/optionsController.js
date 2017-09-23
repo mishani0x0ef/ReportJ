@@ -170,11 +170,13 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             templates: $scope.templates,
             repositories: $scope.repositories,
         };
-        storageService.saveSettings(settings, (isSuccess) => {
-            const message = isSuccess ? "Options saved" : "Saving failed";
-            showNotification(isSuccess, message);
-            $scope.$apply();
-        });
+        storageService.saveSettings(settings)
+            .then(() => { return { isSuccess: true, message: "Options saved" }; })
+            .catch(() => { return { isSuccess: false, message: "Saving failed" }; })
+            .then((result) => {
+                showNotification(result.isSuccess, result.message);
+                $scope.$apply();
+            });
     };
 
     this.initialize = function () {
@@ -182,11 +184,11 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
             .then((established) => { $scope.repoApiAvailable = established; })
             .catch(() => { $scope.repoApiAvailable = false; });
 
-        storageService.getRepositories((repos) => {
+        storageService.getRepositories().then((repos) => {
             angular.copy(repos, $scope.repositories);
             $scope.$apply();
         });
-        storageService.getTemplates((templates) => {
+        storageService.getTemplates().then((templates) => {
             angular.copy(templates, $scope.templates);
             $scope.$apply();
         });

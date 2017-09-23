@@ -32,7 +32,7 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
         $scope.svnCommits = [];
         $scope.loading = true;
         $scope.loadingDescription = "Loading commits";
-        storageService.getRepositories(function (repositories) {
+        storageService.getRepositories().then((repositories) => {
             if (typeof repositories === "undefined" || repositories.length === 0) {
                 resetLoadingDeferred();
             }
@@ -52,7 +52,7 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
         $scope.templates = [];
         $scope.loading = true;
         $scope.loadingDescription = "Loading templates";
-        storageService.getTemplates((templates) => {
+        storageService.getTemplates().then((templates) => {
             if (typeof templates !== "undefined" && templates.length !== 0) {
                 angular.forEach(templates, (template) => {
                     $scope.templates.push(template);
