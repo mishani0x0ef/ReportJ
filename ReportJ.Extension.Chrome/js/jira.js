@@ -10,41 +10,34 @@ class JiraWrapper {
         this.apiUrl = `${baseJiraUrl}/rest/api/latest/`;
     }
 
-    getIssueInfo(url, callback, callbackContext) {
+    getIssueInfo(url) {
         const issueKey = this._getIssueKey(url);
-        const api = `${this.apiUrl}issue/${issueKey}?${this.issueInfoParams}`;
+        const apiUrl = `${this.apiUrl}issue/${issueKey}?${this.issueInfoParams}`;
 
-        return $.getJSON(api)
-            .then((issue) => {
-                const summary = this._resolveSummaryFromIssue(issue);
-                callback(summary, callbackContext);
-                return summary;
-            });
+        return $.getJSON(apiUrl).then((issue) => this._getSummaryFromIssue(issue));
     }
 
-    checkIsInsideJira(callback) {
+    checkIsInsideJira() {
         const api = this.apiUrl + "mypermissions";
-        $.ajax({
+        const settings = {
             method: "GET",
             dataType: "json",
-            url: api,
-            success: function () {
-                callback(true);
-            },
-            error: function () {
-                callback(false);
-            }
-        });
+            url: api
+        };
+
+        return $.ajax(settings)
+            .then(() => true)
+            .catch(() => false);
     }
 
-    _resolveSummaryFromIssue(issue, summary) {
+    _getSummaryFromIssue(issue, summary) {
         let issueTitle = issue.fields.summary;
 
         if (!summary) {
             summary = "";
         }
         if (issue.fields.parent) {
-            summary = this._resolveSummaryFromIssue(issue.fields.parent, summary);
+            summary = this._getSummaryFromIssue(issue.fields.parent, summary);
         }
         if (issueTitle[issueTitle.length - 1] != ".") {
             issueTitle += ".";
@@ -56,19 +49,22 @@ class JiraWrapper {
 
     _getIssueKey(url) {
         const issueStartStrDetailsScreen = "browse/";
-        const issueStartStrBoard = "selectedIssue=";
-        let startIndex, endIndex;
+        const issueDetailsOpened = url.indexOf(issueStartStrDetailsScreen) > -1;
+        let keyStartIndex, keyEndIndex;
 
-        if (url.indexOf(issueStartStrDetailsScreen) > -1) {
-            // issue details screen opened.
-            startIndex = url.indexOf(issueStartStrDetailsScreen) + issueStartStrDetailsScreen.length;
-            endIndex = url.indexOf("?") < 0 ? (url.length) : url.indexOf("?");
+        if (issueDetailsOpened) {
+            const paramsIndex = url.indexOf("?");
+            keyStartIndex = url.indexOf(issueStartStrDetailsScreen) + issueStartStrDetailsScreen.length;
+            keyEndIndex = paramsIndex < 0 ? (url.length) : paramsIndex;
         } else {
             // issue selected on board.
-            startIndex = url.indexOf(issueStartStrBoard) + issueStartStrBoard.length;
-            endIndex = url.indexOf("&", startIndex) < 0 ? (url.length) : url.indexOf("&", startIndex);
+            const issueStartStrBoard = "selectedIssue=";
+            keyStartIndex = url.indexOf(issueStartStrBoard) + issueStartStrBoard.length;
+
+            const nextParamIndex = url.indexOf("&", keyStartIndex);
+            keyEndIndex = nextParamIndex < 0 ? (url.length) : nextParamIndex;
         }
 
-        return url.substring(startIndex, endIndex);
+        return url.substring(keyStartIndex, keyEndIndex);
     }
 }

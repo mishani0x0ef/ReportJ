@@ -10,10 +10,11 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
     var initJira = function () {
         urlService.getCurrentBaseUrl(function (url) {
             jira = new JiraWrapper(url);
-            jira.checkIsInsideJira(function (inJira) {
-                $scope.insideJiraPage = inJira;
-                $scope.$apply($scope.insideJiraPage);
-            })
+            jira.checkIsInsideJira(url)
+                .then((inJira) => {
+                    $scope.insideJiraPage = inJira;
+                    $scope.$apply($scope.insideJiraPage);
+                });
         });
     }
     initJira();
@@ -74,14 +75,13 @@ jiraReporterApp.controller('PopupController', function ($scope, $timeout, storag
     };
 
     $scope.addIssueSummary = function () {
-        chrome.tabs.getSelected(null, function (tab) {
-            jira.getIssueInfo(
-                tab.url,
-                function (issueSummary, context) {
-                    chrome.tabs.executeScript({
-                        code: "document.activeElement.value = " + JSON.stringify(issueSummary) + " + document.activeElement.value"
-                    })
-                }, chrome);
+        chrome.tabs.getSelected(null, (tab) => {
+            jira.getIssueInfo(tab.url)
+                .then((summary) => {
+                    const issueSummary = JSON.stringify(summary);
+                    const code = `document.activeElement.value = ${issueSummary} + document.activeElement.value`;
+                    chrome.tabs.executeScript({ code });
+                });
         });
     };
 
