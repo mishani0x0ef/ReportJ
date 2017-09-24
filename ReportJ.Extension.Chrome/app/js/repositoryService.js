@@ -1,4 +1,7 @@
-jiraReporterApp.service('repositoryService', function ($q, $http) {
+import AppConfig from "../config";
+import reportjApp from "./app";
+
+reportjApp.service('repositoryService', function ($q, $http) {
     var config = new AppConfig();
     var baseApiUrl = config.urls.reportjApiUrl;
     var defaultCommitsCount = 10;

@@ -1,4 +1,6 @@
-jiraReporterApp.service('storageService', function ($q) {
+import reportjApp from "./app";
+
+reportjApp.service('storageService', function ($q) {
     var self = this;
 
     var defaultTemplates = [

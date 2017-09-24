@@ -1,8 +1,6 @@
-if (typeof jQuery === "undefined") {
-    throw new Error("JiraWrapper requires jQuery");
-}
+import $ from "jquery";
 
-class JiraWrapper {
+export default class JiraWrapper {
     constructor(baseJiraUrl) {
         this.jiraUrl = baseJiraUrl;
 

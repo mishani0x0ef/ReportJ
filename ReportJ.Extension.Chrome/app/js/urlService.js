@@ -1,4 +1,4 @@
-class UrlService {
+export default class UrlService {
     getCurrentBaseUrl() {
         return new Promise((resolve) => {
             chrome.tabs.getSelected(null, (tab) => {

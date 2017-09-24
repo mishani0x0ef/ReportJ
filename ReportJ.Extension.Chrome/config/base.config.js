@@ -10,8 +10,8 @@ module.exports = function () {
             options: "./app/js/optionsController.js",
         },
         output: {
-            filename: "[name].[chunkhash].js",
-            path: path.resolve(__dirname, "../build")
+            filename: "[name].js",
+            path: path.resolve(__dirname, "../app/build")
         },
         module: {
             rules: [
@@ -36,6 +36,10 @@ module.exports = function () {
             extensions: [".js"]
         },
         plugins: [
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery"
+            }),
             new webpack.optimize.CommonsChunkPlugin({
                 name: "vendor",
                 minChunks: function (module) {
@@ -46,7 +50,7 @@ module.exports = function () {
             new webpack.optimize.CommonsChunkPlugin({
                 name: "manifest"
             }),
-            new CleanWebpackPlugin(["build/**"], {
+            new CleanWebpackPlugin(["app/build/**"], {
                 root: path.resolve(__dirname, "../")
             })
         ]

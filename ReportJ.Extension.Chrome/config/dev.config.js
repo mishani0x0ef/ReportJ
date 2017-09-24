@@ -15,11 +15,6 @@ module.exports = function (env) {
 
     return webpackMerge(base, {
         devtool: "cheap-module-source-map",
-        output: {
-            // Remove 'chunkhash' in order to let HMR work. MR
-            filename: "[name].js",
-            publicPath: "build/"
-        },
         module: {
             rules: [
                 // {

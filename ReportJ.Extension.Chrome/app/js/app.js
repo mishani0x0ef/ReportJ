@@ -1,6 +1,8 @@
-var jiraReporterApp = angular.module('jiraReporterApp', []);
+import angular from "angular";
 
-jiraReporterApp.directive('equals', function () {
+const reportjApp = angular.module('reportjApp', []);
+
+reportjApp.directive('equals', function () {
     return {
         restrict: 'A',
         require: '?ngModel',
@@ -14,7 +16,7 @@ jiraReporterApp.directive('equals', function () {
                 validate();
             });
 
-            attrs.$observe('equals', function (val) {
+            attrs.$observe('equals', function () {
                 validate();
             });
 
@@ -29,7 +31,7 @@ jiraReporterApp.directive('equals', function () {
     }
 });
 
-jiraReporterApp.directive('diableValidation', function () {
+reportjApp.directive('diableValidation', function () {
     return {
         require: '^form',
         restrict: 'A',
@@ -54,3 +56,5 @@ jiraReporterApp.directive('diableValidation', function () {
         }
     }
 })
+
+export default reportjApp;

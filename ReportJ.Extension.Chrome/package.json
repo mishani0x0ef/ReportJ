@@ -5,7 +5,8 @@
   "main": "background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node_modules\\.bin\\webpack --config=\"webpack.config.js\""
+    "build": "node_modules\\.bin\\webpack --config=\"webpack.config.js\"",
+    "watch": "node_modules\\.bin\\webpack --config=\"webpack.config.js\" --watch=true"
   },
   "repository": {
     "type": "git",
@@ -18,9 +19,14 @@
   },
   "homepage": "https://github.com/mishani0x0ef/ReportJ#readme",
   "devDependencies": {
+    "bootstrap": "^3.3.5",
     "clean-webpack-plugin": "^0.1.16",
     "eslint": "^4.7.2",
     "webpack": "^3.6.0",
     "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.6.6",
+    "jquery": "^3.2.1"
   }
 }

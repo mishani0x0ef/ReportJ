@@ -21,3 +21,5 @@ var AppConfig = function () {
     };
     Object.freeze(self.urls);
 }
+
+export default AppConfig;

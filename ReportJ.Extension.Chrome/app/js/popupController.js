@@ -1,5 +1,13 @@
-// Add this comment in order to avoid bug in Chrome - https://bugs.chromium.org/p/chromium/issues/detail?id=720597
-jiraReporterApp.controller('PopupController', function ($scope, $timeout, storageService, repositoryService) {
+import AppConfig from "../config";
+import JiraWrapper from "./jira";
+import UrlService from "./urlService";
+
+import angular from "angular";
+import dialog from "./dialog";
+import reportjApp from "./app";
+
+// todo: currently controller doesn't work propely. MR
+reportjApp.controller('PopupController', function ($scope, $timeout, storageService, repositoryService) {
 
     $scope.config = new AppConfig();
     $scope.insideJiraPage = false;

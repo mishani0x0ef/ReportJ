@@ -1,6 +1,4 @@
-if (typeof bootbox === "undefined") {
-    throw new Error("bootbox is required from dialog");
-}
+import * as bootbox from "../lib/bootbox";
 
 class Dialog {
     alert(message, caption) {
@@ -14,5 +12,4 @@ class Dialog {
     }
 }
 
-// init global dialog.
-window.dialog = new Dialog();
+export default new Dialog();

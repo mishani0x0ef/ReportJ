@@ -1,4 +1,13 @@
-jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, repositoryService) {
+import "bootstrap";
+import $ from "jquery";
+import AppConfig from "../config";
+
+import angular from "angular";
+import dialog from "./dialog";
+import reportjApp from "./app";
+
+// todo: currently controller doesn't work propely. MR
+reportjApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, repositoryService) {
 
     // Private handlers
 
