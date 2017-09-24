@@ -4,7 +4,8 @@
   "description": "",
   "main": "background.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node_modules\\.bin\\webpack --config=\"webpack.config.js\""
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,9 @@
   },
   "homepage": "https://github.com/mishani0x0ef/ReportJ#readme",
   "devDependencies": {
-    "eslint": "^4.7.2"
+    "clean-webpack-plugin": "^0.1.16",
+    "eslint": "^4.7.2",
+    "webpack": "^3.6.0",
+    "webpack-merge": "^4.1.0"
   }
 }
