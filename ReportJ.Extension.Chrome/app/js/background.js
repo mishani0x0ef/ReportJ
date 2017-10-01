@@ -6,14 +6,27 @@ import { getRandomString } from "./util/string";
 class BackgroundWorker {
     constructor(browser) {
         this.browser = browser;
+        this.browser.runtime.onInstalled.addListener((e) => this.onInstalled(e));
         this.urlService = new UrlService(browser);
-
-        this.initContextMenu();
-        this.browser.contextMenus.onClicked.addListener(this.contextMenuHandler);
     }
 
-    contextMenuHandler(e) {
-        if (e.menuItemId !== self.contextMenuId) {
+    onInstalled() {
+        this.initContextMenu();
+    }
+
+    initContextMenu() {
+        const context = "editable";
+        const title = `${config.app.name} add issue summary`;
+        this.menuItemId = this.browser.contextMenus.create({
+            "title": title,
+            "contexts": [context],
+            "id": getRandomString(),
+        });
+        this.browser.contextMenus.onClicked.addListener((e) => this.onContextMenuClick(e));
+    }
+
+    onContextMenuClick(e) {
+        if (e.menuItemId !== this.menuItemId) {
             return;
         }
 
@@ -27,16 +40,6 @@ class BackgroundWorker {
                     const code = `document.activeElement.value = ${issueSummary} + document.activeElement.value`;
                     this.browser.tabs.executeScript({ code });
                 });
-        });
-    }
-
-    initContextMenu() {
-        const context = "editable";
-        const title = config.app.name + " add issue summary";
-        this.contextMenuId = this.browser.contextMenus.create({
-            "title": title,
-            "contexts": [context],
-            "id": getRandomString()
         });
     }
 }
