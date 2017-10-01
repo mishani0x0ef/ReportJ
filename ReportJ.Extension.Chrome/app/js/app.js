@@ -1,6 +1,7 @@
 import angular from "angular";
 
-const reportjApp = angular.module('reportjApp', []);
+const reportjApp = angular.module("reportjApp", [])
+    .constant("browser", chrome);
 
 reportjApp.directive('equals', function () {
     return {
@@ -55,6 +56,6 @@ reportjApp.directive('diableValidation', function () {
             });
         }
     }
-})
+});
 
 export default reportjApp;

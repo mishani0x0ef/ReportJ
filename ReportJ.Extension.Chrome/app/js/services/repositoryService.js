@@ -1,8 +1,7 @@
 import config from "~/config";
-import reportjApp from "~/js/app";
 
-reportjApp.service('repositoryService', function ($q, $http) {
-    var baseApiUrl = config.urls.reportjApiUrl;
+export default function RepositoryService($q, $http) {
+    var baseApiUrl = config.api.reportjApiUrl;
     var defaultCommitsCount = 10;
 
     this.checkConnection = function () {
@@ -56,4 +55,4 @@ reportjApp.service('repositoryService', function ($q, $http) {
             return $q.deferred().reject().promise();
         });
     };
-});
+}

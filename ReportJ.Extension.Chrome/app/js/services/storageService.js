@@ -1,6 +1,4 @@
-import reportjApp from "./app";
-
-reportjApp.service('storageService', function ($q) {
+export default function StorageService() {
     var self = this;
 
     var defaultTemplates = [
@@ -54,4 +52,4 @@ reportjApp.service('storageService', function ($q) {
     function isNil(obj) {
         return typeof (obj) === "undefined" || obj === null;
     }
-});
+}

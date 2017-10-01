@@ -3,17 +3,15 @@ import UrlService from "~/js/services/urlService";
 
 import angular from "angular";
 import dialog from "~/js/util/dialog";
-import reportjApp from "./app";
 
-// todo: currently controller doesn't work propely. MR
-reportjApp.controller('PopupController', function ($scope, $timeout, storageService, repositoryService) {
-
+// todo: decouple this class on components and use ES6 syntax. Currently it's require too many afforts. MR
+export default function PopupController($scope, $timeout, browser, storageService, repositoryService) {
     $scope.insideJiraPage = false;
 
     var jira = {};
 
     var initJira = function () {
-        const urlService = new UrlService(chrome);
+        const urlService = new UrlService(browser);
         urlService.getCurrentBaseUrl()
             .then((url) => {
                 jira = new JiraWrapper(url);
@@ -44,7 +42,7 @@ reportjApp.controller('PopupController', function ($scope, $timeout, storageServ
             }
             angular.forEach(repositories, (repo) => {
                 repositoryService.getLastCommits(repo, $scope.addCommits)
-                    .then((commits) => { angular.copy(commits, $scope.svnCommits); })
+                    .then((commits) => angular.copy(commits, $scope.svnCommits))
                     .catch(() => {
                         const msg = `Oops! Something went wrong while getting your commits for '${repo.name}' repository.`;
                         dialog.alert(msg, "Warning!");
@@ -69,18 +67,18 @@ reportjApp.controller('PopupController', function ($scope, $timeout, storageServ
     };
 
     $scope.openOptions = function () {
-        chrome.tabs.create({
+        browser.tabs.create({
             url: "options.html"
         });
     };
 
     $scope.addIssueSummary = function () {
-        chrome.tabs.getSelected(null, (tab) => {
+        browser.tabs.getSelected(null, (tab) => {
             jira.getIssueInfo(tab.url)
                 .then((summary) => {
                     const issueSummary = JSON.stringify(summary);
                     const code = `document.activeElement.value = ${issueSummary} + document.activeElement.value`;
-                    chrome.tabs.executeScript({ code });
+                    browser.tabs.executeScript({ code });
                 });
         });
     };
@@ -93,7 +91,7 @@ reportjApp.controller('PopupController', function ($scope, $timeout, storageServ
         }, 1000);
 
         const code = `document.activeElement.value = document.activeElement.value + ${JSON.stringify(message)} + '\\n';true`;
-        chrome.tabs.executeScript({ code });
+        browser.tabs.executeScript({ code });
     };
 
     this.initialize = function () {
@@ -111,4 +109,4 @@ reportjApp.controller('PopupController', function ($scope, $timeout, storageServ
     }
 
     this.initialize();
-});
+}

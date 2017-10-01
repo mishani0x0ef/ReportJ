@@ -7,7 +7,7 @@ module.exports = function () {
     return {
         entry: {
             background: "./app/js/background.js",
-            popup: "./app/js/popupController.js",
+            popup: "./app/js/popup/app.js",
             options: "./app/js/optionsController.js",
         },
         output: {
