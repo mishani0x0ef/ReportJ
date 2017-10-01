@@ -1,8 +1,7 @@
-import AppConfig from "../config";
-import reportjApp from "./app";
+import config from "~/config";
+import reportjApp from "~/js/app";
 
 reportjApp.service('repositoryService', function ($q, $http) {
-    var config = new AppConfig();
     var baseApiUrl = config.urls.reportjApiUrl;
     var defaultCommitsCount = 10;
 

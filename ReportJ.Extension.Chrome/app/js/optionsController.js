@@ -1,9 +1,9 @@
 import "bootstrap";
 import $ from "jquery";
-import AppConfig from "../config";
 
 import angular from "angular";
-import dialog from "./dialog";
+import config from "~/config";
+import dialog from "~/js/util/dialog";
 import reportjApp from "./app";
 
 // todo: currently controller doesn't work propely. MR
@@ -53,7 +53,7 @@ reportjApp.controller('OptionsController', function ($scope, $interval, $timeout
         $scope.saveSettings();
     }
 
-    $scope.config = new AppConfig();
+    $scope.config = config;
 
     $scope.maxRepoQuota = 2;
     $scope.repoApiAvailable = false;

@@ -1,7 +1,11 @@
 export default class UrlService {
+    constructor(browser) {
+        this.browser = browser;
+    }
+
     getCurrentBaseUrl() {
         return new Promise((resolve) => {
-            chrome.tabs.getSelected(null, (tab) => {
+            this.browser.tabs.getSelected(null, (tab) => {
                 const baseUrl = this.getBaseUrl(tab.url);
                 resolve(baseUrl);
             });

@@ -1,21 +1,19 @@
-import AppConfig from "../config";
-import JiraWrapper from "./jira";
-import UrlService from "./urlService";
+import JiraWrapper from "~/js/services/jira";
+import UrlService from "~/js/services/urlService";
 
 import angular from "angular";
-import dialog from "./dialog";
+import dialog from "~/js/util/dialog";
 import reportjApp from "./app";
 
 // todo: currently controller doesn't work propely. MR
 reportjApp.controller('PopupController', function ($scope, $timeout, storageService, repositoryService) {
 
-    $scope.config = new AppConfig();
     $scope.insideJiraPage = false;
 
     var jira = {};
 
     var initJira = function () {
-        const urlService = new UrlService();
+        const urlService = new UrlService(chrome);
         urlService.getCurrentBaseUrl()
             .then((url) => {
                 jira = new JiraWrapper(url);

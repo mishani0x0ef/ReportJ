@@ -1,13 +1,12 @@
-import AppConfig from "./config";
-import JiraWrapper from "./js/jira";
-import UrlService from "./js/urlService";
-import { getRandomString } from "./js/util/string";
+import JiraWrapper from "./services/jira";
+import UrlService from "./services/urlService";
+import config from "~/config";
+import { getRandomString } from "./util/string";
 
 class BackgroundWorker {
     constructor(browser) {
         this.browser = browser;
-        this.config = new AppConfig();
-        this.urlService = new UrlService();
+        this.urlService = new UrlService(browser);
 
         this.initContextMenu();
         this.browser.contextMenus.onClicked.addListener(this.contextMenuHandler);
@@ -33,7 +32,7 @@ class BackgroundWorker {
 
     initContextMenu() {
         const context = "editable";
-        const title = this.config.app.name + " add issue summary";
+        const title = config.app.name + " add issue summary";
         this.contextMenuId = this.browser.contextMenus.create({
             "title": title,
             "contexts": [context],

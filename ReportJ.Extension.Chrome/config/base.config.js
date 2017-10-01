@@ -1,11 +1,12 @@
 var path = require("path");
 var webpack = require("webpack");
 var CleanWebpackPlugin = require("clean-webpack-plugin");
+var manifest = require("../app/manifest.json");
 
 module.exports = function () {
     return {
         entry: {
-            background: "./app/background.js",
+            background: "./app/js/background.js",
             popup: "./app/js/popupController.js",
             options: "./app/js/optionsController.js",
         },
@@ -39,6 +40,12 @@ module.exports = function () {
             new webpack.ProvidePlugin({
                 $: "jquery",
                 jQuery: "jquery"
+            }),
+            new webpack.DefinePlugin({
+                NAME: JSON.stringify(manifest.name),
+                DESCRIPTION: JSON.stringify(manifest.description),
+                VERSION: JSON.stringify(manifest.version),
+                HOME_URL: JSON.stringify(manifest.homepage_url),
             }),
             new webpack.optimize.CommonsChunkPlugin({
                 name: "vendor",
