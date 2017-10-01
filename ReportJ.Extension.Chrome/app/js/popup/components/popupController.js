@@ -110,3 +110,5 @@ export default function PopupController($scope, $timeout, browser, storageServic
 
     this.initialize();
 }
+
+PopupController.$inject = ["$scope", "$timeout", "browser", "storageService", "repositoryService"];

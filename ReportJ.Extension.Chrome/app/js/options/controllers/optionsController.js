@@ -203,3 +203,5 @@ export default function OptionsController($scope, $interval, $timeout, storageSe
 
     this.initialize();
 }
+
+OptionsController.$inject = ["$scope", "$interval", "$timeout", "storageService", "repositoryService"];

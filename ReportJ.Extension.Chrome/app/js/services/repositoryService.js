@@ -56,3 +56,5 @@ export default function RepositoryService($q, $http) {
         });
     };
 }
+
+RepositoryService.$inject = ["$q", "$http"];
