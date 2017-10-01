@@ -1,7 +1,22 @@
 var path = require("path");
 var webpack = require("webpack");
 var CleanWebpackPlugin = require("clean-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var manifest = require("../app/manifest.json");
+
+function getCssLoaders() {
+    return [
+        {
+            loader: "css-loader",
+            options: {
+                minimize: true
+            }
+        },
+        {
+            loader: "postcss-loader"
+        }
+    ];
+}
 
 module.exports = function () {
     return {
@@ -27,7 +42,13 @@ module.exports = function () {
                 {
                     test: /\.html$/,
                     use: "raw-loader"
-                }
+                },
+                {
+                    test: /\.css$/,
+                    use: ExtractTextPlugin.extract({
+                        use: getCssLoaders()
+                    })
+                },
             ]
         },
         resolve: {
@@ -59,7 +80,8 @@ module.exports = function () {
             }),
             new CleanWebpackPlugin(["app/build/**"], {
                 root: path.resolve(__dirname, "../")
-            })
+            }),
+            new ExtractTextPlugin("[name].css")
         ]
     };
 };

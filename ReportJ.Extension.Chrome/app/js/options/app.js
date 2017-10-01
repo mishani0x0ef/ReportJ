@@ -1,3 +1,6 @@
+import "~/css/main.css";
+import "~/css/animation.css";
+import "~/css/bootstrap.paper.css";
 import OptionsController from "./controllers/optionsController";
 import RepositoryService from "~/js/services/repositoryService";
 import StarageService from "~/js/services/storageService";

@@ -3,11 +3,11 @@ var webpackMerge = require("webpack-merge");
 var baseConfig = require("./base.config");
 
 function getCssLoaders() {
-    return ["style-loader", "css-loader", "postcss-loader"];
-}
-
-function getLessLoaders() {
-    return ["less-loader"];
+    return [
+        "style-loader",
+        "css-loader",
+        "postcss-loader"
+    ];
 }
 
 module.exports = function (env) {
@@ -21,10 +21,6 @@ module.exports = function (env) {
                 //     test: /\.css$/,
                 //     use: getCssLoaders()
                 // },
-                // {
-                //     test: /\.less$/,
-                //     use: getCssLoaders().concat(getLessLoaders())
-                // }
             ]
         },
         plugins: [
