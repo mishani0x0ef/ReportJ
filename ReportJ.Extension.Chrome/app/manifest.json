@@ -1,13 +1,20 @@
 {
     "manifest_version": 2,
-
     "name": "ReportJ",
     "description": "The reporting helper for JIRA system.",
     "homepage_url": "https://github.com/mishani0x0ef/reportj",
-    "version": "2.3.3",
-    "permissions": ["storage", "activeTab", "contextMenus"],
+    "version": "2.4",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "contextMenus"
+    ],
     "background": {
-        "scripts": ["build/manifest.js", "build/vendor.js", "build/background.js"],
+        "scripts": [
+            "build/manifest.js",
+            "build/vendor.js",
+            "build/background.js"
+        ],
         "persistent": false
     },
     "browser_action": {

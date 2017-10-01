@@ -12,7 +12,7 @@ $manifest | ConvertTo-Json  | set-content ".\app\manifest.json"
 # BUILD
 Write-Host "## Run NPM build";
 
-$buildCmd = "npm run build"
+$buildCmd = "npm run build:release"
 Invoke-Expression -Command $buildCmd
 
 Write-Host "## Build Success";
