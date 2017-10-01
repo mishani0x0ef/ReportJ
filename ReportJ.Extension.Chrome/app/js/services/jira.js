@@ -28,6 +28,34 @@ export default class JiraWrapper {
             .catch(() => false);
     }
 
+    setRemainingEstimate(url, estimate) {
+        estimate = estimate || "0m";
+        const key = this._getIssueKey(url);
+        const api = `${this.apiUrl}issue/${key}`;
+
+        const requestData = {
+            "update":
+            {
+                "timetracking": [
+                    {
+                        "edit":
+                        { "remainingEstimate": estimate }
+                    }
+                ]
+            }
+        };
+
+        const settings = {
+            method: "PUT",
+            dataType: "json",
+            contentType: 'application/json',
+            url: api,
+            data: JSON.stringify(requestData)
+        };
+
+        return $.ajax(settings);
+    }
+
     _getSummaryFromIssue(issue, summary) {
         let issueTitle = issue.fields.summary;
 
