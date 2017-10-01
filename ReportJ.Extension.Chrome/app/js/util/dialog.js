@@ -1,4 +1,4 @@
-import * as bootbox from "~/lib/bootbox";
+import * as bootbox from "./bootbox";
 
 class Dialog {
     alert(message, caption) {
