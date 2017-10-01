@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="reportjApp">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -14,275 +14,286 @@
     <script type="text/javascript" src="build/options.js"></script>
 </head>
 
-<body class="options-wrap" ng-controller="OptionsController">
+<body class="options-wrap" ng-app="reportjOptionsApp">
 
-    <div id="container">
-        <div class="col-lg-6 col-md-10 col-sm-12 col-lg-offset-3 col-md-offset-1 panel panel-default">
-            <div class="panel-body">
+    <div class="content" ng-controller="optionsController">
+        <div id="container">
+            <div class="col-lg-6 col-md-10 col-sm-12 col-lg-offset-3 col-md-offset-1 panel panel-default">
+                <div class="panel-body">
 
-                <div class="options">
+                    <div class="options">
 
-                    <div class="header">
-                        <div class="header-title text-center">
-                            <h2 class="text-center">
-                                <img src="img/logo-wide.png" alt="{{config.app.name}} logo"> 
-                                <span>Settings</span>
-                            </h2>
-                        </div>
-                    </div>
-
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#templatesSettings" data-toggle="tab" aria-expanded="true">Templates</a>
-                        </li>
-                        <li>
-                            <a href="#repositorySettings" data-toggle="tab" aria-expanded="false">Repositories</a>
-                        </li>
-                        <li>
-                            <a href="#about" data-toggle="tab" aria-expanded="false">About</a>
-                        </li>
-                    </ul>
-
-                    <div id="settings" class="tab-content well">
-                        
-                        <div id="templatesSettings" class="fade tab-pane active in">
-                            <h4>What is this?</h4>
-                            <p>Templates allow you to pre-define your common used reports and get quick access to them via ReportJ popup.</p>
-                            
-                            <h5>Templates</h5>
-                            <div class="list">
-                                <div class="list-item" ng-repeat="template in templates track by $index" ng-click="editTemplate(template)">
-                                    <div class="col-xs-10">
-                                        <span>{{template.description}}</span>
-                                    </div>
-                                    <div class="col-xs-2 text-right">
-                                        <button type="button" class="btn btn-link" title="Delete" ng-click="removeTemplate(template); $event.stopPropagation();">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="inline-group" ng-show="templates.length > 0">
-                                <button class="btn btn-primary" ng-click="editTemplate()" ng-disabled="isMaxTemplatesCountExceed">Add Template</button>
-                                <p class="off" ng-class="{ off: isMaxTemplatesCountExceed !== true }">Sorry, but quota for templates is <strong>{{maxTemplateQuota}}</strong> templates.</p>
-                            </div>
-                            
-                        </div>
-                        
-                        <div id="templateEditModal" class="modal modal-custom">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            <span>&times;</span>
-                                        </button>
-                                        <img class="modal-header-icon" src="img/template.png" alt="template" />
-                                        <h4 class="modal-title">Template</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal" name="templateForm" ng-submit="saveTemplate(editedTemplate)">
-                                            <fieldset>
-                                                <div class="form-group" ng-class="{ 'has-error': templateForm.description.$dirtyInvalid }" data-title="{{templateForm.description.$errorMessage}}">
-                                                    <div class="col-xs-12">
-                                                        <textarea class="form-control" rows="5" placeholder="Put template text here..." required maxlength="255" name="description" ng-model="editedTemplate.description"></textarea>
-                                                        <span ng-class="{ required: templateForm.description.$error.required }"></span>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <span class="text-danger error-summary" ng-show="templateForm.$invalid">Please fill all required fields</span>
-                                        <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveTemplate(editedTemplate)" ng-disabled="templateForm.$invalid">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    </div>
-                                </div>
+                        <div class="header">
+                            <div class="header-title text-center">
+                                <h2 class="text-center">
+                                    <img src="img/logo-wide.png" alt="{{config.app.name}} logo">
+                                    <span>Settings</span>
+                                </h2>
                             </div>
                         </div>
 
-                        <div id="repositorySettings" class="fade tab-pane">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#templatesSettings" data-toggle="tab" aria-expanded="true">Templates</a>
+                            </li>
+                            <li>
+                                <a href="#repositorySettings" data-toggle="tab" aria-expanded="false">Repositories</a>
+                            </li>
+                            <li>
+                                <a href="#about" data-toggle="tab" aria-expanded="false">About</a>
+                            </li>
+                        </ul>
 
-                            <h4>What is this?</h4>
-                            <p>You can configure your SVN and Git repositories to get quick acccess to your latest commits info via ReportJ popup.</p>
+                        <div id="settings" class="tab-content well">
 
-                            <div class="text-center" ng-show="!repoApiAvailable">
-                                <b>To use commits browser you need to install desktop application first.</b>
-                                <p>
-                                    Install desktop application or run it if it's already installed. 
-                                    Then you can reload this page and use awersome commits browse features in your reporting.
-                                </p>
-                                <div>
-                                    <a type="button" class="btn btn-primary btn-lg" href="https://github.com/mishani0x0ef/ReportJ/releases/latest" target="_blank">
-                                        <span>Download</span>
-                                        <span class="glyphicon glyphicon-download"></span>
-                                    </a>
-                                </div>                                
-                            </div>
+                            <div id="templatesSettings" class="fade tab-pane active in">
+                                <h4>What is this?</h4>
+                                <p>Templates allow you to pre-define your common used reports and get quick access to them via
+                                    ReportJ popup.</p>
 
-                            <div ng-show="repoApiAvailable">
-                                <p>If you need ReportJ desktop application - <a href="https://github.com/mishani0x0ef/ReportJ/releases/latest">here is the link to latest release</a></p>
-                                
-                                <div class="content-block" ng-repeat="type in ['SVN', 'Git']">
-                                    <h5>{{type}} Repositories</h5>
-                                    <div class="list">
-                                        <div class="list-item" ng-repeat="repository in repositories | filter: { type: type } | orderBy: 'name'"
-                                             ng-click="editRepository(repository)">
-                                            <div class="col-xs-10">
-                                                <span>{{repository.name}}</span>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <button type="button" class="btn btn-link pull-right" title="Delete" ng-click="removeRepository(repository); $event.stopPropagation();">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </button>
-                                            </div>
-                                            <div class="col-xs-4" title="User Name">
-                                                <i>{{repository.userName}}</i>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <i>{{repository.url}}</i>
-                                            </div>
+                                <h5>Templates</h5>
+                                <div class="list">
+                                    <div class="list-item" ng-repeat="template in templates track by $index" ng-click="editTemplate(template)">
+                                        <div class="col-xs-10">
+                                            <span>{{template.description}}</span>
+                                        </div>
+                                        <div class="col-xs-2 text-right">
+                                            <button type="button" class="btn btn-link" title="Delete" ng-click="removeTemplate(template); $event.stopPropagation();">
+                                                        <span class="glyphicon glyphicon-trash"></span>
+                                                    </button>
                                         </div>
                                     </div>
-                                    <div class="text-center" ng-show="(repositories | filter: { type: type }).length === 0">
-                                        <div>
-                                            <span class="glyphicon glyphicon-default glyphicon-search"></span>
-                                        </div>
-                                        <h5>You have no repositories!</h5>
-                                        <h6>It's perfect chance to <a href="#" ng-click="editRepository(null, type)"> add your first one</a></h6>
-                                    </div>
-                                    <div class="inline-group" ng-show="(repositories | filter: { type: type }).length > 0">
-                                        <button class="btn btn-primary" ng-click="editRepository(null, type)" 
-                                                ng-disabled="(repositories | filter: { type: type }).length >= maxRepoQuota">Add Repository</button>
-                                        <p class="off" ng-class="{off: (repositories | filter: { type: type }).length < maxRepoQuota}">
-                                            Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong> for each repository type.
-                                        </p>
-                                    </div>
                                 </div>
-                            
+
+                                <div class="inline-group" ng-show="templates.length > 0">
+                                    <button class="btn btn-primary" ng-click="editTemplate()" ng-disabled="isMaxTemplatesCountExceed">Add Template</button>
+                                    <p class="off" ng-class="{ off: isMaxTemplatesCountExceed !== true }">Sorry, but quota for templates is <strong>{{maxTemplateQuota}}</strong> templates.</p>
+                                </div>
+
                             </div>
-                            
-                        </div>
 
-                        <div id="repositoryEditModal" class="modal modal-custom">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            <span class="">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title">{{editedRepository.type}} Repository Settings</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal" name="repoForm" ng-submit="saveRepository(editedRepository)">
-                                            <fieldset>
-                                                <div class="form-group" ng-class="{ 'has-error': repoForm.name.$dirtyInvalid }">
-                                                    <label for="repositoryName" class="col-xs-12">Name</label>
-                                                    <div class="col-xs-12">
-                                                        <input type="text" class="form-control" placeholder="Friendly name for your repository" required maxlength="50" name="name" ng-model="editedRepository.name">
-                                                        <span ng-class="{ required: repoForm.name.$error.required }"></span>
-                                                    </div>
-                                                    <div class="col-xs-12 text-muted">
-                                                        <small>Friendly name for your repository to easier identify it.</small>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group" ng-class="{ 'has-error': repoForm.url.$dirtyInvalid }">
-                                                    <label for="repositoryUrl" class="col-xs-12">Repository URL</label>
-                                                    <div class="col-xs-12">
-                                                        <input type="text" class="form-control" placeholder="URL address to repository" required maxlength="255" name="url" ng-model="editedRepository.url">
-                                                        <span ng-class="{ required: repoForm.url.$error.required }"></span>
-                                                    </div>
-                                                    <div class="col-xs-12 text-muted">
-                                                        <small ng-show="editedRepository.type === 'Git'">
-                                                            Path in file system to '.git' folder of your repository (e.g 'D:/project/ReportJ/.git/'). 
-                                                            Git repository feature work only with local repository it cannot access to remote one.
-                                                        </small>
-                                                        <small ng-show="editedRepository.type === 'SVN'">URL of your SVN repository or any of it branches (e.g http://svn.server/myproject).</small>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group" ng-class="{ 'has-error': repoForm.username.$dirtyInvalid }">
-                                                    <label for="repositoryUsername" class="col-xs-12">Username</label>
-                                                    <div class="col-xs-12">
-                                                        <input type="text" class="form-control" placeholder="Name of user that should be tracked" required maxlength="30" name="username" ng-model="editedRepository.userName">
-                                                        <span ng-class="{ required: repoForm.username.$error.required }"></span>
-                                                    </div>
-                                                    <div class="col-xs-12 text-muted">
-                                                        <small>Username used to filter only your commits and give you more relevant data.</small>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <span class="text-danger error-summary" ng-show="repoForm.$invalid">Please fill all required fields</span>
-                                        <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveRepository(editedRepository)" ng-disabled="repoForm.$invalid">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    </div>
-
-                                    <div class="loading-wrap text-center" ng-class="{ on: loading.inProgress === true }">
-                                        <div class="progress-wrap">
-                                            <div class="icon">
-                                                <span class="glyphicon glyphicon-globe"></span>
-                                                <span class="glyphicon glyphicon-transfer"></span>
-                                                <span class="glyphicon glyphicon-globe"></span>
-                                            </div>
-                                            <div class="progress-description"><strong>{{loading.description}}</strong></div>
+                            <div id="templateEditModal" class="modal modal-custom">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                        <span>&times;</span>
+                                                    </button>
+                                            <img class="modal-header-icon" src="img/template.png" alt="template" />
+                                            <h4 class="modal-title">Template</h4>
                                         </div>
-                                        <div class="loading-points">
-                                            <span>.</span>
-                                            <span>.</span>
-                                            <span>.</span>
-                                            <span>.</span>
-                                            <span>.</span>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal" name="templateForm" ng-submit="saveTemplate(editedTemplate)">
+                                                <fieldset>
+                                                    <div class="form-group" ng-class="{ 'has-error': templateForm.description.$dirtyInvalid }" data-title="{{templateForm.description.$errorMessage}}">
+                                                        <div class="col-xs-12">
+                                                            <textarea class="form-control" rows="5" placeholder="Put template text here..." required maxlength="255" name="description"
+                                                                ng-model="editedTemplate.description"></textarea>
+                                                            <span ng-class="{ required: templateForm.description.$error.required }"></span>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <span class="text-danger error-summary" ng-show="templateForm.$invalid">Please fill all required fields</span>
+                                            <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveTemplate(editedTemplate)" ng-disabled="templateForm.$invalid">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div id="about" class="tab-pane fade well text-justify">
-                            <h5>{{config.app.name}} {{config.app.version}}</h5>
-                            <p>This extension designed to improve reporting experience inside JIRA system. It's made to make reporting easier and provide short way for adding of main report parts such as issue title or your previous commits information.</p>
-                            <p>Idea and functionality of extension was gets from personal experience of work with JIRA. And I will be happy to hear about your suggestions. So, don't hesitate to click on button in right-bottom corner.</p>
-                            <p>If you want to help to improve extension you could visit <a target="_blank" ng-href="{{config.app.homePage}}">GitHub page</a> and put your weight. Exspecially i would be appritiated if someone can create extension for Firefox.</p>
-                            <h6>Contact me:</h6>
-                            <ul>
-                                <li><a ng-href="mailto:{{config.app.author.email}}?subject={{config.app.name}}">Email</a></li>
-                                <li><a target="_blank" ng-href="{{config.app.feedbackPage}}">Leave feedback</a></li>
-                            </ul>
+                            <div id="repositorySettings" class="fade tab-pane">
+
+                                <h4>What is this?</h4>
+                                <p>You can configure your SVN and Git repositories to get quick acccess to your latest commits
+                                    info via ReportJ popup.</p>
+
+                                <div class="text-center" ng-show="!repoApiAvailable">
+                                    <b>To use commits browser you need to install desktop application first.</b>
+                                    <p>
+                                        Install desktop application or run it if it's already installed. Then you can reload this page and use awersome commits browse
+                                        features in your reporting.
+                                    </p>
+                                    <div>
+                                        <a type="button" class="btn btn-primary btn-lg" href="https://github.com/mishani0x0ef/ReportJ/releases/latest" target="_blank">
+                                                    <span>Download</span>
+                                                    <span class="glyphicon glyphicon-download"></span>
+                                                </a>
+                                    </div>
+                                </div>
+
+                                <div ng-show="repoApiAvailable">
+                                    <p>If you need ReportJ desktop application - <a href="https://github.com/mishani0x0ef/ReportJ/releases/latest">here is the link to latest release</a></p>
+
+                                    <div class="content-block" ng-repeat="type in ['SVN', 'Git']">
+                                        <h5>{{type}} Repositories</h5>
+                                        <div class="list">
+                                            <div class="list-item" ng-repeat="repository in repositories | filter: { type: type } | orderBy: 'name'" ng-click="editRepository(repository)">
+                                                <div class="col-xs-10">
+                                                    <span>{{repository.name}}</span>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <button type="button" class="btn btn-link pull-right" title="Delete" ng-click="removeRepository(repository); $event.stopPropagation();">
+                                                                <span class="glyphicon glyphicon-trash"></span>
+                                                            </button>
+                                                </div>
+                                                <div class="col-xs-4" title="User Name">
+                                                    <i>{{repository.userName}}</i>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <i>{{repository.url}}</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center" ng-show="(repositories | filter: { type: type }).length === 0">
+                                            <div>
+                                                <span class="glyphicon glyphicon-default glyphicon-search"></span>
+                                            </div>
+                                            <h5>You have no repositories!</h5>
+                                            <h6>It's perfect chance to <a href="#" ng-click="editRepository(null, type)"> add your first one</a></h6>
+                                        </div>
+                                        <div class="inline-group" ng-show="(repositories | filter: { type: type }).length > 0">
+                                            <button class="btn btn-primary" ng-click="editRepository(null, type)" ng-disabled="(repositories | filter: { type: type }).length >= maxRepoQuota">Add Repository</button>
+                                            <p class="off" ng-class="{off: (repositories | filter: { type: type }).length < maxRepoQuota}">
+                                                Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong>                                                for each repository type.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="repositoryEditModal" class="modal modal-custom">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                        <span class="">&times;</span>
+                                                    </button>
+                                            <h4 class="modal-title">{{editedRepository.type}} Repository Settings</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal" name="repoForm" ng-submit="saveRepository(editedRepository)">
+                                                <fieldset>
+                                                    <div class="form-group" ng-class="{ 'has-error': repoForm.name.$dirtyInvalid }">
+                                                        <label for="repositoryName" class="col-xs-12">Name</label>
+                                                        <div class="col-xs-12">
+                                                            <input type="text" class="form-control" placeholder="Friendly name for your repository" required maxlength="50" name="name"
+                                                                ng-model="editedRepository.name">
+                                                            <span ng-class="{ required: repoForm.name.$error.required }"></span>
+                                                        </div>
+                                                        <div class="col-xs-12 text-muted">
+                                                            <small>Friendly name for your repository to easier identify it.</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-class="{ 'has-error': repoForm.url.$dirtyInvalid }">
+                                                        <label for="repositoryUrl" class="col-xs-12">Repository URL</label>
+                                                        <div class="col-xs-12">
+                                                            <input type="text" class="form-control" placeholder="URL address to repository" required maxlength="255" name="url" ng-model="editedRepository.url">
+                                                            <span ng-class="{ required: repoForm.url.$error.required }"></span>
+                                                        </div>
+                                                        <div class="col-xs-12 text-muted">
+                                                            <small ng-show="editedRepository.type === 'Git'">
+                                                                        Path in file system to '.git' folder of your repository (e.g 'D:/project/ReportJ/.git/'). 
+                                                                        Git repository feature work only with local repository it cannot access to remote one.
+                                                                    </small>
+                                                            <small ng-show="editedRepository.type === 'SVN'">URL of your SVN repository or any of it branches (e.g http://svn.server/myproject).</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-class="{ 'has-error': repoForm.username.$dirtyInvalid }">
+                                                        <label for="repositoryUsername" class="col-xs-12">Username</label>
+                                                        <div class="col-xs-12">
+                                                            <input type="text" class="form-control" placeholder="Name of user that should be tracked" required maxlength="30" name="username"
+                                                                ng-model="editedRepository.userName">
+                                                            <span ng-class="{ required: repoForm.username.$error.required }"></span>
+                                                        </div>
+                                                        <div class="col-xs-12 text-muted">
+                                                            <small>Username used to filter only your commits and give you more relevant data.</small>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <span class="text-danger error-summary" ng-show="repoForm.$invalid">Please fill all required fields</span>
+                                            <input type="submit" value="Save changes" class="btn btn-primary" ng-click="saveRepository(editedRepository)" ng-disabled="repoForm.$invalid">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
+
+                                        <div class="loading-wrap text-center" ng-class="{ on: loading.inProgress === true }">
+                                            <div class="progress-wrap">
+                                                <div class="icon">
+                                                    <span class="glyphicon glyphicon-globe"></span>
+                                                    <span class="glyphicon glyphicon-transfer"></span>
+                                                    <span class="glyphicon glyphicon-globe"></span>
+                                                </div>
+                                                <div class="progress-description"><strong>{{loading.description}}</strong></div>
+                                            </div>
+                                            <div class="loading-points">
+                                                <span>.</span>
+                                                <span>.</span>
+                                                <span>.</span>
+                                                <span>.</span>
+                                                <span>.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="about" class="tab-pane fade well text-justify">
+                                <h5>{{config.app.name}} {{config.app.version}}</h5>
+                                <p>This extension designed to improve reporting experience inside JIRA system. It's made to
+                                    make reporting easier and provide short way for adding of main report parts such as issue
+                                    title or your previous commits information.</p>
+                                <p>Idea and functionality of extension was gets from personal experience of work with JIRA.
+                                    And I will be happy to hear about your suggestions. So, don't hesitate to click on button
+                                    in right-bottom corner.</p>
+                                <p>If you want to help to improve extension you could visit <a target="_blank" ng-href="{{config.app.homePage}}">GitHub page</a>                                    and put your weight. Exspecially i would be appritiated if someone can create extension
+                                    for Firefox.</p>
+                                <h6>Contact me:</h6>
+                                <ul>
+                                    <li><a ng-href="mailto:{{config.app.author.email}}?subject={{config.app.name}}">Email</a></li>
+                                    <li><a target="_blank" ng-href="{{config.app.feedbackPage}}">Leave feedback</a></li>
+                                </ul>
+                            </div>
+
                         </div>
 
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
 
-    <div class="notification-wrap" ng-class="{ on: notify === true, success: isNoticaitionSuccess === true, warning: isNoticaitionSuccess !== true }">
-        <div class="notification-icon">
-            <span class="glyphicon" ng-class="{ 'glyphicon-ok': isNoticaitionSuccess === true, 'glyphicon-remove': isNoticaitionSuccess !== true }"></span>
-        </div>
-        <div class="notification-message"><strong>Options saved</strong></div>
-    </div>
-
-    <div class="round-btn-wrap">
-        <div class="round-btn-menu">
-            <div class="round-btn-menu-item">
-                <a type="button" class="btn btn-icon github-icon" data-title="View on GitHub" target="_blank" ng-href="{{config.app.homePage}}">
-                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64pt" height="64pt" viewBox="0 0 64 64">
-                        <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000" stroke="none">
-                            <path d="M224 626 c-232 -76 -298 -370 -119 -535 42 -39 99 -71 125 -71 5 0 10 16 10 35 0 33 -2 35 -35 35 -35 0 -42 5 -90 66 -44 56 -23 62 32 9 42 -40 75 -45 98 -12 14 21 14 22 -7 30 -60 23 -88 42 -102 72 -21 43 -21 124 0 153 8 12 12 27 9 32 -10 16 5 70 18 70 7 0 24 -6 38 -14 17 -9 60 -14 119 -14 59 0 102 5 119 14 14 8 31 14 38 14 13 0 28 -54 18 -70 -3 -5 1 -20 9 -32 18 -25 21 -103 7 -141 -14 -36 -50 -66 -93 -78 -33 -9 -37 -12 -28 -29 5 -10 10 -46 10 -79 0 -35 4 -61 10 -61 52 0 158 88 198 165 23 43 27 63 27 135 0 70 -4 94 -24 135 -32 63 -93 125 -155 155 -60 28 -171 36 -232 16z" />
-                        </g>
-                    </svg>
-                </a>
+        <div class="notification-wrap" ng-class="{ on: notify === true, success: isNoticaitionSuccess === true, warning: isNoticaitionSuccess !== true }">
+            <div class="notification-icon">
+                <span class="glyphicon" ng-class="{ 'glyphicon-ok': isNoticaitionSuccess === true, 'glyphicon-remove': isNoticaitionSuccess !== true }"></span>
             </div>
+            <div class="notification-message"><strong>Options saved</strong></div>
         </div>
-        <div class="round-btn">
-            <a type="button" class="btn btn-primary btn-lg" data-title="Send Feedback" target="_blank" ng-href="{{config.app.feedbackPage}}">
-                <span class="glyphicon glyphicon-envelope"></span>
-            </a>
+
+        <div class="round-btn-wrap">
+            <div class="round-btn-menu">
+                <div class="round-btn-menu-item">
+                    <a type="button" class="btn btn-icon github-icon" data-title="View on GitHub" target="_blank" ng-href="{{config.app.homePage}}">
+                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64pt" height="64pt" viewBox="0 0 64 64">
+                            <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000" stroke="none">
+                                <path d="M224 626 c-232 -76 -298 -370 -119 -535 42 -39 99 -71 125 -71 5 0 10 16 10 35 0 33 -2 35 -35 35 -35 0 -42 5 -90 66 -44 56 -23 62 32 9 42 -40 75 -45 98 -12 14 21 14 22 -7 30 -60 23 -88 42 -102 72 -21 43 -21 124 0 153 8 12 12 27 9 32 -10 16 5 70 18 70 7 0 24 -6 38 -14 17 -9 60 -14 119 -14 59 0 102 5 119 14 14 8 31 14 38 14 13 0 28 -54 18 -70 -3 -5 1 -20 9 -32 18 -25 21 -103 7 -141 -14 -36 -50 -66 -93 -78 -33 -9 -37 -12 -28 -29 5 -10 10 -46 10 -79 0 -35 4 -61 10 -61 52 0 158 88 198 165 23 43 27 63 27 135 0 70 -4 94 -24 135 -32 63 -93 125 -155 155 -60 28 -171 36 -232 16z"
+                                />
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="round-btn">
+                <a type="button" class="btn btn-primary btn-lg" data-title="Send Feedback" target="_blank" ng-href="{{config.app.feedbackPage}}">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </a>
+            </div>
         </div>
     </div>
 

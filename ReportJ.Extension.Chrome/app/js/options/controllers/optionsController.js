@@ -4,10 +4,8 @@ import $ from "jquery";
 import angular from "angular";
 import config from "~/config";
 import dialog from "~/js/util/dialog";
-import reportjApp from "./app";
 
-// todo: currently controller doesn't work propely. MR
-reportjApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, repositoryService) {
+export default function OptionsController($scope, $interval, $timeout, storageService, repositoryService) {
 
     // Private handlers
 
@@ -204,4 +202,4 @@ reportjApp.controller('OptionsController', function ($scope, $interval, $timeout
     }
 
     this.initialize();
-});
+}
