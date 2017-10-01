@@ -27,5 +27,17 @@
         "16": "img/logo.png",
         "48": "img/logo.png",
         "128": "img/logo128x128.png"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+                "build/manifest.js",
+                "build/vendor.js",
+                "build/content.js"
+            ]
+        }
+    ]
 }
