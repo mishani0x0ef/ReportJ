@@ -4,7 +4,11 @@
   "description": "",
   "main": "background.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node_modules\\.bin\\webpack --config=\"webpack.config.js\"",
+    "build:release": "node_modules\\.bin\\webpack --config=\"webpack.config.js\" --env.environment=release",
+    "pack": ".\\pack.ps1",
+    "watch": "node_modules\\.bin\\webpack --config=\"webpack.config.js\" --watch=true"
   },
   "repository": {
     "type": "git",
@@ -17,6 +21,26 @@
   },
   "homepage": "https://github.com/mishani0x0ef/ReportJ#readme",
   "devDependencies": {
-    "eslint": "^4.7.2"
+    "autoprefixer": "^7.1.4",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.16",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.7.2",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^1.1.4",
+    "postcss": "^6.0.12",
+    "postcss-discard-duplicates": "^2.1.0",
+    "postcss-loader": "^2.0.6",
+    "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^3.6.0",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.6.6",
+    "bootstrap": "^3.3.5",
+    "jquery": "^3.2.1"
   }
 }

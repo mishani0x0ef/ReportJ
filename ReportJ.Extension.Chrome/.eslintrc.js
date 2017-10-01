@@ -3,6 +3,9 @@ module.exports = {
         "browser": true,
         "es6": true
     },
+    "parserOptions": {
+        "sourceType": "module"
+    },
     "extends": "eslint:recommended",
     "rules": {
         "accessor-pairs": "error",
@@ -72,10 +75,6 @@ module.exports = {
         "func-call-spacing": "error",
         "func-name-matching": "error",
         "func-names": "off",
-        "func-style": [
-            "error",
-            "expression"
-        ],
         "function-paren-newline": "off",
         "generator-star-spacing": "error",
         "getter-return": "error",
@@ -250,7 +249,7 @@ module.exports = {
         "quotes": "off",
         "radix": "error",
         "require-await": "error",
-        "require-jsdoc": "error",
+        "require-jsdoc": "off",
         "rest-spread-spacing": [
             "error",
             "never"

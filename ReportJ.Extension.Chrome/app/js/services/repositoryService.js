@@ -1,6 +1,7 @@
-jiraReporterApp.service('repositoryService', function ($q, $http) {
-    var config = new AppConfig();
-    var baseApiUrl = config.urls.reportjApiUrl;
+import config from "~/config";
+
+export default function RepositoryService($q, $http) {
+    var baseApiUrl = config.api.reportjApiUrl;
     var defaultCommitsCount = 10;
 
     this.checkConnection = function () {
@@ -54,4 +55,6 @@ jiraReporterApp.service('repositoryService', function ($q, $http) {
             return $q.deferred().reject().promise();
         });
     };
-});
+}
+
+RepositoryService.$inject = ["$q", "$http"];

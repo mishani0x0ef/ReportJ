@@ -1,4 +1,11 @@
-jiraReporterApp.controller('OptionsController', function ($scope, $interval, $timeout, storageService, repositoryService) {
+import "bootstrap";
+import $ from "jquery";
+
+import angular from "angular";
+import config from "~/config";
+import dialog from "~/js/util/dialog";
+
+export default function OptionsController($scope, $interval, $timeout, storageService, repositoryService) {
 
     // Private handlers
 
@@ -44,7 +51,7 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
         $scope.saveSettings();
     }
 
-    $scope.config = new AppConfig();
+    $scope.config = config;
 
     $scope.maxRepoQuota = 2;
     $scope.repoApiAvailable = false;
@@ -195,4 +202,6 @@ jiraReporterApp.controller('OptionsController', function ($scope, $interval, $ti
     }
 
     this.initialize();
-});
+}
+
+OptionsController.$inject = ["$scope", "$interval", "$timeout", "storageService", "repositoryService"];

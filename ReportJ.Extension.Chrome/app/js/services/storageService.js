@@ -1,4 +1,4 @@
-jiraReporterApp.service('storageService', function ($q) {
+export default function StorageService() {
     var self = this;
 
     var defaultTemplates = [
@@ -52,4 +52,4 @@ jiraReporterApp.service('storageService', function ($q) {
     function isNil(obj) {
         return typeof (obj) === "undefined" || obj === null;
     }
-});
+}
