@@ -16,9 +16,7 @@ To use extension you need to do next steps:
 2. Click "ADD TO CHROME"
 3. You are awersome
 
-# How to use Chrome extension?
-
-## Add pre-defined template
+# Add pre-defined template
 
 Often we should report some common activities such as status meetings, retrospectives, deployments etc. ReportJ has "Reporting Templates" feature which allow you to define your common activities once and than use it at any moment.
 
@@ -36,7 +34,7 @@ Often we should report some common activities such as status meetings, retrospec
 * Select *"Templates"* tab
 * Click on any template in list and it will be added by magic
 
-## Add commit's message
+# Add commit's message
 
 It's not a secret that developers copy&paste commit's message into reports. To do it in more convinient way:
 
@@ -59,7 +57,7 @@ It's not a secret that developers copy&paste commit's message into reports. To d
 * Select *"Commits"* tab
 * Just click on commit info you want to add and it will be added
 
-## Add Issue Summary
+# Add Issue Summary
 
 *Work only on Jira pages.*
 
