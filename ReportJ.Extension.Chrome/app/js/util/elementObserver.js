@@ -1,12 +1,14 @@
 import $ from "jquery";
+import debounce from "lodash.debounce"
 
 export default class ElementObserver {
     constructor(selector) {
         this.selector = selector;
         this.handlers = new Set();
 
-        this.prevIsVisible = false;
-        this.isVisible = false;
+        this._callHandlers = debounce(($element) => {
+            this.handlers.forEach((h) => h($element));
+        }, 100, 200);
 
         this._createMutation();
     }
@@ -30,19 +32,15 @@ export default class ElementObserver {
         mutations.forEach((mutation) => {
             const $mutationTarget = $(mutation.target);
             if ($mutationTarget.is(this.selector)) {
-                this._callAppendHandlers($mutationTarget);
+                this._callHandlers($mutationTarget);
             } else if (mutation.addedNodes) {
                 const $target = $(mutation.addedNodes)
                     .map((_, elem) => $(elem).is(this.selector));
 
                 if ($target.lenth > 0) {
-                    this._callAppendHandlers($target);
+                    this._callHandlers($target);
                 }
             }
         })
-    }
-
-    _callAppendHandlers($element) {
-        this.handlers.forEach((h) => h($element));
     }
 } 
