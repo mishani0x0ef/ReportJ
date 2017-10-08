@@ -8,9 +8,7 @@ export default class ElementObserver {
         this.prevIsVisible = false;
         this.isVisible = false;
 
-        // todo: use proper flow for element identification. MR
-        //this._createMutation();
-        this.setTimer();
+        this._createMutation();
     }
 
     onAppear(handler) {
@@ -23,38 +21,28 @@ export default class ElementObserver {
         observer.observe(document.body, {
             childList: true,
             subtree: true,
-            attributes: false,
+            attributes: true,
             characterData: false
         });
     }
 
     _processMutations(mutations) {
         mutations.forEach((mutation) => {
-            if (!mutation.addedNodes) {
-                return;
-            }
+            const $mutationTarget = $(mutation.target);
+            if ($mutationTarget.is(this.selector)) {
+                this._callAppendHandlers($mutationTarget);
+            } else if (mutation.addedNodes) {
+                const $target = $(mutation.addedNodes)
+                    .map((_, elem) => $(elem).is(this.selector));
 
-            const $nodes = $(mutation.addedNodes);
-            const elementAppeared = $nodes.has(this.selector);
-
-            if (elementAppeared) {
-                this.handlers.forEach((h) => h($nodes));
-                return;
+                if ($target.lenth > 0) {
+                    this._callAppendHandlers($target);
+                }
             }
         })
     }
 
-    setTimer() {
-        setInterval(() => {
-            const $element = $(document).find(this.selector);
-            this.prevIsVisible = this.isVisible;
-            this.isVisible = $element.lenth !== 0;
-            if (!this.isVisible) {
-                return;
-            }
-            this.handlers.forEach((handler) => {
-                handler($element);
-            });
-        }, 2000);
+    _callAppendHandlers($element) {
+        this.handlers.forEach((h) => h($element));
     }
 } 
