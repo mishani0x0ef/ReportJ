@@ -6,8 +6,8 @@ Param(
 # Change Version
 Write-Host "## Set version to ${version}";
 $manifest = Get-Content ".\app\manifest.json" -raw | ConvertFrom-Json
-$manifest.version = $version
-$manifest | ConvertTo-Json  | set-content ".\app\manifest.json"
+$manifest.version = "${version}"
+$manifest | ConvertTo-Json -Depth 10 | set-content ".\app\manifest.json"
 
 # BUILD
 Write-Host "## Run NPM build";
