@@ -2,6 +2,7 @@ import $ from "jquery";
 import ElementObserver from "~/js/util/elementObserver";
 import JiraWrapper from "~/js/services/jira";
 import UrlService from "~/js/services/urlService";
+import { isNil } from "~/js/util/object";
 
 export default class CloseIssueExtender {
     constructor(browser) {
@@ -28,7 +29,10 @@ export default class CloseIssueExtender {
     _initCloseDialogObserver() {
         const observer = new ElementObserver(".jira-dialog-content-ready");
         observer.onAppear(($dialog) => {
-            // todo: check is it "Close Dialog". Currently it could be any other dialog. MR
+            if (!this._isCloseDialog($dialog)) {
+                return;
+            }
+
             const customCloseExist = $dialog.has(".reportj-close-button").length > 0;
             if (customCloseExist) {
                 return;
@@ -40,6 +44,12 @@ export default class CloseIssueExtender {
 
             $button.click(() => this._resetRemaining());
         });
+    }
+
+    _isCloseDialog($dialog) {
+        const $heading = $dialog.find(".jira-dialog-heading h2");
+        const title = $heading.attr("title");
+        return !isNil(title) && title.toLowerCase().includes("close issue");
     }
 
     _resetRemaining() {
