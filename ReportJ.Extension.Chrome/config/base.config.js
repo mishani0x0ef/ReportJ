@@ -24,6 +24,7 @@ module.exports = function () {
             background: "./app/js/background.js",
             popup: "./app/js/popup/app.js",
             options: "./app/js/options/app.js",
+            content: "./app/js/content/content.js"
         },
         output: {
             filename: "[name].js",

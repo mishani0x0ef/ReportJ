@@ -1,4 +1,6 @@
-export default function StorageService() {
+import { isNil } from "~/js/util/object";
+
+export default function StorageService(browser) {
     var self = this;
 
     var defaultTemplates = [
@@ -11,7 +13,7 @@ export default function StorageService() {
 
     this.getTemplates = function () {
         return new Promise((resolve) => {
-            chrome.storage.sync.get(["settings"], (storage) => {
+            browser.storage.sync.get(["settings"], (storage) => {
                 const templateExists = !isNil(storage.settings) && !isNil(storage.settings.templates);
                 if (templateExists) {
                     resolve(storage.settings.templates);
@@ -28,7 +30,7 @@ export default function StorageService() {
 
     this.getRepositories = function () {
         return new Promise((resolve) => {
-            chrome.storage.sync.get(["settings"], (storage) => {
+            browser.storage.sync.get(["settings"], (storage) => {
                 const reposExists = !isNil(storage.settings) && !isNil(storage.settings.repositories);
                 const repos = reposExists ? storage.settings.repositories : [];
                 resolve(repos);
@@ -38,18 +40,15 @@ export default function StorageService() {
 
     this.saveSettings = function (settings) {
         return new Promise((resolve, reject) => {
-            chrome.storage.sync.set({ settings }, () => {
-                if (isNil(chrome.runtime.lastError)) {
+            browser.storage.sync.set({ settings }, () => {
+                if (isNil(browser.runtime.lastError)) {
                     resolve();
                 } else {
-                    reject(chrome.runtime.lastError);
+                    reject(browser.runtime.lastError);
                 }
             });
         });
     };
-
-    // todo: move to some kinds of utils. MR
-    function isNil(obj) {
-        return typeof (obj) === "undefined" || obj === null;
-    }
 }
+
+StorageService.$inject = ["browser"];
