@@ -38,11 +38,7 @@ export default class CloseIssueExtender {
                 return;
             }
 
-            const $container = $dialog.find(".form-footer .buttons");
-            const $button = $("<div class='reportj-close-button aui-button'>Close with ReportJ</div>");
-            $container.prepend($button);
-
-            $button.click(() => this._resetRemaining());
+            this._addCloseBtn($dialog);
         });
     }
 
@@ -52,13 +48,30 @@ export default class CloseIssueExtender {
         return !isNil(title) && title.toLowerCase().includes("close issue");
     }
 
-    _resetRemaining() {
+    _addCloseBtn($dialog) {
+        const $container = $dialog.find(".form-footer .buttons");
+        const $button = $("<div class='reportj-button reportj-close-button aui-button' title='Close issue and reset remaining estimate'>Close with ReportJ</div>");
+        $container.prepend($button);
+
+        $button.click((e) => this._closeIssueWithResetRemaining(e));
+    }
+
+    _closeIssueWithResetRemaining(e) {
+        const $target = $(e.target);
+        $target.attr("disabled", "disabled");
+        
         const url = location.href;
         this.jira.setRemainingEstimate(url, "0m")
             .then(() => {
-                // trigger default close to submit issue. MR
+                // trigger default close to submit issue
+                // don't used close over JIRA api because could be used custom submit JIRA workflow
                 const $closeBtn = $("#issue-workflow-transition-submit");
                 $closeBtn.trigger("click");
-            });
+
+                // set timeout to let default submit finish it's work.
+                return new Promise((resolve) => setTimeout(() => resolve(), 3000));
+            })
+            .then(() => $target.removeAttr("disabled"))
+            .catch(() => $target.removeAttr("disabled"));
     }
 }

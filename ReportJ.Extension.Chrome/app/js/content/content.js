@@ -1,3 +1,5 @@
+
+import "./common/button.css";
 import CloseIssueExtender from "./closeIssue/closeIssueExtender";
 
 class ContentController {
