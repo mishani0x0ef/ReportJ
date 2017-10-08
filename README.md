@@ -16,6 +16,10 @@ To use extension you need to do next steps:
 2. Click "ADD TO CHROME"
 3. You are awersome
 
+# Close issue with reset of remaining estimate
+
+During close of issue you will see new button *"Close with ReportJ"* just click it instead *"Close"* to automatically reset remaining estimate before closing.
+
 # Add pre-defined template
 
 Often we should report some common activities such as status meetings, retrospectives, deployments etc. ReportJ has "Reporting Templates" feature which allow you to define your common activities once and than use it at any moment.
