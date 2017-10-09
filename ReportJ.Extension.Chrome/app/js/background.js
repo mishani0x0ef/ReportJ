@@ -1,35 +1,41 @@
 import JiraWrapper from "./services/jira";
 import UrlService from "./services/urlService";
 import config from "~/config";
-import { getRandomString } from "./util/string";
 
 class BackgroundWorker {
-    constructor(browser) {
+    constructor(browser, urlService) {
         this.browser = browser;
+        this.urlService = urlService;
+
+        this.contextMenus = {
+            addIssueSummaryId: "3956cb0d-9144-468a-a76e-7d67c58f7949",
+        };
+
         this.browser.runtime.onInstalled.addListener((e) => this.onInstalled(e));
-        this.urlService = new UrlService(browser);
-    }
-
-    onInstalled() {
-        this.initContextMenu();
-    }
-
-    initContextMenu() {
-        const context = "editable";
-        const title = `${config.app.name} add issue summary`;
-        this.menuItemId = this.browser.contextMenus.create({
-            "title": title,
-            "contexts": [context],
-            "id": getRandomString(),
-        });
         this.browser.contextMenus.onClicked.addListener((e) => this.onContextMenuClick(e));
     }
 
-    onContextMenuClick(e) {
-        if (e.menuItemId !== this.menuItemId) {
-            return;
-        }
+    onInstalled() {
+        this.createContextMenu();
+    }
 
+    createContextMenu() {
+        const context = "editable";
+        const title = `${config.app.name} add issue summary`;
+        this.browser.contextMenus.create({
+            "title": title,
+            "contexts": [context],
+            "id": this.contextMenus.addIssueSummaryId,
+        });
+    }
+
+    onContextMenuClick(e) {
+        if (e.menuItemId === this.contextMenus.addIssueSummaryId) {
+            this.addIssueSummary();
+        }
+    }
+
+    addIssueSummary() {
         this.browser.tabs.getSelected(null, (tab) => {
             const baseUrl = this.urlService.getBaseUrl(tab.url);
             const jira = new JiraWrapper(baseUrl);
@@ -44,4 +50,4 @@ class BackgroundWorker {
     }
 }
 
-export default new BackgroundWorker(chrome);
+export default new BackgroundWorker(chrome, new UrlService(chrome));
