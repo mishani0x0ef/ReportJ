@@ -5,18 +5,13 @@ import UrlService from "~/js/services/urlService";
 
 export default class CloseIssueExtender {
     constructor(browser) {
-        this.browser = browser;
-        this._initService();
+        this.urlService = new UrlService(browser);
+        const baseUrl = this.urlService.getBaseUrl(location.href);
+        this.jira = new JiraWrapper(baseUrl);
     }
 
     start() {
         this._initCloseDialogObserver();
-    }
-
-    _initService() {
-        this.urlService = new UrlService(this.browser);
-        const baseUrl = this.urlService.getBaseUrl(location.href);
-        this.jira = new JiraWrapper(baseUrl);
     }
 
     _initCloseDialogObserver() {

@@ -1,9 +1,13 @@
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
+import JiraWrapper from "~/js/services/jira";
+import UrlService from "~/js/services/urlService";
 import { isEmpty } from "~/js/util/object";
 
 export default class AutoIssueSummaryExtender {
     constructor(browser) {
-        this.browser = browser;
+        this.urlService = new UrlService(browser);
+        const baseUrl = this.urlService.getBaseUrl(location.href);
+        this.jira = new JiraWrapper(baseUrl);
     }
 
     start() {
@@ -21,8 +25,8 @@ export default class AutoIssueSummaryExtender {
     _addIssueSummaryIfEmpty($input) {
         const currentValue = $input.text();
         if (isEmpty(currentValue)) {
-            // todo: add issue summary. MR
-            $input.text("Hello from ReportJ.");
+            this.jira.getIssueInfo(location.href)
+                .then((summary) => $input.text(summary));
         }
     }
 }
