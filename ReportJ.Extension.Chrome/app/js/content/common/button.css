@@ -1,9 +1,0 @@
-.reportj-button:after {
-    content: " ";
-    margin-left: 10px;
-    padding: 12px 10px 10px 10px;
-    background-image: url(https://github.com/mishani0x0ef/ReportJ/blob/master/ReportJ.Extension.Chrome/app/img/logo.png?raw=true);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}

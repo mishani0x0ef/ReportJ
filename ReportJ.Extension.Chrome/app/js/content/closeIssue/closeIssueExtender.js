@@ -50,7 +50,7 @@ export default class CloseIssueExtender {
 
     _addCloseBtn($dialog) {
         const $container = $dialog.find(".form-footer .buttons");
-        const $button = $("<div class='reportj-button reportj-close-button aui-button' title='Close issue and reset remaining estimate'>Close with ReportJ</div>");
+        const $button = $("<div class='reportj-button reportj-close-button aui-button' title='Close issue and reset remaining estimate'>Close with <strong>ReportJ</strong></div>");
         $container.prepend($button);
 
         $button.click((e) => this._closeIssueWithResetRemaining(e));
