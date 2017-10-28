@@ -1,24 +1,28 @@
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
+import { isEmpty } from "~/js/util/object";
 
 export default class AutoIssueSummaryExtender {
     constructor(browser) {
         this.browser = browser;
-        this._initService();
     }
 
     start() {
-        //this._initLogWorkDialogObserver();
+        this._initLogWorkObserver();
     }
 
-    _initLogWorkDialogObserver() {
-        const observer = new JiraDialogObserver(".jira-dialog-content-ready", "close issue");
+    _initLogWorkObserver() {
+        const observer = new JiraDialogObserver("Log Work");
         observer.onAppear(($dialog) => {
-            const customCloseExist = $dialog.has(".reportj-close-button").length > 0;
-            if (customCloseExist) {
-                return;
-            }
-
-            this._addCloseBtn($dialog);
+            const $comment = $dialog.find("#comment");
+            this._addIssueSummaryIfEmpty($comment);
         });
+    }
+
+    _addIssueSummaryIfEmpty($input) {
+        const currentValue = $input.text();
+        if (isEmpty(currentValue)) {
+            // todo: add issue summary. MR
+            $input.text("Hello from ReportJ.");
+        }
     }
 }

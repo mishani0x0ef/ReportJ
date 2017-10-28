@@ -2,8 +2,8 @@ import ElementObserver from "./elementObserver";
 import { isNil } from "~/js/util/object";
 
 export default class JiraDialogObserver extends ElementObserver {
-    constructor(selector, titleText) {
-        super(selector);
+    constructor(titleText) {
+        super(".jira-dialog-content-ready");
         super.onAppear(($element) => {
             const expectedDialog = this._isExpectedDialog($element, titleText);
             if (expectedDialog) {

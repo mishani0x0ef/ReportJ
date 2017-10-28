@@ -20,7 +20,7 @@ export default class CloseIssueExtender {
     }
 
     _initCloseDialogObserver() {
-        const observer = new JiraDialogObserver(".jira-dialog-content-ready", "close issue");
+        const observer = new JiraDialogObserver("Close Issue");
         observer.onAppear(($dialog) => {
             const customCloseExist = $dialog.has(".reportj-close-button").length > 0;
             if (!customCloseExist) {
