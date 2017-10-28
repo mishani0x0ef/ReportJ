@@ -1,7 +1,9 @@
+import GeneralSettings from "~/js/models/settings/generalSettings";
+
 import { isNil } from "~/js/util/object";
 
 export default function StorageService(browser) {
-    var self = this;
+    var that = this;
 
     var defaultTemplates = [
         { templateId: 0, description: "Daily status meeting." },
@@ -10,6 +12,22 @@ export default function StorageService(browser) {
         { templateId: 3, description: "Issue testing and verification." },
         { templateId: 4, description: "Deployment of {component_name} v.{version_number} on Production environment." }
     ];
+
+    this.getGeneralSettings = function () {
+        return new Promise((resolve) => {
+            browser.storage.sync.get(["settings"], (storage) => {
+                const settingsExists = !isNil(storage.settings) && !isNil(storage.settings.general);
+                if (settingsExists) {
+                    resolve(storage.settings.general);
+                } else {
+                    const general = new GeneralSettings();
+                    const settings = { general };
+                    that.saveSettings(settings);
+                    resolve(general);
+                }
+            });
+        });
+    }
 
     this.getTemplates = function () {
         return new Promise((resolve) => {
@@ -21,7 +39,7 @@ export default function StorageService(browser) {
                     const settings = {
                         templates: defaultTemplates
                     };
-                    self.saveSettings(settings);
+                    that.saveSettings(settings);
                     resolve(defaultTemplates);
                 }
             });

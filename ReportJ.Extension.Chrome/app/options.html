@@ -32,7 +32,7 @@
 
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a href="#templatesSettings" data-toggle="tab" aria-expanded="true">Templates</a>
+                                <a href="#generalSettings" data-toggle="tab" aria-expanded="true">General</a>
                             </li>
                             <li>
                                 <a href="#repositorySettings" data-toggle="tab" aria-expanded="false">Repositories</a>
@@ -44,12 +44,20 @@
 
                         <div id="settings" class="tab-content well">
 
-                            <div id="templatesSettings" class="fade tab-pane active in">
-                                <h4>What is this?</h4>
+                            <div id="generalSettings" class="fade tab-pane active in">
+                                <h4>General</h4>
+                                <div class="well-sm">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-change="saveSettings()" ng-model="generalSettings.autoIssueSummary.enabled"> Automatically add issue summary to "Log Work" reports.
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <h4>Templates</h4>
                                 <p>Templates allow you to pre-define your common used reports and get quick access to them via
                                     ReportJ popup.</p>
 
-                                <h5>Templates</h5>
                                 <div class="list">
                                     <div class="list-item" ng-repeat="template in templates track by $index" ng-click="editTemplate(template)">
                                         <div class="col-xs-10">

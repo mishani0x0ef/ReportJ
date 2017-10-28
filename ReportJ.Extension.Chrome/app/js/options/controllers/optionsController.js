@@ -1,6 +1,8 @@
 import "bootstrap";
 import $ from "jquery";
 
+import GeneralSettings from "~/js/models/settings/generalSettings";
+
 import angular from "angular";
 import config from "~/config";
 import dialog from "~/js/util/dialog";
@@ -52,6 +54,8 @@ export default function OptionsController($scope, $interval, $timeout, storageSe
     }
 
     $scope.config = config;
+
+    $scope.generalSettings = new GeneralSettings();
 
     $scope.maxRepoQuota = 2;
     $scope.repoApiAvailable = false;
@@ -174,6 +178,7 @@ export default function OptionsController($scope, $interval, $timeout, storageSe
 
     $scope.saveSettings = function () {
         const settings = {
+            general: $scope.generalSettings,
             templates: $scope.templates,
             repositories: $scope.repositories,
         };
@@ -191,6 +196,10 @@ export default function OptionsController($scope, $interval, $timeout, storageSe
             .then((established) => { $scope.repoApiAvailable = established; })
             .catch(() => { $scope.repoApiAvailable = false; });
 
+        storageService.getGeneralSettings().then((settings) => {
+            angular.copy(settings, $scope.generalSettings);
+            $scope.$apply();
+        });
         storageService.getRepositories().then((repos) => {
             angular.copy(repos, $scope.repositories);
             $scope.$apply();
