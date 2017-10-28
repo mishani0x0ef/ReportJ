@@ -2,8 +2,6 @@
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/reportj/hijbdbjoelgicnhnghhhlkpbhjdmchfg?hl=en-US)
 
-# What is idea of ReportJ?
-
 This extension designed to improve reporting experience inside JIRA system.
 
 Idea and functionality of extension was gets from personal experience of work with JIRA. And I will be happy to hear about your suggestions.
