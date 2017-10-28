@@ -11,13 +11,7 @@ export default class CloseIssueExtender {
     }
 
     start() {
-        const baseUrl = this.urlService.getBaseUrl(location.href);
-        this.jira.checkIsInsideJira(baseUrl)
-            .then((inJira) => {
-                if (inJira) {
-                    this._initCloseDialogObserver();
-                }
-            });
+        this._initCloseDialogObserver();
     }
 
     _initService() {
@@ -59,7 +53,7 @@ export default class CloseIssueExtender {
     _closeIssueWithResetRemaining(e) {
         const $target = $(e.target);
         $target.attr("disabled", "disabled");
-        
+
         const url = location.href;
         this.jira.setRemainingEstimate(url, "0m")
             .then(() => {
