@@ -16,11 +16,10 @@ export default class JiraWrapper {
     }
 
     checkIsInsideJira() {
-        const api = this.apiUrl + "mypermissions";
+        const url = this.apiUrl + "mypermissions";
         const settings = {
-            method: "GET",
-            dataType: "json",
-            url: api
+            method: "HEAD",
+            url
         };
 
         return $.ajax(settings)
@@ -30,7 +29,7 @@ export default class JiraWrapper {
                 // when check unseccessfull - error added to console.
                 // add explaination to error to avoid confusion of developers that use it.
                 if (console) {
-                    const message = `Please ignore network error generate by extension ReportJ during access to ${api}`;
+                    const message = `Please ignore network error generate by extension ReportJ during access to ${url}`;
                     console.warn(message);
                 }
                 return false;
