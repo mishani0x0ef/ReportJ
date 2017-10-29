@@ -1,51 +1,27 @@
 import $ from "jquery";
-import ElementObserver from "~/js/util/elementObserver";
+import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import JiraWrapper from "~/js/services/jira";
 import UrlService from "~/js/services/urlService";
-import { isNil } from "~/js/util/object";
 
 export default class CloseIssueExtender {
     constructor(browser) {
-        this.browser = browser;
-        this._initService();
-    }
-
-    start() {
-        const baseUrl = this.urlService.getBaseUrl(location.href);
-        this.jira.checkIsInsideJira(baseUrl)
-            .then((inJira) => {
-                if (inJira) {
-                    this._initCloseDialogObserver();
-                }
-            });
-    }
-
-    _initService() {
-        this.urlService = new UrlService(this.browser);
+        this.urlService = new UrlService(browser);
         const baseUrl = this.urlService.getBaseUrl(location.href);
         this.jira = new JiraWrapper(baseUrl);
     }
 
-    _initCloseDialogObserver() {
-        const observer = new ElementObserver(".jira-dialog-content-ready");
-        observer.onAppear(($dialog) => {
-            if (!this._isCloseDialog($dialog)) {
-                return;
-            }
-
-            const customCloseExist = $dialog.has(".reportj-close-button").length > 0;
-            if (customCloseExist) {
-                return;
-            }
-
-            this._addCloseBtn($dialog);
-        });
+    start() {
+        this._initCloseDialogObserver();
     }
 
-    _isCloseDialog($dialog) {
-        const $heading = $dialog.find(".jira-dialog-heading h2");
-        const title = $heading.attr("title");
-        return !isNil(title) && title.toLowerCase().includes("close issue");
+    _initCloseDialogObserver() {
+        const observer = new JiraDialogObserver("Close Issue");
+        observer.onAppear(($dialog) => {
+            const customCloseExist = $dialog.has(".reportj-close-button").length > 0;
+            if (!customCloseExist) {
+                this._addCloseBtn($dialog);
+            }
+        });
     }
 
     _addCloseBtn($dialog) {
@@ -59,7 +35,7 @@ export default class CloseIssueExtender {
     _closeIssueWithResetRemaining(e) {
         const $target = $(e.target);
         $target.attr("disabled", "disabled");
-        
+
         const url = location.href;
         this.jira.setRemainingEstimate(url, "0m")
             .then(() => {
