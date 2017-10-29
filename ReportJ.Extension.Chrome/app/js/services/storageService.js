@@ -18,14 +18,11 @@ export default function StorageService(browser) {
             browser.storage.sync.get(["settings"], (storage) => {
                 const settingsExists = !isNil(storage.settings) && !isNil(storage.settings.general);
                 const defaultSettings = new GeneralSettings();
+                let settings = defaultSettings;
                 if (settingsExists) {
-                    const settings = Object.assign(defaultSettings, storage.settings.general);
-                    resolve(settings);
-                } else {
-                    const settings = { general: defaultSettings };
-                    that.saveSettings(settings);
-                    resolve(defaultSettings);
+                    settings = Object.assign(defaultSettings, storage.settings.general);
                 }
+                resolve(settings);
             });
         });
     }
