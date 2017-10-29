@@ -3,5 +3,8 @@ export default class GeneralSettings {
         this.autoIssueSummary = {
             enabled: true
         };
+        this.optimisationsForNonJiraPages = {
+            enabled: true
+        };
     }
 }
