@@ -12,11 +12,18 @@ class ContentController {
         const baseUrl = urlService.getBaseUrl(location.href);
         const jira = new JiraWrapper(baseUrl);
 
-        const jiraCheckPromise = jira.checkIsInsideJira(baseUrl);
-        const settingPromise = storage.getGeneralSettings();
+        let generalSettings;
 
-        Promise.all([jiraCheckPromise, settingPromise])
-            .then((results) => this._initExtenders(results[0], results[1]))
+        storage.getGeneralSettings()
+            .then((settings) => {
+                generalSettings = settings;
+
+                if (settings.optimisationsForNonJiraPages.enabled) {
+                    return jira.checkIsInsideJira(baseUrl);
+                }
+                return Promise.resolve(true);
+            })
+            .then((insideJira) => this._initExtenders(insideJira, generalSettings))
             .then(() => this.start());
     }
 
