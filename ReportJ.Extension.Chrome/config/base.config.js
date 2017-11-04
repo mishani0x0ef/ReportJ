@@ -18,6 +18,11 @@ function getCssLoaders() {
     ];
 }
 
+function getSassLoaders() {
+    const cssLoaders = getCssLoaders();
+    return cssLoaders.concat(["sass-loader"]);
+}
+
 module.exports = function () {
     return {
         entry: {
@@ -50,11 +55,18 @@ module.exports = function () {
                         use: getCssLoaders()
                     })
                 },
+                {
+                    test: /\.scss$/,
+                    use: ExtractTextPlugin.extract({
+                        use: getSassLoaders()
+                    })
+                },
             ]
         },
         resolve: {
             alias: {
-                "~": path.resolve(__dirname, "../app")
+                "~": path.resolve(__dirname, "../app"),
+                "root": path.resolve(__dirname, "../app"),
             },
             extensions: [".js"]
         },
