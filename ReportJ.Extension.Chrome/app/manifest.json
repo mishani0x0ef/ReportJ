@@ -34,8 +34,7 @@
                 "*://*/*"
             ],
             "css": [
-                // todo: uncomment when styles would be added. MR
-                //"build/content.css"
+                "build/content.css"
             ],
             "js": [
                 "build/manifest.js",

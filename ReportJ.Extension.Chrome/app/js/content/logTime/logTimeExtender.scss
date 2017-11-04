@@ -1,0 +1,17 @@
+@import "~root/css/variables";
+@import "~root/css/mixins";
+
+$link-size: 20px;
+
+logTimeExtender {
+    display: inline-flex;
+    vertical-align: middle;
+
+    .reportj-link {
+        margin: 0 5px;
+        width: $link-size;
+        height: $link-size;
+        cursor: pointer;
+        @include background-img($logo-path);
+    }
+}
