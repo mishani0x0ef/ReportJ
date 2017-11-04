@@ -1,36 +1,25 @@
 
 import AutoIssueSumaryExtender from "./autoIssueSummary/autoIssueSummaryExtender";
 import CloseIssueExtender from "./closeIssue/closeIssueExtender";
-import JiraWrapper from "~/js/services/jira";
 import StorageService from "~/js/services/storageService";
-import UrlService from "~/js/services/urlService";
+
+import { checkIsInsideJira } from "~/js/content/common/jiraUtil";
 
 class ContentController {
     constructor(browser) {
         const storage = new StorageService(browser);
-        const urlService = new UrlService(browser);
-        const baseUrl = urlService.getBaseUrl(location.href);
-        const jira = new JiraWrapper(baseUrl);
 
-        let generalSettings;
-
-        storage.getGeneralSettings()
-            .then((settings) => {
-                generalSettings = settings;
-
-                if (settings.optimisationsForNonJiraPages.enabled) {
-                    return jira.checkIsInsideJira(baseUrl);
-                }
-                return Promise.resolve(true);
+        Promise.all([storage.getGeneralSettings(), checkIsInsideJira()])
+            .then((results) => {
+                const settings = results[0];
+                const insideJira = results[1];
+                this._initExtenders(insideJira, settings);
             })
-            .then((insideJira) => this._initExtenders(insideJira, generalSettings))
             .then(() => this.start());
     }
 
     start() {
-        this.extenders.forEach((extender) => {
-            extender.start();
-        });
+        this.extenders.forEach((extender) => extender.start());
     }
 
     _initExtenders(insideJira, settings) {
