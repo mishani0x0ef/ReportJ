@@ -31,7 +31,7 @@ reportj-log-time-extender {
             display: flex;
             flex-direction: column;
             top: 25px;
-            left: 5px;
+            left: -75px;
             z-index: $z-index-base-popup;
         }
         
@@ -69,7 +69,7 @@ reportj-log-time-extender {
 
                 &.active {
                     font-weight: bold;
-                    background-color: lighten($color-primary, 79%);
+                    background-color: lighten($color-primary, 75%);
                 }
 
                 input {
