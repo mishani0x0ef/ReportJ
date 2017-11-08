@@ -26,22 +26,22 @@ export default class LogTimeExtender {
         const observer = new JiraDialogObserver("Log Work");
         observer.onAppear(($dialog) => {
             const $logTimeInput = $dialog.find("#log-work-time-logged");
-            const $element = $(template).insertAfter($logTimeInput);
-            this._initElement($element);
-            this._addButtonHandlers($element);
+            const $component = $(template).insertAfter($logTimeInput);
+            this._initComponentTemplate($component);
+            this._addButtonHandlers($component);
         });
     }
 
-    _initElement($element) {
-        const $link = $element.find(".reportj-link");
+    _initComponentTemplate($template) {
+        const $link = $template.find(".reportj-link");
         $link.click(() => this._showPopup());
         this._createTimeOptionsGroup(this.hours);
         this._createTimeOptionsGroup(this.minutes);
     }
 
-    _addButtonHandlers($element) {
-        const $okButton = $element.find("#reportj-submit-log-time");
-        const $cancelButton = $element.find("#reportj-cancel-log-time");
+    _addButtonHandlers($template) {
+        const $okButton = $template.find("#reportj-submit-log-time");
+        const $cancelButton = $template.find("#reportj-cancel-log-time");
 
         $okButton.click(() => {
             const time = this._getLogTimeFromPopup();
@@ -54,7 +54,7 @@ export default class LogTimeExtender {
 
     _showPopup() {
         const $logWorkPopup = $(`${this.componentName} .log-work-popup`);
-        $logWorkPopup.addClass("active"); 
+        $logWorkPopup.addClass("active");
     }
 
     _hidePopup() {
@@ -62,34 +62,37 @@ export default class LogTimeExtender {
         $logWorkPopup.removeClass("active");
     }
 
-    // todo: simplify element creation by using some simple UI framework. MR
     _createTimeOptionsGroup(timeOptions) {
         const group = timeOptions.group;
         const groupSelector = `input[name=${group}]`;
-
-        const $elements = timeOptions.values.map((value) => {
-            const inputId = `${group}_${value}`;
-            const $input = $(`<input type="radio" id="${inputId}" name="${group}" value="${value}" />`);
-            const $label = $(`<label for="${inputId}">${value}</label>`);
-            const $template = $(`<div class="grid-cell"></div>`).append($input).append($label);
-
-            return $template;
-        });
+        const $elements = timeOptions.values.map((value) => this._createTimeElement(group, value));
 
         $(timeOptions.placeholder).append($elements);
+        $(groupSelector).change((e) => this._onSelctionChange(e));
+    }
 
-        $(groupSelector).change((e) => {
-            const $group = $(groupSelector).parent();
-            const $container = $(e.target.parentElement);
-            const activationClass = "active";
-            const checked = e.target.checked;
+    _createTimeElement(group, value) {
+        const inputId = `${group}_${value}`;
+        return $(
+            `<div class="grid-cell">
+                <input type="radio" id="${inputId}" name="${group}" value="${value}" />
+                <label for="${inputId}">${value}</label>
+            </div>`
+        );
+    }
 
-            $group.removeClass(activationClass);
+    _onSelctionChange(e) {
+        const groupName = e.target.name;
+        const groupSelector = `input[name=${groupName}]`;
+        const $group = $(groupSelector).parent();
+        const activationClass = "active";
 
-            if (checked) {
-                $container.addClass(activationClass);
-            }
-        });
+        $group.removeClass(activationClass);
+
+        if (e.target.checked) {
+            const $targetContainer = $(e.target.parentElement);
+            $targetContainer.addClass(activationClass);
+        }
     }
 
     _getLogTimeFromPopup() {
