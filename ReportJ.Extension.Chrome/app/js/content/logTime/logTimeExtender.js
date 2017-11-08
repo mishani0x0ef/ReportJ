@@ -93,10 +93,11 @@ export default class LogTimeExtender {
     }
 
     _getLogTimeFromPopup() {
-        const hoursValue = $(`input[name=${this.hours.group}]:checked`).val();
-        const minutesValue = $(`input[name=${this.minutes.group}]:checked`).val();
+        const hoursValue = $(`input[name=${this.hours.group}]:checked`).val() || "";
+        const minutesValue = $(`input[name=${this.minutes.group}]:checked`).val() || "";
+        const logTime = `${hoursValue} ${minutesValue}`;
 
-        return `${hoursValue} ${minutesValue}`;
+        return logTime.trim();
     }
 
     _setLogTimeToJira(time) {
