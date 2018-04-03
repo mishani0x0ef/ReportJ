@@ -1,6 +1,6 @@
 {
   "name": "reportj-extension",
-  "version": "2.3.4",
+  "version": "2.6.0",
   "description": "",
   "main": "background.js",
   "scripts": {
