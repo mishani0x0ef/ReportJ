@@ -3,6 +3,13 @@ module.exports = {
         "browser": true,
         "es6": true
     },
+    "settings": {
+        "ecmascript": 6,
+        "jsx": true,
+    },
+    "plugins": [
+        "react"
+    ],
     "parserOptions": {
         "sourceType": "module"
     },
@@ -248,6 +255,7 @@ module.exports = {
         "quote-props": "off",
         "quotes": "off",
         "radix": "error",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], 
         "require-await": "error",
         "require-jsdoc": "off",
         "rest-spread-spacing": [

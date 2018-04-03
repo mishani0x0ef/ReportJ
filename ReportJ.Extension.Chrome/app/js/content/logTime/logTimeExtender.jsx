@@ -1,7 +1,9 @@
 import "./logTimeExtender.scss";
 import $ from "jquery";
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
+import React from "react";
 import template from "./logTimeExtender.html";
+import { render } from "react-dom";
 
 export default class LogTimeExtender {
     constructor() {
@@ -26,10 +28,18 @@ export default class LogTimeExtender {
         const observer = new JiraDialogObserver("Log Work");
         observer.onAppear(($dialog) => {
             const $logTimeInput = $dialog.find("#log-work-time-logged");
-            const $component = $(template).insertAfter($logTimeInput);
-            this._initComponentTemplate($component);
-            this._addButtonHandlers($component);
+            const $component = $("<div class='reportj-for-react'><div>").insertAfter($logTimeInput);
+
+            render(<this._app />, $component[0]);
+            // this._initComponentTemplate($component);
+            // this._addButtonHandlers($component);
         });
+    }
+
+    _app() {
+        return <div>
+            <h3>Hello from React!</h3>
+        </div>;
     }
 
     _initComponentTemplate($template) {
