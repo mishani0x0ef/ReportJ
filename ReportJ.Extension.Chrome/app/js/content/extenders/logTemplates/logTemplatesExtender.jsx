@@ -8,6 +8,15 @@ export class LogTemplatesExtender {
         this._initLogWorkObserver();
     }
 
+    addComment(comment) {
+        const commentArea = document.querySelector("#log-work #comment");
+
+        let currentValue = commentArea.value || "";
+        currentValue = currentValue.trim();
+
+        commentArea.value = `${currentValue}\n${comment}`;
+    }
+
     _initLogWorkObserver() {
         const observer = new JiraDialogObserver("Log Work");
         observer.onAppear(($dialog) => {
@@ -18,7 +27,7 @@ export class LogTemplatesExtender {
 
             comment.parentNode.insertBefore(featureContainer, comment);
 
-            render(<TemplateSelector />, featureContainer);
+            render(<TemplateSelector onSubmit={(text) => this.addComment(text)} />, featureContainer);
         });
     }
 }
