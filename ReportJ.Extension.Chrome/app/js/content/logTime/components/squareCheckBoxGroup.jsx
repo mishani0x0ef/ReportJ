@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { classIf } from "~/js/content/common/reactUtil";
+import { callIfExist } from "~/js/content/common/functionUtil";
 
 export class SquareCheckBoxGroup extends Component {
     constructor(props) {
@@ -13,10 +14,7 @@ export class SquareCheckBoxGroup extends Component {
     onChange(event) {
         const value = event.target.value;
         this.setState({ checkedValue: value });
-
-        if (typeof this.props.onChange == "function") {
-            typeof this.props.onChange(value);
-        }
+        callIfExist(this.props.onChange, [value]);
     }
 
     render() {

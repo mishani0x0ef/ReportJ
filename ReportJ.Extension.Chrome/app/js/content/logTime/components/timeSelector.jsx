@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { classIf } from "~/js/content/common/reactUtil";
+import { callIfExist } from "~/js/content/common/functionUtil";
 import { SquareCheckBoxGroup } from "./squareCheckBoxGroup";
 
 export class TimeSelector extends Component {
@@ -38,9 +39,7 @@ export class TimeSelector extends Component {
     }
 
     submitChanges() {
-        if (typeof this.props.onSubmit === "function") {
-            this.props.onSubmit(this.selectedTime);
-        }
+        callIfExist(this.props.onSubmit, [this.selectedTime]);
         this.closePopup();
     }
 
