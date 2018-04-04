@@ -1,3 +1,5 @@
+import { createElement, insertBefore } from "~/js/util/html";
+
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import React from "react";
 import { TemplateSelector } from "./components/templateSelector";
@@ -8,12 +10,9 @@ export class LogTemplatesExtender {
         const observer = new JiraDialogObserver("Log Work");
         observer.onAppear(($dialog) => {
             const comment = $dialog[0].querySelector("#comment");
+            const featureContainer = createElement(`<div class="reportj-feature reportj-block"></div>`);
 
-            const featureContainer = document.createElement("div");
-            featureContainer.className = "reportj-feature reportj-block";
-
-            comment.parentNode.insertBefore(featureContainer, comment);
-
+            insertBefore(featureContainer, comment);
             render(<TemplateSelector onSubmit={(text) => this.addComment(text)} />, featureContainer);
         });
     }
