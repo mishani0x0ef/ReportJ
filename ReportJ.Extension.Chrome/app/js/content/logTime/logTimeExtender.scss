@@ -3,10 +3,12 @@
 
 $link-size: 20px;
 
-reportj-log-time-extender {
-    position: relative;
-    display: inline-flex;
-    vertical-align: middle;
+reportj-log-time {
+    .time-selector {
+        position: relative;
+        display: inline-flex;
+        vertical-align: middle;
+    }
 
     h4 {
         margin: 0;
