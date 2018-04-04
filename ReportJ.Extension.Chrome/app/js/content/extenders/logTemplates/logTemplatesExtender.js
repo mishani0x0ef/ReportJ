@@ -1,6 +1,4 @@
-export default class LogTemplatesExtender {
-
-
+export class LogTemplatesExtender {
     start() {
 
     }

@@ -5,7 +5,7 @@ import React from "react";
 import { render } from "react-dom";
 import { TimeSelector } from "./components/timeSelector";
 
-export default class LogTimeExtender {
+export class LogTimeExtender {
     constructor() {
         this.hours = ["0h", "1h", "2h", "3h", "4h", "5h", "6h", "7h", "8h"];
         this.minutes = ["0m", "15m", "30m", "45m"];

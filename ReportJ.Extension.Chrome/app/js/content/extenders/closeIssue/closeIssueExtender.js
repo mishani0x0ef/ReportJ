@@ -3,7 +3,7 @@ import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import JiraWrapper from "~/js/services/jira";
 import UrlService from "~/js/services/urlService";
 
-export default class CloseIssueExtender {
+export class CloseIssueExtender {
     constructor(browser) {
         this.urlService = new UrlService(browser);
         const baseUrl = this.urlService.getBaseUrl(location.href);

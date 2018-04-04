@@ -3,7 +3,7 @@ import JiraWrapper from "~/js/services/jira";
 import UrlService from "~/js/services/urlService";
 import { isEmpty } from "~/js/util/object";
 
-export default class AutoIssueSummaryExtender {
+export class AutoIssueSummaryExtender {
     constructor(browser) {
         this.urlService = new UrlService(browser);
         const baseUrl = this.urlService.getBaseUrl(location.href);
