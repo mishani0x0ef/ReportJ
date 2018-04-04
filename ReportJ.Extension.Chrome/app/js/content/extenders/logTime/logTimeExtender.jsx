@@ -13,22 +13,17 @@ export class LogTimeExtender {
     }
 
     start() {
-        this._initLogWorkObserver();
-    }
-
-    _initLogWorkObserver() {
         const observer = new JiraDialogObserver("Log Work");
-
         observer.onAppear(($dialog) => {
             const $logTimeInput = $dialog.find("#log-work-time-logged");
             const $component = $("<reportj-log-time></reportj-log-time>").insertAfter($logTimeInput);
 
-            render(<TimeSelector hours={this.hours} minutes={this.minutes} onSubmit={(time) => this._setLogTimeToJira(time)} />,
+            render(<TimeSelector hours={this.hours} minutes={this.minutes} onSubmit={(time) => this.setLogTimeToJira(time)} />,
                 $component[0]);
         });
     }
 
-    _setLogTimeToJira(time) {
+    setLogTimeToJira(time) {
         const $timeInput = $("#log-work-time-logged");
         $timeInput.val(time);
     }
