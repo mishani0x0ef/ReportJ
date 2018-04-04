@@ -1,8 +1,6 @@
 @import "~root/css/variables";
 @import "~root/css/mixins";
 
-$link-size: 20px;
-
 reportj-log-time {
     .time-selector {
         position: relative;
@@ -12,14 +10,6 @@ reportj-log-time {
 
     h4 {
         margin: 0;
-    }
-
-    .reportj-link {
-        margin: 0 5px;
-        width: $link-size;
-        height: $link-size;
-        cursor: pointer;
-        @include background-img($logo-path);
     }
 
     .log-work-popup {
