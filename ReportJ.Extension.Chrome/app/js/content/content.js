@@ -1,7 +1,7 @@
 
-import AutoIssueSumaryExtender from "./autoIssueSummary/autoIssueSummaryExtender";
-import CloseIssueExtender from "./closeIssue/closeIssueExtender";
-import LogTimeExtender from "./logTime/logTimeExtender";
+import AutoIssueSumaryExtender from "./extenders/autoIssueSummary/autoIssueSummaryExtender";
+import CloseIssueExtender from "./extenders/closeIssue/closeIssueExtender";
+import LogTimeExtender from "./extenders/logTime/logTimeExtender";
 import StorageService from "~/js/services/storageService";
 
 import { checkIsInsideJira } from "~/js/content/common/jiraUtil";
