@@ -48,6 +48,7 @@
     "bootstrap": "^3.3.5",
     "jquery": "^3.2.1",
     "lodash.debounce": "^4.0.8",
+    "prop-types": "^15.6.1",
     "react": "^16.3.0",
     "react-dom": "^16.3.0"
   }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { classIf } from "~/js/content/common/reactUtil";
+
+import PropTypes from "prop-types";
 import { callIfExist } from "~/js/content/common/functionUtil";
+import { classIf } from "~/js/content/common/reactUtil";
 
 export class SquareCheckBoxGroup extends Component {
     constructor(props) {
@@ -22,7 +24,7 @@ export class SquareCheckBoxGroup extends Component {
             <div className="popup-section">
                 <h4>{this.props.group}</h4>
                 <div className="grid-row">
-                    {this.props.values.map(value => {
+                    {this.props.values.map((value) => {
                         const key = `${this.props.group}_${value}`;
                         const isChecked = this.state.checkedValue === value;
                         return (
@@ -40,4 +42,10 @@ export class SquareCheckBoxGroup extends Component {
             </div>
         );
     }
+}
+
+SquareCheckBoxGroup.propTypes = {
+    values: PropTypes.array.isRequired,
+    group: PropTypes.string,
+    onChange: PropTypes.func,
 }

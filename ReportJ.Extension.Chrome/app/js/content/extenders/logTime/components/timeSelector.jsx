@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { classIf } from "~/js/content/common/reactUtil";
-import { callIfExist } from "~/js/content/common/functionUtil";
+
+import PropTypes from "prop-types";
 import { SquareCheckBoxGroup } from "./squareCheckBoxGroup";
+import { callIfExist } from "~/js/content/common/functionUtil";
+import { classIf } from "~/js/content/common/reactUtil";
 
 export class TimeSelector extends Component {
     constructor(props) {
@@ -18,7 +20,7 @@ export class TimeSelector extends Component {
     get selectedTime() {
         const hours = this.selectedHours || "";
         const minutes = this.selectedMinutes || "";
-        let logTime = `${hours} ${minutes}`;
+        const logTime = `${hours} ${minutes}`;
         return logTime.trim();
     }
 
@@ -59,4 +61,10 @@ export class TimeSelector extends Component {
             </div>
         );
     }
+}
+
+TimeSelector.propTypes = {
+    hours: PropTypes.array.isRequired,
+    minutes: PropTypes.array.isRequired,
+    onSubmit: PropTypes.func,
 }

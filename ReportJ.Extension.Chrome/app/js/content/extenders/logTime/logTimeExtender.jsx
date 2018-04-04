@@ -1,9 +1,10 @@
 import "./logTimeExtender.scss";
+
 import $ from "jquery";
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import React from "react";
-import { render } from "react-dom";
 import { TimeSelector } from "./components/timeSelector";
+import { render } from "react-dom";
 
 export class LogTimeExtender {
     constructor() {

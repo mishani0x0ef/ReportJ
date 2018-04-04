@@ -13,7 +13,7 @@ module.exports = {
     "parserOptions": {
         "sourceType": "module"
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": "error",
@@ -22,7 +22,7 @@ module.exports = {
             "never"
         ],
         "array-callback-return": "error",
-        "array-element-newline": "error",
+        "array-element-newline": "off",
         "arrow-body-style": "off",
         "arrow-parens": [
             "error",
