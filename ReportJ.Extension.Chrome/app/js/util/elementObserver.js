@@ -22,7 +22,7 @@ export default class ElementObserver {
         observer.observe(document.body, {
             childList: true,
             subtree: true,
-            attributes: true,
+            attributes: false,
             characterData: false
         });
     }

@@ -13,7 +13,7 @@ export class TemplateSelector extends Component {
     }
 
     showPopup() {
-        callIfExist(this.props.onSubmit, "Mock!!!! Please implement real using of templates.");
+        callIfExist(this.props.onSubmit, "Mock!!!! Please implement real using of templates");
     }
 
     render() {
