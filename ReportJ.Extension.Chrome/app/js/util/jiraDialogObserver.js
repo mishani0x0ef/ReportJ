@@ -4,10 +4,10 @@ import { isNil } from "~/js/util/object";
 export default class JiraDialogObserver extends ElementObserver {
     constructor(titleText) {
         super(".jira-dialog-content-ready");
-        super.onAppear(($element) => {
-            const expectedDialog = this._isExpectedDialog($element, titleText);
+        super.onAppear((element) => {
+            const expectedDialog = this._isExpectedDialog(element, titleText);
             if (expectedDialog) {
-                this._callHandlers($element, this.dialogHandlers);
+                this._callHandlers(element, this.dialogHandlers);
             }
         })
 
@@ -18,9 +18,9 @@ export default class JiraDialogObserver extends ElementObserver {
         this.dialogHandlers.push(handler);
     }
 
-    _isExpectedDialog($element, dialogTitleText) {
-        const $heading = $element.find(".jira-dialog-heading h2");
-        const title = $heading.attr("title");
+    _isExpectedDialog(element, dialogTitleText) {
+        const heading = element.querySelector(".jira-dialog-heading h2");
+        const title = heading.title;
         return !isNil(title) && title.toLowerCase().includes(dialogTitleText.toLowerCase());
     }
 }

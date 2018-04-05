@@ -11,22 +11,18 @@ export class AutoIssueSummaryExtender {
     }
 
     start() {
-        this._initLogWorkObserver();
-    }
-
-    _initLogWorkObserver() {
         const observer = new JiraDialogObserver("Log Work");
-        observer.onAppear(($dialog) => {
-            const $comment = $dialog.find("#comment");
-            this._addIssueSummaryIfEmpty($comment);
+        observer.onAppear((dialog) => {
+            const comment = dialog.querySelector("#comment");
+            this._addIssueSummaryIfEmpty(comment);
         });
     }
 
-    _addIssueSummaryIfEmpty($input) {
-        const currentValue = $input.text();
+    _addIssueSummaryIfEmpty(input) {
+        const currentValue = input.value;
         if (isEmpty(currentValue)) {
             this.jira.getIssueInfo(location.href)
-                .then((summary) => $input.text(summary));
+                .then((summary) => { input.value = summary; });
         }
     }
 }

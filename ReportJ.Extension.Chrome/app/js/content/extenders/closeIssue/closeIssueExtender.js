@@ -1,7 +1,7 @@
-import $ from "jquery";
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import JiraWrapper from "~/js/services/jira";
 import UrlService from "~/js/services/urlService";
+import { createElement } from "~/js/util/html";
 
 export class CloseIssueExtender {
     constructor(browser) {
@@ -11,43 +11,39 @@ export class CloseIssueExtender {
     }
 
     start() {
-        this._initCloseDialogObserver();
-    }
-
-    _initCloseDialogObserver() {
         const observer = new JiraDialogObserver("Close Issue");
-        observer.onAppear(($dialog) => {
-            const customCloseExist = $dialog.has(".reportj-close-button").length > 0;
+        observer.onAppear((dialog) => {
+            const customCloseExist = dialog.className.includes("reportj-close-button");
             if (!customCloseExist) {
-                this._addCloseBtn($dialog);
+                this._addCloseBtn(dialog);
             }
         });
     }
 
-    _addCloseBtn($dialog) {
-        const $container = $dialog.find(".form-footer .buttons");
-        const $button = $("<div class='reportj-button reportj-close-button aui-button' title='Close issue and reset remaining estimate'>Close with <strong>ReportJ</strong></div>");
-        $container.prepend($button);
+    _addCloseBtn(dialog) {
+        const container = dialog.querySelector(".form-footer .buttons");
+        const button = createElement("<div class='reportj-button reportj-close-button aui-button' title='Close issue and reset remaining estimate'>Close with <strong>ReportJ</strong></div>");
 
-        $button.click((e) => this._closeIssueWithResetRemaining(e));
+        container.prepend(button);
+        button.addEventListener("click", (e) => this._closeIssueWithResetRemaining(e));
     }
 
     _closeIssueWithResetRemaining(e) {
-        const $target = $(e.target);
-        $target.attr("disabled", "disabled");
+        const target = e.target;
+        target.setAttribute("disabled", "disabled");
 
         const url = location.href;
         this.jira.setRemainingEstimate(url, "0m")
             .then(() => {
                 // trigger default close to submit issue
                 // don't used close over JIRA api because could be used custom submit JIRA workflow
-                const $closeBtn = $("#issue-workflow-transition-submit");
-                $closeBtn.trigger("click");
+                const closeBtn = document.getElementById("issue-workflow-transition-submit");
+                closeBtn.click();
 
                 // set timeout to let default submit finish it's work.
                 return new Promise((resolve) => setTimeout(() => resolve(), 3000));
             })
-            .then(() => $target.removeAttr("disabled"))
-            .catch(() => $target.removeAttr("disabled"));
+            .then(() => target.removeAttribute("disabled"))
+            .catch(() => target.removeAttribute("disabled"));
     }
 }

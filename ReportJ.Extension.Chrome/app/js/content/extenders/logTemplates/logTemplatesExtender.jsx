@@ -8,8 +8,8 @@ import { render } from "react-dom";
 export class LogTemplatesExtender {
     start() {
         const observer = new JiraDialogObserver("Log Work");
-        observer.onAppear(($dialog) => {
-            const comment = $dialog[0].querySelector("#comment");
+        observer.onAppear((dialog) => {
+            const comment = dialog.querySelector("#comment");
             const featureContainer = createElement(`<div class="reportj-feature reportj-block"></div>`);
 
             insertBefore(featureContainer, comment);

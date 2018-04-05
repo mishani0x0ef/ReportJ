@@ -1,4 +1,3 @@
-import $ from "jquery";
 import debounce from "lodash.debounce"
 
 export default class ElementObserver {
@@ -30,17 +29,18 @@ export default class ElementObserver {
 
     _processMutations(mutations) {
         mutations.forEach((mutation) => {
-            const $mutationTarget = $(mutation.target);
-            if ($mutationTarget.is(this.selector)) {
-                this._callHandlers($mutationTarget, this.handlers);
-            } else if (mutation.addedNodes) {
-                const $target = $(mutation.addedNodes)
-                    .map((_, elem) => $(elem).is(this.selector));
-
-                if ($target.lenth > 0) {
-                    this._callHandlers($target, this.handlers);
-                }
+            const targetMatch = this._processElementMutation(mutation.target);
+            if (!targetMatch && mutation.addedNodes) {
+                mutation.addedNodes.forEach((elem) => this._processElementMutation(elem));
             }
         })
+    }
+
+    _processElementMutation(elem) {
+        const isMatchSelector = elem.matches && elem.matches(this.selector);
+        if (isMatchSelector) {
+            this._callHandlers(elem, this.handlers);
+        }
+        return isMatchSelector;
     }
 } 
