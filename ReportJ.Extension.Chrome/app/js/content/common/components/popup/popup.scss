@@ -1,0 +1,40 @@
+@import "~root/css/variables";
+@import "~root/css/mixins";
+
+.reportj-popup-container {
+    position: relative;
+}
+
+.reportj-popup {
+    display: none;
+    background-color: $color-background;
+    padding: 12px 16px;
+    margin: 0 7px 7px 0;
+    box-shadow: $panel-shadow;
+
+    &.active {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        top: 0;
+        left: 0;
+        z-index: $z-index-base-popup;
+    }
+    
+    .reportj-popup-section {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 12px;
+    }
+
+    .reportj-popup-section:last-of-type {
+        padding-bottom: 0;
+    }
+
+    .reportj-buttons-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}

@@ -1,16 +1,16 @@
+import "~/css/content.scss";
 
-import AutoIssueSumaryExtender from "./autoIssueSummary/autoIssueSummaryExtender";
-import CloseIssueExtender from "./closeIssue/closeIssueExtender";
-import LogTimeExtender from "./logTime/logTimeExtender";
+import { AutoIssueSummaryExtender, CloseIssueExtender, LogTemplatesExtender, LogTimeExtender } from "./extenders";
+
 import StorageService from "~/js/services/storageService";
-
 import { checkIsInsideJira } from "~/js/content/common/jiraUtil";
 
 class ContentController {
     constructor(browser) {
-        const storage = new StorageService(browser);
+        this.browser = browser;
+        this.storage = new StorageService(browser);
 
-        Promise.all([storage.getGeneralSettings(), checkIsInsideJira()])
+        Promise.all([this.storage.getGeneralSettings(), checkIsInsideJira()])
             .then((results) => {
                 const settings = results[0];
                 const insideJira = results[1];
@@ -32,11 +32,14 @@ class ContentController {
     }
 
     _addJiraExtenders(extenders, settings) {
-        extenders.push(new CloseIssueExtender());
-        extenders.push(new LogTimeExtender());
+        extenders.push(
+            new CloseIssueExtender(),
+            new LogTimeExtender(),
+            new LogTemplatesExtender(this.storage, this.browser)
+        );
 
         if (settings.autoIssueSummary.enabled) {
-            extenders.push(new AutoIssueSumaryExtender());
+            extenders.push(new AutoIssueSummaryExtender());
         }
     }
 }

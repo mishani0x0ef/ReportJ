@@ -3,10 +3,17 @@ module.exports = {
         "browser": true,
         "es6": true
     },
+    "settings": {
+        "ecmascript": 6,
+        "jsx": true,
+    },
+    "plugins": [
+        "react"
+    ],
     "parserOptions": {
         "sourceType": "module"
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": "error",
@@ -15,7 +22,7 @@ module.exports = {
             "never"
         ],
         "array-callback-return": "error",
-        "array-element-newline": "error",
+        "array-element-newline": "off",
         "arrow-body-style": "off",
         "arrow-parens": [
             "error",
@@ -248,6 +255,7 @@ module.exports = {
         "quote-props": "off",
         "quotes": "off",
         "radix": "error",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], 
         "require-await": "error",
         "require-jsdoc": "off",
         "rest-spread-spacing": [

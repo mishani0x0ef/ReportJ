@@ -38,6 +38,10 @@ module.exports = function () {
         module: {
             rules: [
                 {
+                    test: /\.jsx?/,
+                    loader: "babel-loader"
+                },
+                {
                     test: /\.(png|jpg|svg)$/,
                     loader: "file-loader?name=images/[name].[ext]"
                 },
@@ -68,7 +72,7 @@ module.exports = function () {
                 "~": path.resolve(__dirname, "../app"),
                 "root": path.resolve(__dirname, "../app"),
             },
-            extensions: [".js"]
+            extensions: [".js", ".jsx"]
         },
         plugins: [
             new webpack.ProvidePlugin({

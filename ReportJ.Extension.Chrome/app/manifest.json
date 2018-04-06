@@ -3,7 +3,7 @@
     "name": "ReportJ",
     "description": "The reporting helper for JIRA system.",
     "homepage_url": "https://github.com/mishani0x0ef/reportj",
-    "version": "2.4.3",
+    "version": "2.6.0",
     "permissions": [
         "storage",
         "activeTab",
@@ -42,5 +42,8 @@
                 "build/content.js"
             ]
         }
+    ],
+    "web_accessible_resources": [
+        "options.html"
     ]
 }
