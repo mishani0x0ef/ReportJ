@@ -1,9 +1,9 @@
 import "./templateSelector.scss";
 
+import { Popup, PopupButtonsSection, PopupSection } from "~/js/content/common/components/popup/popup";
 import React, { Component } from "react";
 
 import { List } from "~/js/content/common/components/list/list";
-import { Popup } from "~/js/content/common/components/popup/popup";
 import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
 import { callIfExist } from "~/js/content/common/functionUtil";
@@ -55,16 +55,16 @@ export class TemplateSelector extends Component {
                     <span className="reportj-link" title="Select comment from templates"></span>
                 </a>
                 <Popup visible={this.state.isPopupVisible}>
-                    <div className="reportj-popup-section">
+                    <PopupSection>
                         <h3>Templates</h3>
                         <List borderVisible={true}>
                             {this.state.templates.map((templ) => this.renderTemplateItem(templ))}
                         </List>
-                    </div>
-                    <div className="reportj-popup-section reportj-buttons-section">
+                    </PopupSection>
+                    <PopupButtonsSection>
                         <ProductPlacement />
                         <a className="aui-button aui-button-link cancel" onClick={() => this.closePopup()}>Cancel</a>
-                    </div>
+                    </PopupButtonsSection>
                 </Popup>
             </section>
         );

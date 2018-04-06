@@ -5,6 +5,22 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { classIf } from "~/js/content/common/reactUtil";
 
+export const PopupSection = ({ children }) => {
+    return <div className="reportj-popup-section">{children}</div>;
+}
+
+PopupSection.propTypes = {
+    children: PropTypes.any,
+}
+
+export const PopupButtonsSection = ({ children }) => {
+    return <div className="reportj-popup-section reportj-buttons-section">{children}</div>;
+}
+
+PopupButtonsSection.propTypes = {
+    children: PropTypes.any,
+}
+
 export class Popup extends Component {
     render() {
         return (
