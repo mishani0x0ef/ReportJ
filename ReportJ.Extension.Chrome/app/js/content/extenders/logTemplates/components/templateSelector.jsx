@@ -3,6 +3,7 @@ import "./templateSelector.scss";
 import { Popup, PopupButtonsSection, PopupSection } from "~/js/content/common/components/popup/popup";
 import React, { Component } from "react";
 
+import { JiraCancelButton } from "~/js/content/common/components/button/button";
 import { List } from "~/js/content/common/components/list/list";
 import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
@@ -63,7 +64,7 @@ export class TemplateSelector extends Component {
                     </PopupSection>
                     <PopupButtonsSection>
                         <ProductPlacement />
-                        <a className="aui-button aui-button-link cancel" onClick={() => this.closePopup()}>Cancel</a>
+                        <JiraCancelButton text="Cancel" onClick={() => this.closePopup()} />
                     </PopupButtonsSection>
                 </Popup>
             </section>
