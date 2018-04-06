@@ -23,3 +23,11 @@ $link-size: 20px;
     cursor: pointer;
     @include background-img($logo-path);
 }
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-center {
+    text-align: center;
+}
