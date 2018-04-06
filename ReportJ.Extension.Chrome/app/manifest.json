@@ -42,5 +42,8 @@
                 "build/content.js"
             ]
         }
+    ],
+    "web_accessible_resources": [
+        "options.html"
     ]
 }

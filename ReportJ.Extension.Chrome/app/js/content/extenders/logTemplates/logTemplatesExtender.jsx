@@ -6,8 +6,9 @@ import { TemplateSelector } from "./components/templateSelector";
 import { render } from "react-dom";
 
 export class LogTemplatesExtender {
-    constructor(storage) {
+    constructor(storage, browser) {
         this.storage = storage;
+        this.browser = browser;
     }
 
     start() {
@@ -17,7 +18,10 @@ export class LogTemplatesExtender {
             const featureContainer = createElement(`<div class="reportj-feature reportj-block"></div>`);
 
             insertBefore(featureContainer, comment);
-            render(<TemplateSelector storageService={this.storage} onSubmit={(text) => this.addComment(text)} />, featureContainer);
+            render(<TemplateSelector
+                storageService={this.storage}
+                browser={this.browser}
+                onSubmit={(text) => this.addComment(text)} />, featureContainer);
         });
     }
 

@@ -8,12 +8,14 @@ import { List } from "~/js/content/common/components/list/list";
 import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
 import { callIfExist } from "~/js/content/common/functionUtil";
+import { getSettingsUrl } from "~/js/content/common/browser";
 
 export class TemplateSelector extends Component {
     constructor(props) {
         super(props);
 
         this.storageService = props.storageService;
+        this.browser = props.browser;
 
         this.state = {
             isPopupVisible: false,
@@ -44,6 +46,26 @@ export class TemplateSelector extends Component {
         this.closePopup();
     }
 
+    renderTemplates() {
+        if (this.state.templates && this.state.templates.length > 0) {
+            return (
+                <List headerText="Templates" borderVisible={true}>
+                    {this.state.templates.map((templ) => this.renderTemplateItem(templ))}
+                </List>
+            );
+        }
+
+        return (
+            <section className="text-center">
+                <h4>We have not found templates!</h4>
+                <h5>
+                    <span>You can </span>
+                    <a href={getSettingsUrl(this.browser)} target="_blank">add your first one</a>
+                </h5>
+            </section>
+        );
+    }
+
     renderTemplateItem(text) {
         return (
             <p className="text-justify" onClick={() => this.submitSelectedTemplate(text)}>{text}</p>
@@ -59,9 +81,7 @@ export class TemplateSelector extends Component {
                 </a>
                 <Popup visible={this.state.isPopupVisible}>
                     <PopupSection>
-                        <List headerText="Templates" borderVisible={true}>
-                            {this.state.templates.map((templ) => this.renderTemplateItem(templ))}
-                        </List>
+                        {this.renderTemplates()}
                     </PopupSection>
                     <PopupButtonsSection>
                         <ProductPlacement />
@@ -76,4 +96,5 @@ export class TemplateSelector extends Component {
 TemplateSelector.propTypes = {
     onSubmit: PropTypes.func,
     storageService: PropTypes.any,
+    browser: PropTypes.any,
 }
