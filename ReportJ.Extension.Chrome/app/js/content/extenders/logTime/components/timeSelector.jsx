@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
 import { SquareCheckBoxGroup } from "./squareCheckBoxGroup";
 import { callIfExist } from "~/js/content/common/functionUtil";
@@ -53,7 +54,7 @@ export class TimeSelector extends Component {
                     <SquareCheckBoxGroup group="Hours" values={this.props.hours} onChange={(e) => this.onHoursChange(e)} />
                     <SquareCheckBoxGroup group="Minutes" values={this.props.minutes} onChange={(e) => this.onMinutesChange(e)} />
                     <div className="popup-section buttons-section">
-                        <span className="product-placement">Powered by ReportJ</span>
+                        <ProductPlacement />
                         <input type="button" className="aui-button" value="OK" onClick={() => this.submitChanges()} />
                         <a className="aui-button aui-button-link cancel" onClick={() => this.closePopup()}>Cancel</a>
                     </div>

@@ -4,6 +4,7 @@ import React, { Component } from "react";
 
 import { List } from "~/js/content/common/components/list/list";
 import { Popup } from "~/js/content/common/components/popup/popup";
+import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
 import { callIfExist } from "~/js/content/common/functionUtil";
 
@@ -61,6 +62,7 @@ export class TemplateSelector extends Component {
                         </List>
                     </div>
                     <div className="reportj-popup-section reportj-buttons-section">
+                        <ProductPlacement />
                         <a className="aui-button aui-button-link cancel" onClick={() => this.closePopup()}>Cancel</a>
                     </div>
                 </Popup>
