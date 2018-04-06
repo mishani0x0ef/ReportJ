@@ -7,6 +7,13 @@ import { callIfExist } from "~/js/content/common/functionUtil";
 import { classIf } from "~/js/content/common/reactUtil";
 
 export class List extends Component {
+    renderHeader() {
+        if (this.props.headerText) {
+            return <p className="reportj-list-header">{this.props.headerText}</p>;
+        }
+        return null;
+    }
+
     renderListItem(content) {
         return (
             <div className="reportj-list-item" onClick={callIfExist(content.click)}>
@@ -17,8 +24,11 @@ export class List extends Component {
 
     render() {
         return (
-            <div className={`reportj-list ${classIf(this.props.borderVisible, "reportj-has-border")}`}>
-                {this.props.children.map((child) => this.renderListItem(child))}
+            <div className="reportj-list-conainer">
+                {this.renderHeader()}
+                <div className={`reportj-list ${classIf(this.props.borderVisible, "reportj-has-border")}`}>
+                    {this.props.children.map((child) => this.renderListItem(child))}
+                </div>
             </div>
         );
     }
@@ -27,4 +37,5 @@ export class List extends Component {
 List.propTypes = {
     children: PropTypes.any,
     borderVisible: PropTypes.bool,
+    headerText: PropTypes.string,
 }

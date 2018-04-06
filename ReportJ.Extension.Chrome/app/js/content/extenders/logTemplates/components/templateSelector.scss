@@ -1,19 +1,14 @@
 @import "~root/css/variables";
 @import "~root/css/mixins";
 
-.reportj-template-selector {
-    h3 {
-        margin-bottom: 12px;
-    }
-    
+.reportj-template-selector {    
     .reportj-popup {
         min-width: 250px;
         max-width: 450px;
         max-height: 450px;
     }
 
-    .reportj-list {
-        background-color: darken($color-background, 1%);
+    .reportj-list-conainer {
         margin-left: -15px;
         margin-right: -15px;
     }

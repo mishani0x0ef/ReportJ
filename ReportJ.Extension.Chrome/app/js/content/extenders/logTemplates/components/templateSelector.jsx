@@ -59,8 +59,7 @@ export class TemplateSelector extends Component {
                 </a>
                 <Popup visible={this.state.isPopupVisible}>
                     <PopupSection>
-                        <h3 className="text-center">Templates</h3>
-                        <List borderVisible={true}>
+                        <List headerText="Templates" borderVisible={true}>
                             {this.state.templates.map((templ) => this.renderTemplateItem(templ))}
                         </List>
                     </PopupSection>

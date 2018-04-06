@@ -1,6 +1,13 @@
 @import "~root/css/variables";
 @import "~root/css/mixins";
 
+.reportj-list-header {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 2px solid $color-primary-light;
+}
+
 .reportj-list {
     display: flex;
     flex-direction: column;
@@ -10,7 +17,6 @@
 
     &.reportj-has-border {
         border: 1px solid $color-border;
-        border-radius: 2px;
     }
 
     .reportj-list-item {
