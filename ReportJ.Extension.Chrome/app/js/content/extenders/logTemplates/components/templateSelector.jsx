@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { Popup } from "~/js/content/common/components/popup/popup";
 import PropTypes from "prop-types";
 import { callIfExist } from "~/js/content/common/functionUtil";
 
@@ -8,20 +9,30 @@ export class TemplateSelector extends Component {
         super(props);
 
         this.state = {
-
+            isPopupVisible: false,
         };
     }
 
     showPopup() {
-        callIfExist(this.props.onSubmit, "Mock!!!! Please implement real using of templates");
+        this.setState({ isPopupVisible: true });
+        //callIfExist(this.props.onSubmit, "Mock!!!! Please implement real using of templates");
     }
 
     render() {
         return (
-            <a className="reportj-text-link" onClick={() => this.showPopup()}>
-                <span>Use power of ReportJ.</span>
-                <span className="reportj-link" title="Select comment from templates"></span>
-            </a>
+            <section>
+                <a className="reportj-text-link" onClick={() => this.showPopup()}>
+                    <span>Use power of ReportJ.</span>
+                    <span className="reportj-link" title="Select comment from templates"></span>
+                </a>
+                <Popup visible={this.state.isPopupVisible}>
+                    <p>Lohpidar!</p>
+                    <p>Lohpidar!</p>
+                    <p>Lohpidar!</p>
+                    <p>Lohpidar!</p>
+                    <p>Lohpidar!</p>
+                </Popup>
+            </section>
         );
     }
 }
