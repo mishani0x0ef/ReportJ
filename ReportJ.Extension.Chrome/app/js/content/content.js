@@ -7,9 +7,9 @@ import { checkIsInsideJira } from "~/js/content/common/jiraUtil";
 
 class ContentController {
     constructor(browser) {
-        const storage = new StorageService(browser);
+        this.storage = new StorageService(browser);
 
-        Promise.all([storage.getGeneralSettings(), checkIsInsideJira()])
+        Promise.all([this.storage.getGeneralSettings(), checkIsInsideJira()])
             .then((results) => {
                 const settings = results[0];
                 const insideJira = results[1];
@@ -34,7 +34,7 @@ class ContentController {
         extenders.push(
             new CloseIssueExtender(),
             new LogTimeExtender(),
-            new LogTemplatesExtender()
+            new LogTemplatesExtender(this.storage)
         );
 
         if (settings.autoIssueSummary.enabled) {

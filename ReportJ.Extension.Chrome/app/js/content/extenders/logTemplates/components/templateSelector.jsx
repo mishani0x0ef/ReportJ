@@ -13,20 +13,22 @@ export class TemplateSelector extends Component {
     constructor(props) {
         super(props);
 
+        this.storageService = props.storageService;
+
         this.state = {
             isPopupVisible: false,
-            templates: [
-                "Rick getting mad and drink all whiskey.",
-                "Morty is scaried and wonna go home.",
-                "Your mom is a well know character.",
-                "Rick getting mad and drink all whiskey.",
-                "Morty is scaried and wonna go home.",
-                "Your mom is a well know character.",
-                "Rick getting mad and drink all whiskey.",
-                "Morty is scaried and wonna go home.",
-                "Your mom is a well know character.",
-            ],
+            templates: [],
         };
+
+        this.initTemplates();
+    }
+
+    initTemplates() {
+        this.storageService.getTemplates()
+            .then((templates) => {
+                const templateDescriptions = templates.map((t) => t.description);
+                this.setState({ templates: templateDescriptions });
+            });
     }
 
     showPopup() {
@@ -57,7 +59,7 @@ export class TemplateSelector extends Component {
                 </a>
                 <Popup visible={this.state.isPopupVisible}>
                     <PopupSection>
-                        <h3>Templates</h3>
+                        <h3 className="text-center">Templates</h3>
                         <List borderVisible={true}>
                             {this.state.templates.map((templ) => this.renderTemplateItem(templ))}
                         </List>
@@ -74,4 +76,5 @@ export class TemplateSelector extends Component {
 
 TemplateSelector.propTypes = {
     onSubmit: PropTypes.func,
+    storageService: PropTypes.any,
 }
