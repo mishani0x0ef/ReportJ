@@ -1,10 +1,11 @@
+import { JiraButton, JiraCancelButton } from "~/js/content/common/components/button/button";
+import { Popup, PopupButtonsSection, PopupSection } from "~/js/content/common/components/popup/popup";
 import React, { Component } from "react";
 
 import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
 import { SquareCheckBoxGroup } from "./squareCheckBoxGroup";
 import { callIfExist } from "~/js/content/common/functionUtil";
-import { classIf } from "~/js/content/common/reactUtil";
 
 export class TimeSelector extends Component {
     constructor(props) {
@@ -50,15 +51,19 @@ export class TimeSelector extends Component {
         return (
             <div className="time-selector">
                 <span className="reportj-link" title="Use ReportJ to set time" onClick={() => this.showPopup()}></span>
-                <div className={`log-work-popup ${classIf(this.state.isPopupVisible, "active")}`}>
-                    <SquareCheckBoxGroup group="Hours" values={this.props.hours} onChange={(e) => this.onHoursChange(e)} />
-                    <SquareCheckBoxGroup group="Minutes" values={this.props.minutes} onChange={(e) => this.onMinutesChange(e)} />
-                    <div className="popup-section buttons-section">
+                <Popup visible={this.state.isPopupVisible}>
+                    <PopupSection>
+                        <SquareCheckBoxGroup group="Hours" values={this.props.hours} onChange={(e) => this.onHoursChange(e)} />
+                    </PopupSection>
+                    <PopupSection>
+                        <SquareCheckBoxGroup group="Minutes" values={this.props.minutes} onChange={(e) => this.onMinutesChange(e)} />
+                    </PopupSection>
+                    <PopupButtonsSection>
                         <ProductPlacement />
-                        <input type="button" className="aui-button" value="OK" onClick={() => this.submitChanges()} />
-                        <a className="aui-button aui-button-link cancel" onClick={() => this.closePopup()}>Cancel</a>
-                    </div>
-                </div>
+                        <JiraButton text="OK" onClick={() => this.submitChanges()} />
+                        <JiraCancelButton text="Cancel" onClick={() => this.closePopup()} />
+                    </PopupButtonsSection>
+                </Popup>
             </div>
         );
     }
