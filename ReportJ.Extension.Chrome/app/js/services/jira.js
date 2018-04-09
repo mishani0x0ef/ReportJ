@@ -1,7 +1,11 @@
 import $ from "jquery";
+import { getBaseUrl } from "~/js/util/url";
 
 export default class JiraWrapper {
     constructor(baseJiraUrl) {
+        if (typeof baseJiraUrl === "undefined") {
+            baseJiraUrl = getBaseUrl(location.href);
+        }
         this.jiraUrl = baseJiraUrl;
 
         this.issueInfoParams = "fields=summary,parent";
@@ -42,12 +46,11 @@ export default class JiraWrapper {
         const api = `${this.apiUrl}issue/${key}`;
 
         const requestData = {
-            "update":
-            {
+            "update": {
                 "timetracking": [
                     {
                         "edit":
-                        { "remainingEstimate": estimate }
+                            { "remainingEstimate": estimate }
                     }
                 ]
             }

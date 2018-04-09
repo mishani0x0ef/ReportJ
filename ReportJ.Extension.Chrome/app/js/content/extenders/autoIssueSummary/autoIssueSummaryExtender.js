@@ -1,12 +1,10 @@
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import JiraWrapper from "~/js/services/jira";
-import { getBaseUrl } from "~/js/util/url";
 import { isEmpty } from "~/js/util/object";
 
 export class AutoIssueSummaryExtender {
     constructor() {
-        const baseUrl = getBaseUrl(location.href);
-        this.jira = new JiraWrapper(baseUrl);
+        this.jira = new JiraWrapper();
     }
 
     start() {
