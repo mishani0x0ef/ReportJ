@@ -1,11 +1,10 @@
 import JiraWrapper from "./services/jira";
-import UrlService from "./services/urlService";
 import config from "~/config";
+import { getBaseUrl } from "~/js/util/url";
 
 class BackgroundWorker {
-    constructor(browser, urlService) {
+    constructor(browser) {
         this.browser = browser;
-        this.urlService = urlService;
 
         this.contextMenus = {
             addIssueSummaryId: "3956cb0d-9144-468a-a76e-7d67c58f7949",
@@ -37,7 +36,7 @@ class BackgroundWorker {
 
     addIssueSummary() {
         this.browser.tabs.getSelected(null, (tab) => {
-            const baseUrl = this.urlService.getBaseUrl(tab.url);
+            const baseUrl = getBaseUrl(tab.url);
             const jira = new JiraWrapper(baseUrl);
 
             jira.getIssueInfo(tab.url)
@@ -50,4 +49,4 @@ class BackgroundWorker {
     }
 }
 
-export default new BackgroundWorker(chrome, new UrlService(chrome));
+export default new BackgroundWorker(chrome);

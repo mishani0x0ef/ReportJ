@@ -1,7 +1,11 @@
 import $ from "jquery";
+import { getBaseUrl } from "~/js/util/url";
 
 export default class JiraWrapper {
     constructor(baseJiraUrl) {
+        if (typeof baseJiraUrl === "undefined") {
+            baseJiraUrl = getBaseUrl(location.href);
+        }
         this.jiraUrl = baseJiraUrl;
 
         this.issueInfoParams = "fields=summary,parent";
@@ -24,16 +28,7 @@ export default class JiraWrapper {
 
         return $.ajax(settings)
             .then(() => true)
-            .catch(() => {
-                // https://github.com/mishani0x0ef/ReportJ/issues/29
-                // when check unseccessfull - error added to console.
-                // add explaination to error to avoid confusion of developers that use it.
-                if (console) {
-                    const message = `Please ignore network error generate by extension ReportJ during access to ${url}`;
-                    console.warn(message);
-                }
-                return false;
-            });
+            .catch(() => false);
     }
 
     setRemainingEstimate(url, estimate) {
@@ -42,12 +37,10 @@ export default class JiraWrapper {
         const api = `${this.apiUrl}issue/${key}`;
 
         const requestData = {
-            "update":
-            {
-                "timetracking": [
+            update: {
+                timetracking: [
                     {
-                        "edit":
-                        { "remainingEstimate": estimate }
+                        edit: { remainingEstimate: estimate }
                     }
                 ]
             }
@@ -56,7 +49,7 @@ export default class JiraWrapper {
         const settings = {
             method: "PUT",
             dataType: "json",
-            contentType: 'application/json',
+            contentType: "application/json",
             url: api,
             data: JSON.stringify(requestData)
         };

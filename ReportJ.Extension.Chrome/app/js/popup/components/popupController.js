@@ -1,8 +1,7 @@
 import JiraWrapper from "~/js/services/jira";
 import UrlService from "~/js/services/urlService";
-
+import { alert } from "~/js/util/dialog";
 import angular from "angular";
-import dialog from "~/js/util/dialog";
 
 // todo: decouple this class on components and use ES6 syntax. Currently it's require too many afforts. MR
 export default function PopupController($scope, $timeout, browser, storageService, repositoryService) {
@@ -45,7 +44,7 @@ export default function PopupController($scope, $timeout, browser, storageServic
                     .then((commits) => angular.copy(commits, $scope.svnCommits))
                     .catch(() => {
                         const msg = `Oops! Something went wrong while getting your commits for '${repo.name}' repository.`;
-                        dialog.alert(msg, "Warning!");
+                        alert(msg, "Warning!");
                     })
                     .finally(() => { $scope.loading = false; });
             });

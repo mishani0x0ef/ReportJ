@@ -3,8 +3,8 @@ import "./list.scss";
 import React, { Component } from "react";
 
 import PropTypes from "prop-types";
-import { callIfExist } from "~/js/content/common/functionUtil";
-import { classIf } from "~/js/content/common/reactUtil";
+import { callIfExist } from "~/js/util/function";
+import { classIf } from "~/js/util/react";
 
 export class List extends Component {
     renderHeader() {
@@ -14,9 +14,9 @@ export class List extends Component {
         return null;
     }
 
-    renderListItem(content) {
+    renderListItem(content, key) {
         return (
-            <div className="reportj-list-item" onClick={callIfExist(content.click)}>
+            <div key={key} className="reportj-list-item" onClick={callIfExist(content.click)}>
                 {content}
             </div>
         );
@@ -27,7 +27,7 @@ export class List extends Component {
             <div className="reportj-list-conainer">
                 {this.renderHeader()}
                 <div className={`reportj-list ${classIf(this.props.borderVisible, "reportj-has-border")}`}>
-                    {this.props.children.map((child) => this.renderListItem(child))}
+                    {this.props.children.map((child, index) => this.renderListItem(child, index))}
                 </div>
             </div>
         );

@@ -1,28 +1,22 @@
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import JiraWrapper from "~/js/services/jira";
-import UrlService from "~/js/services/urlService";
 import { createElement } from "~/js/util/html";
 
 export class CloseIssueExtender {
-    constructor(browser) {
-        this.urlService = new UrlService(browser);
-        const baseUrl = this.urlService.getBaseUrl(location.href);
-        this.jira = new JiraWrapper(baseUrl);
+    constructor() {
+        this.jira = new JiraWrapper();
     }
 
     start() {
         const observer = new JiraDialogObserver("Close Issue");
         observer.onAppear((dialog) => {
-            const customCloseExist = dialog.className.includes("reportj-close-button");
-            if (!customCloseExist) {
-                this._addCloseBtn(dialog);
-            }
+            this._addCloseBtn(dialog);
         });
     }
 
     _addCloseBtn(dialog) {
         const container = dialog.querySelector(".form-footer .buttons");
-        const button = createElement("<div class='reportj-button reportj-close-button aui-button' title='Close issue and reset remaining estimate'>Close with <strong>ReportJ</strong></div>");
+        const button = createElement("<div class='aui-button' title='Close issue and reset remaining estimate'>Close with <strong>ReportJ</strong></div>");
 
         container.prepend(button);
         button.addEventListener("click", (e) => this._closeIssueWithResetRemaining(e));
@@ -41,9 +35,7 @@ export class CloseIssueExtender {
                 closeBtn.click();
 
                 // set timeout to let default submit finish it's work.
-                return new Promise((resolve) => setTimeout(() => resolve(), 3000));
-            })
-            .then(() => target.removeAttribute("disabled"))
-            .catch(() => target.removeAttribute("disabled"));
+                setTimeout(() => target.removeAttribute("disabled"), 3000);
+            });
     }
 }

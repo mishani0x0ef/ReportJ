@@ -1,11 +1,10 @@
 import "bootstrap";
+
 import $ from "jquery";
-
 import GeneralSettings from "~/js/models/settings/generalSettings";
-
 import angular from "angular";
 import config from "~/config";
-import dialog from "~/js/util/dialog";
+import { confirm } from "~/js/util/dialog";
 
 export default function OptionsController($scope, $interval, $timeout, storageService, repositoryService) {
 
@@ -118,7 +117,7 @@ export default function OptionsController($scope, $interval, $timeout, storageSe
             .catch(() => {
                 const message = "We wasn't able to establish connection using repository settings that you have defined. Save it anyway?";
                 const caption = "Connection problem!";
-                dialog.confirm(message, caption)
+                confirm(message, caption)
                     .then((confirmed) => {
                         if (confirmed) {
                             saveRepository(repo);
@@ -130,7 +129,7 @@ export default function OptionsController($scope, $interval, $timeout, storageSe
 
     $scope.removeRepository = function (repo) {
         const message = `Are you sure you want to delete this amazing repository '${repo.name}'?`;
-        dialog.confirm(message, "Delete confirmation")
+        confirm(message, "Delete confirmation")
             .then((confirmed) => {
                 if (confirmed) {
                     $scope.repositories = $scope.repositories.filter((r) => r !== repo);
@@ -167,7 +166,7 @@ export default function OptionsController($scope, $interval, $timeout, storageSe
 
     $scope.removeTemplate = function (template) {
         const message = "Are you sure you want to delete such a wonderful template?";
-        dialog.confirm(message, "Delete confirmation")
+        confirm(message, "Delete confirmation")
             .then((confirmed) => {
                 if (confirmed) {
                     $scope.templates = $scope.templates.filter((t) => t !== template);

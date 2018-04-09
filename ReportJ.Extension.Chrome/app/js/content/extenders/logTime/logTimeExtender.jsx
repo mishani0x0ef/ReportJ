@@ -1,9 +1,10 @@
 import "./logTimeExtender.scss";
 
+import { createElement, insertAfter } from "~/js/util/html";
+
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import React from "react";
 import { TimeSelector } from "./components/timeSelector";
-import { insertAfter } from "~/js/util/html";
 import { render } from "react-dom";
 
 export class LogTimeExtender {
@@ -16,7 +17,7 @@ export class LogTimeExtender {
         const observer = new JiraDialogObserver("Log Work");
         observer.onAppear((dialog) => {
             const logTimeInput = dialog.querySelector("#log-work-time-logged");
-            const featureContainer = document.createElement("reportj-log-time");
+            const featureContainer = createElement(`<div class="reportj-log-time"></div>`);
             insertAfter(featureContainer, logTimeInput);
 
             render(<TimeSelector hours={this.hours} minutes={this.minutes} onSubmit={(time) => this.setLogTimeToJira(time)} />,

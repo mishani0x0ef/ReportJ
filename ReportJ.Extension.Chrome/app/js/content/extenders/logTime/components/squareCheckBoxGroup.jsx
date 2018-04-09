@@ -3,8 +3,8 @@ import "./squareCheckBoxGroup.scss";
 import React, { Component } from "react";
 
 import PropTypes from "prop-types";
-import { callIfExist } from "~/js/content/common/functionUtil";
-import { classIf } from "~/js/content/common/reactUtil";
+import { callIfExist } from "~/js/util/function";
+import { classIf } from "~/js/util/react";
 
 export class SquareCheckBoxGroup extends Component {
     constructor(props) {

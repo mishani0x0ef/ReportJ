@@ -7,8 +7,8 @@ import { JiraCancelButton } from "~/js/content/common/components/button/button";
 import { List } from "~/js/content/common/components/list/list";
 import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
-import { callIfExist } from "~/js/content/common/functionUtil";
-import { getSettingsUrl } from "~/js/content/common/browser";
+import { callIfExist } from "~/js/util/function";
+import { getSettingsUrl } from "~/js/util/browser";
 
 export class TemplateSelector extends Component {
     constructor(props) {
@@ -50,7 +50,7 @@ export class TemplateSelector extends Component {
         if (this.state.templates && this.state.templates.length > 0) {
             return (
                 <List headerText="Templates" borderVisible={true}>
-                    {this.state.templates.map((templ) => this.renderTemplateItem(templ))}
+                    {this.state.templates.map((templ, index) => this.renderTemplateItem(templ, index))}
                 </List>
             );
         }
@@ -66,9 +66,9 @@ export class TemplateSelector extends Component {
         );
     }
 
-    renderTemplateItem(text) {
+    renderTemplateItem(text, key) {
         return (
-            <p className="text-justify" onClick={() => this.submitSelectedTemplate(text)}>{text}</p>
+            <p key={key} className="text-justify" onClick={() => this.submitSelectedTemplate(text)}>{text}</p>
         );
     }
 

@@ -1,15 +1,11 @@
 import * as bootbox from "./bootbox";
 
-class Dialog {
-    alert(message, caption) {
-        bootbox.alert(message, caption);
-    }
-
-    confirm(message, caption) {
-        return new Promise((resolve) => {
-            bootbox.confirm(message, caption, (confirmed) => resolve(confirmed));
-        });
-    }
+export function alert(message, caption) {
+    bootbox.alert(message, caption);
 }
 
-export default new Dialog();
+export function confirm(message, caption) {
+    return new Promise((resolve) => {
+        bootbox.confirm(message, caption, (confirmed) => resolve(confirmed));
+    });
+}
