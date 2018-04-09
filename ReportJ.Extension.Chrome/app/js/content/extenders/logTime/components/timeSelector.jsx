@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
 import { SquareCheckBoxGroup } from "./squareCheckBoxGroup";
-import { callIfExist } from "~/js/content/common/functionUtil";
+import { callIfExist } from "~/js/util/function";
 
 export class TimeSelector extends Component {
     constructor(props) {

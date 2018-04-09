@@ -3,7 +3,7 @@ import "~/css/content.scss";
 import { AutoIssueSummaryExtender, CloseIssueExtender, LogTemplatesExtender, LogTimeExtender } from "./extenders";
 
 import StorageService from "~/js/services/storageService";
-import { checkIsInsideJira } from "~/js/content/common/jiraUtil";
+import { checkIsInsideJira } from "~/js/util/jira";
 
 class ContentController {
     constructor(browser) {
