@@ -1,12 +1,11 @@
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import JiraWrapper from "~/js/services/jira";
-import UrlService from "~/js/services/urlService";
 import { createElement } from "~/js/util/html";
+import { getBaseUrl } from "~/js/util/url";
 
 export class CloseIssueExtender {
-    constructor(browser) {
-        this.urlService = new UrlService(browser);
-        const baseUrl = this.urlService.getBaseUrl(location.href);
+    constructor() {
+        const baseUrl = getBaseUrl(location.href);
         this.jira = new JiraWrapper(baseUrl);
     }
 
