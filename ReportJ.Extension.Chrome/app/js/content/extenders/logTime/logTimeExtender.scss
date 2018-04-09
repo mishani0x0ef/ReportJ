@@ -2,6 +2,8 @@
 @import "~root/css/mixins";
 
 .reportj-log-time {
+    display: inline-block;
+
     .time-selector {
         position: relative;
         display: inline-flex;
