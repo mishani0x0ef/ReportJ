@@ -9,26 +9,18 @@ class ContentController {
     constructor(browser) {
         this.browser = browser;
         this.storage = new StorageService(browser);
-
-        Promise.all([this.storage.getGeneralSettings(), checkIsInsideJira()])
-            .then((results) => {
-                const settings = results[0];
-                const insideJira = results[1];
-                this._initExtenders(insideJira, settings);
-            })
-            .then(() => this.start());
     }
 
     start() {
-        this.extenders.forEach((extender) => extender.start());
-    }
-
-    _initExtenders(insideJira, settings) {
         this.extenders = [];
 
-        if (insideJira) {
-            this._addJiraExtenders(this.extenders, settings);
-        }
+        return Promise.all([this.storage.getGeneralSettings(), checkIsInsideJira()])
+            .then(([settings, insideJira]) => {
+                if (insideJira) {
+                    this._addJiraExtenders(this.extenders, settings);
+                }
+                this.extenders.forEach((extender) => extender.start());
+            });
     }
 
     _addJiraExtenders(extenders, settings) {
@@ -44,4 +36,5 @@ class ContentController {
     }
 }
 
-var contentController = new ContentController(chrome);
+var content = new ContentController(chrome);
+content.start();
