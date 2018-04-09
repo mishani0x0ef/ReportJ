@@ -28,16 +28,7 @@ export default class JiraWrapper {
 
         return $.ajax(settings)
             .then(() => true)
-            .catch(() => {
-                // https://github.com/mishani0x0ef/ReportJ/issues/29
-                // when check unseccessfull - error added to console.
-                // add explaination to error to avoid confusion of developers that use it.
-                if (console) {
-                    const message = `Please ignore network error generate by extension ReportJ during access to ${url}`;
-                    console.warn(message);
-                }
-                return false;
-            });
+            .catch(() => false);
     }
 
     setRemainingEstimate(url, estimate) {
