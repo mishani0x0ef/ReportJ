@@ -37,11 +37,10 @@ export default class JiraWrapper {
         const api = `${this.apiUrl}issue/${key}`;
 
         const requestData = {
-            "update": {
-                "timetracking": [
+            update: {
+                timetracking: [
                     {
-                        "edit":
-                            { "remainingEstimate": estimate }
+                        edit: { remainingEstimate: estimate }
                     }
                 ]
             }
@@ -50,7 +49,7 @@ export default class JiraWrapper {
         const settings = {
             method: "PUT",
             dataType: "json",
-            contentType: 'application/json',
+            contentType: "application/json",
             url: api,
             data: JSON.stringify(requestData)
         };
