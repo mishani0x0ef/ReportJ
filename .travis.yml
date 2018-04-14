@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "node"
+before_script:
+  - cd ./ReportJ.Extension.Chrome
+  - npm install
+script:
+  - npm run build:release
+cache:
+  directories:
+    - "node_modules"

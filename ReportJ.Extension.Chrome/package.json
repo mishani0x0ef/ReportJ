@@ -5,10 +5,10 @@
   "main": "background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node_modules\\.bin\\webpack --config=\"webpack.config.js\"",
-    "build:release": "node_modules\\.bin\\webpack --config=\"webpack.config.js\" --env.environment=release",
+    "build": "webpack",
+    "build:release": "webpack --env.environment=release",
     "pack": ".\\pack.ps1",
-    "watch": "node_modules\\.bin\\webpack --config=\"webpack.config.js\" --watch=true"
+    "watch": "webpack --watch=true"
   },
   "repository": {
     "type": "git",
