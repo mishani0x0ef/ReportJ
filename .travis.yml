@@ -3,5 +3,6 @@ node_js:
   - "iojs"
 before_script:
   - cd ./ReportJ.Extension.Chrome
+  - npm install
 script:
   - npm run build:release
