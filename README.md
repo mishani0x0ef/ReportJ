@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mishani0x0ef/ReportJ.svg?branch=master)](https://travis-ci.org/mishani0x0ef/ReportJ)
+[![CodeFactor](https://www.codefactor.io/repository/github/mishani0x0ef/reportj/badge)](https://www.codefactor.io/repository/github/mishani0x0ef/reportj)
 
 <img src="https://github.com/mishani0x0ef/ReportJ/blob/master/ReportJ.Extension.Chrome/app/img/logo-lg.png" alt="ReportJ logo" height="100" style="text-align: center; display: block;">
 
