@@ -4,6 +4,5 @@ namespace ReportJ.Flare.Repo.Tests.Services
 {
     public class SvnCommitProviderTests : CommitProviderTests<SvnCommitProvider>
     {
-
     }
 }
