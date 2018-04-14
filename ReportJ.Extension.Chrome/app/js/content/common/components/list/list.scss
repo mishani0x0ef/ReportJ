@@ -1,11 +1,17 @@
 @import "~root/css/variables";
 @import "~root/css/mixins";
 
+.reportj-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .reportj-list-header {
     text-align: center;
     text-transform: uppercase;
-    font-weight: bold;
+    letter-spacing: 2px;
     border-bottom: 2px solid $color-primary-light;
+    padding: 5px 0 8px;
 }
 
 .reportj-list {
@@ -17,16 +23,19 @@
 
     &.reportj-has-border {
         border: 1px solid $color-border;
+
+        .reportj-list-item {
+            &:last-of-type {
+                border-bottom: none;
+            }
+        }
     }
 
     .reportj-list-item {
         border-bottom: 1px solid $color-border;
         cursor: pointer;
-        padding: 6px 8px;
-
-        &:last-of-type {
-            border-bottom: none;
-        }
+        padding: 7px 10px;
+        @include default-animate();
 
         &:hover {
             background-color: darken($color-background, 5%);

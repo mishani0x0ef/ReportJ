@@ -24,7 +24,7 @@ export class List extends Component {
 
     render() {
         return (
-            <div className="reportj-list-conainer">
+            <div className="reportj-list-container">
                 {this.renderHeader()}
                 <div className={`reportj-list ${classIf(this.props.borderVisible, "reportj-has-border")}`}>
                     {this.props.children.map((child, index) => this.renderListItem(child, index))}

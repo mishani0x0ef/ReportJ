@@ -6,19 +6,22 @@
 }
 
 .reportj-popup {
-    display: none;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
     background-color: $color-background;
     padding: 12px 16px;
     margin: 0 7px 7px 0;
     box-shadow: $panel-shadow;
+    transform: scale(1, 1);
+    z-index: $z-index-base-popup;
+    @include default-animate();
 
-    &.active {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        top: 0;
-        left: 0;
-        z-index: $z-index-base-popup;
+    &:not(.active) {
+        transform: scale(0, 0);
+        opacity: 0;
     }
     
     .reportj-popup-section {

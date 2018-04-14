@@ -49,7 +49,7 @@ export class TemplateSelector extends Component {
     renderTemplates() {
         if (this.state.templates && this.state.templates.length > 0) {
             return (
-                <List headerText="Templates" borderVisible={true}>
+                <List headerText="Templates">
                     {this.state.templates.map((templ, index) => this.renderTemplateItem(templ, index))}
                 </List>
             );
