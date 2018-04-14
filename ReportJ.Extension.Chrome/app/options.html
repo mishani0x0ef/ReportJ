@@ -73,7 +73,7 @@
 
                                 <div class="inline-group">
                                     <button class="btn btn-primary" ng-click="editTemplate()" ng-disabled="isMaxTemplatesCountExceed">Add Template</button>
-                                    <p class="off" ng-class="{ off: isMaxTemplatesCountExceed !== true }">Sorry, but quota for templates is <strong>{{maxTemplateQuota}}</strong> templates.</p>
+                                    <span class="off animated" ng-class="{ off: isMaxTemplatesCountExceed !== true }">Sorry, but quota for templates is <strong>{{maxTemplateQuota}}</strong> templates.</span>
                                 </div>
 
                             </div>
@@ -162,9 +162,9 @@
                                         </div>
                                         <div class="inline-group" ng-show="(repositories | filter: { type: type }).length > 0">
                                             <button class="btn btn-primary" ng-click="editRepository(null, type)" ng-disabled="(repositories | filter: { type: type }).length >= maxRepoQuota">Add Repository</button>
-                                            <p class="off" ng-class="{off: (repositories | filter: { type: type }).length < maxRepoQuota}">
-                                                Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong>                                                for each repository type.
-                                            </p>
+                                            <span class="off animated" ng-class="{off: (repositories | filter: { type: type }).length < maxRepoQuota}">
+                                                Sorry, but quota for count of repositories is <strong>{{maxRepoQuota}}</strong> for each repository type.
+                                            </span>
                                         </div>
                                     </div>
 

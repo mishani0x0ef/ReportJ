@@ -31,3 +31,7 @@
 .loading-points :nth-child(2n+3) {
     animation-delay: -1s;
 }
+
+.animated {
+    transition: all 0.5s ease;
+}

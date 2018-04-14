@@ -135,8 +135,6 @@
     padding: 0 5px;
 }
 
-.btn-wrap {}
-
 .btn-wrap .btn-caption {
     margin-right: 10px;
 }
@@ -218,24 +216,16 @@
 }
 
 .inline-group {
-    display: inline-block;
+    display: flex;
+    align-items: center;
 }
 
-.inline-group > * {
-    display: inline;
-    transition: all 0.5s ease;
-}
-
-.inline-group > p {
+.inline-group > span {
     margin-left: 10px;
-    width: 1px;
-    min-width: 1px;
-    max-width: 1px;
 }
 
 .inline-group > .off {
     margin: 0;
-    padding: 0;
     opacity: 0;
     overflow: hidden;
     visibility: hidden;
