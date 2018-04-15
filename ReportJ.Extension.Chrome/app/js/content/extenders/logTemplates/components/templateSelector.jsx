@@ -49,7 +49,7 @@ export class TemplateSelector extends Component {
     renderTemplates() {
         if (this.state.templates && this.state.templates.length > 0) {
             return (
-                <List headerText="Templates" borderVisible={true}>
+                <List>
                     {this.state.templates.map((templ, index) => this.renderTemplateItem(templ, index))}
                 </List>
             );
@@ -76,10 +76,16 @@ export class TemplateSelector extends Component {
         return (
             <section className="reportj-template-selector">
                 <a className="reportj-text-link" onClick={() => this.showPopup()}>
-                    <span>Use power of ReportJ.</span>
+                    <span>Use power of ReportJ</span>
                     <span className="reportj-link" title="Select comment from templates"></span>
                 </a>
                 <Popup visible={this.state.isPopupVisible}>
+                    <PopupSection>
+                        <div className="reportj-templates-header">
+                            <span className="reportj-templates-header-text">Templates</span>
+                            <a href={getSettingsUrl(this.browser)} target="_blank">Open Settings</a>
+                        </div>
+                    </PopupSection>
                     <PopupSection>
                         {this.renderTemplates()}
                     </PopupSection>

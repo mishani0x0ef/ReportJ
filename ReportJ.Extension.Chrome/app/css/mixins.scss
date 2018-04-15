@@ -4,3 +4,7 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+@mixin default-animate() {
+    transition: all 0.5s ease;
+}
