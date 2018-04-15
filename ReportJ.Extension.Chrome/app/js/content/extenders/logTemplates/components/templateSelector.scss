@@ -2,6 +2,17 @@
 @import "~root/css/mixins";
 
 .reportj-template-selector {
+    .reportj-templates-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &-text {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    }
+
     .reportj-popup {
         min-width: 350px;
         max-width: 450px;
@@ -11,5 +22,6 @@
     .reportj-list-container {
         margin-left: -15px;
         margin-right: -15px;
+        border-top: 2px solid $color-primary-light;
     }
 }
