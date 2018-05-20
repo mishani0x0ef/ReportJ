@@ -31,15 +31,13 @@ export class CopyWorkLogExtender {
         const commentContainer = container.querySelector(".worklog-comment");
 
         const duration = this._parseDuration(timeContainer.innerHTML);
-        const rawComment = commentContainer.innerHTML;
+        const comment = this._parseComment(commentContainer.innerHTML);
 
         console.log(`Time: ${duration}`);
-        console.log(`Comment: ${rawComment}`);
+        console.log(`Comment: ${comment}`);
 
         const logWorkTrigger = document.querySelector(".issueaction-log-work");
-        if (logWorkTrigger) {
-            logWorkTrigger.click();
-        }
+        logWorkTrigger.click();
 
         // TODO: insert duration and comment into dialog. MR
     }
@@ -54,6 +52,17 @@ export class CopyWorkLogExtender {
             .replace(" hours", "h")
             .replace(" hour", "h")
             .replace(" minutes", "m")
-            .replace(" minute", "m");
+            .replace(" minute", "m")
+            .trim();
+    }
+
+    _parseComment(comment) {
+        return comment
+            .replace(/<br>/g, "")
+            // remove 'a' tag and live only text inside 
+            // <a href="any">TEXT</a> -> TEXT
+            .replace(/<a[^>]*>/g, "")
+            .replace(/<\/a>/g, "")
+            .trim();
     }
 }
