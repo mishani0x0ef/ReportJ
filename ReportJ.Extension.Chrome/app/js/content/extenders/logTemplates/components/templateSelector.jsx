@@ -9,8 +9,9 @@ import { ProductPlacement } from "~/js/content/common/components/productPlacemen
 import PropTypes from "prop-types";
 import { callIfExist } from "~/js/util/function";
 import { getSettingsUrl } from "~/js/util/browser";
+import onClickOutside from "react-onclickoutside";
 
-export class TemplateSelector extends Component {
+export class TemplateSelectorComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -99,8 +100,14 @@ export class TemplateSelector extends Component {
     }
 }
 
-TemplateSelector.propTypes = {
+TemplateSelectorComponent.propTypes = {
     onSubmit: PropTypes.func,
     storageService: PropTypes.any,
     browser: PropTypes.any,
 }
+
+export const TemplateSelector = onClickOutside(TemplateSelectorComponent, {
+    handleClickOutside: function (instance) {
+        return () => instance.closePopup();
+    }
+});
