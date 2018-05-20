@@ -3,9 +3,6 @@ node_js:
   - "node"
 before_script:
   - cd ./ReportJ.Extension.Chrome
-  - npm install
+  - npm ci
 script:
   - npm run build:release
-cache:
-  directories:
-    - "node_modules"
