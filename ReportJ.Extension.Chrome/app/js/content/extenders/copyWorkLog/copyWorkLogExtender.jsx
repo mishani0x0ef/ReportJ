@@ -7,6 +7,7 @@ import { isEmpty } from "~/js/util/object";
 export class CopyWorkLogExtender {
     start() {
         this._initWorkLogsInsideContainer(document);
+        // BUG: observer don't see changes if "Work Log" tab is opened and log was added or removed.
         const observer = new ElementObserver(".issuePanelContainer");
         observer.onAppear((panel) => this._initWorkLogsInsideContainer(panel));
     }
@@ -20,21 +21,17 @@ export class CopyWorkLogExtender {
         const container = element.querySelector(".actionContainer");
 
         const button = createElement("<div class='aui-button'>Copy with <strong>ReportJ</strong></div>");
-        button.addEventListener("click", (e) => this._copyWorkLog(e));
+        button.addEventListener("click", (e) => this._copyWorkLog(e.currentTarget.parentElement));
 
         insertAfter(button, container);
     }
 
-    _copyWorkLog(event) {
-        const container = event.currentTarget.parentElement;
-        const timeContainer = container.querySelector(".worklog-duration");
+    _copyWorkLog(container) {
+        const durationContainer = container.querySelector(".worklog-duration");
         const commentContainer = container.querySelector(".worklog-comment");
 
-        const duration = this._parseDuration(timeContainer.innerHTML);
+        const duration = this._parseDuration(durationContainer.innerHTML);
         const comment = this._parseComment(commentContainer.innerHTML);
-
-        const logWorkTrigger = document.querySelector(".issueaction-log-work");
-        logWorkTrigger.click();
 
         const observer = new JiraDialogObserver("Log Work");
         observer.onAppear((dialog) => {
@@ -46,6 +43,14 @@ export class CopyWorkLogExtender {
 
             observer.dispose();
         });
+
+        const logWorkTrigger = document.querySelector(".issueaction-log-work");
+
+        if (logWorkTrigger) {
+            logWorkTrigger.click();
+        } else {
+            observer.dispose();
+        }
     }
 
     _parseDuration(duration) {
