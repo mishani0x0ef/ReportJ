@@ -4,16 +4,14 @@ import ElementObserver from "~/js/util/ElementObserver";
 
 export class CopyWorkLogExtender {
     start() {
-        const selector = "div[id*='worklog']";
-
-        const initialWorkLogs = document.querySelectorAll(selector);
-        initialWorkLogs.forEach((workLog) => this._addCopyButton(workLog));
-
+        this._initWorkLogsInsideContainer(document);
         const observer = new ElementObserver(".issuePanelContainer");
-        observer.onAppear((panel) => {
-            const workLogs = panel.querySelectorAll(selector);
-            workLogs.forEach((workLog) => this._addCopyButton(workLog));
-        });
+        observer.onAppear((panel) => this._initWorkLogsInsideContainer(panel));
+    }
+
+    _initWorkLogsInsideContainer(container) {
+        const workLogs = container.querySelectorAll("div[id*='worklog']");
+        workLogs.forEach((workLog) => this._addCopyButton(workLog));
     }
 
     _addCopyButton(element) {
