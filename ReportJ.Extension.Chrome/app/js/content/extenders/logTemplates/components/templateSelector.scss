@@ -13,10 +13,13 @@
         }
     }
 
+    .reportj-popup-container {
+        position: inherit;
+    }
+
     .reportj-popup {
-        min-width: 350px;
-        max-width: 450px;
-        max-height: 450px;
+        top: 30px;
+        width: calc(100% - 30px);
     }
 
     .reportj-list-container {
