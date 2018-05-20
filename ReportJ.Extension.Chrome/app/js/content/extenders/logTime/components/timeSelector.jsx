@@ -6,8 +6,9 @@ import { ProductPlacement } from "~/js/content/common/components/productPlacemen
 import PropTypes from "prop-types";
 import { SquareCheckBoxGroup } from "./squareCheckBoxGroup";
 import { callIfExist } from "~/js/util/function";
+import onClickOutside from "react-onclickoutside";
 
-export class TimeSelector extends Component {
+class TimeSelectorComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -69,8 +70,14 @@ export class TimeSelector extends Component {
     }
 }
 
-TimeSelector.propTypes = {
+TimeSelectorComponent.propTypes = {
     hours: PropTypes.array.isRequired,
     minutes: PropTypes.array.isRequired,
     onSubmit: PropTypes.func,
 }
+
+export const TimeSelector = onClickOutside(TimeSelectorComponent, {
+    handleClickOutside: function (instance) {
+        return () => instance.closePopup();
+    }
+});
