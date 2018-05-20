@@ -1,6 +1,6 @@
 import { createElement, insertAfter } from "~/js/util/html";
 
-import ElementObserver from "~/js/util/ElementObserver";
+import ElementObserver from "~/js/util/elementObserver";
 import JiraDialogObserver from "~/js/util/jiraDialogObserver";
 import { isEmpty } from "~/js/util/object";
 
