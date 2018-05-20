@@ -6,13 +6,18 @@ import { isEmpty } from "~/js/util/object";
 
 export class CopyWorkLogExtender {
     start() {
-        this._initWorkLogsInsideContainer(document);
-        // BUG: observer don't see changes if "Work Log" tab is opened and log was added or removed.
+        this._initCopyButtons(document);
         const observer = new ElementObserver(".issuePanelContainer");
-        observer.onAppear((panel) => this._initWorkLogsInsideContainer(panel));
+        observer.onAppear((panel) => this._initCopyButtons(panel));
+
+        const deleteObserver = new JiraDialogObserver("Delete Worklog");
+        deleteObserver.onAppear((dialog) => {
+            const submitButton = dialog.querySelector("#delete-log-work-submit");
+            this._reinitCopyButtonsAfterSubmit(submitButton);
+        })
     }
 
-    _initWorkLogsInsideContainer(container) {
+    _initCopyButtons(container) {
         const workLogs = container.querySelectorAll("div[id*='worklog']");
         workLogs.forEach((workLog) => this._addCopyButton(workLog));
     }
@@ -41,6 +46,9 @@ export class CopyWorkLogExtender {
             timeInput.value = duration;
             commentInput.value = comment;
 
+            const submitButton = dialog.querySelector("#log-work-submit");
+            this._reinitCopyButtonsAfterSubmit(submitButton);
+
             observer.dispose();
         });
 
@@ -51,6 +59,13 @@ export class CopyWorkLogExtender {
         } else {
             observer.dispose();
         }
+    }
+
+    _reinitCopyButtonsAfterSubmit(submitButton) {
+        // Workaround. After update of work logs mutation didn't called. So have to recreate buttons manually.
+        submitButton.addEventListener("click", () => {
+            setTimeout(() => this._initCopyButtons(document.body), 3000);
+        });
     }
 
     _parseDuration(duration) {
