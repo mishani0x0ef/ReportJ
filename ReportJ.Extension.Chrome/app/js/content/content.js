@@ -1,6 +1,6 @@
 import "~/css/content.scss";
 
-import { AutoIssueSummaryExtender, CloseIssueExtender, LogTemplatesExtender, LogTimeExtender } from "./extenders";
+import { AutoIssueSummaryExtender, CloseIssueExtender, CopyWorkLogExtender, LogTemplatesExtender, LogTimeExtender } from "./extenders";
 
 import StorageService from "~/js/services/storageService";
 import { checkIsInsideJira } from "~/js/util/jira";
@@ -27,7 +27,8 @@ class ContentController {
         extenders.push(
             new CloseIssueExtender(),
             new LogTimeExtender(),
-            new LogTemplatesExtender(this.storage, this.browser)
+            new LogTemplatesExtender(this.storage, this.browser),
+            new CopyWorkLogExtender()
         );
 
         if (settings.autoIssueSummary.enabled) {
