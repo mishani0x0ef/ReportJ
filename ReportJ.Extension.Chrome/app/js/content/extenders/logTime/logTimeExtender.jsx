@@ -27,6 +27,6 @@ export class LogTimeExtender {
 
     setLogTimeToJira(time) {
         const timeInput = document.getElementById("log-work-time-logged");
-        timeInput.value = time
+        timeInput.value = time;
     }
 }

@@ -16,10 +16,15 @@ export default class ElementObserver {
         this.handlers.add(handler);
     }
 
-    _createMutation() {
-        var observer = new MutationObserver((m) => this._processMutations(m));
+    dispose() {
+        this.handlers.clear();
+        this.observer.disconnect();
+    }
 
-        observer.observe(document.body, {
+    _createMutation() {
+        this.observer = new MutationObserver((m) => this._processMutations(m));
+
+        this.observer.observe(document.body, {
             childList: true,
             subtree: true,
             attributes: false,

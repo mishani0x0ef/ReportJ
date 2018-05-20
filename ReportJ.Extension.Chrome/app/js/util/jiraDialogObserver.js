@@ -18,6 +18,11 @@ export default class JiraDialogObserver extends ElementObserver {
         this.dialogHandlers.push(handler);
     }
 
+    dispose() {
+        super.dispose();
+        this.dialogHandlers = null;
+    }
+
     _isExpectedDialog(element, dialogTitleText) {
         const heading = element.querySelector(".jira-dialog-heading h2");
         const title = heading.title;

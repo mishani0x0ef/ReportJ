@@ -16,10 +16,12 @@ export class AutoIssueSummaryExtender {
     }
 
     _addIssueSummaryIfEmpty(input) {
-        const currentValue = input.value;
-        if (isEmpty(currentValue)) {
-            this.jira.getIssueInfo(location.href)
-                .then((summary) => { input.value = summary; });
-        }
+        this.jira.getIssueInfo(location.href)
+            .then((summary) => {
+                const currentValue = input.value;
+                if (isEmpty(currentValue)) {
+                    input.value = summary;
+                }
+            });
     }
 }
