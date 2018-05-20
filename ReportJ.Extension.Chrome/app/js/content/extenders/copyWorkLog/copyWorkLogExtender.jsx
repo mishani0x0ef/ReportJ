@@ -25,7 +25,35 @@ export class CopyWorkLogExtender {
         insertAfter(button, container);
     }
 
-    _copyWorkLog(element) {
-        console.log("Copy worklog");
+    _copyWorkLog(event) {
+        const container = event.currentTarget.parentElement;
+        const timeContainer = container.querySelector(".worklog-duration");
+        const commentContainer = container.querySelector(".worklog-comment");
+
+        const duration = this._parseDuration(timeContainer.innerHTML);
+        const rawComment = commentContainer.innerHTML;
+
+        console.log(`Time: ${duration}`);
+        console.log(`Comment: ${rawComment}`);
+
+        const logWorkTrigger = document.querySelector(".issueaction-log-work");
+        if (logWorkTrigger) {
+            logWorkTrigger.click();
+        }
+
+        // TODO: insert duration and comment into dialog. MR
+    }
+
+    _parseDuration(duration) {
+        return duration
+            .replace(/,/g, "")
+            .replace(" weeks", "w")
+            .replace(" week", "w")
+            .replace(" days", "d")
+            .replace(" day", "d")
+            .replace(" hours", "h")
+            .replace(" hour", "h")
+            .replace(" minutes", "m")
+            .replace(" minute", "m");
     }
 }
