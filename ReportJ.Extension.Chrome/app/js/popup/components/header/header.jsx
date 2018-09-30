@@ -10,15 +10,17 @@ export class Header extends Component {
     constructor() {
         super();
 
-        this.isInsideJira = false;
-
-        this._initJiraConnection();
+        this.state = {
+            isInsideJira: false,
+        };
+        this._init();
     }
 
     render() {
         return (
             <div className="header-buttons-container mid-section">
                 <button className="btn btn-link"
+                    disabled={!this.state.isInsideJira}
                     onClick={() => this.addIssueSummary()}>
                     <span className="btn-caption">Add issue summary</span>
                     <span className="glyphicon glyphicon-plus"></span>
@@ -33,13 +35,10 @@ export class Header extends Component {
     }
 
     addIssueSummary() {
-        browser.tabs.getSelected(null, (tab) => {
-            this.jira.getIssueInfo(tab.url)
-                .then((summary) => {
-                    const issueSummary = JSON.stringify(summary);
-                    const code = `document.activeElement.value = ${issueSummary} + document.activeElement.value`;
-                    browser.tabs.executeScript({ code });
-                });
+        browser.tabs.getSelected(null, async (tab) => {
+            const summary = await this.jira.getIssueInfo(tab.url);
+            const code = `document.activeElement.value = ${JSON.stringify(summary)} + document.activeElement.value`;
+            browser.tabs.executeScript({ code });
         });
     }
 
@@ -49,11 +48,12 @@ export class Header extends Component {
         });
     }
 
-    async _initJiraConnection() {
+    async _init() {
         const urlService = new UrlService(browser);
         const url = await urlService.getCurrentBaseUrl();
 
         this.jira = new JiraWrapper(url);
-        this.isInsideJira = await this.jira.checkIsInsideJira(url);
+        const isInsideJira = await this.jira.checkIsInsideJira(url);
+        this.setState({ isInsideJira });
     }
 }
