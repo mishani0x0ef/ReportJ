@@ -4,13 +4,14 @@ module.exports = {
         "es6": true
     },
     "settings": {
-        "ecmascript": 6,
+        "ecmascript": 2017,
         "jsx": true,
     },
     "plugins": [
         "react"
     ],
     "parserOptions": {
+        ecmaVersion: 2017,
         "sourceType": "module"
     },
     "extends": ["eslint:recommended", "plugin:react/recommended"],

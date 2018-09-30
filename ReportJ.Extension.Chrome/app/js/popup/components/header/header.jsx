@@ -10,7 +10,6 @@ export class Header extends Component {
     constructor() {
         super();
 
-        this.isReady = false;
         this.isInsideJira = false;
 
         this._initJiraConnection();
@@ -50,13 +49,11 @@ export class Header extends Component {
         });
     }
 
-    _initJiraConnection() {
+    async _initJiraConnection() {
         const urlService = new UrlService(browser);
-        urlService.getCurrentBaseUrl()
-            .then((url) => {
-                this.jira = new JiraWrapper(url);
-                return this.jira.checkIsInsideJira(url);
-            })
-            .then((inJira) => { this.isInsideJira = inJira });
+        const url = await urlService.getCurrentBaseUrl();
+
+        this.jira = new JiraWrapper(url);
+        this.isInsideJira = await this.jira.checkIsInsideJira(url);
     }
 }

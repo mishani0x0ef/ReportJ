@@ -5,12 +5,13 @@ export default class UrlService {
         this.browser = browser;
     }
 
-    getCurrentBaseUrl() {
-        return new Promise((resolve) => {
+    async getCurrentBaseUrl() {
+        const url = await new Promise((resolve) => {
             this.browser.tabs.getSelected(null, (tab) => {
                 const baseUrl = getBaseUrl(tab.url);
                 resolve(baseUrl);
             });
         });
+        return url;
     }
 }
