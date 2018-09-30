@@ -1,11 +1,11 @@
 import "./templateSelector.scss";
 
-import { Popup, PopupButtonsSection, PopupSection } from "~/js/content/common/components/popup/popup";
+import { Popup, PopupButtonsSection, PopupSection } from "~/js/common/components/popup/popup";
 import React, { Component } from "react";
 
-import { JiraCancelButton } from "~/js/content/common/components/button/button";
-import { List } from "~/js/content/common/components/list/list";
-import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
+import { JiraCancelButton } from "~/js/common/components/button/button";
+import { List } from "~/js/common/components/list/list";
+import { ProductPlacement } from "~/js/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
 import { callIfExist } from "~/js/util/function";
 import { getSettingsUrl } from "~/js/util/browser";

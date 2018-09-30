@@ -1,8 +1,8 @@
-import { JiraButton, JiraCancelButton } from "~/js/content/common/components/button/button";
-import { Popup, PopupButtonsSection, PopupSection } from "~/js/content/common/components/popup/popup";
+import { JiraButton, JiraCancelButton } from "~/js/common/components/button/button";
+import { Popup, PopupButtonsSection, PopupSection } from "~/js/common/components/popup/popup";
 import React, { Component } from "react";
 
-import { ProductPlacement } from "~/js/content/common/components/productPlacement/productPlacement";
+import { ProductPlacement } from "~/js/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
 import { SquareCheckBoxGroup } from "./squareCheckBoxGroup";
 import { callIfExist } from "~/js/util/function";
