@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,152 +7,15 @@
 
     <link rel="stylesheet" href="build/popup.css">
 
+</head>
+
+<body>
+
+    <div id="app"></div>
+
     <script type="text/javascript" src="build/manifest.js"></script>
     <script type="text/javascript" src="build/vendor.js"></script>
     <script type="text/javascript" src="build/popup.js"></script>
-</head>
-
-<body class="extension-popup" ng-app="reportjPopupApp">
-
-    <div class="content" ng-controller="PopupController">
-
-        <div class="header-buttons">
-            <div class="container">
-                <div class="row">
-                    <div class="btn-wrap col-xs-5">
-                        <button class="btn btn-link text-center" ng-disabled="!insideJiraPage" ng-click="addIssueSummary()">
-                                    <span class="btn-caption">Add issue summary</span>
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </button>
-                    </div>
-                    <div class="btn-wrap col-xs-4 col-xs-offset-3 text-right" ng-click="openOptions()">
-                        <div class="btn btn-link">
-                            <span class="btn-caption">Settings</span>
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <ul class="nav nav-tabs">
-            <li class="active" role="presentation">
-                <a href="#templates" aria-controls="templates" role="tab" data-toggle="tab">Templates</a>
-            </li>
-            <li role="presentation">
-                <a href="#commits" aria-controls="commits" role="tab" data-toggle="tab">Commits</a>
-            </li>
-        </ul>
-
-        <div class="tab-content col-xs-12 well">
-
-            <div role="tabpanel" class="tab-pane fade active in popup-content" id="templates">
-                <div class="container">
-                    <div class="row">
-                        <div ng-repeat="template in templates track by $index ">
-                            <div class="list-item" ng-click="addMessageToReport(template, template.description)">
-                                <div class="text-justify">
-                                    <p>{{template.description}}</p>
-                                </div>
-                                <div class="result-wrap" ng-class="{ on: template.justAdded }">
-                                    <div class="add-confirm">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                        <strong>Added</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="warning-wrap" ng-class="{ on: templates.length===0 }">
-                            <div class="warning">
-                                <div class="warning-icon">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </div>
-                                <h4>We haven't found templates!</h4>
-                                <h5>
-                                    You can try to <a href="# " ng-click="refreshTemplates()">refresh data</a> or you can
-                                    <a href="# " ng-click="openOptions()">update settings</a> and add some new templates.
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane fade in popup-content" id="commits">
-                <div class="container">
-                    <div class="row" ng-show="repoApiAvailable">
-                        <div ng-repeat="commit in svnCommits | orderBy: '-Date'">
-                            <div class="list-item" ng-click="addMessageToReport(commit, commit.Message)">
-                                <div class="col-xs-6">
-                                    <strong>{{commit.Date | date: 'dd MMM HH:mm'}}</strong>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    <i>{{commit.Author}}</i>
-                                </div>
-                                <div class="col-xs-12 text-justify">
-                                    <p>{{commit.Message}}</p>
-                                </div>
-                                <div class="result-wrap" ng-class="{ on: commit.justAdded }">
-                                    <div class="add-confirm">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                        <strong>Added</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="warning-wrap" ng-class="{ on: svnCommits.length===0 }">
-                            <div class="warning">
-                                <div class="warning-icon">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </div>
-                                <h4>We haven't found commits info!</h4>
-                                <h5>
-                                    You can try to <a href="# " ng-click="refreshCommits()">refresh data</a> or you can
-                                    <a
-                                        href="# " ng-click="openOptions()">update settings</a> and add some new repositories.
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row text-center" ng-show="!repoApiAvailable">
-                        <div class="warning-wrap" ng-class="{on: !repoApiAvailable}">
-                            <div class="warning">
-                                <div class="warning-icon">
-                                    <span class="glyphicon glyphicon-heart-empty"></span>
-                                </div>
-                                <h4>You need to install desktop application first.</h4>
-                                <h5>It's really easy and won't take long time. Believe me.</h5>
-                                <div>
-                                    <a type="button" class="btn btn-primary btn-lg" href="https://github.com/mishani0x0ef/ReportJ/releases/latest" target="_blank">
-                                                <span>Download</span>
-                                                <span class="glyphicon glyphicon-download"></span>
-                                            </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="loading-wrap text-center" ng-class="{ on: loading }">
-                <div class="progress-wrap">
-                    <span class="icon glyphicon glyphicon-download"></span>
-                    <div class="progress-description"><strong>{{loadingDescription}}</strong></div>
-                </div>
-                <div class="loading-points">
-                    <span>.</span>
-                    <span>.</span>
-                    <span>.</span>
-                    <span>.</span>
-                    <span>.</span>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
 
 </body>
 
