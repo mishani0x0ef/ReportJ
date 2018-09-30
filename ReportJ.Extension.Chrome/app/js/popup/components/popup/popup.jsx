@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { Header } from "../header/header";
+import { ModeSelector } from "../mode-selector/mode-selector";
 
 export class Popup extends Component {
     render() {
@@ -8,7 +9,7 @@ export class Popup extends Component {
             <div className="extension-popup">
                 <div className="content">
                     <Header></Header>
-                    <section>Tabs</section>
+                    <ModeSelector></ModeSelector>
                 </div>
             </div>
         );
