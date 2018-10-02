@@ -20,7 +20,14 @@ function getCssLoaders() {
 
 function getSassLoaders() {
     const cssLoaders = getCssLoaders();
-    return cssLoaders.concat(["sass-loader"]);
+    return cssLoaders.concat([
+        {
+            loader: "sass-loader",
+            options: {
+                includePaths: ["node_modules"]
+            }
+        }
+    ]);
 }
 
 module.exports = function () {
@@ -70,7 +77,7 @@ module.exports = function () {
         resolve: {
             alias: {
                 "~": path.resolve(__dirname, "../app"),
-                "root": path.resolve(__dirname, "../app"),
+                "app": path.resolve(__dirname, "../app"),
             },
             extensions: [".js", ".jsx"]
         },

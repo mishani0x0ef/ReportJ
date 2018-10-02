@@ -1,30 +1,31 @@
 import React, { Component } from "react";
 
+import Tab from "@material/react-tab";
+import TabBar from "@material/react-tab-bar";
+
 export class ModeSelector extends Component {
+    constructor() {
+        super();
+        this.state = {
+            activeIndex: 0
+        };
+    }
+
     render() {
         return (
-            <section>
-                <ul className="nav nav-tabs">
-                    <li className="active" role="presentation">
-                        <a href="#templates" aria-controls="templates" role="tab" data-toggle="tab">Templates</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#commits" aria-controls="commits" role="tab" data-toggle="tab">Commits</a>
-                    </li>
-
-                    <div className="tab-content">
-                        <div role="tabpanel" className="tab-pane fade active in popup-content" id="templates">
-                            templates
-                        </div>
-                    </div>
-
-                    <div className="tab-content">
-                        <div role="tabpanel" className="tab-pane fade active in popup-content" id="commits">
-                            Commits
-                        </div>
-                    </div>
-                </ul>
-            </section>
+            <div>
+                <TabBar
+                    activeIndex={this.state.activeIndex}
+                    handleActiveIndexUpdate={(activeIndex) => this.setState({ activeIndex })}
+                >
+                    <Tab>
+                        <span className="mdc-tab__text-label">Templates</span>
+                    </Tab>
+                    <Tab>
+                        <span className="mdc-tab__text-label">Commits</span>
+                    </Tab>
+                </TabBar>
+            </div>
         );
     }
 }
