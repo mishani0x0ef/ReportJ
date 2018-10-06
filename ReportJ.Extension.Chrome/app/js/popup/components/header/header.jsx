@@ -3,9 +3,10 @@ import "./header.scss";
 import React, { Component } from "react";
 
 import Button from "@material/react-button";
-import JiraWrapper from "~/js/services/jira";
+import IconButton from "@material/react-icon-button";
+import JiraWrapper from "app/js/services/jira";
 import MaterialIcon from "@material/react-material-icon";
-import UrlService from "~/js/services/urlService";
+import UrlService from "app/js/services/urlService";
 import { browser } from "../../globals";
 
 export class Header extends Component {
@@ -19,20 +20,17 @@ export class Header extends Component {
     }
 
     render() {
-        // BUG: IconButton isn't properly included into package 
-        // https://github.com/material-components/material-components-web-react/commit/88d5e4ead4ec9bacc2e84e69194258b8f718d72a
         return (
-            <div className="header-buttons-container mid-section">
+            <div className="header-buttons-container small-section">
                 <Button
                     icon={<MaterialIcon icon="add_circle_outline" />}
                     disabled={!this.state.isInsideJira}
                     onClick={() => this.addIssueSummary()}>
                     Add issue summary
                 </Button>
-                <Button title="Open options page"
-                    onClick={() => this.openOptions()}>
+                <IconButton title="Open options page" onClick={() => this.openOptions()}>
                     <MaterialIcon icon="settings" />
-                </Button>
+                </IconButton>
             </div>
         );
     }
