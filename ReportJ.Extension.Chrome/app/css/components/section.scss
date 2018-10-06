@@ -1,0 +1,9 @@
+@import "../mixins";
+
+.small-section {
+    @include small-section;
+}
+
+.mid-section {
+    @include mid-section;
+}

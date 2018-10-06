@@ -17,7 +17,7 @@
     box-shadow: $panel-shadow;
     transform: scale(1, 1);
     z-index: $z-index-base-popup;
-    @include default-animate();
+    @include default-animate;
 
     &:not(.active) {
         transform: scale(0, 0);

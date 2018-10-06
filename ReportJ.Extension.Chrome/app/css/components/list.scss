@@ -1,0 +1,40 @@
+@import "../variables";
+@import "../mixins";
+
+.app-list {
+    background-color: $color-background;
+    border-top: 1px solid $color-border;
+
+    .app-list-item {
+        border-bottom: 1px solid $color-border;
+        cursor: pointer;
+        position: relative;
+        @include default-animate;
+        @include mid-section;
+
+        &:hover:not(:disabled) {
+            background-color: $color-background-hover;
+        }
+
+        &[data-clicked]:after {
+            background-color: $color-primary-light;
+            border-bottom-left-radius: 6px;
+            content: attr(data-clicked);
+            color: $color-text-active;
+            font-weight: bold;
+            opacity: 0;
+            position: absolute;
+            right: -100px;
+            text-transform: uppercase;
+            top: -1px;
+            @include default-animate;
+            @include small-section;
+        }
+
+        // TODO: provide this behavior on click instead of hover. MR
+        &:hover:not(:disabled):after {
+            opacity: 1;
+            right: 0;
+        }
+    }
+}
