@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 
+import { Commits } from "../commits/commits";
 import Tab from "@material/react-tab";
 import TabBar from "@material/react-tab-bar";
+import { Templates } from "../templates/templates";
 
 export class ModeSelector extends Component {
     constructor() {
@@ -12,6 +14,10 @@ export class ModeSelector extends Component {
     }
 
     render() {
+        const modeElement = this.state.activeIndex === 0
+            ? <Templates></Templates>
+            : <Commits></Commits>;
+
         return (
             <div>
                 <TabBar
@@ -25,6 +31,9 @@ export class ModeSelector extends Component {
                         <span className="mdc-tab__text-label">Commits</span>
                     </Tab>
                 </TabBar>
+                <section>
+                    {modeElement}
+                </section>
             </div>
         );
     }
