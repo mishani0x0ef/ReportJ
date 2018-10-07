@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import PropTypes from "prop-types";
 import StorageService from "app/js/services/storageService";
 import { Template } from "./template/template";
 import { browser } from "app/js/popup/globals";
@@ -18,15 +19,9 @@ export class Templates extends Component {
     }
 
     render() {
-        const content = this.state.isLoading
+        return this.state.isLoading
             ? (<span>Loading...</span>)
-            : this.getTemplates(this.state.templates);
-
-        return (
-            <div>
-                {content}
-            </div>
-        );
+            : this._getTemplates(this.state.templates);
     }
 
     async _inti() {
@@ -40,11 +35,21 @@ export class Templates extends Component {
         }
     }
 
-    getTemplates(templates) {
+    _getTemplates(templates) {
         return (
             <div className="app-list" aria-orientation="vertical">
-                {templates.map((template, key) => <Template key={key} template={template}></Template>)}
+                {templates.map((template, key) =>
+                    <Template
+                        key={key}
+                        template={template}
+                        onClick={(text) => this.props.onSelected(text)}>
+                    </Template>
+                )}
             </div>
         );
     }
+}
+
+Templates.propTypes = {
+    onSelected: PropTypes.func,
 }
