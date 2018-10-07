@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { Loading } from "app/js/common/components/loading/loading";
 import PropTypes from "prop-types";
 import StorageService from "app/js/services/storageService";
 import { Template } from "./template/template";
@@ -20,7 +21,7 @@ export class Templates extends Component {
 
     render() {
         return this.state.isLoading
-            ? (<span>Loading...</span>)
+            ? <Loading text="Looking for your templates..."></Loading>
             : this._getTemplates(this.state.templates);
     }
 

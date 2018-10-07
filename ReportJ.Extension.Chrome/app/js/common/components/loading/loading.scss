@@ -1,0 +1,33 @@
+@import "~app/css/variables";
+@import "~app/css/mixins";
+
+$icon-size: 64px;
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.app-loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    .app-loading-icon-container {
+        color: $color-text-mute;
+        display: flex;
+        justify-content: center;
+        padding: $icon-size * (0.3);
+
+        .app-loading-icon {
+            animation: spin 1s linear infinite;
+            font-size: $icon-size;
+        }
+    }
+
+    .app-loading-text {
+        color: $color-text-mute;
+    }
+}
