@@ -1,3 +1,5 @@
+import "./mode-selector.scss";
+
 import React, { Component } from "react";
 
 import { Commits } from "../commits/commits";
@@ -21,7 +23,7 @@ export class ModeSelector extends Component {
             : <Commits></Commits>;
 
         return (
-            <div>
+            <div className="app-mode-selector">
                 <TabBar
                     activeIndex={this.state.activeIndex}
                     handleActiveIndexUpdate={(activeIndex) => this.setState({ activeIndex })}
@@ -33,7 +35,7 @@ export class ModeSelector extends Component {
                         <span className="mdc-tab__text-label">Commits</span>
                     </Tab>
                 </TabBar>
-                <section>
+                <section className="app-mode-selector-content">
                     {modeElement}
                 </section>
             </div>

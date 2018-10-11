@@ -1,12 +1,13 @@
 @import "~app/css/variables";
+@import "~app/css/mixins";
 
 .chrome-popup {
-    display: flex;
-    flex-direction: column;
     height: $chrome-popup-height;
     width: $chrome-popup-width;
+    @include flex-column();
 
     &-content {
-        flex: 1;
+        flex: 1 1 auto;
+        @include flex-column();
     }
 }
