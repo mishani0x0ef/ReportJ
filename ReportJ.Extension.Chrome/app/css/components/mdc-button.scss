@@ -1,3 +1,9 @@
+ @import "../variables";
+ 
+ .mdc-button {
+     font-size: $font-size-button;
+ }
+ 
  .mdc-button--outlined {
     @include mdc-button-outline-width(1px);
  }
