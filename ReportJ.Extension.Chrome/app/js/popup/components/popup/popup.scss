@@ -1,6 +1,12 @@
 @import "~app/css/variables";
 
 .chrome-popup {
+    display: flex;
+    flex-direction: column;
     height: $chrome-popup-height;
     width: $chrome-popup-width;
+
+    &-content {
+        flex: 1;
+    }
 }

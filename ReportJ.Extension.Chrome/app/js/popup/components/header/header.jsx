@@ -25,6 +25,7 @@ export class Header extends Component {
                 <Button
                     icon={<MaterialIcon icon="add_circle_outline" />}
                     disabled={!this.state.isInsideJira}
+                    outlined={true}
                     onClick={() => this.addIssueSummary()}>
                     Add issue summary
                 </Button>
