@@ -1,6 +1,9 @@
 @import "~app/css/variables";
 @import "~app/css/mixins";
 
+$content-width: 800px;
+$content-min-width: 720px;
+
 .app-content-container {
     align-items: center;
     background: $color-background-hover;
@@ -10,8 +13,9 @@
     .app-content {
         background: $color-background;
         border: 1px solid $color-border;
-        min-width: 720px;
-        max-width: 920px;
+        min-width: $content-min-width;
+        max-width: $content-width;
+        width: $content-width;
         @include flex-column();
         @include mid-section();
     }

@@ -2,6 +2,7 @@ import "./category-selector.scss";
 
 import React, { Component } from "react";
 
+import { About } from "../about/about";
 import { GeneralOptions } from "../general-options/general-options";
 import Tab from "@material/react-tab";
 import TabBar from "@material/react-tab-bar";
@@ -45,7 +46,7 @@ export class CategorySelector extends Component {
             case 1:
                 return <h3>Repos</h3>;
             case 2:
-                return <h3>About</h3>;
+                return <About />;
             default:
                 return <GeneralOptions />;
         }
