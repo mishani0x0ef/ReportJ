@@ -1,4 +1,4 @@
-import { getBaseUrl } from "~/js/util/url";
+import { getBaseUrl } from "app/js/common/utils/url";
 
 export default class UrlService {
     constructor(browser) {

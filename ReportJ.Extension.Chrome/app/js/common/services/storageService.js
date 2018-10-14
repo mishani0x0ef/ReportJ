@@ -1,6 +1,5 @@
-import GeneralSettings from "~/js/models/settings/generalSettings";
-
-import { isNil } from "~/js/util/object";
+import GeneralSettings from "app/js/common/models/settings/generalSettings";
+import { isNil } from "app/js/common/utils/object";
 
 export default function StorageService(browser) {
     var that = this;

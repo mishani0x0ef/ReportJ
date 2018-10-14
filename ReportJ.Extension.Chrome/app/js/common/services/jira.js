@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { getBaseUrl } from "~/js/util/url";
+import { getBaseUrl } from "app/js/common/utils/url";
 
 export default class JiraWrapper {
     constructor(baseJiraUrl) {

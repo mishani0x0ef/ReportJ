@@ -4,10 +4,10 @@ import React, { Component } from "react";
 
 import Button from "@material/react-button";
 import IconButton from "@material/react-icon-button";
-import JiraWrapper from "app/js/services/jira";
+import JiraWrapper from "app/js/common/services/jira";
 import MaterialIcon from "@material/react-material-icon";
-import UrlService from "app/js/services/urlService";
-import { browser } from "../../globals";
+import UrlService from "app/js/common/services/urlService";
+import { browser } from "app/js/common/globals";
 
 export class Header extends Component {
     constructor() {

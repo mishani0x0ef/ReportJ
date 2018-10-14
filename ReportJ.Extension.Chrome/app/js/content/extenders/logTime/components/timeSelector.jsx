@@ -1,11 +1,11 @@
-import { JiraButton, JiraCancelButton } from "~/js/common/components/button/button";
-import { Popup, PopupButtonsSection, PopupSection } from "~/js/common/components/popup/popup";
+import { JiraButton, JiraCancelButton } from "app/js/common/components/button/button";
+import { Popup, PopupButtonsSection, PopupSection } from "app/js/common/components/popup/popup";
 import React, { Component } from "react";
 
-import { ProductPlacement } from "~/js/common/components/productPlacement/productPlacement";
+import { ProductPlacement } from "app/js/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
 import { SquareCheckBoxGroup } from "./squareCheckBoxGroup";
-import { callIfExist } from "~/js/util/function";
+import { callIfExist } from "app/js/common/utils/function";
 import onClickOutside from "react-onclickoutside";
 
 class TimeSelectorComponent extends Component {

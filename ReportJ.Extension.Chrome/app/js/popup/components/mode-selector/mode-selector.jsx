@@ -6,8 +6,8 @@ import { Commits } from "../commits/commits";
 import Tab from "@material/react-tab";
 import TabBar from "@material/react-tab-bar";
 import { Templates } from "../templates/templates";
-import { addTextToInput } from "app/js/util/browser";
-import { browser } from "app/js/popup/globals";
+import { addTextToInput } from "app/js/common/utils/browser";
+import { browser } from "app/js/common/globals";
 
 export class ModeSelector extends Component {
     constructor() {

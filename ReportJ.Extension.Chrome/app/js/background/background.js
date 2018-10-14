@@ -1,6 +1,6 @@
-import JiraWrapper from "./services/jira";
-import config from "~/config";
-import { getBaseUrl } from "~/js/util/url";
+import JiraWrapper from "app/js/common/services/jira";
+import config from "app/config";
+import { getBaseUrl } from "app/js/common/utils/url";
 
 class BackgroundWorker {
     constructor(browser) {
@@ -12,6 +12,10 @@ class BackgroundWorker {
 
         this.browser.runtime.onInstalled.addListener((e) => this.onInstalled(e));
         this.browser.contextMenus.onClicked.addListener((e) => this.onContextMenuClick(e));
+    }
+
+    initialize() {
+
     }
 
     onInstalled() {

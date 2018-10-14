@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import { Loading } from "app/js/common/components/loading/loading";
 import PropTypes from "prop-types";
-import StorageService from "app/js/services/storageService";
+import StorageService from "app/js/common/services/storageService";
 import { Template } from "./template/template";
-import { browser } from "app/js/popup/globals";
+import { browser } from "app/js/common/globals";
 import messages from "app/js/common/utils/messages";
 
 export class Templates extends Component {

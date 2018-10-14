@@ -1,10 +1,10 @@
 import "bootstrap";
 
 import $ from "jquery";
-import GeneralSettings from "~/js/models/settings/generalSettings";
+import GeneralSettings from "app/js/common/models/settings/generalSettings";
 import angular from "angular";
-import config from "~/config";
-import { confirm } from "~/js/util/dialog";
+import config from "app/config";
+import { confirm } from "app/js/common/utils/dialog";
 
 export default function OptionsController($scope, $interval, $timeout, storageService, repositoryService) {
 

@@ -1,6 +1,6 @@
-import JiraDialogObserver from "~/js/util/jiraDialogObserver";
-import JiraWrapper from "~/js/services/jira";
-import { isEmpty } from "~/js/util/object";
+import JiraDialogObserver from "app/js/common/utils/html-observers/jiraDialogObserver";
+import JiraWrapper from "app/js/common/services/jira";
+import { isEmpty } from "app/js/common/utils/object";
 
 export class AutoIssueSummaryExtender {
     constructor() {

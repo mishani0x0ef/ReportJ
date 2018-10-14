@@ -3,7 +3,7 @@ import "./popup.scss";
 import React, { Component } from "react";
 
 import PropTypes from "prop-types";
-import { classIf } from "~/js/util/react";
+import { classIf } from "app/js/common/utils/react";
 
 export const PopupSection = ({ children }) => {
     return <div className="reportj-popup-section">{children}</div>;

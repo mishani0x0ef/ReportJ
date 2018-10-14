@@ -1,8 +1,8 @@
 import "./logTimeExtender.scss";
 
-import { createElement, insertAfter } from "~/js/util/html";
+import { createElement, insertAfter } from "app/js/common/utils/html";
 
-import JiraDialogObserver from "~/js/util/jiraDialogObserver";
+import JiraDialogObserver from "app/js/common/utils/html-observers/jiraDialogObserver";
 import React from "react";
 import { TimeSelector } from "./components/timeSelector";
 import { render } from "react-dom";

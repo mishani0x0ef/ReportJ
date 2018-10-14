@@ -1,8 +1,8 @@
-import { createElement, insertAfter } from "~/js/util/html";
+import { createElement, insertAfter } from "app/js/common/utils/html";
 
-import ElementObserver from "~/js/util/elementObserver";
-import JiraDialogObserver from "~/js/util/jiraDialogObserver";
-import { isEmpty } from "~/js/util/object";
+import ElementObserver from "app/js/common/utils/html-observers/elementObserver";
+import JiraDialogObserver from "app/js/common/utils/html-observers/jiraDialogObserver";
+import { isEmpty } from "app/js/common/utils/object";
 
 export class CopyWorkLogExtender {
     start() {

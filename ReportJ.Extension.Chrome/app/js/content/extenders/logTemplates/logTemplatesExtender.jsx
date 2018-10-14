@@ -1,6 +1,6 @@
-import { createElement, insertBefore } from "~/js/util/html";
+import { createElement, insertBefore } from "app/js/common/utils/html";
 
-import JiraDialogObserver from "~/js/util/jiraDialogObserver";
+import JiraDialogObserver from "app/js/common/utils/html-observers/jiraDialogObserver";
 import React from "react";
 import { TemplateSelector } from "./components/templateSelector";
 import { render } from "react-dom";

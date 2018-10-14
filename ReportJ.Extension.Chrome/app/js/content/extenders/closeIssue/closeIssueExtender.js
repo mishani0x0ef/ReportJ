@@ -1,6 +1,6 @@
-import JiraDialogObserver from "~/js/util/jiraDialogObserver";
-import JiraWrapper from "~/js/services/jira";
-import { createElement } from "~/js/util/html";
+import JiraDialogObserver from "app/js/common/utils/html-observers/jiraDialogObserver";
+import JiraWrapper from "app/js/common/services/jira";
+import { createElement } from "app/js/common/utils/html";
 
 export class CloseIssueExtender {
     constructor() {

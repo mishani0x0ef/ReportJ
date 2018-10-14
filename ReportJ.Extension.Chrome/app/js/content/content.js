@@ -1,9 +1,9 @@
-import "~/css/content.scss";
+import "app/css/content.scss";
 
 import { AutoIssueSummaryExtender, CloseIssueExtender, CopyWorkLogExtender, LogTemplatesExtender, LogTimeExtender } from "./extenders";
 
-import StorageService from "~/js/services/storageService";
-import { checkIsInsideJira } from "~/js/util/jira";
+import StorageService from "app/js/common/services/storageService";
+import { checkIsInsideJira } from "app/js/common/utils/jira";
 
 class ContentController {
     constructor(browser) {

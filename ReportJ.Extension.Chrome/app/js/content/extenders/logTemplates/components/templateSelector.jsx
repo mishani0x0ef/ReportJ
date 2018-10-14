@@ -1,14 +1,14 @@
 import "./templateSelector.scss";
 
-import { Popup, PopupButtonsSection, PopupSection } from "~/js/common/components/popup/popup";
+import { Popup, PopupButtonsSection, PopupSection } from "app/js/common/components/popup/popup";
 import React, { Component } from "react";
 
-import { JiraCancelButton } from "~/js/common/components/button/button";
-import { List } from "~/js/common/components/list/list";
-import { ProductPlacement } from "~/js/common/components/productPlacement/productPlacement";
+import { JiraCancelButton } from "app/js/common/components/button/button";
+import { List } from "app/js/common/components/list/list";
+import { ProductPlacement } from "app/js/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
-import { callIfExist } from "~/js/util/function";
-import { getSettingsUrl } from "~/js/util/browser";
+import { callIfExist } from "app/js/common/utils/function";
+import { getSettingsUrl } from "app/js/common/utils/browser";
 import onClickOutside from "react-onclickoutside";
 
 export class TemplateSelectorComponent extends Component {

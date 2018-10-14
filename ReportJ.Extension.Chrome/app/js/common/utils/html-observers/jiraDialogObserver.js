@@ -1,5 +1,5 @@
 import ElementObserver from "./elementObserver";
-import { isNil } from "~/js/util/object";
+import { isNil } from "app/js/common/utils/object";
 
 export default class JiraDialogObserver extends ElementObserver {
     constructor(titleText) {
