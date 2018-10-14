@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import StorageService from "app/js/services/storageService";
 import { Template } from "./template/template";
 import { browser } from "app/js/popup/globals";
+import messages from "app/js/common/utils/messages";
 
 export class Templates extends Component {
     constructor() {
@@ -21,7 +22,7 @@ export class Templates extends Component {
 
     render() {
         return this.state.isLoading
-            ? <Loading text="Looking for your templates..."></Loading>
+            ? <Loading text={messages.templates.loading} />
             : this._getTemplates(this.state.templates);
     }
 
