@@ -1,0 +1,30 @@
+@import "~app/css/variables";
+@import "~app/css/mixins";
+
+$icon-size: 64px;
+
+@keyframes wrench-working {
+    15% {
+        transform: rotate(60deg);
+    }
+    25% {
+        transform: rotate(-30deg);
+    }
+    50% {
+        transform: rotate(30deg);
+    }
+    75% {
+        transform: rotate(-60deg);
+    }
+}
+
+.app-under-development {
+    align-items: center;
+    justify-content: center;
+    @include flex-column();
+
+    .app-under-development-icon {
+        animation: wrench-working 2s linear infinite;
+        font-size: $icon-size;
+    }
+}
