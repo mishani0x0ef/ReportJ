@@ -4,6 +4,7 @@
 .app-list {
     background-color: $color-background;
     border-top: 1px solid $color-border;
+    @include flex-column();
 
     .app-list-item {
         border-bottom: 1px solid $color-border;

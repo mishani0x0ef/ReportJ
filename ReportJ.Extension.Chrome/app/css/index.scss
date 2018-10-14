@@ -1,5 +1,8 @@
 @import "normalize.css/normalize";
-@import "./base/typography";
+@import 
+    "./base/typography"
+    ,"./base/util"
+;
 
 @import "./theme/reportj";
 
