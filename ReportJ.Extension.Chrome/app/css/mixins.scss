@@ -21,6 +21,10 @@
     padding: 12px 12px 16px;
 }
 
+@mixin large-section {
+    padding: 18px 12px 24px;
+}
+
 @mixin flex-column($reverse: false) {
     display: flex;
     @if $reverse {

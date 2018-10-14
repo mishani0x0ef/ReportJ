@@ -1,0 +1,15 @@
+@import "~app/css/variables";
+@import "~app/css/mixins";
+
+.app-content-container {
+    align-items: center;
+    @include flex-column();
+
+    .app-content {
+        border: 1px solid $color-border;
+        min-width: 720px;
+        max-width: 920px;
+        @include flex-column();
+        @include mid-section();
+    }
+}
