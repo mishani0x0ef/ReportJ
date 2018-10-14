@@ -1,12 +1,6 @@
 @import "~app/css/variables";
 @import "~app/css/mixins";
 
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 .app-loading {
     display: flex;
     flex-direction: column;
