@@ -1,8 +1,6 @@
 @import "~app/css/variables";
 @import "~app/css/mixins";
 
-$icon-size: 64px;
-
 @keyframes spin {
     100% {
         transform: rotate(360deg);
@@ -20,11 +18,11 @@ $icon-size: 64px;
         color: $color-text-mute;
         display: flex;
         justify-content: center;
-        padding: $icon-size * (0.3);
+        padding: $font-size-icon-huge * (0.3);
 
         .app-loading-icon {
             animation: spin 1s linear infinite;
-            font-size: $icon-size;
+            font-size: $font-size-icon-huge;
         }
     }
 

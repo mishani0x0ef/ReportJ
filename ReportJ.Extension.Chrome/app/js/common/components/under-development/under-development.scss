@@ -1,8 +1,6 @@
 @import "~app/css/variables";
 @import "~app/css/mixins";
 
-$icon-size: 64px;
-
 @keyframes wrench-working {
     15% {
         transform: rotate(60deg);
@@ -25,6 +23,6 @@ $icon-size: 64px;
 
     .app-under-development-icon {
         animation: wrench-working 2s linear infinite;
-        font-size: $icon-size;
+        font-size: $font-size-icon-huge;
     }
 }
