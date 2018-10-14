@@ -35,7 +35,7 @@ module.exports = function () {
         entry: {
             background: "./app/js/background/background.js",
             popup:      "./app/js/popup/index.jsx",
-            options:    "./app/js/options/app.js",
+            options:    "./app/js/options/index.jsx",
             content:    "./app/js/content/content.js"
         },
         output: {
