@@ -1,6 +1,7 @@
 @import "normalize.css/normalize";
 @import 
     "./base/animation"
+    ,"./base/html"
     ,"./base/typography"
     ,"./base/util"
 ;
@@ -11,6 +12,7 @@
     "@material/react-button/index"
     ,"@material/react-icon-button/index"
     ,"@material/react-material-icon/index"
+    ,"@material/react-switch/index.scss"
     ,"@material/react-tab/index"
     ,"@material/react-tab-bar/index"
     ,"@material/react-tab-indicator/index"
@@ -22,4 +24,6 @@
     ,"./components/app-list"
     ,"./components/mdc-button"
     ,"./components/mdc-icon-button"
+    ,"./components/mdc-switch"
+    ,"./components/mdc-tab-bar"
 ;

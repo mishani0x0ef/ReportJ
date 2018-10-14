@@ -3,9 +3,12 @@
 
 .app-content-container {
     align-items: center;
+    background: $color-background-hover;
+    height: 100%;
     @include flex-column();
 
     .app-content {
+        background: $color-background;
         border: 1px solid $color-border;
         min-width: 720px;
         max-width: 920px;

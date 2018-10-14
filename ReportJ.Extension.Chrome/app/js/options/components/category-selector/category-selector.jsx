@@ -1,5 +1,8 @@
+import "./category-selector.scss";
+
 import React, { Component } from "react";
 
+import { GeneralOptions } from "../general-options/general-options";
 import Tab from "@material/react-tab";
 import TabBar from "@material/react-tab-bar";
 
@@ -30,7 +33,7 @@ export class CategorySelector extends Component {
                         <span className="mdc-tab__text-label">About</span>
                     </Tab>
                 </TabBar>
-                <section>
+                <section className="app-category-selector">
                     {category}
                 </section>
             </div>
@@ -39,12 +42,12 @@ export class CategorySelector extends Component {
 
     _getCategory() {
         switch (this.state.activeIndex) {
-        case 1:
-            return <h3>Repos</h3>;
-        case 2:
-            return <h3>About</h3>;
-        default:
-            return <h3>General</h3>;
+            case 1:
+                return <h3>Repos</h3>;
+            case 2:
+                return <h3>About</h3>;
+            default:
+                return <GeneralOptions />;
         }
     }
 }
