@@ -41,11 +41,11 @@ To use templates in reporting
 * Select *"Templates"* tab
 * Click on any template to insert it
 
-*NOTE: you can use reporting templates on any website (not only inside Jira).*
+> NOTE: you can use reporting templates on any website (not only inside Jira).
 
 ## Add commit's message
 
-*NOTE: flow of work with commits will be changed in the next version (it would easier for git users and you would definitely like it)*
+> NOTE: flow of work with commits will be changed in the next version (it would easier for git users and you would definitely like it).
 
 It's not a secret that developers copy&paste commit's message into reports. To do it in more convinient way:
 
@@ -70,6 +70,6 @@ Use your commits information for reporting
 
 ## Add Issue Summary
 
-*NOTE: works only on Jira pages.*
+> NOTE: works only on Jira pages.
 
 Just do right mouse click in some editable field and choose **ReportJ add issue summary** point from context menu - title from issue will be added.
