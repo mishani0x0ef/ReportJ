@@ -25,6 +25,8 @@ During close of an issue you will see new button **Close with ReportJ**. Just cl
 
 ## Add pre-defined template
 
+> NOTE: you can use reporting templates on any website (not only inside Jira).
+
 Often we report some common activities such as status meetings, retrospectives, deployments etc. ReportJ has **Reporting Templates**  that allows you to define your common activities once and than use it at any moment.
 
 To configurate reporting templates
@@ -40,8 +42,6 @@ To use templates in reporting
 * Open extension's popup 
 * Select *"Templates"* tab
 * Click on any template to insert it
-
-> NOTE: you can use reporting templates on any website (not only inside Jira).
 
 ## Add commit's message
 
