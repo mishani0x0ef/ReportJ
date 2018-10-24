@@ -17,29 +17,35 @@ To use extension you need to do next steps:
 2. Click "ADD TO CHROME"
 3. You are awersome
 
-# Close issue with reset of remaining estimate
+# Main Feature
 
-During close of issue you will see new button *"Close with ReportJ"* just click it instead *"Close"* to automatically reset remaining estimate before closing.
+## Reset remaining estimate on issue closed
 
-# Add pre-defined template
+During close of an issue you will see new button **Close with ReportJ**. Just click it to automatically reset remaining estimate and close an issue.
 
-Often we should report some common activities such as status meetings, retrospectives, deployments etc. ReportJ has "Reporting Templates" feature which allow you to define your common activities once and than use it at any moment.
+## Add pre-defined template
 
-### Configurate reporting templates
+Often we report some common activities such as status meetings, retrospectives, deployments etc. ReportJ has **Reporting Templates**  that allows you to define your common activities once and than use it at any moment.
 
-* Open extension options (settings) over Chrome Extensions page or from ReportJ's popup
+To configurate reporting templates
+
+* Open extension options over Chrome Extensions page or from ReportJ's popup
 * Select *"Templates"* tab
 * Click *"Add Template"* (some of common templates already saved for you and you can use them immediately after extension install)
 * Write down and save you template
 
-### Use templates in reporting
+To use templates in reporting
 
 * Click on some editable field inside a page
 * Open extension's popup 
 * Select *"Templates"* tab
-* Click on any template in list and it will be added by magic
+* Click on any template to insert it
 
-# Add commit's message
+*NOTE: you can use reporting templates on any website (not only inside Jira).*
+
+## Add commit's message
+
+*NOTE: flow of work with commits will be changed in the next version (it would easier for git users and you would definitely like it)*
 
 It's not a secret that developers copy&paste commit's message into reports. To do it in more convinient way:
 
@@ -64,6 +70,6 @@ It's not a secret that developers copy&paste commit's message into reports. To d
 
 # Add Issue Summary
 
-*Work only on Jira pages.*
+*NOTE: works only on Jira pages.*
 
-Just do right mouse click in some editable field and choose *"ReportJ add issue summary"* point from context menu - title from issue will be added.
+Just do right mouse click in some editable field and choose **ReportJ add issue summary** point from context menu - title from issue will be added.
