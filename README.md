@@ -17,7 +17,7 @@ To use extension you need to do next steps:
 2. Click "ADD TO CHROME"
 3. You are awersome
 
-# Main Feature
+# Main Features
 
 ## Reset remaining estimate on issue closed
 
@@ -49,26 +49,26 @@ To use templates in reporting
 
 It's not a secret that developers copy&paste commit's message into reports. To do it in more convinient way:
 
-### Install desktop app
+Install desktop app
 
 * Download and install desktop app [ReportJ.Desktop.msi](https://github.com/mishani0x0ef/ReportJ/releases/latest) (it's free and have no ads)
 * When application installed you can use *Commits feature*
 
-### Configurate repository information in extension settings
+Configurate repository information in extension settings
 
 * Open extension options (settings) over Chrome Extensions page or from ReportJ's popup
 * Select *"Repositories"* tab
 * Click *"Add Repository"* and fill all fields with appropriate data
 * If you make all right and repository is available for API server - you are amazing
 
-### Use your commits information for reporting
+Use your commits information for reporting
 
 * Click on some editable field inside a page
 * Open extension popup 
 * Select *"Commits"* tab
 * Just click on commit info you want to add and it will be added
 
-# Add Issue Summary
+## Add Issue Summary
 
 *NOTE: works only on Jira pages.*
 
