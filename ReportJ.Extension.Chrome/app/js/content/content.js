@@ -2,13 +2,13 @@ import "app/css/content.scss";
 
 import { AutoIssueSummaryExtender, CloseIssueExtender, CopyWorkLogExtender, LogTemplatesExtender, LogTimeExtender } from "./extenders";
 
-import StorageService from "app/js/common/services/storageService";
+import BrowserStorage from "app/js/common/services/browserStorage";
 import { checkIsInsideJira } from "app/js/common/utils/jira";
 
 class ContentController {
     constructor(browser) {
         this.browser = browser;
-        this.storage = new StorageService(browser);
+        this.storage = new BrowserStorage(browser);
     }
 
     start() {

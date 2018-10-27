@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-import StorageService from "app/js/common/services/storageService";
+import BrowserStorage from "app/js/common/services/browserStorage";
 import Switch from "@material/react-switch";
 import { browser } from "app/js/common/globals";
 
 export class MainOptions extends Component {
     constructor() {
         super();
-        this.storage = new StorageService(browser);
+        this.storage = new BrowserStorage(browser);
         this.state = {
             autoIssueSummary: {
                 enabled: true,

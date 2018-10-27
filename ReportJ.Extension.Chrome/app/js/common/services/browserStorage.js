@@ -1,7 +1,7 @@
 import GeneralSettings from "app/js/common/models/settings/generalSettings";
 import { isNil } from "app/js/common/utils/object";
 
-export default class StorageService {
+export default class BrowserStorage {
     constructor(browser) {
         this.browser = browser;
         this._defaultTemplates = [

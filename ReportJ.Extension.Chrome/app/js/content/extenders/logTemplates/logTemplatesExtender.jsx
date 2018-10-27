@@ -19,7 +19,7 @@ export class LogTemplatesExtender {
 
             insertBefore(featureContainer, comment);
             render(<TemplateSelector
-                storageService={this.storage}
+                storage={this.storage}
                 browser={this.browser}
                 onSubmit={(text) => this.addComment(text)} />, featureContainer);
         });

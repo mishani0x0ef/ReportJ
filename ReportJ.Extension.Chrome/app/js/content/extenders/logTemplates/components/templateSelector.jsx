@@ -15,7 +15,7 @@ export class TemplateSelectorComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.storageService = props.storageService;
+        this.storage = props.storage;
         this.browser = props.browser;
 
         this.state = {
@@ -27,7 +27,7 @@ export class TemplateSelectorComponent extends Component {
     }
 
     initTemplates() {
-        this.storageService.getTemplates()
+        this.storage.getTemplates()
             .then((templates) => {
                 const templateDescriptions = templates.map((t) => t.description);
                 this.setState({ templates: templateDescriptions });
@@ -102,7 +102,7 @@ export class TemplateSelectorComponent extends Component {
 
 TemplateSelectorComponent.propTypes = {
     onSubmit: PropTypes.func,
-    storageService: PropTypes.any,
+    storage: PropTypes.any,
     browser: PropTypes.any,
 }
 

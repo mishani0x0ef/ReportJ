@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
+import BrowserStorage from "app/js/common/services/browserStorage";
 import { Loading } from "app/js/common/components/loading/loading";
 import PropTypes from "prop-types";
-import StorageService from "app/js/common/services/storageService";
 import { Template } from "./template/template";
 import { browser } from "app/js/common/globals";
 import messages from "app/js/common/utils/messages";
@@ -16,7 +16,7 @@ export class Templates extends Component {
             templates: [],
         };
 
-        this.storage = new StorageService(browser);
+        this.storage = new BrowserStorage(browser);
         this._inti();
     }
 
