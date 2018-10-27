@@ -1,0 +1,17 @@
+@import "~app/css/variables";
+@import "~app/css/mixins";
+
+.app-list {
+    @include default-border();
+    @include default-border-radius();
+
+    .app-list-item-button {
+        padding: 0;
+
+        .mdc-button {
+            height: auto;
+            width: 100%;
+            @include mid-section();
+        }
+    }
+}
