@@ -40,7 +40,7 @@ module.exports = function () {
         },
         output: {
             filename: "[name].js",
-            path: path.resolve(__dirname, "../app/build")
+            path: path.resolve(__dirname, "../app/dist")
         },
         module: {
             rules: [
@@ -82,10 +82,6 @@ module.exports = function () {
             extensions: [".js", ".jsx"]
         },
         plugins: [
-            new webpack.ProvidePlugin({
-                $: "jquery",
-                jQuery: "jquery"
-            }),
             new webpack.DefinePlugin({
                 NAME: JSON.stringify(manifest.name),
                 DESCRIPTION: JSON.stringify(manifest.description),
@@ -104,7 +100,7 @@ module.exports = function () {
             new webpack.optimize.CommonsChunkPlugin({
                 name: "manifest"
             }),
-            new CleanWebpackPlugin(["app/build/**"], {
+            new CleanWebpackPlugin(["app/dist/**"], {
                 root: path.resolve(__dirname, "../")
             }),
             new ExtractTextPlugin("[name].css")

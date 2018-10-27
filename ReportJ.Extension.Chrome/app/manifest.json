@@ -11,9 +11,9 @@
     ],
     "background": {
         "scripts": [
-            "build/manifest.js",
-            "build/vendor.js",
-            "build/background.js"
+            "dist/manifest.js",
+            "dist/vendor.js",
+            "dist/background.js"
         ],
         "persistent": false
     },
@@ -34,12 +34,12 @@
                 "*://*/*"
             ],
             "css": [
-                "build/content.css"
+                "dist/content.css"
             ],
             "js": [
-                "build/manifest.js",
-                "build/vendor.js",
-                "build/content.js"
+                "dist/manifest.js",
+                "dist/vendor.js",
+                "dist/content.js"
             ]
         }
     ],

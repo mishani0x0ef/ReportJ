@@ -20,7 +20,7 @@ Write-Host "## Build Success";
 # PACK
 Write-Host "## Pack Package";
 
-$source = "app\build", "app\img", ".\app\manifest.json", ".\app\*.html"
+$source = "app\dist", "app\img", ".\app\manifest.json", ".\app\*.html"
 $dest = "packages\ReportJ.Chrome_${version}.zip"
 
 Compress-Archive -Path $source -DestinationPath $dest -Update
