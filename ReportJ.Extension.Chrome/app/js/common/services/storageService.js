@@ -1,69 +1,64 @@
 import GeneralSettings from "app/js/common/models/settings/generalSettings";
 import { isNil } from "app/js/common/utils/object";
 
-export default function StorageService(browser) {
-    var that = this;
+export default class StorageService {
+    constructor(browser) {
+        this.browser = browser;
+        this._defaultTemplates = [
+            { templateId: 0, description: "Daily status meeting." },
+            { templateId: 1, description: "Planning meeting." },
+            { templateId: 2, description: "Retrospective meeting." },
+            { templateId: 3, description: "Issue testing and verification." },
+            { templateId: 4, description: "Code review." },
+        ];
+    }
 
-    var defaultTemplates = [
-        { templateId: 0, description: "Daily status meeting." },
-        { templateId: 1, description: "Planning meeting." },
-        { templateId: 2, description: "Retrospective meeting." },
-        { templateId: 3, description: "Issue testing and verification." },
-        { templateId: 4, description: "Deployment of {component_name} v.{version_number} on Production environment." }
-    ];
+    async getOptions() {
+        const options = await new Promise((resolve) => {
+            this.browser.storage.sync.get(["settings"], (storage) => {
+                const settings = storage.settings || {};
 
-    this.getGeneralSettings = function () {
-        return new Promise((resolve) => {
-            browser.storage.sync.get(["settings"], (storage) => {
-                const settingsExists = !isNil(storage.settings) && !isNil(storage.settings.general);
-                const defaultSettings = new GeneralSettings();
-                let settings = defaultSettings;
-                if (settingsExists) {
-                    settings = Object.assign(defaultSettings, storage.settings.general);
-                }
+                const defaultOptions = new GeneralSettings();
+                const userOptions = settings.general || {};
+                settings.general = Object.assign(defaultOptions, userOptions);
+
+                settings.templates = settings.templates || this._defaultTemplates;
+                settings.repositories = settings.repositories || [];
+
                 resolve(settings);
             });
         });
+        return options;
     }
 
-    this.getTemplates = function () {
-        return new Promise((resolve) => {
-            browser.storage.sync.get(["settings"], (storage) => {
-                const templateExists = !isNil(storage.settings) && !isNil(storage.settings.templates);
-                if (templateExists) {
-                    resolve(storage.settings.templates);
-                } else {
-                    const settings = {
-                        templates: defaultTemplates
-                    };
-                    that.saveSettings(settings);
-                    resolve(defaultTemplates);
-                }
-            });
-        });
-    };
+    async getGeneralSettings() {
+        const { general } = await this.getOptions();
+        return general;
+    }
 
-    this.getRepositories = function () {
-        return new Promise((resolve) => {
-            browser.storage.sync.get(["settings"], (storage) => {
-                const reposExists = !isNil(storage.settings) && !isNil(storage.settings.repositories);
-                const repos = reposExists ? storage.settings.repositories : [];
-                resolve(repos);
-            });
-        });
-    };
+    async getTemplates() {
+        const { templates } = await this.getOptions();
+        return templates;
+    }
 
-    this.saveSettings = function (settings) {
+    async getRepositories() {
+        const { repositories } = await this.getOptions();
+        return repositories;
+    }
+
+    async setSettings(settings) {
+        const currentOptions = await this.getOptions();
+        const targetOptions = Object.assign(currentOptions, settings);
+
         return new Promise((resolve, reject) => {
-            browser.storage.sync.set({ settings }, () => {
-                if (isNil(browser.runtime.lastError)) {
+            this.browser.storage.sync.set({ settings: targetOptions }, () => {
+                const error = this.browser.runtime.lastError;
+                if (isNil(error)) {
                     resolve();
                 } else {
-                    reject(browser.runtime.lastError);
+                    reject(error);
                 }
             });
         });
-    };
+    }
 }
-
-StorageService.$inject = ["browser"];
