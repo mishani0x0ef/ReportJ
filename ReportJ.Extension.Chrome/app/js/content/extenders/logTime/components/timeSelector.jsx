@@ -1,5 +1,5 @@
-import { JiraButton, JiraCancelButton } from "app/js/common/components/button/button";
-import { Popup, PopupButtonsSection, PopupSection } from "app/js/common/components/popup/popup";
+import { JiraButton, JiraCancelButton } from "app/js/content/components/button/button";
+import { Popup, PopupButtonsSection, PopupSection } from "app/js/content/components/popup/popup";
 import React, { Component } from "react";
 
 import { ProductPlacement } from "app/js/common/components/productPlacement/productPlacement";
