@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { ListItem } from "app/js/common/components/list/list";
 import { Notification } from "app/js/common/components/notification/notification";
 import PropTypes from "prop-types";
 
@@ -12,10 +13,12 @@ export class Template extends Component {
 
     render() {
         return (
-            <div onClick={this._handleClick} className="app-list-item" data-clicked="Added">
+            <ListItem
+                data-clicked="Added"
+                onClick={this._handleClick}>
                 <span>{this.props.template.description}</span>
                 <Notification text="Added" ref={this.notification} />
-            </div>
+            </ListItem>
         );
     }
 

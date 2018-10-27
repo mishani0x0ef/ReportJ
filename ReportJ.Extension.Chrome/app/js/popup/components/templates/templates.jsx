@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
+import { List } from "app/js/common/components/list/list";
 import { Loading } from "app/js/common/components/loading/loading";
 import PropTypes from "prop-types";
 import { Template } from "./template/template";
@@ -12,23 +13,21 @@ export class Templates extends Component {
         super();
 
         this.state = {
-            isLoading: false,
+            isLoading: true,
             templates: [],
         };
 
         this.storage = new BrowserStorage(browser);
-        this._inti();
+        this._init();
     }
 
     render() {
         return this.state.isLoading
-            ? <Loading text={messages.templates.loading} />
+            ? <Loading text={messages.popup.templates.loading} />
             : this._getTemplates(this.state.templates);
     }
 
-    async _inti() {
-        this.setState({ isLoading: true });
-
+    async _init() {
         try {
             const templates = await this.storage.getTemplates();
             this.setState({ templates });
@@ -39,7 +38,7 @@ export class Templates extends Component {
 
     _getTemplates(templates) {
         return (
-            <div className="app-list" aria-orientation="vertical">
+            <List className="no-border">
                 {templates.map((template, key) =>
                     <Template
                         key={key}
@@ -47,7 +46,7 @@ export class Templates extends Component {
                         onClick={(text) => this.props.onSelected(text)}>
                     </Template>
                 )}
-            </div>
+            </List>
         );
     }
 }

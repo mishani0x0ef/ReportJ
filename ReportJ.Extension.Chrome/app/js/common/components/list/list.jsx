@@ -5,11 +5,13 @@ import React, { Component } from "react";
 import Button from "@material/react-button";
 import MaterialIcon from "@material/react-material-icon";
 import PropTypes from "prop-types";
+import { mergeClassNames } from "app/js/common/utils/react";
 
 export class List extends Component {
     render() {
+        const className = mergeClassNames(this.props, "app-list");
         return (
-            <div className="app-list">
+            <div {...this.props} className={className}>
                 {this.props.children}
             </div>
         );
@@ -17,28 +19,32 @@ export class List extends Component {
 }
 
 List.propTypes = {
+    className: PropTypes.string,
     children: PropTypes.any,
 }
 
 export class ListItem extends Component {
     render() {
+        const className = mergeClassNames(this.props, "app-list-item");
         return (
-            <div className="app-list-item">
+            < div {...this.props} className={className} >
                 {this.props.children}
-            </div>
+            </div >
         );
     }
 }
 
 ListItem.propTypes = {
+    className: PropTypes.any,
     children: PropTypes.any,
 }
 
 export class ListButtonItem extends Component {
     render() {
         const icon = this.props.icon ? <MaterialIcon icon={this.props.icon} /> : null;
+        const className = mergeClassNames(this.props, "app-list-item app-list-item-button");
         return (
-            <div className="app-list-item app-list-item-button">
+            <div {...this.props} className={className}>
                 <Button
                     icon={icon}
                     disabled={this.props.disabled}
@@ -51,6 +57,7 @@ export class ListButtonItem extends Component {
 }
 
 ListButtonItem.propTypes = {
+    className: PropTypes.any,
     text: PropTypes.string,
     icon: PropTypes.string,
     disabled: PropTypes.bool,

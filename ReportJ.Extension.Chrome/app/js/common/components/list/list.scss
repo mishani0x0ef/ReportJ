@@ -2,8 +2,31 @@
 @import "~app/css/mixins";
 
 .app-list {
+    background-color: $color-background;
     @include default-border();
     @include default-border-radius();
+    @include flex-column();
+
+    &.no-border {
+        border: none;
+        border-radius: 0;
+    }
+
+    .app-list-item {
+        border-bottom: 1px solid $color-border;
+        cursor: pointer;
+        position: relative;
+        @include default-animate();
+        @include mid-section();
+
+        &:hover:not(:disabled) {
+            background-color: $color-background-hover;
+        }
+
+        &:last-child {
+            border: none;
+        }
+    }
 
     .app-list-item-button {
         padding: 0;
