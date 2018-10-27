@@ -1,3 +1,5 @@
+@import "~app/css/mixins";
+
 html {
     height: 100%;
 }
@@ -8,4 +10,8 @@ body {
     #app {
         height: 100%;
     }
+}
+
+label {
+    @include pading-sides(12px);
 }

@@ -4,7 +4,7 @@ const config = {
         description: DESCRIPTION,
         version: VERSION,
         homePage: HOME_URL,
-        feedbackPage: "https://docs.google.com/forms/d/1x3dH1dE1GtiwZO8lsT8YNthr4d1R_8pZsU2Om1aBLLw/viewform?usp=send_form",
+        feedbackPage: "https://chrome.google.com/webstore/detail/reportj/hijbdbjoelgicnhnghhhlkpbhjdmchfg?utm_source=chrome-ntp-icon",
         author: {
             email: "mishani0x0ef@gmail.com"
         }

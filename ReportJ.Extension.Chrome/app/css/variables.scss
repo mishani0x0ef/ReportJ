@@ -1,13 +1,13 @@
 // Colors
 
-$color-primary: #003366;
-$color-primary-light: #3b73af;
+$color-primary: #2196f3;
+$color-primary-light: lighten($color-primary, 10%);
 
 $color-background: #fff;
 $color-background-hover: #f4f4f4;
 
-$color-text: #333;
-$color-text-mute: #666;
+$color-text: #666;
+$color-text-mute: #999;
 $color-text-active: #fff;
 
 $color-border: #dedede;

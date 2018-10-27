@@ -3,4 +3,5 @@
 
 .app-category-selector {
     @include mid-section();
+    @include pading-sides(24px);
 }

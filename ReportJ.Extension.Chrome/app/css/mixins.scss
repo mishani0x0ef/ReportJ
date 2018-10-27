@@ -9,7 +9,7 @@
     transition: all 0.5s ease;
 }
 
-@mixin  default-border-radius {
+@mixin default-border-radius {
     border-radius: 2px;
 }
 
@@ -29,8 +29,13 @@
     display: flex;
     @if $reverse {
         flex-direction: column-reverse;
-    } 
+    }
     @else {
         flex-direction: column;
     }
+}
+
+@mixin pading-sides($padding: 0) {
+    padding-left: $padding;
+    padding-right: $padding;
 }
