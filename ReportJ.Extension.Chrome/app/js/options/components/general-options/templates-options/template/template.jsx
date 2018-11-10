@@ -2,6 +2,7 @@ import "./template.scss";
 
 import React, { Component } from "react";
 import TextField, { HelperText, Input } from "@material/react-text-field";
+import { isEnterDown, isEscapeDown } from "app/js/common/utils/key";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
 import Button from "@material/react-button";
@@ -37,8 +38,9 @@ export class Template extends Component {
                         <Input
                             value={this.state.value}
                             maxLength={this.state.maxLength}
-                            ref={input => this.input = input}
-                            onChange={(e) => this.onChange(e)} />
+                            ref={(input) => this.input = input}
+                            onChange={(e) => this.onChange(e)}
+                            onKeyDown={(e) => this.onKeyDown(e)} />
                     </TextField>
                     <div className="pull-right">
                         <Button onClick={() => this.discardChanges()}>Cancel</Button>
@@ -68,7 +70,7 @@ export class Template extends Component {
     async saveChanges() {
         const template = Object.assign({}, this.props.template, { description: this.state.value });
         await this.storage.setTemplate(template);
-        
+
         this._endEdit();
         if (this.props.onTemplateChanged) {
             this.props.onTemplateChanged();
@@ -82,6 +84,17 @@ export class Template extends Component {
 
     onChange(e) {
         this._setValue(e.target.value);
+    }
+
+    onKeyDown(e) {
+        if (isEnterDown(e)) {
+            this.saveChanges();
+        } else if (isEscapeDown(e)) {
+            this.discardChanges();
+        } else {
+            return;
+        }
+        e.preventDefault();
     }
 
     _endEdit() {
