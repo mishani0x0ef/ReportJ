@@ -5,6 +5,7 @@
     background-color: $color-background;
     @include default-border();
     @include default-border-radius();
+    @include default-shadow();
     @include flex-column();
 
     &.no-border {

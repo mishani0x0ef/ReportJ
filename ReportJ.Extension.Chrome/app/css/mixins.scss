@@ -19,6 +19,10 @@
     border-radius: 4px;
 }
 
+@mixin  default-shadow {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
 @mixin small-section {
     padding: 8px 12px 10px;
 }
