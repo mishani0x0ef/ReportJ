@@ -1,16 +1,22 @@
 import "./template.scss";
 
 import React, { Component } from "react";
+import TextField, { HelperText, Input } from "@material/react-text-field";
 
 import Button from "@material/react-button";
 import { ListItem } from "app/js/common/components/list/list";
 import PropTypes from "prop-types";
 
 export class Template extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
+        this.input = null;
         this.state = {
-            mode: "read",
+            mode: props.initialMode || "read",
+            value: props.template.description,
+            length: props.template.description.length,
+            maxLength: 255,
         };
     }
 
@@ -18,7 +24,19 @@ export class Template extends Component {
         if (this.state.mode === "edit") {
             return (
                 <ListItem className="app-template-editor-list-item">
-                    <textarea rows="3" defaultValue={this.props.template.description} />
+                    <TextField
+                        label="Your template"
+                        textarea={true}
+                        dense={true}
+                        helperText={
+                            <HelperText>{this.state.length}/{this.state.maxLength}</HelperText>
+                        }>
+                        <Input
+                            value={this.state.value}
+                            maxlength={this.state.maxLength}
+                            ref={input => this.input = input}
+                            onChange={(e) => this.onChange(e)} />
+                    </TextField>
                     <div className="pull-right">
                         <Button onClick={() => this.discardChanges()}>Cancel</Button>
                         <Button
@@ -38,23 +56,52 @@ export class Template extends Component {
     }
 
     startEdit() {
-        this.setState({ mode: "edit" });
+        this.setState({ mode: "edit" }, () => {
+            // set timeout to let React update DOM
+            setTimeout(() => this._focusTextField(), 0);
+        });
     }
 
-    saveChanges() {
-        // todo: save changes. MR
+    async saveChanges() {
+        // todo: save template. MR
+        if (this.props.onTemplateChanged) {
+            this.props.onTemplateChanged();
+        }
         this._endEdit();
     }
 
     discardChanges() {
+        this._setValue(this.props.template.description);
         this._endEdit();
+    }
+
+    onChange(e) {
+        this._setValue(e.target.value);
     }
 
     _endEdit() {
         this.setState({ mode: "read" });
     }
+
+    _setValue(value) {
+        this.setState({
+            value,
+            length: value.length,
+        });
+    }
+
+    _focusTextField() {
+        if (!this.input) return;
+
+        const inputElement = this.input.inputElement;
+        if (inputElement) {
+            inputElement.focus();
+        }
+    }
 }
 
 Template.propTypes = {
+    initialMode: PropTypes.string,
     template: PropTypes.any,
+    onTemplateChanged: PropTypes.func,
 }

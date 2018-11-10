@@ -43,7 +43,10 @@ export class TemplatesOptions extends Component {
 
     _renderTemplate(template, key) {
         return (
-            <Template key={key} template={template}></Template>
+            <Template
+                key={key}
+                template={template}
+                onTemplateChanged={() => this._init()} />
         );
     }
 }
