@@ -3,14 +3,17 @@ import "./template.scss";
 import React, { Component } from "react";
 import TextField, { HelperText, Input } from "@material/react-text-field";
 
+import BrowserStorage from "app/js/common/services/browserStorage";
 import Button from "@material/react-button";
 import { ListItem } from "app/js/common/components/list/list";
 import PropTypes from "prop-types";
+import { browser } from "app/js/common/globals";
 
 export class Template extends Component {
     constructor(props) {
         super(props);
 
+        this.storage = new BrowserStorage(browser);
         this.input = null;
         this.state = {
             mode: props.initialMode || "read",
@@ -33,7 +36,7 @@ export class Template extends Component {
                         }>
                         <Input
                             value={this.state.value}
-                            maxlength={this.state.maxLength}
+                            maxLength={this.state.maxLength}
                             ref={input => this.input = input}
                             onChange={(e) => this.onChange(e)} />
                     </TextField>
@@ -63,11 +66,13 @@ export class Template extends Component {
     }
 
     async saveChanges() {
-        // todo: save template. MR
+        const template = Object.assign({}, this.props.template, { description: this.state.value });
+        await this.storage.setTemplate(template);
+        
+        this._endEdit();
         if (this.props.onTemplateChanged) {
             this.props.onTemplateChanged();
         }
-        this._endEdit();
     }
 
     discardChanges() {

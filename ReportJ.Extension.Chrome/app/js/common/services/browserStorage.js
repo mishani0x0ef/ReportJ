@@ -61,4 +61,17 @@ export default class BrowserStorage {
             });
         });
     }
+
+    async setTemplate(template) {
+        let templates = await this.getTemplates();
+        const templatesMap = new Map(templates.map((t) => [t.templateId, t]));
+
+        if (typeof template.templateId === "undefined") {
+            template.templateId = Math.max(...templatesMap.keys()) + 1;
+        }
+        templatesMap.set(template.templateId, template);
+
+        templates = Array.from(templatesMap.values());
+        await this.setSettings({ templates });
+    }
 }
