@@ -1,0 +1,10 @@
+@import "~app/css/variables";
+@import "~app/css/mixins";
+
+.app-list-item.app-template-editor-list-item {
+    @include flex-column();
+
+    &:hover:not(:disabled) {
+        background: $color-background;
+    }
+}

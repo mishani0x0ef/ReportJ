@@ -10,3 +10,8 @@
 .no-border {
     border: none;
 }
+
+.pull-right {
+    display: flex;
+    justify-content: flex-end;
+}

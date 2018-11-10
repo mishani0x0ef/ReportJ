@@ -1,7 +1,8 @@
-import { List, ListButtonItem, ListItem } from "app/js/common/components/list/list";
+import { List, ListButtonItem } from "app/js/common/components/list/list";
 import React, { Component } from "react";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
+import { Template } from "./template/template";
 import { browser } from "app/js/common/globals";
 
 export class TemplatesOptions extends Component {
@@ -40,9 +41,9 @@ export class TemplatesOptions extends Component {
         });
     }
 
-    _renderTemplate(template, index) {
+    _renderTemplate(template, key) {
         return (
-            <ListItem key={index}>{template.description}</ListItem>
+            <Template key={key} template={template}></Template>
         );
     }
 }
