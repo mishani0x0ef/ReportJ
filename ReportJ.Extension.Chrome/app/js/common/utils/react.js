@@ -7,3 +7,17 @@ export function mergeClassNames(props, classNames) {
     const componentClasses = classNames || "";
     return `${componentClasses} ${parentClasses}`;
 }
+
+export function focusInput(input) {
+    if (!input) return;
+
+    const inputElement = input.inputElement;
+    if (inputElement) {
+        inputElement.focus();
+    }
+}
+
+export function afterRender(func) {
+    // need to allow React render DOM elements.
+    setTimeout(() => func(), 0);
+}

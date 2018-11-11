@@ -47,8 +47,7 @@ export class ListButtonItem extends Component {
             <div {...this.props} className={className}>
                 <Button
                     icon={icon}
-                    disabled={this.props.disabled}
-                    onClick={() => this.props.onClick()}>
+                    disabled={this.props.disabled}>
                     {this.props.text}
                 </Button>
             </div>
@@ -61,5 +60,4 @@ ListButtonItem.propTypes = {
     text: PropTypes.string,
     icon: PropTypes.string,
     disabled: PropTypes.bool,
-    onClick: PropTypes.any,
 }

@@ -2,6 +2,7 @@ import "./template.scss";
 
 import React, { Component } from "react";
 import TextField, { HelperText, Input } from "@material/react-text-field";
+import { afterRender, focusInput } from "app/js/common/utils/react";
 import { isEnterDown, isEscapeDown } from "app/js/common/utils/key";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
@@ -38,7 +39,7 @@ export class Template extends Component {
                         <Input
                             value={this.state.value}
                             maxLength={this.state.maxLength}
-                            ref={(input) => this.input = input}
+                            ref={(input) => { this.input = input }}
                             onChange={(e) => this.onChange(e)}
                             onKeyDown={(e) => this.onKeyDown(e)} />
                     </TextField>
@@ -60,21 +61,22 @@ export class Template extends Component {
         );
     }
 
+    componentDidMount() {
+        this._focusTextField();
+    }
+
+    componentDidUpdate() {
+        this._focusTextField();
+    }
+
     startEdit() {
-        this.setState({ mode: "edit" }, () => {
-            // set timeout to let React update DOM
-            setTimeout(() => this._focusTextField(), 0);
-        });
+        this.setState({ mode: "edit" });
     }
 
     async saveChanges() {
         const template = Object.assign({}, this.props.template, { description: this.state.value });
         await this.storage.setTemplate(template);
-
         this._endEdit();
-        if (this.props.onTemplateChanged) {
-            this.props.onTemplateChanged();
-        }
     }
 
     discardChanges() {
@@ -99,6 +101,9 @@ export class Template extends Component {
 
     _endEdit() {
         this.setState({ mode: "read" });
+        if (this.props.onTemplateChanged) {
+            this.props.onTemplateChanged();
+        }
     }
 
     _setValue(value) {
@@ -109,12 +114,7 @@ export class Template extends Component {
     }
 
     _focusTextField() {
-        if (!this.input) return;
-
-        const inputElement = this.input.inputElement;
-        if (inputElement) {
-            inputElement.focus();
-        }
+        afterRender(() => focusInput(this.input));
     }
 }
 

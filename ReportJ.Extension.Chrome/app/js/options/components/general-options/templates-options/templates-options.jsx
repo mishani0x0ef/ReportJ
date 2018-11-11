@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
 import { Template } from "./template/template";
+import { afterRender } from "app/js/common/utils/react";
 import { browser } from "app/js/common/globals";
 
 export class TemplatesOptions extends Component {
@@ -32,7 +33,9 @@ export class TemplatesOptions extends Component {
     }
 
     addTemplate() {
-        throw new Error("Not implemented");
+        const templates = this.state.templates;
+        templates.push({ description: "" });
+        this.setState({ templates }, () => this._scrollBottom());
     }
 
     async _init() {
@@ -42,11 +45,21 @@ export class TemplatesOptions extends Component {
     }
 
     _renderTemplate(template, key) {
+        const initialMode = typeof template.templateId === "undefined" ? "edit" : "read";
         return (
             <Template
                 key={key}
+                initialMode={initialMode}
                 template={template}
                 onTemplateChanged={() => this._init()} />
         );
+    }
+
+    _scrollBottom() {
+        afterRender(() => window.scrollTo({
+            top: document.body.scrollHeight,
+            left: 0,
+            behavior: "smooth"
+        }));
     }
 }
