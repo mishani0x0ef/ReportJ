@@ -76,7 +76,6 @@ module.exports = function () {
         },
         resolve: {
             alias: {
-                "~": path.resolve(__dirname, "../app"),
                 "app": path.resolve(__dirname, "../app"),
             },
             extensions: [".js", ".jsx"]
@@ -106,4 +105,4 @@ module.exports = function () {
             new ExtractTextPlugin("[name].css")
         ]
     };
-};
+}

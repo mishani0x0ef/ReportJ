@@ -1,4 +1,4 @@
-import config from "~/config";
+import config from "app/config";
 
 export default function RepositoryService($q, $http) {
     var baseApiUrl = config.api.reportjApiUrl;
