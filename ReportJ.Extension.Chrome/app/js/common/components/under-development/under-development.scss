@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     @include flex-column();
+    @include large-section();
 
     .app-under-development-icon {
         animation: wrench-working 2s linear infinite;

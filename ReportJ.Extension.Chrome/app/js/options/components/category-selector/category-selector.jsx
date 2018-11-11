@@ -3,6 +3,7 @@ import "./category-selector.scss";
 import React, { Component } from "react";
 
 import { About } from "../about/about";
+import { CommitsOptions } from "../commints-options/commints-options";
 import { GeneralOptions } from "../general-options/general-options";
 import Tab from "@material/react-tab";
 import TabBar from "@material/react-tab-bar";
@@ -44,7 +45,7 @@ export class CategorySelector extends Component {
     _getCategory() {
         switch (this.state.activeIndex) {
             case 1:
-                return <h3>Repos</h3>;
+                return <CommitsOptions />;
             case 2:
                 return <About />;
             default:
