@@ -2,6 +2,8 @@ const path = require("path");
 const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const manifest = require("./app/manifest.json");
@@ -90,5 +92,6 @@ module.exports = {
                 }
             }
         },
+        minimizer: [new OptimizeCSSAssetsPlugin({}), new TerserPlugin()],
     }
 }
