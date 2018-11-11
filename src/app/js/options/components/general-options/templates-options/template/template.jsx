@@ -1,29 +1,19 @@
 import "./template.scss";
 
-import { LinearProgress, ListItem } from "app/js/common/components";
 import React, { Component } from "react";
-import TextField, { HelperText, Input } from "@material/react-text-field";
-import { afterRender, focusInput } from "app/js/common/utils/react";
-import { isEnterDown, isEscapeDown } from "app/js/common/utils/key";
 
-import BrowserStorage from "app/js/common/services/browserStorage";
-import Button from "@material/react-button";
-import IconButton from "@material/react-icon-button";
-import MaterialIcon from "@material/react-material-icon";
+import { EditTemplate } from "./edit/edit";
 import PropTypes from "prop-types";
-import { browser } from "app/js/common/globals";
-import messages from "app/js/common/utils/messages";
-import onClickOutside from "react-onclickoutside";
+import { ReadTemplate } from "./read/read";
+import isNil from "lodash/isNil";
 
-class TemplateComponent extends Component {
+export class Template extends Component {
     constructor(props) {
         super(props);
-        const description = props.template.description;
 
-        this.storage = new BrowserStorage(browser);
-        this.input = null;
+        const description = props.template.description;
         this.state = {
-            mode: props.initialMode || "read",
+            mode: isNil(props.template.templateId) ? "edit" : "read",
             value: description,
             valid: description.length > 0,
             length: description.length,
@@ -33,139 +23,40 @@ class TemplateComponent extends Component {
     }
 
     render() {
-        if (this.state.mode === "edit") {
-            const progressText = messages.options.templates.usedSymbols(this.state.length, this.state.maxLength);
-            return (
-                <ListItem className="app-template-editor-list-item">
-                    <TextField
-                        label="Your template"
-                        textarea={true}
-                        dense={true}>
-                        <Input
-                            value={this.state.value}
-                            maxLength={this.state.maxLength}
-                            isValid={this.state.valid}
-                            ref={(input) => { this.input = input }}
-                            onChange={(e) => this.onChange(e)}
-                            onKeyDown={(e) => this.onKeyDown(e)} />
-                    </TextField>
-                    <LinearProgress
-                        currentValue={this.state.length}
-                        targetValue={this.state.maxLength}
-                        message={progressText} />
-                    <div className="pull-right">
-                        <Button onClick={() => this.discardChanges()}>Cancel</Button>
-                        <Button
-                            outlined={true}
-                            onClick={() => this.saveChanges()}>
-                            Save
-                        </Button>
-                    </div>
-                </ListItem>
-            );
-        }
-        const classNames = this.state.isDeleted ? "app-list-item--deleted" : "";
-        return (
-            <ListItem className={classNames} onClick={() => this.startEdit()}>
-                <div className="app-template-read-content">
-                    <span>{this.props.template.description}</span>
-                    <IconButton title="Remove template" onClick={(e) => this.removeTemplate(e)}>
-                        <MaterialIcon icon="clear" />
-                    </IconButton>
-                </div>
-            </ListItem>
-        );
-    }
-
-    componentDidMount() {
-        this._focusTextField();
-    }
-
-    componentDidUpdate() {
-        this._focusTextField();
-    }
-
-    handleClickOutside() {
-        if (this.state.mode !== "edit") return;
-        if (this.state.isValid) {
-            this.saveChanges();
-        } else {
-            this.discardChanges();
-        }
+        return this.state.mode === "edit"
+            ? <EditTemplate
+                template={this.props.template}
+                onEdited={() => this.onEdited()} />
+            : <ReadTemplate
+                template={this.props.template}
+                onClick={() => this.startEdit()}
+                onDeleted={() => this.onDeleted()} />;
     }
 
     startEdit() {
         this.setState({ mode: "edit" });
     }
 
-    async saveChanges() {
-        if (!this.state.valid) return;
-        const template = Object.assign({}, this.props.template, { description: this.state.value });
-        await this.storage.setTemplate(template);
-        this._endEdit();
-    }
-
-    async removeTemplate(e) {
-        e.stopPropagation();
-        await this.storage.removeTemplate(this.props.template.templateId);
-        this.setState({ isDeleted: true });
-        this._finishRemoveAfterAnimation();
-    }
-
-    discardChanges() {
-        this._setValue(this.props.template.description);
-        this._endEdit();
-    }
-
-    onChange(e) {
-        this._setValue(e.target.value);
-    }
-
-    onKeyDown(e) {
-        if (isEnterDown(e)) {
-            this.saveChanges();
-        } else if (isEscapeDown(e)) {
-            this.discardChanges();
-        } else {
-            return;
-        }
-        e.preventDefault();
-    }
-
-    _endEdit() {
+    endEdit() {
         this.setState({ mode: "read" });
-        if (this.props.onTemplateChanged) {
-            this.props.onTemplateChanged();
+    }
+
+    onEdited() {
+        if (this.props.onEdited) {
+            this.props.onEdited(this.props.template);
         }
+        this.endEdit();
     }
 
-    _setValue(value) {
-        this.setState({
-            value,
-            length: value.length,
-            valid: value.length > 0,
-        });
-    }
-
-    _finishRemoveAfterAnimation() {
-        setTimeout(() => {
-            if (this.props.onDeleted) {
-                this.props.onDeleted(this.props.template);
-            }
-            this._endEdit()
-        }, 500);
-    }
-
-    _focusTextField() {
-        afterRender(() => focusInput(this.input));
+    onDeleted() {
+        if (this.props.onDeleted) {
+            this.props.onDeleted(this.props.template);
+        }
     }
 }
 
-TemplateComponent.propTypes = {
-    initialMode: PropTypes.string,
+Template.propTypes = {
     template: PropTypes.any,
-    onTemplateChanged: PropTypes.func,
+    onEdited: PropTypes.func,
     onDeleted: PropTypes.func,
 }
-
-export const Template = onClickOutside(TemplateComponent);

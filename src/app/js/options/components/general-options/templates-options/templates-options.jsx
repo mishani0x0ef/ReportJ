@@ -7,7 +7,6 @@ import BrowserStorage from "app/js/common/services/browserStorage";
 import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
 import { browser } from "app/js/common/globals";
-import isNil from "lodash/isNil";
 import messages from "app/js/common/utils/messages";
 
 export class TemplatesOptions extends Component {
@@ -93,14 +92,12 @@ export class TemplatesOptions extends Component {
     }
 
     _renderTemplate(template, key) {
-        const initialMode = isNil(template.templateId) ? "edit" : "read";
         return (
             <Template
                 key={key}
-                initialMode={initialMode}
                 template={template}
                 onDeleted={(t) => this.softDelete(t)}
-                onTemplateChanged={() => this._init()} />
+                onEdited={() => this._init()} />
         );
     }
 
