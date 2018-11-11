@@ -19,7 +19,7 @@ Write-Host "## Build Success";
 Write-Host "## Pack Package";
 
 $source = "app\dist", "app\img", ".\app\manifest.json", ".\app\*.html"
-$dest = "packages\ReportJ.Chrome_${version}.zip"
+$dest = "packages\chrome_${version}.zip"
 
 if(!(Test-Path "packages")) {
     New-Item -ItemType Directory -Force -Path "packages"
