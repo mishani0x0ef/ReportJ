@@ -1,4 +1,5 @@
 import "app/css/content.scss";
+import "app/js/common/utils/axios.config";
 
 import { AutoIssueSummaryExtender, CloseIssueExtender, CopyWorkLogExtender, LogTemplatesExtender, LogTimeExtender } from "./extenders";
 

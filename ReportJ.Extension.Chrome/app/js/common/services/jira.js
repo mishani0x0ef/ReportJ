@@ -1,4 +1,4 @@
-import $ from "jquery";
+import axios from "axios";
 import { getBaseUrl } from "app/js/common/utils/url";
 
 export default class JiraWrapper {
@@ -16,17 +16,12 @@ export default class JiraWrapper {
         const issueKey = this._getIssueKey(url);
         const apiUrl = `${this.apiUrl}issue/${issueKey}?${this.issueInfoParams}`;
 
-        return $.getJSON(apiUrl).then((issue) => this._getSummaryFromIssue(issue));
+        return axios.get(apiUrl).then((issue) => this._getSummaryFromIssue(issue));
     }
 
     checkIsInsideJira() {
         const url = this.apiUrl + "mypermissions";
-        const settings = {
-            method: "HEAD",
-            url
-        };
-
-        return $.ajax(settings)
+        return axios.head(url)
             .then(() => true)
             .catch(() => false);
     }
@@ -46,15 +41,7 @@ export default class JiraWrapper {
             }
         };
 
-        const settings = {
-            method: "PUT",
-            dataType: "json",
-            contentType: "application/json",
-            url: api,
-            data: JSON.stringify(requestData)
-        };
-
-        return $.ajax(settings);
+        return axios.put(api, JSON.stringify(requestData));
     }
 
     _getSummaryFromIssue(issue, summary) {

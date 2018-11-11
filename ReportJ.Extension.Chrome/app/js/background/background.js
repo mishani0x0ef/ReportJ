@@ -1,3 +1,5 @@
+import "app/js/common/utils/axios.config";
+
 import JiraWrapper from "app/js/common/services/jira";
 import config from "app/config";
 import { getBaseUrl } from "app/js/common/utils/url";
