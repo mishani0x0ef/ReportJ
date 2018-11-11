@@ -92,6 +92,13 @@ module.exports = {
                 }
             }
         },
-        minimizer: [new OptimizeCSSAssetsPlugin({}), new TerserPlugin()],
+        minimizer: [
+            new OptimizeCSSAssetsPlugin({}),
+            new TerserPlugin({
+                parallel: true,
+                cache: true,
+                extractComments: true
+            })
+        ],
     }
 }
