@@ -12,8 +12,9 @@ import { ListItem } from "app/js/common/components/list/list";
 import MaterialIcon from "@material/react-material-icon";
 import PropTypes from "prop-types";
 import { browser } from "app/js/common/globals";
+import onClickOutside from "react-onclickoutside";
 
-export class Template extends Component {
+class TemplateComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -76,6 +77,11 @@ export class Template extends Component {
         this._focusTextField();
     }
 
+    handleClickOutside() {
+        if (this.state.mode !== "edit") return;
+        this.saveChanges();
+    }
+
     startEdit() {
         this.setState({ mode: "edit" });
     }
@@ -130,8 +136,10 @@ export class Template extends Component {
     }
 }
 
-Template.propTypes = {
+TemplateComponent.propTypes = {
     initialMode: PropTypes.string,
     template: PropTypes.any,
     onTemplateChanged: PropTypes.func,
 }
+
+export const Template = onClickOutside(TemplateComponent);
