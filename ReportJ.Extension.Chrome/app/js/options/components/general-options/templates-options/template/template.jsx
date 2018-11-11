@@ -7,7 +7,9 @@ import { isEnterDown, isEscapeDown } from "app/js/common/utils/key";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
 import Button from "@material/react-button";
+import IconButton from "@material/react-icon-button";
 import { ListItem } from "app/js/common/components/list/list";
+import MaterialIcon from "@material/react-material-icon";
 import PropTypes from "prop-types";
 import { browser } from "app/js/common/globals";
 
@@ -56,7 +58,12 @@ export class Template extends Component {
         }
         return (
             <ListItem onClick={() => this.startEdit()}>
-                {this.props.template.description}
+                <div className="app-template-read-content">
+                    <span>{this.props.template.description}</span>
+                    <IconButton title="Remove template" onClick={() => this.removeTemplate()}>
+                        <MaterialIcon icon="clear" />
+                    </IconButton>
+                </div>
             </ListItem>
         );
     }
@@ -76,6 +83,11 @@ export class Template extends Component {
     async saveChanges() {
         const template = Object.assign({}, this.props.template, { description: this.state.value });
         await this.storage.setTemplate(template);
+        this._endEdit();
+    }
+
+    async removeTemplate() {
+        await this.storage.removeTemplate(this.props.template.templateId);
         this._endEdit();
     }
 

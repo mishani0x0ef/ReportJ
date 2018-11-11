@@ -1,5 +1,5 @@
 import GeneralSettings from "app/js/common/models/settings/generalSettings";
-import { isNil } from "app/js/common/utils/object";
+import isNil from "lodash/isNil";
 
 export default class BrowserStorage {
     constructor(browser) {
@@ -66,12 +66,18 @@ export default class BrowserStorage {
         let templates = await this.getTemplates();
         const templatesMap = new Map(templates.map((t) => [t.templateId, t]));
 
-        if (typeof template.templateId === "undefined") {
+        if (isNil(template.templateId)) {
             template.templateId = Math.max(...templatesMap.keys()) + 1;
         }
         templatesMap.set(template.templateId, template);
 
         templates = Array.from(templatesMap.values());
+        await this.setSettings({ templates });
+    }
+
+    async removeTemplate(templateId) {
+        let templates = await this.getTemplates();
+        templates = templates.filter((t) => t.templateId !== templateId);
         await this.setSettings({ templates });
     }
 }

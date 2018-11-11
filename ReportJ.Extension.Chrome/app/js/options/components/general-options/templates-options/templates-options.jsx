@@ -5,6 +5,7 @@ import BrowserStorage from "app/js/common/services/browserStorage";
 import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
 import { browser } from "app/js/common/globals";
+import isNil from "lodash/isNil";
 
 export class TemplatesOptions extends Component {
     constructor() {
@@ -45,7 +46,7 @@ export class TemplatesOptions extends Component {
     }
 
     _renderTemplate(template, key) {
-        const initialMode = typeof template.templateId === "undefined" ? "edit" : "read";
+        const initialMode = isNil(template.templateId) ? "edit" : "read";
         return (
             <Template
                 key={key}
