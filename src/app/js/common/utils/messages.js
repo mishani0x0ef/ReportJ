@@ -1,3 +1,5 @@
+import pluralize from "pluralize";
+
 const messages = {
     common: {
         components: {
@@ -21,6 +23,7 @@ const messages = {
         templates: {
             usedTemplates: (used, from) => `${used}/${from} templates`,
             usedSymbols: (used, from) => `${used}/${from}`,
+            undoDelete: (itemsCount) => `${itemsCount} ${pluralize("template", itemsCount)} deleted`,
         },
     },
 }

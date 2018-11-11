@@ -1,11 +1,9 @@
 import "./template-options.scss";
 
-import { List, ListButtonItem } from "app/js/common/components/list/list";
+import { LinearProgress, List, ListButtonItem, NoTemplatesMessage, Snackbar } from "app/js/common/components";
 import React, { Component } from "react";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
-import { LinearProgress } from "app/js/common/components/linear-progress/linear-progress";
-import { NoTemplatesMessage } from "app/js/common/components/no-templates-message/no-templates-message";
 import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
 import { browser } from "app/js/common/globals";
@@ -16,8 +14,10 @@ export class TemplatesOptions extends Component {
     constructor() {
         super();
         this.storage = new BrowserStorage(browser);
+        this.undoSnackbar = null;
         this.state = {
             templates: [],
+            deletedTemplates: [],
             maxTemplates: 10,
         };
         this._init();
@@ -47,6 +47,11 @@ export class TemplatesOptions extends Component {
                     currentValue={this.state.templates.length}
                     targetValue={this.state.maxTemplates}
                     message={messages.options.templates.usedTemplates(this.state.templates.length, this.state.maxTemplates)} />
+                <Snackbar
+                    ref={(snackbar) => { this.undoSnackbar = snackbar }}
+                    text={messages.options.templates.undoDelete(this.state.deletedTemplates.length)}
+                    actionText="Undo"
+                    onClosed={(undo) => this.onDeleteUndo(undo)} />
             </div>
         );
     }
@@ -56,6 +61,27 @@ export class TemplatesOptions extends Component {
         const templates = this.state.templates;
         templates.push({ description: "" });
         this.setState({ templates }, () => this._scrollBottom());
+    }
+
+    softDelete(template) {
+        const deletedTemplates = this.state.deletedTemplates;
+        deletedTemplates.push(template);
+        this.setState({ deletedTemplates });
+        this._showDeleteUndo();
+    }
+
+    async onDeleteUndo(doUndo) {
+        if (doUndo) {
+            const deletedTemplates = this.state.deletedTemplates;
+            let template = deletedTemplates.pop();
+            while (template) {
+                template.templateId = null;
+                await this.storage.setTemplate(template);
+                template = deletedTemplates.pop();
+            }
+            await this._init();
+        }
+        this.setState({ deletedTemplates: [] });
     }
 
     async _init() {
@@ -71,8 +97,15 @@ export class TemplatesOptions extends Component {
                 key={key}
                 initialMode={initialMode}
                 template={template}
+                onDeleted={(t) => this.softDelete(t)}
                 onTemplateChanged={() => this._init()} />
         );
+    }
+
+    _showDeleteUndo() {
+        if (this.undoSnackbar) {
+            this.undoSnackbar.show();
+        }
     }
 
     _scrollBottom() {

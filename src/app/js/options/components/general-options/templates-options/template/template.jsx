@@ -1,5 +1,6 @@
 import "./template.scss";
 
+import { LinearProgress, ListItem } from "app/js/common/components";
 import React, { Component } from "react";
 import TextField, { HelperText, Input } from "@material/react-text-field";
 import { afterRender, focusInput } from "app/js/common/utils/react";
@@ -8,8 +9,6 @@ import { isEnterDown, isEscapeDown } from "app/js/common/utils/key";
 import BrowserStorage from "app/js/common/services/browserStorage";
 import Button from "@material/react-button";
 import IconButton from "@material/react-icon-button";
-import { LinearProgress } from "app/js/common/components/linear-progress/linear-progress";
-import { ListItem } from "app/js/common/components/list/list";
 import MaterialIcon from "@material/react-material-icon";
 import PropTypes from "prop-types";
 import { browser } from "app/js/common/globals";
@@ -102,6 +101,9 @@ class TemplateComponent extends Component {
 
     async removeTemplate() {
         await this.storage.removeTemplate(this.props.template.templateId);
+        if (this.props.onDeleted) {
+            this.props.onDeleted(this.props.template);
+        }
         this._endEdit();
     }
 
@@ -161,6 +163,7 @@ TemplateComponent.propTypes = {
     initialMode: PropTypes.string,
     template: PropTypes.any,
     onTemplateChanged: PropTypes.func,
+    onDeleted: PropTypes.func,
 }
 
 export const Template = onClickOutside(TemplateComponent);
