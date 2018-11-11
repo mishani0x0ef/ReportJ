@@ -1,7 +1,10 @@
+import "./template-options.scss";
+
 import { List, ListButtonItem } from "app/js/common/components/list/list";
 import React, { Component } from "react";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
+import { LinearProgress } from "app/js/common/components/linear-progress/linear-progress";
 import { NoTemplatesMessage } from "app/js/common/components/no-templates-message/no-templates-message";
 import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
@@ -14,6 +17,7 @@ export class TemplatesOptions extends Component {
         this.storage = new BrowserStorage(browser);
         this.state = {
             templates: [],
+            maxTemplates: 10,
         };
         this._init();
     }
@@ -23,8 +27,10 @@ export class TemplatesOptions extends Component {
             ? null
             : <NoTemplatesMessage onTemplateAdd={() => this.addTemplate()} />;
 
+        const exceedLimit = this.state.templates.length >= this.state.maxTemplates;
+
         return (
-            <div>
+            <div className="app-templates-options">
                 <h2>Templates</h2>
                 <List>
                     {this.state.templates.map((template, i) => this._renderTemplate(template, i))}
@@ -32,14 +38,20 @@ export class TemplatesOptions extends Component {
                     <ListButtonItem
                         icon="add_circle_outline"
                         text="Add Template"
+                        disabled={exceedLimit}
                         onClick={() => this.addTemplate()}>
                     </ListButtonItem>
                 </List>
+                <LinearProgress
+                    currentValue={this.state.templates.length}
+                    targetValue={this.state.maxTemplates}
+                    message={`${this.state.templates.length}/${this.state.maxTemplates} templates`} />
             </div>
         );
     }
 
     addTemplate() {
+        if (this.state.templates.length >= this.state.maxTemplates) return;
         const templates = this.state.templates;
         templates.push({ description: "" });
         this.setState({ templates }, () => this._scrollBottom());

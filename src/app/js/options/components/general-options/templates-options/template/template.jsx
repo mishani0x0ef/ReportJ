@@ -8,6 +8,7 @@ import { isEnterDown, isEscapeDown } from "app/js/common/utils/key";
 import BrowserStorage from "app/js/common/services/browserStorage";
 import Button from "@material/react-button";
 import IconButton from "@material/react-icon-button";
+import { LinearProgress } from "app/js/common/components/linear-progress/linear-progress";
 import { ListItem } from "app/js/common/components/list/list";
 import MaterialIcon from "@material/react-material-icon";
 import PropTypes from "prop-types";
@@ -139,10 +140,13 @@ class TemplateComponent extends Component {
     }
 
     _getHelpText() {
-        const validationText = this.state.valid ? "" : "need input some text";
+        const progressText = `${this.state.length}/${this.state.maxLength}`;
         return (
             <HelperText>
-                {this.state.length}/{this.state.maxLength} {validationText}
+                <LinearProgress
+                    currentValue={this.state.length}
+                    targetValue={this.state.maxLength}
+                    message={progressText} />
             </HelperText>
         );
     }
