@@ -22,10 +22,12 @@ class TemplateComponent extends Component {
         this.input = null;
         this.state = {
             mode: props.initialMode || "read",
-            value: props.template.description,
-            length: props.template.description.length,
+            value: "",
+            valid: true,
+            length: 0,
             maxLength: 255,
         };
+        this._setValue(props.template.description);
     }
 
     render() {
@@ -36,12 +38,11 @@ class TemplateComponent extends Component {
                         label="Your template"
                         textarea={true}
                         dense={true}
-                        helperText={
-                            <HelperText>{this.state.length}/{this.state.maxLength}</HelperText>
-                        }>
+                        helperText={this._getHelpText()}>
                         <Input
                             value={this.state.value}
                             maxLength={this.state.maxLength}
+                            isValid={this.state.valid}
                             ref={(input) => { this.input = input }}
                             onChange={(e) => this.onChange(e)}
                             onKeyDown={(e) => this.onKeyDown(e)} />
@@ -87,6 +88,7 @@ class TemplateComponent extends Component {
     }
 
     async saveChanges() {
+        if (!this.state.valid) return;
         const template = Object.assign({}, this.props.template, { description: this.state.value });
         await this.storage.setTemplate(template);
         this._endEdit();
@@ -128,7 +130,17 @@ class TemplateComponent extends Component {
         this.setState({
             value,
             length: value.length,
+            valid: value.length > 0,
         });
+    }
+
+    _getHelpText() {
+        const validationText = this.state.valid ? "" : "need input some text";
+        return (
+            <HelperText>
+                {this.state.length}/{this.state.maxLength} {validationText}
+            </HelperText>
+        );
     }
 
     _focusTextField() {
