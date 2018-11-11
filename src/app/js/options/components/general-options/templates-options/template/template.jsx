@@ -28,18 +28,19 @@ class TemplateComponent extends Component {
             valid: description.length > 0,
             length: description.length,
             maxLength: 255,
+            isDeleted: false,
         };
     }
 
     render() {
         if (this.state.mode === "edit") {
+            const progressText = messages.options.templates.usedSymbols(this.state.length, this.state.maxLength);
             return (
                 <ListItem className="app-template-editor-list-item">
                     <TextField
                         label="Your template"
                         textarea={true}
-                        dense={true}
-                        helperText={this._getHelpText()}>
+                        dense={true}>
                         <Input
                             value={this.state.value}
                             maxLength={this.state.maxLength}
@@ -48,6 +49,10 @@ class TemplateComponent extends Component {
                             onChange={(e) => this.onChange(e)}
                             onKeyDown={(e) => this.onKeyDown(e)} />
                     </TextField>
+                    <LinearProgress
+                        currentValue={this.state.length}
+                        targetValue={this.state.maxLength}
+                        message={progressText} />
                     <div className="pull-right">
                         <Button onClick={() => this.discardChanges()}>Cancel</Button>
                         <Button
@@ -59,11 +64,12 @@ class TemplateComponent extends Component {
                 </ListItem>
             );
         }
+        const classNames = this.state.isDeleted ? "app-list-item--deleted" : "";
         return (
-            <ListItem onClick={() => this.startEdit()}>
+            <ListItem className={classNames} onClick={() => this.startEdit()}>
                 <div className="app-template-read-content">
                     <span>{this.props.template.description}</span>
-                    <IconButton title="Remove template" onClick={() => this.removeTemplate()}>
+                    <IconButton title="Remove template" onClick={(e) => this.removeTemplate(e)}>
                         <MaterialIcon icon="clear" />
                     </IconButton>
                 </div>
@@ -99,12 +105,11 @@ class TemplateComponent extends Component {
         this._endEdit();
     }
 
-    async removeTemplate() {
+    async removeTemplate(e) {
+        e.stopPropagation();
         await this.storage.removeTemplate(this.props.template.templateId);
-        if (this.props.onDeleted) {
-            this.props.onDeleted(this.props.template);
-        }
-        this._endEdit();
+        this.setState({ isDeleted: true });
+        this._finishRemoveAfterAnimation();
     }
 
     discardChanges() {
@@ -142,16 +147,13 @@ class TemplateComponent extends Component {
         });
     }
 
-    _getHelpText() {
-        const progressText = messages.options.templates.usedSymbols(this.state.length, this.state.maxLength);
-        return (
-            <HelperText>
-                <LinearProgress
-                    currentValue={this.state.length}
-                    targetValue={this.state.maxLength}
-                    message={progressText} />
-            </HelperText>
-        );
+    _finishRemoveAfterAnimation() {
+        setTimeout(() => {
+            if (this.props.onDeleted) {
+                this.props.onDeleted(this.props.template);
+            }
+            this._endEdit()
+        }, 500);
     }
 
     _focusTextField() {

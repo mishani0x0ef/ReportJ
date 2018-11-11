@@ -67,7 +67,9 @@ export class TemplatesOptions extends Component {
         const deletedTemplates = this.state.deletedTemplates;
         deletedTemplates.push(template);
         this.setState({ deletedTemplates });
-        this._showDeleteUndo();
+        if (this.undoSnackbar) {
+            this.undoSnackbar.show();
+        }
     }
 
     async onDeleteUndo(doUndo) {
@@ -100,12 +102,6 @@ export class TemplatesOptions extends Component {
                 onDeleted={(t) => this.softDelete(t)}
                 onTemplateChanged={() => this._init()} />
         );
-    }
-
-    _showDeleteUndo() {
-        if (this.undoSnackbar) {
-            this.undoSnackbar.show();
-        }
     }
 
     _scrollBottom() {

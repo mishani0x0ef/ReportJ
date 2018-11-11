@@ -20,6 +20,8 @@
     .app-list-item {
         border-bottom: 1px solid $color-border;
         cursor: pointer;
+        max-height: 100%;
+        overflow: hidden;
         position: relative;
         @include default-animate();
         @include mid-section();
@@ -30,6 +32,13 @@
 
         &:last-child {
             border: none;
+        }
+
+        &.app-list-item--deleted {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
         }
     }
 
