@@ -2,6 +2,7 @@ import { List, ListButtonItem } from "app/js/common/components/list/list";
 import React, { Component } from "react";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
+import { NoTemplatesMessage } from "app/js/common/components/no-templates-message/no-templates-message";
 import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
 import { browser } from "app/js/common/globals";
@@ -18,11 +19,16 @@ export class TemplatesOptions extends Component {
     }
 
     render() {
+        const emptyTemplates = this.state.templates.length > 0
+            ? null
+            : <NoTemplatesMessage onTemplateAdd={() => this.addTemplate()} />;
+
         return (
             <div>
                 <h2>Templates</h2>
                 <List>
                     {this.state.templates.map((template, i) => this._renderTemplate(template, i))}
+                    {emptyTemplates}
                     <ListButtonItem
                         icon="add_circle_outline"
                         text="Add Template"

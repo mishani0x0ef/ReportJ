@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import BrowserStorage from "app/js/common/services/browserStorage";
 import { List } from "app/js/common/components/list/list";
 import { Loading } from "app/js/common/components/loading/loading";
+import { NoTemplatesMessage } from "app/js/common/components/no-templates-message/no-templates-message";
 import PropTypes from "prop-types";
 import { Template } from "./template/template";
 import { browser } from "app/js/common/globals";
@@ -27,6 +28,12 @@ export class Templates extends Component {
             : this._getTemplates(this.state.templates);
     }
 
+    openOptions() {
+        browser.tabs.create({
+            url: "options.html"
+        });
+    }
+
     async _init() {
         try {
             const templates = await this.storage.getTemplates();
@@ -37,16 +44,22 @@ export class Templates extends Component {
     }
 
     _getTemplates(templates) {
+        if (templates.length > 0) {
+            return (
+                <List className="no-border">
+                    {templates.map((template, key) =>
+                        <Template
+                            key={key}
+                            template={template}
+                            onClick={(text) => this.props.onSelected(text)}>
+                        </Template>
+                    )}
+                </List>
+            );
+        }
+
         return (
-            <List className="no-border">
-                {templates.map((template, key) =>
-                    <Template
-                        key={key}
-                        template={template}
-                        onClick={(text) => this.props.onSelected(text)}>
-                    </Template>
-                )}
-            </List>
+            <NoTemplatesMessage onTemplateAdd={() => this.openOptions()} />
         );
     }
 }

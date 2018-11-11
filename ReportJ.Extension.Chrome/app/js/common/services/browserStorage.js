@@ -1,4 +1,5 @@
 import GeneralSettings from "app/js/common/models/settings/generalSettings";
+import isEmpty from "lodash/isEmpty";
 import isNil from "lodash/isNil";
 
 export default class BrowserStorage {
@@ -67,7 +68,8 @@ export default class BrowserStorage {
         const templatesMap = new Map(templates.map((t) => [t.templateId, t]));
 
         if (isNil(template.templateId)) {
-            template.templateId = Math.max(...templatesMap.keys()) + 1;
+            const ids = Array.from(templatesMap.keys());
+            template.templateId = isEmpty(ids) ? 0 : Math.max(...ids) + 1;
         }
         templatesMap.set(template.templateId, template);
 
