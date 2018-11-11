@@ -13,6 +13,7 @@ import { ListItem } from "app/js/common/components/list/list";
 import MaterialIcon from "@material/react-material-icon";
 import PropTypes from "prop-types";
 import { browser } from "app/js/common/globals";
+import messages from "app/js/common/utils/messages";
 import onClickOutside from "react-onclickoutside";
 
 class TemplateComponent extends Component {
@@ -140,7 +141,7 @@ class TemplateComponent extends Component {
     }
 
     _getHelpText() {
-        const progressText = `${this.state.length}/${this.state.maxLength}`;
+        const progressText = messages.options.templates.usedSymbols(this.state.length, this.state.maxLength);
         return (
             <HelperText>
                 <LinearProgress

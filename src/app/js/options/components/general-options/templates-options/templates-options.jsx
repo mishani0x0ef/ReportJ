@@ -10,6 +10,7 @@ import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
 import { browser } from "app/js/common/globals";
 import isNil from "lodash/isNil";
+import messages from "app/js/common/utils/messages";
 
 export class TemplatesOptions extends Component {
     constructor() {
@@ -45,7 +46,7 @@ export class TemplatesOptions extends Component {
                 <LinearProgress
                     currentValue={this.state.templates.length}
                     targetValue={this.state.maxTemplates}
-                    message={`${this.state.templates.length}/${this.state.maxTemplates} templates`} />
+                    message={messages.options.templates.usedTemplates(this.state.templates.length, this.state.maxTemplates)} />
             </div>
         );
     }

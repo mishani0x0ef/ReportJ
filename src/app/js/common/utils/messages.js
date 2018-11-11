@@ -16,6 +16,13 @@ const messages = {
             loading: "Check your autstanding work progress...",
         },
     },
+
+    options: {
+        templates: {
+            usedTemplates: (used, from) => `${used}/${from} templates`,
+            usedSymbols: (used, from) => `${used}/${from}`,
+        },
+    },
 }
 
 export default messages;
