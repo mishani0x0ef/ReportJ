@@ -22,12 +22,11 @@ class TemplateComponent extends Component {
         this.input = null;
         this.state = {
             mode: props.initialMode || "read",
-            value: "",
+            value: props.template.description,
             valid: true,
-            length: 0,
+            length: props.template.description.length,
             maxLength: 255,
         };
-        this._setValue(props.template.description);
     }
 
     render() {
