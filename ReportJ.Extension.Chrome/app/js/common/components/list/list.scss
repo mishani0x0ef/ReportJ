@@ -13,6 +13,10 @@
         border-radius: 0;
     }
 
+    &.no-shadow {
+        box-shadow: none;
+    }
+
     .app-list-item {
         border-bottom: 1px solid $color-border;
         cursor: pointer;

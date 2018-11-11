@@ -11,6 +11,10 @@
     border: none;
 }
 
+.no-shadow {
+    box-shadow: none;
+}
+
 .pull-right {
     display: flex;
     justify-content: flex-end;

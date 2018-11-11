@@ -46,7 +46,7 @@ export class Templates extends Component {
     _getTemplates(templates) {
         if (templates.length > 0) {
             return (
-                <List className="no-border">
+                <List className="no-border no-shadow">
                     {templates.map((template, key) =>
                         <Template
                             key={key}
