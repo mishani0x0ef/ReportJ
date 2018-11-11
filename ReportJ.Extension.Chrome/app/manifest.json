@@ -11,7 +11,6 @@
     ],
     "background": {
         "scripts": [
-            "dist/manifest.js",
             "dist/vendor.js",
             "dist/background.js"
         ],
@@ -37,7 +36,6 @@
                 "dist/content.css"
             ],
             "js": [
-                "dist/manifest.js",
                 "dist/vendor.js",
                 "dist/content.js"
             ]
