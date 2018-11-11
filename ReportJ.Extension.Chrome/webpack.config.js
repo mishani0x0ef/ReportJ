@@ -71,8 +71,6 @@ module.exports = {
             DESCRIPTION: JSON.stringify(manifest.description),
             VERSION: JSON.stringify(manifest.version),
             HOME_URL: JSON.stringify(manifest.homepage_url),
-            // https://github.com/facebook/react/issues/12041
-            "__REACT_DEVTOOLS_GLOBAL_HOOK__": "({ isDisabled: true })",
         }),
         new CleanWebpackPlugin(["app/dist/**"]),
         new MiniCssExtractPlugin({
