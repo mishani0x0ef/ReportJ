@@ -17,14 +17,15 @@ import onClickOutside from "react-onclickoutside";
 class TemplateComponent extends Component {
     constructor(props) {
         super(props);
+        const description = props.template.description;
 
         this.storage = new BrowserStorage(browser);
         this.input = null;
         this.state = {
             mode: props.initialMode || "read",
-            value: props.template.description,
-            valid: true,
-            length: props.template.description.length,
+            value: description,
+            valid: description.length > 0,
+            length: description.length,
             maxLength: 255,
         };
     }
@@ -79,7 +80,11 @@ class TemplateComponent extends Component {
 
     handleClickOutside() {
         if (this.state.mode !== "edit") return;
-        this.saveChanges();
+        if (this.state.isValid) {
+            this.saveChanges();
+        } else {
+            this.discardChanges();
+        }
     }
 
     startEdit() {
