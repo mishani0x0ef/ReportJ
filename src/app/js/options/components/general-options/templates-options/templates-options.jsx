@@ -60,9 +60,13 @@ export class TemplatesOptions extends Component {
     }
 
     softDelete(template) {
+        const templates = this.state.templates.filter((t) => t !== template);
         const deletedTemplates = this.state.deletedTemplates;
         deletedTemplates.push(template);
-        this.setState({ deletedTemplates });
+        this.setState({
+            templates,
+            deletedTemplates
+        });
         this.undoSnackbar.show();
     }
 
@@ -75,13 +79,12 @@ export class TemplatesOptions extends Component {
                 await this.storage.setTemplate(template);
                 template = deletedTemplates.pop();
             }
-            await this._init();
         }
         this.setState({ deletedTemplates: [] });
+        await this._init();
     }
 
     async _init() {
-        // BUG: don't update properly after delete and undo. MR
         const templates = await this.storage.getTemplates();
         this.setState({ templates });
     }

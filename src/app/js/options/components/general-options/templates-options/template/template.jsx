@@ -11,14 +11,8 @@ export class Template extends Component {
     constructor(props) {
         super(props);
 
-        const description = props.template.description;
         this.state = {
             mode: isNil(props.template.templateId) ? "edit" : "read",
-            value: description,
-            valid: description.length > 0,
-            length: description.length,
-            maxLength: 255,
-            isDeleted: false,
         };
     }
 

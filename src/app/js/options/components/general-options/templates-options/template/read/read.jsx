@@ -12,15 +12,11 @@ export class ReadTemplate extends Component {
         super();
 
         this.storage = new BrowserStorage(browser);
-        this.state = {
-            isDeleted: false,
-        };
     }
 
     render() {
-        const classNames = this.state.isDeleted ? "app-list-item--deleted" : "";
         return (
-            <ListItem className={classNames} onClick={(e) => this.onClick(e)}>
+            <ListItem onClick={(e) => this.onClick(e)}>
                 <div className="app-template-read-content">
                     <span>{this.props.template.description}</span>
                     <IconButton title="Remove template" onClick={(e) => this.removeTemplate(e)}>
@@ -34,22 +30,15 @@ export class ReadTemplate extends Component {
     async removeTemplate(e) {
         e.stopPropagation();
         await this.storage.removeTemplate(this.props.template.templateId);
-        this.setState({ isDeleted: true });
-        this._finishRemoveAfterAnimation();
+        if (this.props.onDeleted) {
+            this.props.onDeleted(this.props.template);
+        }
     }
 
     onClick(e) {
         if (this.props.onClick) {
             this.props.onClick(e);
         }
-    }
-
-    _finishRemoveAfterAnimation() {
-        setTimeout(() => {
-            if (this.props.onDeleted) {
-                this.props.onDeleted(this.props.template);
-            }
-        }, 500);
     }
 }
 
