@@ -11,6 +11,10 @@
     transition: all 0.5s ease;
 }
 
+@mixin quick-animate {
+    transition: all 0.275s ease;
+}
+
 @mixin default-border {
     border: 1px solid $color-border;
 }

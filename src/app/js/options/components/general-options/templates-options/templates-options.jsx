@@ -23,18 +23,15 @@ export class TemplatesOptions extends Component {
     }
 
     render() {
-        const emptyTemplates = this.state.templates.length > 0
-            ? null
-            : <NoTemplatesMessage onTemplateAdd={() => this.addTemplate()} />;
-
+        const hasTemplates = this.state.templates.length > 0;
         const exceedLimit = this.state.templates.length >= this.state.maxTemplates;
 
         return (
             <div className="app-templates-options">
                 <h2>Templates</h2>
                 <List>
-                    {this.state.templates.map((template, i) => this._renderTemplate(template, i))}
-                    {emptyTemplates}
+                    {this.state.templates.map((t, i) => this._renderTemplate(t, i))}
+                    {!hasTemplates && <NoTemplatesMessage onTemplateAdd={() => this.addTemplate()} />}
                     <ListButtonItem
                         icon="add_circle_outline"
                         text="Add Template"
@@ -66,9 +63,7 @@ export class TemplatesOptions extends Component {
         const deletedTemplates = this.state.deletedTemplates;
         deletedTemplates.push(template);
         this.setState({ deletedTemplates });
-        if (this.undoSnackbar) {
-            this.undoSnackbar.show();
-        }
+        this.undoSnackbar.show();
     }
 
     async onDeleteUndo(doUndo) {

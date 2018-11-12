@@ -23,7 +23,7 @@
         max-height: 100%;
         overflow: hidden;
         position: relative;
-        @include default-animate();
+        @include quick-animate();
         @include mid-section();
 
         &:hover:not(:disabled) {
