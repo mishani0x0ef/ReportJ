@@ -86,9 +86,9 @@ export class TemplatesOptions extends Component {
     }
 
     async _init() {
-        this.setState({
-            templates: await this.storage.getTemplates(),
-        });
+        // BUG: don't update properly after delete and undo. MR
+        const templates = await this.storage.getTemplates();
+        this.setState({ templates });
     }
 
     _renderTemplate(template, key) {
