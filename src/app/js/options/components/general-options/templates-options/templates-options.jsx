@@ -4,6 +4,7 @@ import { LinearProgress, List, ListButtonItem, NoTemplatesMessage, Snackbar } fr
 import React, { Component } from "react";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
+import { CSSTransitionGroup } from "react-transition-group";
 import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
 import { browser } from "app/js/common/globals";
@@ -23,21 +24,28 @@ export class TemplatesOptions extends Component {
     }
 
     render() {
-        const hasTemplates = this.state.templates.length > 0;
-        const exceedLimit = this.state.templates.length >= this.state.maxTemplates;
+        const templates = this.state.templates.map((t, i) => this._renderTemplate(t, i));
+        const isTemplatesEmpty = templates.length === 0;
+        const exceedLimit = templates.length >= this.state.maxTemplates;
 
         return (
             <div className="app-templates-options">
                 <h2>Templates</h2>
                 <List>
-                    {this.state.templates.map((t, i) => this._renderTemplate(t, i))}
-                    {!hasTemplates && <NoTemplatesMessage onTemplateAdd={() => this.addTemplate()} />}
-                    <ListButtonItem
-                        icon="add_circle_outline"
-                        text="Add Template"
-                        disabled={exceedLimit}
-                        onClick={() => this.addTemplate()}>
-                    </ListButtonItem>
+                    {isTemplatesEmpty && <NoTemplatesMessage onTemplateAdd={() => this.addTemplate()} />}
+                    <CSSTransitionGroup
+                        transitionName="fade"
+                        transitionEnterTimeout={300}
+                        transitionLeaveTimeout={250}>
+                        {templates}
+                        <ListButtonItem
+                            key="add"
+                            icon="add_circle_outline"
+                            text="Add Template"
+                            disabled={exceedLimit}
+                            onClick={() => this.addTemplate()}>
+                        </ListButtonItem>
+                    </CSSTransitionGroup>
                 </List>
                 <LinearProgress
                     currentValue={this.state.templates.length}
