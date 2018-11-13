@@ -5,4 +5,5 @@ export * from "./no-templates-message/no-templates-message";
 export * from "./notification/notification";
 export * from "./productPlacement/productPlacement";
 export * from "./snackbar/snackbar";
+export * from "./transition/transition";
 export * from "./under-development/under-development";

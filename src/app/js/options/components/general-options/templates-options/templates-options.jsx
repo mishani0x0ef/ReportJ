@@ -1,10 +1,9 @@
 import "./template-options.scss";
 
-import { LinearProgress, List, ListButtonItem, NoTemplatesMessage, Snackbar } from "app/js/common/components";
+import { FadeTransition, LinearProgress, List, ListButtonItem, NoTemplatesMessage, Snackbar } from "app/js/common/components";
 import React, { Component } from "react";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
-import { CSSTransitionGroup } from "react-transition-group";
 import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
 import { browser } from "app/js/common/globals";
@@ -33,10 +32,7 @@ export class TemplatesOptions extends Component {
                 <h2>Templates</h2>
                 <List>
                     {isTemplatesEmpty && <NoTemplatesMessage onTemplateAdd={() => this.addTemplate()} />}
-                    <CSSTransitionGroup
-                        transitionName="fade"
-                        transitionEnterTimeout={300}
-                        transitionLeaveTimeout={250}>
+                    <FadeTransition>
                         {templates}
                         <ListButtonItem
                             key="add"
@@ -45,7 +41,7 @@ export class TemplatesOptions extends Component {
                             disabled={exceedLimit}
                             onClick={() => this.addTemplate()}>
                         </ListButtonItem>
-                    </CSSTransitionGroup>
+                    </FadeTransition>
                 </List>
                 <LinearProgress
                     currentValue={this.state.templates.length}
