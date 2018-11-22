@@ -41,7 +41,11 @@ export default class BrowserStorage {
 
     async getTemplates() {
         const { templates } = await this.getOptions();
-        return orderBy(templates, ["usages", "description"], ["desc", "asc"]);
+        return orderBy(
+            templates,
+            [(t) => t.usages || 0, "description"],
+            ["desc", "asc"]
+        );
     }
 
     async getRepositories() {
@@ -77,6 +81,11 @@ export default class BrowserStorage {
 
         templates = Array.from(templatesMap.values());
         await this.setSettings({ templates });
+    }
+
+    async upvoteTemplate(template) {
+        template.usages = (template.usages || 0) + 1;
+        await this.setTemplate(template);
     }
 
     async removeTemplate(templateId) {
