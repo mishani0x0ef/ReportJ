@@ -4,6 +4,8 @@ import { FadeTransition, LinearProgress, List, ListButtonItem, NoTemplatesMessag
 import React, { Component } from "react";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
+import IconButton from "@material/react-icon-button";
+import MaterialIcon from "@material/react-material-icon";
 import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
 import { browser } from "app/js/common/globals";
@@ -29,7 +31,16 @@ export class TemplatesOptions extends Component {
 
         return (
             <div className="app-templates-options">
-                <h2>Templates</h2>
+                <div className="app-templates-options-header">
+                    <h2>Templates</h2>
+                    <IconButton
+                        title="Add Template"
+                        className="mdc-icon-button-large"
+                        disabled={exceedLimit}
+                        onClick={() => this.addTemplate()}>
+                        <MaterialIcon icon="add_circle_outline" />
+                    </IconButton>
+                </div>
                 <List>
                     {isTemplatesEmpty && <NoTemplatesMessage onTemplateAdd={() => this.addTemplate()} />}
                     <FadeTransition>

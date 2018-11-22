@@ -1,4 +1,10 @@
 .app-templates-options {
+    &-header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+
     .app-linear-progress {
         margin-left: auto;
         width: 280px;
