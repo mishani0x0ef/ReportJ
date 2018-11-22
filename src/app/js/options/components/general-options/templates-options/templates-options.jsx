@@ -8,13 +8,12 @@ import IconButton from "@material/react-icon-button";
 import MaterialIcon from "@material/react-material-icon";
 import { Template } from "./template/template";
 import { afterRender } from "app/js/common/utils/react";
-import { browser } from "app/js/common/globals";
 import messages from "app/js/common/utils/messages";
 
 export class TemplatesOptions extends Component {
     constructor() {
         super();
-        this.storage = new BrowserStorage(browser);
+        this.storage = new BrowserStorage();
         this.undoSnackbar = null;
         this.state = {
             templates: [],

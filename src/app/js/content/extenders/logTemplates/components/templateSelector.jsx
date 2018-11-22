@@ -9,6 +9,7 @@ import { ProductPlacement } from "app/js/common/components/productPlacement/prod
 import PropTypes from "prop-types";
 import { callIfExist } from "app/js/common/utils/function";
 import { getSettingsUrl } from "app/js/common/utils/browser";
+import isEmpty from "lodash/isEmpty";
 import onClickOutside from "react-onclickoutside";
 
 export class TemplateSelectorComponent extends Component {
@@ -26,12 +27,9 @@ export class TemplateSelectorComponent extends Component {
         this.initTemplates();
     }
 
-    initTemplates() {
-        this.storage.getTemplates()
-            .then((templates) => {
-                const templateDescriptions = templates.map((t) => t.description);
-                this.setState({ templates: templateDescriptions });
-            });
+    async initTemplates() {
+        const templates = await this.storage.getTemplates();
+        this.setState({ templates })
     }
 
     showPopup() {
@@ -42,13 +40,14 @@ export class TemplateSelectorComponent extends Component {
         this.setState({ isPopupVisible: false });
     }
 
-    submitSelectedTemplate(text) {
-        callIfExist(this.props.onSubmit, text);
+    submitSelectedTemplate(template) {
+        callIfExist(this.props.onSubmit, template.description);
+        this.storage.upvoteTemplate(template);
         this.closePopup();
     }
 
     renderTemplates() {
-        if (this.state.templates && this.state.templates.length > 0) {
+        if (!isEmpty(this.state.templates)) {
             return (
                 <List>
                     {this.state.templates.map((templ, index) => this.renderTemplateItem(templ, index))}
@@ -67,9 +66,11 @@ export class TemplateSelectorComponent extends Component {
         );
     }
 
-    renderTemplateItem(text, key) {
+    renderTemplateItem(template, key) {
         return (
-            <p key={key} className="text-justify" onClick={() => this.submitSelectedTemplate(text)}>{text}</p>
+            <p key={key} className="text-justify" onClick={() => this.submitSelectedTemplate(template)}>
+                {template.description}
+            </p>
         );
     }
 

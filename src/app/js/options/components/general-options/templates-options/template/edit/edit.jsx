@@ -7,7 +7,6 @@ import { isEnterDown, isEscapeDown } from "app/js/common/utils/key";
 import BrowserStorage from "app/js/common/services/browserStorage";
 import Button from "@material/react-button";
 import PropTypes from "prop-types";
-import { browser } from "app/js/common/globals";
 import messages from "app/js/common/utils/messages";
 import onClickOutside from "react-onclickoutside";
 
@@ -15,7 +14,7 @@ class EditTemplateComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.storage = new BrowserStorage(browser);
+        this.storage = new BrowserStorage();
         this.input = null;
         const description = props.template.description;
         this.state = {

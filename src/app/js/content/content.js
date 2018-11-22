@@ -9,7 +9,7 @@ import { checkIsInsideJira } from "app/js/common/utils/jira";
 class ContentController {
     constructor(browser) {
         this.browser = browser;
-        this.storage = new BrowserStorage(browser);
+        this.storage = new BrowserStorage();
     }
 
     start() {

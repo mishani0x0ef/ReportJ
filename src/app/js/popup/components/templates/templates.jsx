@@ -18,7 +18,7 @@ export class Templates extends Component {
             templates: [],
         };
 
-        this.storage = new BrowserStorage(browser);
+        this.storage = new BrowserStorage();
         this._init();
     }
 
