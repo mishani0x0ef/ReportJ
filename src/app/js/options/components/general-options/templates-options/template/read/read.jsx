@@ -5,13 +5,12 @@ import IconButton from "@material/react-icon-button";
 import { ListItem } from "app/js/common/components";
 import MaterialIcon from "@material/react-material-icon";
 import PropTypes from "prop-types";
-import { browser } from "app/js/common/globals";
 
 export class ReadTemplate extends Component {
     constructor() {
         super();
 
-        this.storage = new BrowserStorage(browser);
+        this.storage = new BrowserStorage();
     }
 
     render() {

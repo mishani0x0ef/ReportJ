@@ -1,9 +1,11 @@
 import GeneralSettings from "app/js/common/models/settings/generalSettings";
+import { browser } from "app/js/common/globals";
 import isEmpty from "lodash/isEmpty";
 import isNil from "lodash/isNil";
+import orderBy from "lodash/orderBy";
 
 export default class BrowserStorage {
-    constructor(browser) {
+    constructor() {
         this.browser = browser;
         this._defaultTemplates = [
             { templateId: 0, description: "Daily status meeting." },
@@ -39,7 +41,7 @@ export default class BrowserStorage {
 
     async getTemplates() {
         const { templates } = await this.getOptions();
-        return templates;
+        return orderBy(templates, ["usages", "description"], ["desc", "asc"]);
     }
 
     async getRepositories() {
