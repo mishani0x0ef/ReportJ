@@ -1,0 +1,30 @@
+@import "~app/css/variables";
+@import "~app/css/mixins";
+
+.reportj-template-selector {
+    .reportj-templates-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &-text {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    }
+
+    .reportj-popup-container {
+        position: inherit;
+    }
+
+    .reportj-popup {
+        top: 30px;
+        width: calc(100% - 30px);
+    }
+
+    .reportj-list-container {
+        margin-left: -15px;
+        margin-right: -15px;
+        border-top: 2px solid $color-primary-light;
+    }
+}

@@ -1,0 +1,21 @@
+@import "~app/css/variables";
+@import "~app/css/mixins";
+
+.reportj-log-time {
+    display: inline-block;
+
+    .time-selector {
+        position: relative;
+        display: inline-flex;
+        vertical-align: middle;
+    }
+
+    h4 {
+        margin: 0;
+    }
+
+    .reportj-popup.active {
+        top: 25px;
+        left: -105px;
+    }
+}

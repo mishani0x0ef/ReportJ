@@ -1,0 +1,8 @@
+$mdc-theme-primary: #2196f3;
+$mdc-theme-secondary: #018786;
+$mdc-theme-on-primary: if(mdc-theme-contrast-tone($mdc-theme-primary) == "dark", #000, #fff) !default;;
+$mdc-theme-on-secondary: if(mdc-theme-contrast-tone($mdc-theme-secondary) == "dark", #000, #fff) !default;
+
+$mdc-typography-styles-button: (
+  font-size: 12px,
+);

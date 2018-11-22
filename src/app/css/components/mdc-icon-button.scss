@@ -1,0 +1,21 @@
+@import "../variables";
+
+$icon-button-size: 14px;
+$icon-button-size-large: 21px;
+
+@mixin -mdc-icon-button-size($size) {
+    @include mdc-icon-button-size($size, $size);
+
+    .material-icons {
+        font-size: $size;
+    }
+}
+
+.mdc-icon-button {
+    @include mdc-icon-button-ink-color($color-text-mute);
+    @include -mdc-icon-button-size($icon-button-size);
+
+    &.mdc-icon-button-large {
+        @include -mdc-icon-button-size($icon-button-size-large);
+    }
+}

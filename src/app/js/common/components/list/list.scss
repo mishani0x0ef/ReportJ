@@ -1,0 +1,46 @@
+@import "~app/css/variables";
+@import "~app/css/mixins";
+
+.app-list {
+    background-color: $color-background;
+    @include default-border();
+    @include default-border-radius();
+    @include default-shadow();
+    @include flex-column();
+
+    &.no-border {
+        border: none;
+        border-radius: 0;
+    }
+
+    &.no-shadow {
+        box-shadow: none;
+    }
+
+    .app-list-item {
+        border-bottom: 1px solid $color-border;
+        cursor: pointer;
+        max-height: 100%;
+        overflow: hidden;
+        position: relative;
+        @include mid-section();
+
+        &:hover:not(:disabled) {
+            background-color: $color-background-hover;
+        }
+
+        &:last-child {
+            border: none;
+        }
+    }
+
+    .app-list-item-button {
+        padding: 0;
+
+        .mdc-button {
+            height: auto;
+            width: 100%;
+            @include mid-section();
+        }
+    }
+}

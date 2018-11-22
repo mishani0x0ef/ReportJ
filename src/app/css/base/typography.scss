@@ -1,0 +1,44 @@
+@import "../variables";
+
+$font-size-base: 13px;
+
+@mixin set-header-font($coef) {
+    font-size: $font-size-base*$coef;
+    font-weight: normal;
+}
+
+body {
+    color: $color-text;
+    font-family: "Roboto", "DroidSans", "sans-serif";
+    font-size: $font-size-base;
+    line-height: 24px;
+}
+
+h1 {
+    @include set-header-font(3);
+}
+
+h2 {
+    @include set-header-font(2);
+}
+
+h3 {
+    @include set-header-font(1.4);
+}
+
+h4 {
+    @include set-header-font(1.1);
+}
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover:not(:disabled) {
+        color: darken($color-primary, 10%);
+    }
+}
+
+.text-mute {
+    color: $color-text-mute;
+}

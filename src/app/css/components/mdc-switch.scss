@@ -1,0 +1,5 @@
+@import "~app/css/variables";
+
+.mdc-switch {
+    @include mdc-switch-toggled-on-color($color-primary-light);
+}

@@ -2,13 +2,9 @@ language: node_js
 node_js:
   - "node"
 before_script:
-  - cd ./ReportJ.Extension.Chrome
+  - cd ./src
   # https://github.com/sass/node-sass/issues/1991#issuecomment-306437979
   - rm -rf node_modules
-  - rm package-lock.json
-  - npm install
+  - npm ci
 script:
-  - npm run build:release
-cache:
-  directories:
-    - "node_modules"
+  - npm run build

@@ -1,0 +1,22 @@
+@import "~app/css/variables";
+@import "~app/css/mixins";
+
+$content-width: 720px;
+$content-min-width: 720px;
+
+.app-content-container {
+    align-items: center;
+    background: $color-background-hover;
+    min-height: 100vh;
+    @include flex-column();
+
+    .app-content {
+        background: $color-background;
+        border: 1px solid $color-border;
+        min-width: $content-min-width;
+        max-width: $content-width;
+        width: $content-width;
+        @include flex-column();
+        @include mid-section();
+    }
+}

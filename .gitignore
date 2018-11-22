@@ -12,6 +12,7 @@
 [Rr]elease/
 x64/
 build/
+dist/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -191,3 +192,5 @@ packages
 /Keys/private.txt
 /Keys/rsaKey.xml
 .vs
+
+.vscode/

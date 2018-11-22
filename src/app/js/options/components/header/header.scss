@@ -1,0 +1,6 @@
+@import "~app/css/mixins";
+
+.options-header {
+    text-align: center;
+    @include large-section();
+}

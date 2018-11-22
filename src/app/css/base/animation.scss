@@ -1,0 +1,20 @@
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes wrench-working {
+    15% {
+        transform: rotate(60deg);
+    }
+    25% {
+        transform: rotate(-30deg);
+    }
+    50% {
+        transform: rotate(30deg);
+    }
+    75% {
+        transform: rotate(-60deg);
+    }
+}

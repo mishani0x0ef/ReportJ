@@ -1,0 +1,17 @@
+@import "~app/css/mixins";
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    #app {
+        min-height: 100vh;
+    }
+}
+
+label {
+    @include pading-sides(18px);
+}

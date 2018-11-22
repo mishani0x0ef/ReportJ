@@ -1,0 +1,47 @@
+{
+    "manifest_version": 2,
+    "name": "ReportJ",
+    "description": "The reporting helper for JIRA system.",
+    "homepage_url": "https://github.com/mishani0x0ef/reportj",
+    "version": "3.0.0",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "contextMenus"
+    ],
+    "background": {
+        "scripts": [
+            "dist/vendor.js",
+            "dist/background.js"
+        ],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_icon": "img/logo.png",
+        "default_title": "ReportJ",
+        "default_popup": "popup.html"
+    },
+    "options_page": "options.html",
+    "icons": {
+        "16": "img/logo.png",
+        "48": "img/logo.png",
+        "128": "img/logo128x128.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "css": [
+                "dist/content.css"
+            ],
+            "js": [
+                "dist/vendor.js",
+                "dist/content.js"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        "options.html"
+    ]
+}
