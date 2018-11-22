@@ -2,8 +2,8 @@ import "./popup.scss";
 
 import React, { Component } from "react";
 
-import { Header } from "../header/header";
-import { ModeSelector } from "../mode-selector/mode-selector";
+import { Header } from "./components/header/header";
+import { ModeSelector } from "./components/mode-selector/mode-selector";
 
 export class Popup extends Component {
     render() {

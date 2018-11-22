@@ -1,7 +1,7 @@
 import "./index.scss";
 import "app/js/common/utils/axios.config";
 
-import { Options } from "./components/options/options";
+import { Options } from "./options";
 import React from "react";
 import ReactDOM from "react-dom";
 
