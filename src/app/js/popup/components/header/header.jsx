@@ -1,6 +1,7 @@
 import "./header.scss";
 
 import React, { Component } from "react";
+import { eventCategory, visitor } from "app/js/common/services/analytics";
 
 import Button from "@material/react-button";
 import IconButton from "@material/react-icon-button";
@@ -37,6 +38,8 @@ export class Header extends Component {
     }
 
     addIssueSummary() {
+        visitor.event(eventCategory.popup, "add issue summary").send();
+
         browser.tabs.getSelected(null, async (tab) => {
             const summary = await this.jira.getIssueInfo(tab.url);
             const code = `document.activeElement.value = ${JSON.stringify(summary)} + document.activeElement.value`;

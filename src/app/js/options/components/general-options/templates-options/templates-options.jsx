@@ -2,6 +2,7 @@ import "./template-options.scss";
 
 import { FadeTransition, LinearProgress, List, ListButtonItem, NoTemplatesMessage, Snackbar } from "app/js/common/components";
 import React, { Component } from "react";
+import { eventCategory, visitor } from "app/js/common/services/analytics";
 
 import BrowserStorage from "app/js/common/services/browserStorage";
 import IconButton from "@material/react-icon-button";
@@ -67,6 +68,8 @@ export class TemplatesOptions extends Component {
     }
 
     addTemplate() {
+        visitor.event(eventCategory.options, "add template").send();
+
         if (this.state.templates.length >= this.state.maxTemplates) return;
         const templates = this.state.templates;
         templates.push({ description: "" });
