@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { SquareCheckBoxGroup } from "./squareCheckBoxGroup";
 import { callIfExist } from "app/js/common/utils/function";
 import onClickOutside from "react-onclickoutside";
+import { visitor } from "app/js/common/services/analytics";
 
 class TimeSelectorComponent extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ class TimeSelectorComponent extends Component {
 
     showPopup() {
         this.setState({ isPopupVisible: true });
+        visitor.pageview("/content/log-time").send();
     }
 
     closePopup() {
