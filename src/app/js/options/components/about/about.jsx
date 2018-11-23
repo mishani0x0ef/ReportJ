@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import config from "app/config";
+import { pageview } from "app/js/common/services/analytics";
 
 export class About extends Component {
     get issuesPage() {
@@ -12,6 +13,7 @@ export class About extends Component {
         this.state = {
             app: config.app
         };
+        pageview("/options/about");
     }
 
     render() {
