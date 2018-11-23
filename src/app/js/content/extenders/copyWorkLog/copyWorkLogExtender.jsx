@@ -1,4 +1,5 @@
 import { createElement, insertAfter } from "app/js/common/utils/html";
+import { eventCategory, visitor } from "app/js/common/services/analytics";
 
 import ElementObserver from "app/js/common/utils/html-observers/elementObserver";
 import JiraDialogObserver from "app/js/common/utils/html-observers/jiraDialogObserver";
@@ -32,6 +33,8 @@ export class CopyWorkLogExtender {
     }
 
     _copyWorkLog(container) {
+        visitor.event(eventCategory.dialog, "copy log").send();
+
         const durationContainer = container.querySelector(".worklog-duration");
         const commentContainer = container.querySelector(".worklog-comment");
 

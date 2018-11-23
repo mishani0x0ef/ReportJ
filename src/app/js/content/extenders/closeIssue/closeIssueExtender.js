@@ -1,3 +1,5 @@
+import { eventCategory, visitor } from "app/js/common/services/analytics";
+
 import JiraDialogObserver from "app/js/common/utils/html-observers/jiraDialogObserver";
 import JiraWrapper from "app/js/common/services/jira";
 import { createElement } from "app/js/common/utils/html";
@@ -23,6 +25,8 @@ export class CloseIssueExtender {
     }
 
     _closeIssueWithResetRemaining(e) {
+        visitor.event(eventCategory.dialog, "close and reset estimate").send();
+
         const target = e.target;
         target.setAttribute("disabled", "disabled");
 

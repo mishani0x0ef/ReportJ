@@ -2,6 +2,7 @@ import "./templateSelector.scss";
 
 import { Popup, PopupButtonsSection, PopupSection } from "app/js/content/components/popup/popup";
 import React, { Component } from "react";
+import { eventCategory, visitor } from "app/js/common/services/analytics";
 
 import { JiraCancelButton } from "app/js/content/components/button/button";
 import { List } from "app/js/content/components/list/list";
@@ -11,7 +12,6 @@ import { callIfExist } from "app/js/common/utils/function";
 import { getSettingsUrl } from "app/js/common/utils/browser";
 import isEmpty from "lodash/isEmpty";
 import onClickOutside from "react-onclickoutside";
-import { visitor } from "app/js/common/services/analytics";
 
 export class TemplateSelectorComponent extends Component {
     constructor(props) {
@@ -35,7 +35,7 @@ export class TemplateSelectorComponent extends Component {
 
     showPopup() {
         this.setState({ isPopupVisible: true });
-        visitor.pageview("/content/log-templates").send();
+        visitor.event(eventCategory.dialog, "open templates").send();
     }
 
     closePopup() {
