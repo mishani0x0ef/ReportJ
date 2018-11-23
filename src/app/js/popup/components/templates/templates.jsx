@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import { Template } from "./template/template";
 import { browser } from "app/js/common/globals";
 import messages from "app/js/common/utils/messages";
+import { visitor } from "app/js/common/services/analytics";
 
 export class Templates extends Component {
     constructor() {
@@ -20,6 +21,7 @@ export class Templates extends Component {
 
         this.storage = new BrowserStorage();
         this._init();
+        visitor.pageview("/popup/templates").send();
     }
 
     render() {

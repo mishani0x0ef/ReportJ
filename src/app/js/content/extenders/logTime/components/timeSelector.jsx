@@ -1,6 +1,7 @@
 import { JiraButton, JiraCancelButton } from "app/js/content/components/button/button";
 import { Popup, PopupButtonsSection, PopupSection } from "app/js/content/components/popup/popup";
 import React, { Component } from "react";
+import { eventCategory, visitor } from "app/js/common/services/analytics";
 
 import { ProductPlacement } from "app/js/common/components/productPlacement/productPlacement";
 import PropTypes from "prop-types";
@@ -29,6 +30,7 @@ class TimeSelectorComponent extends Component {
 
     showPopup() {
         this.setState({ isPopupVisible: true });
+        visitor.event(eventCategory.dialog, "open time selector").send();
     }
 
     closePopup() {

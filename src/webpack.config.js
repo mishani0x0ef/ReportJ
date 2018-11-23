@@ -100,5 +100,10 @@ module.exports = {
                 extractComments: true
             })
         ],
+    },
+    node: {
+        fs: "empty",
+        net: "empty",
+        tls: "empty",
     }
 }

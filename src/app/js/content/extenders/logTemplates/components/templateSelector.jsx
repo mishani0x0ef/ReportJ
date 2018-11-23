@@ -2,6 +2,7 @@ import "./templateSelector.scss";
 
 import { Popup, PopupButtonsSection, PopupSection } from "app/js/content/components/popup/popup";
 import React, { Component } from "react";
+import { eventCategory, visitor } from "app/js/common/services/analytics";
 
 import { JiraCancelButton } from "app/js/content/components/button/button";
 import { List } from "app/js/content/components/list/list";
@@ -34,6 +35,7 @@ export class TemplateSelectorComponent extends Component {
 
     showPopup() {
         this.setState({ isPopupVisible: true });
+        visitor.event(eventCategory.dialog, "open templates").send();
     }
 
     closePopup() {
