@@ -25,7 +25,7 @@ export default class JiraDialogObserver extends ElementObserver {
 
     _isExpectedDialog(element, dialogTitleText) {
         const heading = element.querySelector(".jira-dialog-heading h2");
-        const title = heading.title;
-        return !isNil(title) && title.toLowerCase().includes(dialogTitleText.toLowerCase());
+        const content = heading.textContent;
+        return !isNil(content) && content.toLowerCase().includes(dialogTitleText.toLowerCase());
     }
 }
