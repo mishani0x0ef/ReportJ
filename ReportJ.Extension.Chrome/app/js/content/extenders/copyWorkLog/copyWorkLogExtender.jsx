@@ -6,7 +6,13 @@ import { isEmpty } from "~/js/util/object";
 
 export class CopyWorkLogExtender {
     start() {
-        this._initCopyButtons(document);
+        setTimeout(() => {
+            const container = document.querySelector(".issuePanelContainer");
+            if(container) {
+                this._initCopyButtons(container);
+            }
+        }, 1000);
+        
         const observer = new ElementObserver(".issuePanelContainer");
         observer.onAppear((panel) => this._initCopyButtons(panel));
 
@@ -18,7 +24,7 @@ export class CopyWorkLogExtender {
     }
 
     _initCopyButtons(container) {
-        const workLogs = container.querySelectorAll("div[id*='worklog']");
+        const workLogs = container.querySelectorAll("div[id^=worklog]");
         workLogs.forEach((workLog) => this._addCopyButton(workLog));
     }
 
