@@ -1,7 +1,0 @@
-@import "~app/css/variables";
-@import "~app/css/mixins";
-
-.app-category-selector {
-    @include mid-section();
-    @include pading-sides(24px);
-}
