@@ -16,6 +16,7 @@ export function observeElement<T extends Element>(
 ): ElementObserver<T> {
   const showListeners: Listener<T>[] = [];
   const hideListeners: Listener<T>[] = [];
+  let shownElementsCount = 0;
 
   const matches: ElementMatcher =
     selector instanceof Function
@@ -27,20 +28,33 @@ export function observeElement<T extends Element>(
       .flatMap((m) => [...Array.from(m.addedNodes), m.target])
       .filter((node): node is Element => isElement(node))
       .filter((elem) => matches(elem))
-      .forEach((elem) => showListeners.forEach((cb) => cb(elem as T)));
+      .forEach((elem) => {
+        showListeners.forEach((cb) => cb(elem as T));
+        shownElementsCount++;
+      });
   }
 
   function hasInside(element: Element, matcher: ElementMatcher): boolean {
-    // TODO: optimize implementation
-    return Array.from(element.querySelectorAll('*')).some((e) => matcher(e));
+    return Array.from(element.childNodes).reduce(
+      (has, node) =>
+        has || (isElement(node) && (matcher(node) || hasInside(node, matcher))),
+      false
+    );
   }
 
   function dispatchHide(mutations: MutationRecord[]) {
+    if (shownElementsCount === 0) {
+      return;
+    }
+
     mutations
       .flatMap((m) => Array.from(m.removedNodes))
       .filter((node): node is T => isElement(node))
       .filter((elem) => matches(elem) || hasInside(elem, matches))
-      .forEach((elem) => hideListeners.forEach((cb) => cb(elem)));
+      .forEach((elem) => {
+        hideListeners.forEach((cb) => cb(elem));
+        shownElementsCount--;
+      });
   }
 
   const observer = new MutationObserver((mutations) => {
