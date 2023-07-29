@@ -1,4 +1,4 @@
-import { ensureSuccess } from '../utils/response';
+import { raise } from '../utils/raise';
 
 function createUrl(relative: string): string {
   const urlComponents = location.href.split('/');
@@ -29,7 +29,7 @@ export async function setRemainingEstimate(estimate: Estimate): Promise<void> {
     }),
   });
 
-  ensureSuccess(response, '[ReportJ] Failed to set remaining estimate');
+  raise(response.ok, '[ReportJ] Failed to set remaining estimate');
 }
 
 export type JiraIssue = {
@@ -43,7 +43,7 @@ export async function getIssue(): Promise<JiraIssue> {
   const url = createUrl(`/issue/${getIssueId()}?fields=summary,parent`);
   const response = await fetch(url);
 
-  ensureSuccess(response, '[ReportJ] Failed to get issue details');
+  raise(response.ok, '[ReportJ] Failed to get issue details');
 
   return (await response.json()) as JiraIssue;
 }
