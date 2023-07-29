@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "lib": ["dom", "ESNext"],
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["react", "react-dom"]
+  }
+}
