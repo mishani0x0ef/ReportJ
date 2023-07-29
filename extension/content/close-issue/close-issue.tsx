@@ -2,13 +2,11 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import Button from '../.common/components/button/button';
 import { useTarget } from './hooks/use-target';
+import { useCloseIssueCommand } from './hooks/use-close-command';
 
 const CloseIssue: React.FC = () => {
   const featureTarget = useTarget();
-
-  function closeIssueAndResetRemainingEstimate() {
-    console.log('[ReportJ] Close issue and reset remaining estimate');
-  }
+  const { isLoading, execute } = useCloseIssueCommand();
 
   if (!featureTarget) {
     return null;
@@ -16,9 +14,10 @@ const CloseIssue: React.FC = () => {
 
   return createPortal(
     <Button
+      disabled={isLoading}
       title="Close issue and reset remaining estimate"
       type="submit"
-      onClick={closeIssueAndResetRemainingEstimate}
+      onClick={execute}
     >
       Close with ReportJ
     </Button>,
