@@ -35,15 +35,37 @@ function getIssueId(): string {
   return url.substring(keyStartIndex, keyEndIndex);
 }
 
-export async function setRemainingEstimate(estimate: Estimate): Promise<void> {
-  const url = `${getApiUrl}/issue/${getIssueId()}`;
+function success(response: Response): boolean {
+  return response.status >= 200 && response.status < 300;
+}
 
-  const { status } = await fetch(url, {
+export async function setRemainingEstimate(estimate: Estimate): Promise<void> {
+  const url = `${getApiUrl()}/issue/${getIssueId()}`;
+
+  const response = await fetch(url, {
     method: 'PUT',
     body: JSON.stringify({
       update: { timetracking: [{ edit: { remainingEstimate: estimate } }] },
     }),
   });
 
-  raise(status >= 300, '[ReportJ] Failed to set remaining estimate');
+  raise(success(response), '[ReportJ] Failed to set remaining estimate');
+}
+
+export type JiraIssueDetails = {
+  fields: {
+    summary: string;
+    parent?: JiraIssueDetails;
+  };
+};
+
+export async function getIssue(): Promise<JiraIssueDetails> {
+  const url = `${getApiUrl()}/issue/${getIssueId()}?fields=summary,parent`;
+  console.log(url);
+  const response = await fetch(url);
+  console.log(response);
+
+  raise(success(response), '[ReportJ] Failed to get issue details');
+
+  return (await response.json()) as JiraIssueDetails;
 }

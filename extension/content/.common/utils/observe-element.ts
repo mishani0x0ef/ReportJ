@@ -6,13 +6,18 @@ type ElementSelector = string | ElementMatcher;
 type Listener<T extends Element> = (element: T) => void;
 type AttachListener<T extends Element> = (handler: Listener<T>) => void;
 
+export type ObservationOptions<T extends Element> = {
+  prepareTarget?: (element: Element) => T;
+};
+
 export type ElementObserver<T extends Element> = {
   onShow: AttachListener<T>;
   onHide: AttachListener<T>;
 } & Disposable;
 
 export function observeElement<T extends Element>(
-  selector: ElementSelector
+  selector: ElementSelector,
+  options?: ObservationOptions<T>
 ): ElementObserver<T> {
   const showListeners: Listener<T>[] = [];
   const hideListeners: Listener<T>[] = [];
@@ -28,6 +33,7 @@ export function observeElement<T extends Element>(
       .flatMap((m) => [...Array.from(m.addedNodes), m.target])
       .filter((node): node is Element => isElement(node))
       .filter((elem) => matches(elem))
+      .map((elem) => options?.prepareTarget(elem) ?? elem)
       .forEach((elem) => {
         showListeners.forEach((cb) => cb(elem as T));
         shownElementsCount++;
@@ -51,6 +57,7 @@ export function observeElement<T extends Element>(
       .flatMap((m) => Array.from(m.removedNodes))
       .filter((node): node is T => isElement(node))
       .filter((elem) => matches(elem) || hasInside(elem, matches))
+      .map((elem) => options?.prepareTarget(elem) ?? elem)
       .forEach((elem) => {
         hideListeners.forEach((cb) => cb(elem));
         shownElementsCount--;

@@ -12,6 +12,10 @@ export function observeDialog(
     (element) =>
       element.matches(selector) &&
       element.textContent !== null &&
-      element.textContent.toLowerCase().includes(titleLower)
+      element.textContent.toLowerCase().includes(titleLower),
+    {
+      prepareTarget: (element) =>
+        element.parentElement?.parentElement as HTMLDivElement,
+    }
   );
 }
