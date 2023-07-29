@@ -1,46 +1,26 @@
-import { raise } from '../utils/raise';
+import { ensureSuccess } from '../utils/response';
 
-type Estimate = `${number}${'d' | 'h' | 'm' | ''}`;
-
-function getApiUrl(): string {
+function createUrl(relative: string): string {
   const urlComponents = location.href.split('/');
   const protocol = urlComponents[0];
   const host = urlComponents[2];
 
-  return `${protocol}//${host}/rest/api/latest`;
+  return `${protocol}//${host}/rest/api/latest${relative}`;
 }
 
-// TODO: refactor method to be more pretty.
 function getIssueId(): string {
-  const url = location.href;
-  const issueStartStrDetailsScreen = 'browse/';
-  const issueDetailsOpened = url.includes(issueStartStrDetailsScreen);
-  let keyStartIndex, keyEndIndex;
+  const url = new URL(location.href);
+  const isIssueDetails = url.pathname.includes('browse/');
 
-  if (issueDetailsOpened) {
-    const paramsIndex = url.indexOf('?');
-    keyStartIndex =
-      url.indexOf(issueStartStrDetailsScreen) +
-      issueStartStrDetailsScreen.length;
-    keyEndIndex = paramsIndex < 0 ? url.length : paramsIndex;
-  } else {
-    // issue selected on board.
-    const issueStartStrBoard = 'selectedIssue=';
-    keyStartIndex = url.indexOf(issueStartStrBoard) + issueStartStrBoard.length;
-
-    const nextParamIndex = url.indexOf('&', keyStartIndex);
-    keyEndIndex = nextParamIndex < 0 ? url.length : nextParamIndex;
-  }
-
-  return url.substring(keyStartIndex, keyEndIndex);
+  return isIssueDetails
+    ? url.pathname.split('/').pop()
+    : url.searchParams.get('selectedIssue');
 }
 
-function success(response: Response): boolean {
-  return response.status >= 200 && response.status < 300;
-}
+type Estimate = `${number}${'d' | 'h' | 'm' | ''}`;
 
 export async function setRemainingEstimate(estimate: Estimate): Promise<void> {
-  const url = `${getApiUrl()}/issue/${getIssueId()}`;
+  const url = createUrl(`/issue/${getIssueId()}`);
 
   const response = await fetch(url, {
     method: 'PUT',
@@ -49,23 +29,21 @@ export async function setRemainingEstimate(estimate: Estimate): Promise<void> {
     }),
   });
 
-  raise(success(response), '[ReportJ] Failed to set remaining estimate');
+  ensureSuccess(response, '[ReportJ] Failed to set remaining estimate');
 }
 
-export type JiraIssueDetails = {
+export type JiraIssue = {
   fields: {
     summary: string;
-    parent?: JiraIssueDetails;
+    parent?: JiraIssue;
   };
 };
 
-export async function getIssue(): Promise<JiraIssueDetails> {
-  const url = `${getApiUrl()}/issue/${getIssueId()}?fields=summary,parent`;
-  console.log(url);
+export async function getIssue(): Promise<JiraIssue> {
+  const url = createUrl(`/issue/${getIssueId()}?fields=summary,parent`);
   const response = await fetch(url);
-  console.log(response);
 
-  raise(success(response), '[ReportJ] Failed to get issue details');
+  ensureSuccess(response, '[ReportJ] Failed to get issue details');
 
-  return (await response.json()) as JiraIssueDetails;
+  return (await response.json()) as JiraIssue;
 }

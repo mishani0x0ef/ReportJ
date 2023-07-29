@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { JiraIssueDetails, getIssue } from '../../.common/services/jira';
+import { JiraIssue, getIssue } from '../../.common/services/jira';
 import { observeDialog } from '../../.common/utils/observe-dialog';
 
 export function useAddSummaryCommand(): void {
-  function getSummaryText(issue: JiraIssueDetails): string {
+  function getSummaryText(issue: JiraIssue): string {
     const summary = issue.fields.summary;
     const parent = issue.fields.parent;
 
