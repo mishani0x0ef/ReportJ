@@ -7,14 +7,11 @@ type Target = HTMLElement | null;
 export function useTarget(): Target {
   const [target, setTarget] = useState<HTMLElement | null>(null);
 
-  function createTarget() {
+  function createTarget(dialog: HTMLDivElement) {
     const root = document.createElement('reportj-root');
-    const footer = document.querySelector('.jira-dialog .form-footer .buttons');
+    const footer = dialog.querySelector('.form-footer .buttons');
 
-    raise(
-      footer,
-      '[ReportJ] Cannot use "CloseIssue" feature, because root element not found'
-    );
+    raise(footer, '[ReportJ] No footer for "CloseIssue" button');
 
     footer.prepend(root);
     setTarget(root);
@@ -27,8 +24,8 @@ export function useTarget(): Target {
   useEffect(() => {
     const dialog = observeDialog('Log work');
 
-    dialog.onShow(() => createTarget());
-    dialog.onHide(() => removeTarget());
+    dialog.onShow(createTarget);
+    dialog.onHide(removeTarget);
 
     return function cleanup() {
       dialog.dispose();
