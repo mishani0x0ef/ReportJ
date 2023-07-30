@@ -4,6 +4,8 @@
   "description": "The reporting helper for JIRA system.",
   "version": "3.0.0",
 
+  "permissions": ["storage"],
+
   "icons": {
     "16": "logo48.png",
     "48": "logo48.png",
