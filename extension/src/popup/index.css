@@ -17,4 +17,9 @@ body {
   font-family: Calibri, sans-serif;
   font-size: 0.8rem;
   color: var(--font-color-default);
+
+  min-height: var(--popup-height);
+  width: var(--popup-width);
+  padding: var(--spacing-base) var(--spacing-large);
+  margin: 0;
 }
