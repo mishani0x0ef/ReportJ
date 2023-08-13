@@ -4,11 +4,11 @@
     "jsx": "react",
     "lib": [
       "dom",
-      "ESNext"
+      "esnext"
     ],
     "typeRoots": [
       "./node_modules/@types",
-      "./types"
+      "./src/types"
     ],
     "types": [
       "react",

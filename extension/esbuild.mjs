@@ -9,7 +9,7 @@ fs.cpSync('public', 'build', {
 const watch = process.argv.includes('--watch');
 
 const ctx = await esbuild.context({
-  entryPoints: ['content/content.tsx'],
+  entryPoints: ['./src/content/index.tsx'],
   bundle: true,
   minify: !watch,
   outfile: 'build/content.js',
