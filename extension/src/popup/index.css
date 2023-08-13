@@ -1,0 +1,20 @@
+/* Palette - https://flatuicolors.com/palette/us */
+:root {
+  --popup-height: 400px;
+  --popup-width: 300px;
+
+  --spacing-base: 0.5rem;
+  --spacing-large: 1rem;
+
+  --color-primary: #0984e3;
+
+  --font-color-disabled: #b2bec3;
+  --font-color-light: #636e72;
+  --font-color-default: #2d3436;
+}
+
+body {
+  font-family: Calibri, sans-serif;
+  font-size: 0.8rem;
+  color: var(--font-color-default);
+}

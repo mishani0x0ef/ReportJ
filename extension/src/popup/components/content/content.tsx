@@ -1,3 +1,5 @@
+import './content.css';
+
 import React from 'react';
 
 type ContentProps = {
@@ -5,7 +7,7 @@ type ContentProps = {
 };
 
 const Content: React.FC<ContentProps> = ({ children }) => (
-  <section>{children}</section>
+  <section className="reportj-content">{children}</section>
 );
 
 export default Content;

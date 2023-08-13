@@ -1,3 +1,5 @@
+import './preferences.css';
+
 import React from 'react';
 
 type PreferenceProps = {
@@ -5,7 +7,7 @@ type PreferenceProps = {
 };
 
 const Preferences: React.FC<PreferenceProps> = ({ children }) => (
-  <div>{children}</div>
+  <div className="reportj-preferences">{children}</div>
 );
 
 export default Preferences;

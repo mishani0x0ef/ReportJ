@@ -1,0 +1,11 @@
+.reportj-preference {
+  display: flex;
+}
+
+.reportj-preference__label {
+  flex-grow: 1;
+}
+
+.reportj-preference__switch {
+  width: 50px;
+}

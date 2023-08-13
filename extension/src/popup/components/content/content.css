@@ -1,0 +1,5 @@
+.reportj-content {
+  min-height: var(--popup-height);
+  width: var(--popup-width);
+  padding: var(--spacing-base) var(--spacing-large);
+}
