@@ -12,8 +12,8 @@ const Preference: React.FC<PreferenceProps> = ({ name, description }) => {
   const id = useId();
 
   return (
-    <div className="reportj-preference">
-      <label htmlFor={id} className="reportj-preference__label">
+    <div className="preference">
+      <label htmlFor={id} className="preference__label">
         {description}
       </label>
       <Switch id={id} name={name} />

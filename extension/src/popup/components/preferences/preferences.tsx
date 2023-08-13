@@ -7,7 +7,7 @@ type PreferenceProps = {
 };
 
 const Preferences: React.FC<PreferenceProps> = ({ children }) => (
-  <div className="reportj-preferences">{children}</div>
+  <div className="preferences">{children}</div>
 );
 
 export default Preferences;

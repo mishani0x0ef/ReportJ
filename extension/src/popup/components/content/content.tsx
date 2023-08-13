@@ -7,7 +7,7 @@ type ContentProps = {
 };
 
 const Content: React.FC<ContentProps> = ({ children }) => (
-  <section className="reportj-content">{children}</section>
+  <section className="content">{children}</section>
 );
 
 export default Content;

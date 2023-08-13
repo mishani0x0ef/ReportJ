@@ -1,8 +1,8 @@
-.reportj-preference {
+.preference {
   display: flex;
   align-items: center;
 }
 
-.reportj-preference__label {
+.preference__label {
   flex-grow: 1;
 }
