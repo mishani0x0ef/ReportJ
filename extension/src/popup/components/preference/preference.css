@@ -1,11 +1,8 @@
 .reportj-preference {
   display: flex;
+  align-items: center;
 }
 
 .reportj-preference__label {
   flex-grow: 1;
-}
-
-.reportj-preference__switch {
-  width: 50px;
 }

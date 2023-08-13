@@ -1,6 +1,7 @@
+import Switch from '../switch/switch';
 import './preference.css';
 
-import React from 'react';
+import React, { useId } from 'react';
 
 type PreferenceProps = {
   name: string;
@@ -8,17 +9,14 @@ type PreferenceProps = {
 };
 
 const Preference: React.FC<PreferenceProps> = ({ name, description }) => {
+  const id = useId();
+
   return (
     <div className="reportj-preference">
-      <label htmlFor={name} className="reportj-preference__label">
+      <label htmlFor={id} className="reportj-preference__label">
         {description}
       </label>
-      <input
-        type="checkbox"
-        id={name}
-        name={name}
-        className="reportj-preference__switch"
-      />
+      <Switch id={id} name={name} />
     </div>
   );
 };
