@@ -2,7 +2,8 @@
   --switch-width: 2.5rem;
   --switch-height: 1.2rem;
   --slider-size: 1rem;
-  --slider-padding: 0.15rem;
+  --slider-padding: 0.1rem;
+  --slider-checked-transition: 1.25rem;
   --animation-speed: 0.25s;
 
   position: relative;
@@ -25,7 +26,6 @@
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: var(--animation-speed);
   transition: var(--animation-speed);
 
   border-radius: var(--switch-height);
@@ -41,7 +41,6 @@
   left: var(--slider-padding);
   bottom: var(--slider-padding);
   background-color: white;
-  -webkit-transition: var(--animation-speed);
   transition: var(--animation-speed);
 
   border-radius: 50%;
@@ -56,7 +55,5 @@
 }
 
 .switch input:checked + .switch__slider:before {
-  -webkit-transform: translateX(var(--slider-size));
-  -ms-transform: translateX(var(--slider-size));
-  transform: translateX(var(--slider-size));
+  transform: translateX(var(--slider-checked-transition));
 }
