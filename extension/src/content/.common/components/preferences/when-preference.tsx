@@ -1,4 +1,4 @@
-import { PreferenceName } from '../../types/preferences';
+import { PreferenceName } from '../../../../.common/types/preferences';
 import { usePreference } from './preferences-provider';
 
 type When = 'enabled' | 'disabled';

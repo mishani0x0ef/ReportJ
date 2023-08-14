@@ -1,4 +1,4 @@
-import { CommandResult, useCommand } from '../../.common/hooks/use-command';
+import { CommandResult, useCommand } from '../../../.common/hooks/use-command';
 import { setRemainingEstimate } from '../../.common/services/jira';
 
 type CloseCommandResult = Omit<CommandResult<void>, 'execute'> & {
