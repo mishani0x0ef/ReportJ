@@ -15,9 +15,11 @@ export async function getPreferences(): Promise<Preferences> {
     closeIssue: true,
   };
 
-  const { preferences } = (await chrome.storage.sync.get([
+  const result = (await chrome.storage.sync.get([
     versioned('preferences'),
   ])) as PreferencesResponse;
+
+  const preferences = result[versioned('preferences')];
 
   return { ...defaultPreferences, ...preferences };
 }

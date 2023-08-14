@@ -2,14 +2,6 @@ import './switch.css';
 
 import React from 'react';
 
-function isOn(value: string) {
-  return value === 'on';
-}
-
-function toSwitch(value: boolean) {
-  return value ? 'on' : 'off';
-}
-
 type SwitchProps = {
   id?: string;
   name?: string;
@@ -28,8 +20,8 @@ const Switch: React.FC<SwitchProps> = ({
       type="checkbox"
       id={id}
       name={name}
-      value={toSwitch(value)}
-      onChange={(e) => onChange?.(isOn(e.target.value))}
+      checked={value}
+      onChange={(e) => onChange?.(e.target.checked)}
     />
     <span className="switch__slider"></span>
   </label>

@@ -40,7 +40,7 @@
 
 body {
   font-family: Calibri, sans-serif;
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--font-color-default);
 
   background-color: var(--color-background);

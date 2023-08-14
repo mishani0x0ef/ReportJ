@@ -1,5 +1,5 @@
 import { PreferenceName } from '@common/types/preferences';
-import { usePreference } from './preferences-provider';
+import { usePreference } from '@common/components/preferences/preferences-provider';
 
 type When = 'enabled' | 'disabled';
 type PreferenceTransform = (value: boolean) => boolean;
