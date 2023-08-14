@@ -29,6 +29,8 @@
   :root {
     --color-background: #2d3436;
 
+    --color-primary: color-mix(in srgb, #0984e3, #fff 15%);
+
     --font-color-disabled: #636e72;
     --font-color-light: #b2bec3;
     --font-color-default: #dfe6e9;
@@ -46,6 +48,22 @@ body {
   background-color: var(--color-background);
   min-height: var(--popup-height);
   width: var(--popup-width);
-  padding: var(--spacing-base) var(--spacing-large);
+
   margin: 0;
+}
+
+header,
+main {
+  margin: var(--spacing-base) var(--spacing-large);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
 }

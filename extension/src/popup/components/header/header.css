@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-base);
+}
+
+.header__logo {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.header__title {
+  flex-grow: 1;
+}
+
+.header__link {
+  flex-shrink: 0;
+}
