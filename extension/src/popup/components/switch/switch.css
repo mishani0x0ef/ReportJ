@@ -1,57 +1,57 @@
 .switch {
-  --switch-width: 2.5rem;
+  --switch-width: 2.2rem;
   --switch-height: 1.2rem;
-  --slider-size: 1rem;
-  --slider-padding: 0.1rem;
-  --slider-checked-transition: 1.25rem;
+  --slider-checked-transition: 1.1rem;
   --animation-speed: 0.25s;
 
-  position: relative;
   display: inline-block;
-  width: var(--switch-width);
   height: var(--switch-height);
+  position: relative;
+  width: var(--switch-width);
 }
 
 .switch input {
+  height: 0;
   opacity: 0;
   width: 0;
-  height: 0;
 }
 
 .switch__slider {
-  position: absolute;
+  background-color: var(--color-background);
+  border-radius: var(--switch-height);
+  box-shadow: var(--shadow-small);
   cursor: pointer;
+  position: absolute;
+  transition: var(--animation-speed);
+  width: var(--switch-width);
+
   top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: var(--animation-speed);
-
-  border-radius: var(--switch-height);
-
-  width: var(--switch-width);
 }
 
 .switch__slider:before {
-  position: absolute;
+  background-color: var(--color-background-dark);
+  border-radius: 50%;
+  box-shadow: var(--shadow-small);
   content: '';
-  height: var(--slider-size);
-  width: var(--slider-size);
-  left: var(--slider-padding);
-  bottom: var(--slider-padding);
-  background-color: white;
+  position: absolute;
   transition: var(--animation-speed);
 
-  border-radius: 50%;
+  height: var(--switch-height);
+  width: var(--switch-height);
+  left: 0;
+  bottom: 0;
 }
 
 .switch input:checked + .switch__slider {
   background-color: var(--color-primary);
+  box-shadow: var(--shadow-small-primary);
 }
 
 .switch input:focus + .switch__slider {
-  box-shadow: 0 0 1px var(--color-primary);
+  box-shadow: var(--shadow-small-primary);
 }
 
 .switch input:checked + .switch__slider:before {
