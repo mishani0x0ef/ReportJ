@@ -1,0 +1,8 @@
+.separator {
+  box-shadow: var(--font-color-disabled) 0px 1px 0px;
+  content: '';
+  margin: var(--spacing-base) 0;
+  height: 1px;
+  width: '100%';
+  opacity: 0.4;
+}

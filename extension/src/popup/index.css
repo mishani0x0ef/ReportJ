@@ -1,0 +1,69 @@
+/* Palette - https://flatuicolors.com/palette/us */
+:root {
+  --popup-height: 400px;
+  --popup-width: 300px;
+
+  --spacing-base: 0.5rem;
+  --spacing-large: 1rem;
+
+  --color-background: #ffffff;
+  --color-background-dark: color-mix(
+    in srgb,
+    var(--color-background),
+    var(--font-color-default) 5%
+  );
+
+  --color-primary: #0984e3;
+
+  --font-color-disabled: #b2bec3;
+  --font-color-light: #636e72;
+  --font-color-default: #2d3436;
+
+  --shadow-small: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  --shadow-small-primary: var(--color-primary) 0px 1px 3px 0px,
+    var(--color-primary) 0px 0px 0px 1px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #2d3436;
+
+    --color-primary: color-mix(in srgb, #0984e3, #fff 15%);
+
+    --font-color-disabled: #636e72;
+    --font-color-light: #b2bec3;
+    --font-color-default: #dfe6e9;
+
+    --shadow-small: rgba(255, 255, 255, 0.1) 0px 1px 3px 0px,
+      rgba(255, 255, 255, 0.5) 0px 0px 0px 1px;
+  }
+}
+
+body {
+  font-family: Calibri, sans-serif;
+  font-size: 1rem;
+  color: var(--font-color-default);
+
+  background-color: var(--color-background);
+  min-height: var(--popup-height);
+  width: var(--popup-width);
+
+  margin: 0;
+}
+
+header,
+main {
+  margin: var(--spacing-base) var(--spacing-large);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}

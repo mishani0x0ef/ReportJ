@@ -1,0 +1,14 @@
+.preference {
+  display: flex;
+  align-items: center;
+}
+
+.preference__label {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.preference label:nth-child(2) {
+  flex-shrink: 0;
+}

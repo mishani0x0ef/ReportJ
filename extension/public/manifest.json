@@ -4,16 +4,28 @@
   "description": "The reporting helper for JIRA system.",
   "version": "3.0.0",
 
+  "permissions": ["storage"],
+
   "icons": {
     "16": "logo48.png",
     "48": "logo48.png",
     "128": "logo144.png"
   },
 
+  "action": {
+    "default_icon": {
+      "16": "logo48.png",
+      "48": "logo48.png",
+      "128": "logo144.png"
+    },
+    "default_title": "ReportJ",
+    "default_popup": "popup/index.html"
+  },
+
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["./content.js"]
+      "js": ["./content/index.js"]
     }
   ]
 }
