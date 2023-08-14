@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
-import { Preferences } from '../../../../.common/types/preferences';
-import { useQuery } from '../../../../.common/hooks/use-query';
-import { getPreferences } from '../../../../.common/storage/preferences';
+import { Preferences } from '@common/types/preferences';
+import { useQuery } from '@common/hooks/use-query';
+import { getPreferences } from '@common/storage/preferences';
 
 const PreferencesContext = createContext<Nullable<Preferences>>(null);
 

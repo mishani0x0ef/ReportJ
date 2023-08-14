@@ -2,18 +2,11 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/types"
-    ],
-    "types": [
-      "react",
-      "react-dom",
-      "chrome"
-    ]
+    "lib": ["dom", "esnext"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["react", "react-dom", "chrome"],
+    "paths": {
+      "@common/*": ["./src/.common/*"]
+    }
   }
 }
