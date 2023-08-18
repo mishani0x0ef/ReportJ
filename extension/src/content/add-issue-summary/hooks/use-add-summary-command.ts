@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from 'preact/hooks';
 import { JiraIssue, getIssue } from '../../.common/services/jira';
 import { observeDialog } from '../../.common/utils/observe-dialog';
 

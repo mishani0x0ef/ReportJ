@@ -1,23 +1,18 @@
-import React, { createContext, useContext } from 'react';
+import { createContext } from 'preact';
+import { useContext } from 'preact/hooks';
 import { Preferences } from '@common/types/preferences';
 import { useQuery } from '@common/hooks/use-query';
 import { getPreferences } from '@common/storage/preferences';
 
 const PreferencesContext = createContext<Nullable<Preferences>>(null);
 
-export const usePreference = (name: keyof Preferences) => {
-  const preferences = useContext(PreferencesContext);
-
-  return preferences?.[name];
-};
-
 type PreferencesProviderProps = {
-  children?: React.ReactNode;
+  children?: Children;
 };
 
-const PreferencesProvider: React.FC<PreferencesProviderProps> = ({
+export default function PreferencesProvider({
   children,
-}) => {
+}: PreferencesProviderProps) {
   const [preferences, isLoading] = useQuery(getPreferences);
 
   if (isLoading) {
@@ -29,6 +24,10 @@ const PreferencesProvider: React.FC<PreferencesProviderProps> = ({
       {children}
     </PreferencesContext.Provider>
   );
-};
+}
 
-export default PreferencesProvider;
+export function usePreference(name: keyof Preferences) {
+  const preferences = useContext(PreferencesContext);
+
+  return preferences?.[name];
+}

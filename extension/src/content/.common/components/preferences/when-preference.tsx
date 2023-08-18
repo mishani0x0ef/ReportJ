@@ -6,14 +6,14 @@ type PreferenceTransform = (value: boolean) => boolean;
 type WhenPreferenceProps = {
   name: PreferenceName;
   when?: When;
-  children?: React.ReactNode;
+  children?: Children;
 };
 
-const WhenPreference: React.FC<WhenPreferenceProps> = ({
+export default function WhenPreference({
   name,
   when = 'enabled',
   children,
-}) => {
+}: WhenPreferenceProps) {
   const preference = usePreference(name);
   const visible: Record<When, PreferenceTransform> = {
     enabled: (value) => value,
@@ -21,10 +21,8 @@ const WhenPreference: React.FC<WhenPreferenceProps> = ({
   };
 
   if (visible[when](preference)) {
-    return children;
+    return <>{children}</>;
   }
 
   return null;
-};
-
-export default WhenPreference;
+}

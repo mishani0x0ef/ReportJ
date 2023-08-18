@@ -1,11 +1,11 @@
-import React from 'react';
+import { ComponentProps } from 'preact';
 
-type ButtonProps = React.ComponentPropsWithoutRef<'button'>;
+type ButtonProps = ComponentProps<'button'>;
 
-const Button: React.FC<ButtonProps> = ({ children, ...props }) => (
-  <button className="aui-button" {...props}>
-    {children}
-  </button>
-);
-
-export default Button;
+export default function Button({ children, ...props }: ButtonProps) {
+  return (
+    <button className="aui-button" {...props}>
+      {children}
+    </button>
+  );
+}
