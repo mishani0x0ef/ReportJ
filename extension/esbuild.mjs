@@ -1,5 +1,6 @@
 import * as esbuild from 'esbuild';
 import fs from 'fs';
+import { exit } from 'process';
 
 fs.rmSync('build', { recursive: true });
 
@@ -17,4 +18,9 @@ const ctx = await esbuild.context({
   outdir: 'build',
 });
 
-watch ? await ctx.watch() : await ctx.rebuild();
+if (watch) {
+  await ctx.watch();
+} else {
+  const result = await ctx.rebuild();
+  exit(Math.min(result.errors.length, 0));
+}
