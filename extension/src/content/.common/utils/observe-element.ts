@@ -7,6 +7,7 @@ type Listener<T extends Element> = (element: T) => void;
 type AttachListener<T extends Element> = (handler: Listener<T>) => void;
 
 export type ObservationOptions<T extends Element> = {
+  observeFirst?: boolean;
   prepareTarget?: (element: Element) => T;
 };
 
@@ -14,6 +15,14 @@ export type ElementObserver<T extends Element> = {
   onShow: AttachListener<T>;
   onHide: AttachListener<T>;
 } & Disposable;
+
+function hasInside(element: Element, matcher: ElementMatcher): boolean {
+  return Array.from(element.childNodes).reduce(
+    (has, node) =>
+      has || (isElement(node) && (matcher(node) || hasInside(node, matcher))),
+    false
+  );
+}
 
 export function observeElement<T extends Element>(
   selector: ElementSelector,
@@ -28,6 +37,10 @@ export function observeElement<T extends Element>(
       ? selector
       : (element) => element.matches(selector);
 
+  function canDispatchShow() {
+    return !options?.observeFirst || shownElementsCount === 0;
+  }
+
   function dispatchShow(mutations: MutationRecord[]) {
     mutations
       .flatMap((m) => [...Array.from(m.addedNodes), m.target])
@@ -40,19 +53,11 @@ export function observeElement<T extends Element>(
       });
   }
 
-  function hasInside(element: Element, matcher: ElementMatcher): boolean {
-    return Array.from(element.childNodes).reduce(
-      (has, node) =>
-        has || (isElement(node) && (matcher(node) || hasInside(node, matcher))),
-      false
-    );
+  function canDispatchHide() {
+    return shownElementsCount > 0;
   }
 
   function dispatchHide(mutations: MutationRecord[]) {
-    if (shownElementsCount === 0) {
-      return;
-    }
-
     mutations
       .flatMap((m) => Array.from(m.removedNodes))
       .filter((node): node is T => isElement(node))
@@ -65,8 +70,13 @@ export function observeElement<T extends Element>(
   }
 
   const observer = new MutationObserver((mutations) => {
-    dispatchShow(mutations);
-    dispatchHide(mutations);
+    if (canDispatchShow()) {
+      dispatchShow(mutations);
+    }
+
+    if (canDispatchHide()) {
+      dispatchHide(mutations);
+    }
   });
 
   observer.observe(document.body, {
