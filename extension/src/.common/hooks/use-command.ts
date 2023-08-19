@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useState } from '@common/ui';
 
 export type Command<T> = () => Promise<T>;
 

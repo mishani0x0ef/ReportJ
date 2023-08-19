@@ -1,6 +1,6 @@
 import './preference.css';
 import Switch from '../switch/switch';
-import { useId } from 'preact/hooks';
+import { useId } from '@common/ui';
 import { PreferenceName } from '@common/types/preferences';
 import { usePreference } from './hooks/use-preference';
 

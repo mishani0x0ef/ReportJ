@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from '@common/ui';
 
 type WhenInsideJiraProps = {
   children?: Children;

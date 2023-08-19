@@ -1,6 +1,6 @@
 import './index.css';
 
-import { render } from 'preact';
+import { render } from '@common/ui';
 import Header from './components/header/header';
 import Preferences from './components/preferences/preferences';
 import Preference from './components/preference/preference';

@@ -1,4 +1,4 @@
-import { createPortal } from 'preact/compat';
+import { createPortal } from '@common/ui';
 import Button from '../.common/components/button/button';
 import { useTarget } from './hooks/use-target';
 import { useCloseIssueCommand } from './hooks/use-close-command';

@@ -1,5 +1,4 @@
-import { createContext } from 'preact';
-import { useContext } from 'preact/hooks';
+import { createContext, useContext } from '@common/ui';
 import { Preferences } from '@common/types/preferences';
 import { useQuery } from '@common/hooks/use-query';
 import { getPreferences } from '@common/storage/preferences';

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from '@common/ui';
 
 export type Query<T> = () => Promise<T>;
 

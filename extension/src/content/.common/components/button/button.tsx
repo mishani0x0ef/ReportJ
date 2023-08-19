@@ -1,4 +1,4 @@
-import { ComponentProps } from 'preact';
+import { ComponentProps } from '@common/ui';
 
 type ButtonProps = ComponentProps<'button'>;
 
