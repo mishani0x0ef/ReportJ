@@ -1,10 +1,9 @@
-import React from 'react';
-import { createPortal } from 'react-dom';
+import { createPortal } from '@common/ui';
 import Button from '../.common/components/button/button';
 import { useTarget } from './hooks/use-target';
 import { useCloseIssueCommand } from './hooks/use-close-command';
 
-const CloseIssue: React.FC = () => {
+export default function CloseIssue() {
   const featureTarget = useTarget();
   const { isLoading, execute } = useCloseIssueCommand();
 
@@ -23,6 +22,4 @@ const CloseIssue: React.FC = () => {
     </Button>,
     featureTarget
   );
-};
-
-export default CloseIssue;
+}

@@ -1,13 +1,9 @@
 import './preferences.css';
 
-import React from 'react';
-
 type PreferenceProps = {
-  children?: React.ReactNode;
+  children?: Children;
 };
 
-const Preferences: React.FC<PreferenceProps> = ({ children }) => (
-  <div className="preferences">{children}</div>
-);
-
-export default Preferences;
+export default function Preferences({ children }: PreferenceProps) {
+  return <main className="preferences">{children}</main>;
+}

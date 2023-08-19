@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from '@common/ui';
 
 export type Command<T> = () => Promise<T>;
 

@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "lib": ["dom", "esnext"],
     "typeRoots": ["./node_modules/@types", "./src/types"],
-    "types": ["react", "react-dom", "chrome"],
+    "types": ["preact", "chrome"],
     "paths": {
       "@common/*": ["./src/.common/*"]
     }

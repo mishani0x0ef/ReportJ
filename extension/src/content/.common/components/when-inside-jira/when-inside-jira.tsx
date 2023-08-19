@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from '@common/ui';
 
 type WhenInsideJiraProps = {
-  children?: React.ReactNode;
+  children?: Children;
 };
 
-const WhenInsideJira: React.FC<WhenInsideJiraProps> = ({ children }) => {
+export default function WhenInsideJira({ children }: WhenInsideJiraProps) {
   const [insideJira, setInsideJira] = useState(false);
 
   async function waitForDom() {
@@ -31,7 +31,5 @@ const WhenInsideJira: React.FC<WhenInsideJiraProps> = ({ children }) => {
     check();
   }, []);
 
-  return insideJira ? children : null;
-};
-
-export default WhenInsideJira;
+  return insideJira ? <>{children}</> : null;
+}

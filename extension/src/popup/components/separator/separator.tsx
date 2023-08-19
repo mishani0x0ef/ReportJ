@@ -1,6 +1,5 @@
 import './separator.css';
-import React from 'react';
 
-const Separator: React.FC = () => <div className="separator"></div>;
-
-export default Separator;
+export default function Separator() {
+  return <div className="separator"></div>;
+}

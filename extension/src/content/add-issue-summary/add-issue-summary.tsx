@@ -1,9 +1,7 @@
 import { useAddSummaryCommand } from './hooks/use-add-summary-command';
 
-const AddIssueSummary: React.FC = () => {
+export default function AddIssueSummary() {
   useAddSummaryCommand();
 
   return null;
-};
-
-export default AddIssueSummary;
+}

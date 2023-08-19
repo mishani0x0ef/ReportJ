@@ -14,6 +14,7 @@ export function observeDialog(
       element.textContent !== null &&
       element.textContent.toLowerCase().includes(titleLower),
     {
+      observeFirst: true,
       prepareTarget: (element) =>
         element.parentElement?.parentElement as HTMLDivElement,
     }

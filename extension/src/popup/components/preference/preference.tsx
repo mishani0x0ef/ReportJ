@@ -1,6 +1,6 @@
 import './preference.css';
 import Switch from '../switch/switch';
-import React, { useId } from 'react';
+import { useId } from '@common/ui';
 import { PreferenceName } from '@common/types/preferences';
 import { usePreference } from './hooks/use-preference';
 
@@ -10,11 +10,11 @@ type PreferenceProps = {
   description?: string;
 };
 
-const Preference: React.FC<PreferenceProps> = ({
+export default function Preference({
   name,
   title,
   description,
-}) => {
+}: PreferenceProps) {
   const id = useId();
   const [enabled, setEnabled] = usePreference(name);
 
@@ -32,6 +32,4 @@ const Preference: React.FC<PreferenceProps> = ({
       />
     </div>
   );
-};
-
-export default Preference;
+}

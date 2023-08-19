@@ -1,4 +1,4 @@
-import { useEffect, useState, DependencyList } from 'react';
+import { useEffect, useState } from '@common/ui';
 
 export type Query<T> = () => Promise<T>;
 
@@ -10,7 +10,7 @@ export type QueryResult<T> = [
 
 export function useQuery<T = unknown>(
   query: Query<T>,
-  deps: DependencyList = []
+  deps: ReadonlyArray<unknown> = []
 ): QueryResult<T> {
   const [result, setResult] = useState<Nullable<T>>(null);
   const [isLoading, setIsLoading] = useState(false);

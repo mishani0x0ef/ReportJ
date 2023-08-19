@@ -1,9 +1,5 @@
 import { Preferences } from '../types/preferences';
-import { StorageKey, VersionedStorageKey } from '../types/settings';
-
-function versioned(key: StorageKey): VersionedStorageKey {
-  return `v3.${key}`;
-}
+import { versioned } from './versioned';
 
 type PreferencesResponse = {
   preferences: Maybe<Preferences>;

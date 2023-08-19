@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from '@common/ui';
 import { raise } from '../../.common/utils/raise';
 import { observeDialog } from '../../.common/utils/observe-dialog';
 
