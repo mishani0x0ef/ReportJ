@@ -1,6 +1,7 @@
 .preference {
   display: flex;
   align-items: center;
+  gap: var(--spacing-base);
 }
 
 .preference__label {

@@ -9,6 +9,7 @@ export async function getPreferences(): Promise<Preferences> {
   const defaultPreferences: Preferences = {
     addIssueSummary: true,
     closeIssue: true,
+    logTime: true,
   };
 
   const result = (await chrome.storage.sync.get([

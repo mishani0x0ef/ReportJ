@@ -19,6 +19,11 @@ render(
         description="Automatically add summary to work reports"
       />
       <Preference
+        name="logTime"
+        title="Log time"
+        description="Provide convenient time selector for work reports"
+      />
+      <Preference
         name="closeIssue"
         title="Close issue"
         description="Reset remaining estimate when closing issue"
