@@ -1,0 +1,34 @@
+/* Palette - https://flatuicolors.com/palette/us */
+reportj-root {
+  --spacing-base: 0.5rem;
+  --spacing-large: 1rem;
+
+  --color-background: #ffffff;
+  --color-primary: #0984e3;
+
+  --font-color-disabled: #b2bec3;
+  --font-color-light: #636e72;
+  --font-color-default: #2d3436;
+
+  --border-radius: 0.25rem;
+
+  --shadow-small: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  --shadow-small-primary: var(--color-primary) 0px 1px 3px 0px,
+    var(--color-primary) 0px 0px 0px 1px;
+
+  --animation-speed: 0.25s;
+}
+
+[data-color-mode='dark'] reportj-root {
+  --color-background: #2d3436;
+
+  --color-primary: color-mix(in srgb, #0984e3, #fff 15%);
+
+  --font-color-disabled: #636e72;
+  --font-color-light: #b2bec3;
+  --font-color-default: #dfe6e9;
+
+  --shadow-small: rgba(255, 255, 255, 0.1) 0px 1px 3px 0px,
+    rgba(255, 255, 255, 0.5) 0px 0px 0px 1px;
+}

@@ -1,0 +1,26 @@
+.reportj-popup__container {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.reportj-popup__anchor {
+  position: relative;
+}
+
+.reportj-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-color: var(--color-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-small);
+  padding: var(--spacing-base);
+
+  transition: transform var(--animation-speed) ease-in-out;
+  transform: scale(0, 0);
+}
+
+.reportj-popup--open {
+  transform: scale(1, 1);
+}

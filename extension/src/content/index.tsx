@@ -1,3 +1,4 @@
+import './index.css';
 import { render } from '@common/ui';
 import CloseIssue from './close-issue/close-issue';
 import AddIssueSummary from './add-issue-summary/add-issue-summary';
