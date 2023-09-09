@@ -61,7 +61,7 @@ export default function TimeSelector({ onSave }: TimeSelectorProps) {
             saveChanges();
           }}
         >
-          Save
+          Apply time
         </Button>
       </div>
     </section>

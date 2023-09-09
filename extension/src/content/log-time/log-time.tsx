@@ -21,6 +21,7 @@ export default function LogTime() {
   return createPortal(
     <Popup
       open={open}
+      setOpen={setOpen}
       trigger={
         <span onClick={() => setOpen((current) => !current)}>ReportJ</span>
       }

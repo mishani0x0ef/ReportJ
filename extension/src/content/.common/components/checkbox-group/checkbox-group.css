@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.reportj-checkbox-group__checkbox {
+.reportj-checkbox-group .reportj-checkbox-group__checkbox {
   flex: 1;
   margin: 0;
   border-radius: var(--border-radius-large);
@@ -14,19 +14,20 @@
   cursor: pointer;
   padding: var(--spacing-base) var(--spacing-large);
   text-align: center;
-  transition: background-color var(--animation-speed);
+  transition: all var(--animation-speed);
 }
 
-.reportj-checkbox-group__checkbox:hover {
+.reportj-checkbox-group .reportj-checkbox-group__checkbox:hover {
   background: var(--color-hover);
 }
 
-.reportj-checkbox-group__checkbox input {
+.reportj-checkbox-group .reportj-checkbox-group__checkbox input {
   display: none;
 }
 
-/* Needs a bit longer selector to be better then Jira selectors */
 .reportj-checkbox-group .reportj-checkbox-group__checkbox:has(input:checked) {
-  background: var(--color-primary);
-  color: var(--font-color-active);
+  background: var(--color-hover);
+  box-shadow: var(--shadow-tiny-primary);
+  color: var(--color-primary);
+  flex-grow: 1000;
 }
