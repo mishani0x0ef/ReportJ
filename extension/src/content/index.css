@@ -1,17 +1,22 @@
 /* Palette - https://flatuicolors.com/palette/us */
 reportj-root {
+  --spacing-tiny: 0.125rem;
   --spacing-base: 0.5rem;
   --spacing-large: 1rem;
 
   --color-background: #ffffff;
   --color-primary: #0984e3;
+  --color-hover: rgba(0, 0, 0, 0.05);
 
   --font-color-disabled: #b2bec3;
   --font-color-light: #636e72;
   --font-color-default: #2d3436;
 
+  --border-color: #636e72;
   --border-radius: 0.25rem;
+  --border-radius-large: 2rem;
 
+  --shadow-tiny: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
   --shadow-small: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   --shadow-small-primary: var(--color-primary) 0px 1px 3px 0px,

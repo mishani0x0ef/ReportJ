@@ -1,6 +1,7 @@
 import { createPortal, useState } from '@common/ui';
 import { useTarget } from './hooks/use-target';
 import { Popup } from '../.common/components/popup/popup';
+import TimeSelector from './components/time-selector/time-selector';
 
 export default function LogTime() {
   const target = useTarget();
@@ -18,7 +19,7 @@ export default function LogTime() {
         <span onClick={() => setOpen((current) => !current)}>ReportJ</span>
       }
     >
-      <>Content</>
+      <TimeSelector />
     </Popup>,
     target
   );

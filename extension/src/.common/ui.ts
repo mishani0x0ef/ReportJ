@@ -1,5 +1,5 @@
 import { createContext, ComponentProps, render } from 'preact';
-import { useContext, useEffect, useId, useState } from 'preact/hooks';
+import { useContext, useEffect, useId, useRef, useState } from 'preact/hooks';
 import { createPortal } from 'preact/compat';
 
 // Re-export Preact hooks and components
@@ -11,6 +11,7 @@ export {
   useContext,
   useEffect,
   useId,
+  useRef,
   useState,
   render,
 };
