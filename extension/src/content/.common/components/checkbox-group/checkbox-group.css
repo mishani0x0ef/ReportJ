@@ -24,3 +24,9 @@
 .reportj-checkbox-group__checkbox input {
   display: none;
 }
+
+/* Needs a bit longer selector to be better then Jira selectors */
+.reportj-checkbox-group .reportj-checkbox-group__checkbox:has(input:checked) {
+  background: var(--color-primary);
+  color: var(--font-color-active);
+}

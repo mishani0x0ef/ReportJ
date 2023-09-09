@@ -28,7 +28,7 @@ function Story({ name, children }: StoryProps) {
 function TimeSelectorStory() {
   return (
     <Story name="Time Selector">
-      <TimeSelector />
+      <TimeSelector onSave={console.log} />
     </Story>
   );
 }

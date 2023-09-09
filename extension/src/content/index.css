@@ -11,6 +11,7 @@ reportj-root {
   --font-color-disabled: #b2bec3;
   --font-color-light: #636e72;
   --font-color-default: #2d3436;
+  --font-color-active: #fff;
 
   --border-color: #636e72;
   --border-radius: 0.25rem;
@@ -33,6 +34,7 @@ reportj-root {
   --font-color-disabled: #636e72;
   --font-color-light: #b2bec3;
   --font-color-default: #dfe6e9;
+  --font-color-active: #2d3436;
 
   --shadow-small: rgba(255, 255, 255, 0.1) 0px 1px 3px 0px,
     rgba(255, 255, 255, 0.5) 0px 0px 0px 1px;

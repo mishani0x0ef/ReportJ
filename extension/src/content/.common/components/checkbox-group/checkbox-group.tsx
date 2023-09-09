@@ -1,7 +1,7 @@
 import './checkbox-group.css';
 import { useEffect, useRef } from '@common/ui';
 
-type ValueType = string;
+type ValueType = string | number;
 
 type CheckboxGroupProps = {
   name: string;
@@ -50,11 +50,12 @@ export default function CheckboxGroup({
 
 type CheckboxProps = {
   value: ValueType;
+  text: ValueType;
 };
 
-CheckboxGroup.Checkbox = ({ value }: CheckboxProps) => (
+CheckboxGroup.Checkbox = ({ text, value }: CheckboxProps) => (
   <label class="reportj-checkbox-group__checkbox">
-    <span>{value}</span>
+    <span>{text}</span>
     <input type="radio" value={value} />
   </label>
 );

@@ -4,9 +4,15 @@ import { Popup } from '../.common/components/popup/popup';
 import TimeSelector from './components/time-selector/time-selector';
 
 export default function LogTime() {
-  const target = useTarget();
-  // TODO: move to hook
+  const { target, input } = useTarget();
   const [open, setOpen] = useState(false);
+
+  function setLogTime(time: string) {
+    if (input) {
+      input.value = time;
+    }
+    setOpen(false);
+  }
 
   if (!target) {
     return null;
@@ -19,7 +25,7 @@ export default function LogTime() {
         <span onClick={() => setOpen((current) => !current)}>ReportJ</span>
       }
     >
-      <TimeSelector />
+      <TimeSelector onSave={setLogTime} />
     </Popup>,
     target
   );
