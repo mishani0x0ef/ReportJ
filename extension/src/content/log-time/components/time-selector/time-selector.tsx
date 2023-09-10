@@ -33,6 +33,8 @@ export default function TimeSelector({ onSave }: TimeSelectorProps) {
 
   return (
     <section class="reportj-time-selector">
+      <p>Select hours and minutes</p>
+
       <CheckboxGroup name="reportj-log-time-hours" onChange={setHour}>
         {hours.map((_, index) => (
           <CheckboxGroup.Checkbox
