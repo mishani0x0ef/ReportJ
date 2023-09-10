@@ -1,0 +1,35 @@
+.reportj-checkbox-group {
+  box-shadow: var(--shadow-tiny);
+  border-radius: var(--border-radius-large);
+  display: flex;
+  padding: var(--spacing-tiny);
+  width: 100%;
+}
+
+.reportj-checkbox-group .reportj-checkbox-group__checkbox {
+  flex: 1;
+  margin: 0;
+  border-radius: var(--border-radius-large);
+  color: var(--font-color-disabled);
+  cursor: pointer;
+  padding: var(--spacing-base) var(--spacing-large);
+  text-align: center;
+  transition: all var(--animation-speed);
+  outline-color: var(--color-primary);
+}
+
+.reportj-checkbox-group .reportj-checkbox-group__checkbox:hover,
+.reportj-checkbox-group .reportj-checkbox-group__checkbox:focus {
+  background: var(--color-hover);
+}
+
+.reportj-checkbox-group .reportj-checkbox-group__checkbox input {
+  display: none;
+}
+
+.reportj-checkbox-group .reportj-checkbox-group__checkbox:has(input:checked) {
+  background: var(--color-hover);
+  box-shadow: var(--shadow-tiny-primary);
+  color: var(--color-primary);
+  flex-grow: 1000;
+}
