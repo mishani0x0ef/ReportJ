@@ -2,6 +2,7 @@ import './popup.css';
 import { classnames } from '../../utils/classnames';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { useRef } from 'preact/hooks';
+import { useKeysHandler } from '../../hooks/use-keys-handler';
 
 type PopupProps = {
   open: boolean;
@@ -12,8 +13,10 @@ type PopupProps = {
 
 export function Popup({ open, setOpen, trigger, children }: PopupProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const close = () => setOpen(false);
 
-  useClickOutside(ref, () => setOpen(false));
+  useClickOutside(ref, close);
+  useKeysHandler(['Escape'], close, ref);
 
   return (
     <div ref={ref} class="reportj-popup__container">

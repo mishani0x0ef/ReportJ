@@ -57,14 +57,7 @@ export default function TimeSelector({ onSave }: TimeSelectorProps) {
 
       <div class="reportj-time-selector__footer">
         <small>Powered by ReportJ</small>
-        <Button
-          onClick={(e) => {
-            e.preventDefault();
-            saveChanges();
-          }}
-        >
-          Apply time
-        </Button>
+        <Button onClick={saveChanges}>Apply time</Button>
       </div>
     </section>
   );
