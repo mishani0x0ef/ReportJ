@@ -15,9 +15,11 @@
   padding: var(--spacing-base) var(--spacing-large);
   text-align: center;
   transition: all var(--animation-speed);
+  outline-color: var(--color-primary);
 }
 
-.reportj-checkbox-group .reportj-checkbox-group__checkbox:hover {
+.reportj-checkbox-group .reportj-checkbox-group__checkbox:hover,
+.reportj-checkbox-group .reportj-checkbox-group__checkbox:focus {
   background: var(--color-hover);
 }
 
