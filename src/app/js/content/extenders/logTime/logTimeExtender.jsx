@@ -16,7 +16,7 @@ export class LogTimeExtender {
     start() {
         const observer = new JiraDialogObserver("Log Work");
         observer.onAppear((dialog) => {
-            const logTimeInput = dialog.querySelector("#log-work-time-logged");
+            const logTimeInput = dialog.querySelector("#log-work-form-time-logged");
             const featureContainer = createElement(`<div class="reportj-log-time"></div>`);
             insertAfter(featureContainer, logTimeInput);
 
@@ -26,7 +26,7 @@ export class LogTimeExtender {
     }
 
     setLogTimeToJira(time) {
-        const timeInput = document.getElementById("log-work-time-logged");
+        const timeInput = document.getElementById("log-work-form-time-logged");
         timeInput.value = time;
     }
 }

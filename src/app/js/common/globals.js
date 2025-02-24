@@ -1,1 +1,1 @@
-export const browser = window.chrome;
+export const browser = self.chrome;
