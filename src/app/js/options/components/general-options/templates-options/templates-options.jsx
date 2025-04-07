@@ -117,7 +117,7 @@ export class TemplatesOptions extends Component {
     }
 
     _scrollBottom() {
-        afterRender(() => window.scrollTo({
+        afterRender(() => self.scrollTo({
             top: document.body.scrollHeight,
             left: 0,
             behavior: "smooth"

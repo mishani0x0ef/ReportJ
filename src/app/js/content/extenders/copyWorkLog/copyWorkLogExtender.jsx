@@ -43,13 +43,13 @@ export class CopyWorkLogExtender {
 
         const observer = new JiraDialogObserver("Log Work");
         observer.onAppear((dialog) => {
-            const timeInput = dialog.querySelector("#log-work-time-logged");
+            const timeInput = dialog.querySelector('input[name="timeLogged"]');
             const commentInput = dialog.querySelector("#comment");
 
             timeInput.value = duration;
             commentInput.value = comment;
 
-            const submitButton = dialog.querySelector("#log-work-submit");
+            const submitButton = dialog.querySelector("#log-work-form-submit");
             this._reinitCopyButtonsAfterSubmit(submitButton);
 
             observer.dispose();

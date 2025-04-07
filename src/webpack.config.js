@@ -18,6 +18,7 @@ module.exports = {
         content: "./app/js/content/content.js"
     },
     output: {
+        globalObject: "this",
         filename: "[name].js",
         path: path.resolve("app/dist")
     },
