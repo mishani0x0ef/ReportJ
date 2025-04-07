@@ -30,6 +30,7 @@ class BackgroundWorker {
         this.browser.contextMenus.create({
             "title": title,
             "contexts": [context],
+            "type": 'normal',
             "id": this.contextMenus.addIssueSummaryId,
         });
     }

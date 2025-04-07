@@ -26,7 +26,7 @@ export class LogTemplatesExtender {
     }
 
     addComment(comment) {
-        const commentArea = document.querySelector("#log-work #comment");
+        const commentArea = document.querySelector("#log-work-form #comment");
 
         let currentValue = commentArea.value || "";
         currentValue = currentValue.trim();

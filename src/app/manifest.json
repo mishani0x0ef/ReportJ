@@ -1,53 +1,38 @@
 {
-    "manifest_version":  3,
-    "name":  "ReportJ",
-    "description":  "The reporting helper for JIRA system.",
-    "homepage_url":  "https://github.com/mishani0x0ef/reportj",
-    "version":  "3.0.3",
-    "permissions":  [
-                        "storage",
-                        "activeTab",
-                        "contextMenus"
-                    ],
-    "content_security_policy":  {
-                                    "extension_pages":  "script-src \u0027self\u0027; object-src \u0027self\u0027"
-                                },
-    "background":  {
-                       "service_worker":  "dist/background.js"
-                   },
-    "action":  {
-                   "default_icon":  "img/logo.png",
-                   "default_title":  "ReportJ",
-                   "default_popup":  "popup.html"
-               },
-    "options_page":  "options.html",
-    "icons":  {
-                  "16":  "img/logo.png",
-                  "48":  "img/logo.png",
-                  "128":  "img/logo128x128.png"
-              },
-    "content_scripts":  [
-                            {
-                                "matches":  [
-                                                "*://*/*"
-                                            ],
-                                "css":  [
-                                            "dist/content.css"
-                                        ],
-                                "js":  [
-                                           "dist/vendor.js",
-                                           "dist/content.js"
-                                       ]
-                            }
-                        ],
-    "web_accessible_resources":  [
-                                     {
-                                         "resources":  [
-                                                           "options.html"
-                                                       ],
-                                         "matches":  [
-                                                         "https://jdc.eleks.com/*"
-                                                     ]
-                                     }
-                                 ]
+  "manifest_version": 3,
+  "name": "ReportJ",
+  "description": "The reporting helper for JIRA system.",
+  "homepage_url": "https://github.com/mishani0x0ef/reportj",
+  "version": "3.0.3",
+  "permissions": ["storage", "activeTab", "contextMenus"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "action": {
+    "default_icon": "img/logo.png",
+    "default_title": "ReportJ",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "img/logo.png",
+    "48": "img/logo.png",
+    "128": "img/logo128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": ["dist/content.css"],
+      "js": ["dist/vendor.js", "dist/content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["options.html"],
+      "matches": ["*://*/*"]
+    }
+  ]
 }

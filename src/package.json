@@ -32,6 +32,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-discard-duplicates": "^4.0.2",
     "postcss-loader": "^3.0.0",
+    "sass": "^1.83.4",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.1.0",
@@ -60,7 +61,6 @@
     "react-dom": "16.6.1",
     "react-onclickoutside": "6.7.1",
     "react-transition-group": "^1.2.1",
-    "sass": "^1.83.4",
     "universal-analytics": "^0.4.20"
   }
 }
